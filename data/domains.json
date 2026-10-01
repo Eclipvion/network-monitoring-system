@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "domain": "google.com",
+    "monitoring": true,
+    "interval": 3600
+  },
+  {
+    "id": 2,
+    "domain": "cloudflare.com",
+    "monitoring": true,
+    "interval": 3600
+  }
+]

@@ -1,0 +1,218 @@
+[
+  {
+    "id": "33dea3f8-d56a-4e3d-b40c-98a6e9cbbda6",
+    "timestamp": "2026-10-01T07:04:29.687Z",
+    "deviceId": 3,
+    "device": "Attendence Machine",
+    "event": "RECOVERY",
+    "status": "UP",
+    "message": "Device Attendence Machine recovered to UP (latency: 8.6ms)"
+  },
+  {
+    "id": "15755e45-a601-4478-bafb-b661b9c867c8",
+    "timestamp": "2026-10-01T07:04:17.488Z",
+    "deviceId": 3,
+    "device": "Attendence Machine",
+    "event": "DEVICE_UPDATED",
+    "status": "INFO",
+    "message": "Device Attendence Machine configuration updated"
+  },
+  {
+    "id": "616299fc-2027-43e5-8e42-39c5eb8a5666",
+    "timestamp": "2026-10-01T07:03:58.194Z",
+    "deviceId": 3,
+    "device": "Attendence Machine",
+    "event": "DEVICE_UPDATED",
+    "status": "INFO",
+    "message": "Device Attendence Machine configuration updated"
+  },
+  {
+    "id": "cf7c8dee-2f31-45ce-bc58-baf21c8a3051",
+    "timestamp": "2026-10-01T07:02:54.521Z",
+    "deviceId": 3,
+    "device": "Test PC",
+    "event": "DEVICE_UPDATED",
+    "status": "INFO",
+    "message": "Device Test PC configuration updated"
+  },
+  {
+    "id": "a8c6ff8a-f54f-4f47-bbbf-43e9584a13fe",
+    "timestamp": "2026-10-01T07:02:25.837Z",
+    "deviceId": 2,
+    "device": "Sharing Server",
+    "event": "DEVICE_UPDATED",
+    "status": "INFO",
+    "message": "Device Sharing Server configuration updated"
+  },
+  {
+    "id": "1577bde1-7ab1-4dce-be26-04d3a717b3a1",
+    "timestamp": "2026-10-01T07:01:59.359Z",
+    "deviceId": 1,
+    "device": "Attendece",
+    "event": "RECOVERY",
+    "status": "UP",
+    "message": "Device Attendece recovered to UP (latency: 4.31ms)"
+  },
+  {
+    "id": "3dd2d338-e8a0-4de3-a38e-cab71be90b6a",
+    "timestamp": "2026-10-01T07:01:51.773Z",
+    "deviceId": 1,
+    "device": "Attendece",
+    "event": "DEVICE_UPDATED",
+    "status": "INFO",
+    "message": "Device Attendece configuration updated"
+  },
+  {
+    "id": "0bd2b091-7942-4c55-8248-9cf84c01d37b",
+    "timestamp": "2026-10-01T06:59:23.885Z",
+    "deviceId": 4,
+    "device": "abcd",
+    "event": "RECOVERY",
+    "status": "UP",
+    "message": "Device abcd recovered to UP (latency: 18.01ms)"
+  },
+  {
+    "id": "fdef5a6e-1fb6-4f09-9d78-e17bf7815be8",
+    "timestamp": "2026-10-01T06:59:23.484Z",
+    "deviceId": 3,
+    "device": "Test PC",
+    "event": "ALERT_DOWN",
+    "status": "DOWN",
+    "message": "Alert triggered: Test PC is DOWN (Ping failed (2/2 retries): Destination Host Unreachable)"
+  },
+  {
+    "id": "ee1956d2-45f6-4761-8675-474f5edb8225",
+    "timestamp": "2026-10-01T06:59:18.619Z",
+    "deviceId": 2,
+    "device": "Sharing Server",
+    "event": "ALERT_DOWN",
+    "status": "DOWN",
+    "message": "Alert triggered: Sharing Server is DOWN (Ping failed (2/2 retries): Destination Host Unreachable)"
+  },
+  {
+    "id": "c446a055-9edd-4b80-a583-58cae9b70f26",
+    "timestamp": "2026-10-01T06:59:13.742Z",
+    "deviceId": 1,
+    "device": "AD Server",
+    "event": "ALERT_DOWN",
+    "status": "DOWN",
+    "message": "Alert triggered: AD Server is DOWN (Ping failed (2/2 retries): Destination Host Unreachable)"
+  },
+  {
+    "id": "fb854be2-c56b-44a2-b334-f6f7834bdf6d",
+    "timestamp": "2026-10-01T06:58:58.051Z",
+    "deviceId": 4,
+    "device": "abcd",
+    "event": "ALERT_DOWN",
+    "status": "DOWN",
+    "message": "Alert triggered: abcd is DOWN (Ping failed (2/2 retries): Destination Host Unreachable)"
+  },
+  {
+    "id": "61dac8ac-7360-4d40-9fbb-a01c63caab04",
+    "timestamp": "2026-10-01T06:58:37.519Z",
+    "deviceId": 3,
+    "device": "Test PC",
+    "event": "RECOVERY",
+    "status": "WARNING",
+    "message": "Device Test PC recovered to WARNING (latency: 0ms)"
+  },
+  {
+    "id": "954ec2de-3547-4a44-bec5-96b90443c5e5",
+    "timestamp": "2026-10-01T06:58:32.680Z",
+    "deviceId": 2,
+    "device": "Sharing Server",
+    "event": "RECOVERY",
+    "status": "WARNING",
+    "message": "Device Sharing Server recovered to WARNING (latency: 0ms)"
+  },
+  {
+    "id": "7a7cf0c3-c6c2-4624-934f-af68dfafb5a1",
+    "timestamp": "2026-10-01T06:58:27.804Z",
+    "deviceId": 1,
+    "device": "AD Server",
+    "event": "RECOVERY",
+    "status": "WARNING",
+    "message": "Device AD Server recovered to WARNING (latency: 0ms)"
+  },
+  {
+    "id": "8ad694da-8866-4d4d-a45e-83f45c2e95c4",
+    "timestamp": "2026-09-28T10:36:58.018Z",
+    "deviceId": 6,
+    "device": "cloudfare",
+    "event": "DEVICE_CREATED",
+    "status": "INFO",
+    "message": "Device cloudfare (1.1.1.1) added"
+  },
+  {
+    "id": "3044c66f-fe4b-4338-b25f-ee047659917d",
+    "timestamp": "2026-09-28T10:36:33.467Z",
+    "deviceId": 5,
+    "device": "Uber",
+    "event": "DEVICE_UPDATED",
+    "status": "INFO",
+    "message": "Device Uber configuration updated"
+  },
+  {
+    "id": "2e9c9e60-9515-4454-83b4-e3f8dd8ee65c",
+    "timestamp": "2026-09-28T10:36:05.910Z",
+    "deviceId": 5,
+    "device": "Uber",
+    "event": "DEVICE_CREATED",
+    "status": "INFO",
+    "message": "Device Uber (8.8.8.8) added"
+  },
+  {
+    "id": "aae2bfdb-0c43-4173-bffe-43d3155cca19",
+    "timestamp": "2026-09-28T10:34:32.169Z",
+    "deviceId": 3,
+    "device": "Test PC",
+    "event": "ALERT_DOWN",
+    "status": "DOWN",
+    "message": "Alert triggered: Test PC is DOWN (Ping failed (2/2 retries): Destination Host Unreachable)"
+  },
+  {
+    "id": "7d2ee1d2-cfea-4de7-a96e-f9e26224f122",
+    "timestamp": "2026-09-28T10:34:27.317Z",
+    "deviceId": 2,
+    "device": "Sharing Server",
+    "event": "ALERT_DOWN",
+    "status": "DOWN",
+    "message": "Alert triggered: Sharing Server is DOWN (Ping failed (2/2 retries): Destination Host Unreachable)"
+  },
+  {
+    "id": "5f7cd0f8-7bd3-4645-aea5-17bc08dee6c8",
+    "timestamp": "2026-09-28T10:34:12.075Z",
+    "deviceId": 1,
+    "device": "AD Server",
+    "event": "ALERT_DOWN",
+    "status": "DOWN",
+    "message": "Alert triggered: AD Server is DOWN (Ping failed (2/2 retries): Destination Host Unreachable)"
+  },
+  {
+    "id": "72de9b7a-859d-40d8-bf66-06b420b48749",
+    "timestamp": "2026-09-28T10:21:26.504Z",
+    "deviceId": 4,
+    "device": "abcd",
+    "event": "DEVICE_CREATED",
+    "status": "INFO",
+    "message": "Device abcd (172.18.1.5) added"
+  },
+  {
+    "id": "c22f7561-e4d6-436d-bcf3-f52d0c6761f9",
+    "timestamp": "2026-09-28T08:02:35.560Z",
+    "deviceId": 1,
+    "device": "AD Server",
+    "event": "RECOVERY",
+    "status": "UP",
+    "message": "Device AD Server recovered to UP (latency: 14.2ms)"
+  },
+  {
+    "id": "ce617b48-cec8-4740-9ddf-25dadce143f0",
+    "timestamp": "2026-09-28T08:02:23.687Z",
+    "deviceId": 1,
+    "device": "AD Server",
+    "event": "ALERT_DOWN",
+    "status": "DOWN",
+    "message": "Alert triggered: AD Server is DOWN (Ping failed (2/2 retries): Destination Host Unreachable)"
+  }
+]

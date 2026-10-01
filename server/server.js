@@ -1,0 +1,95 @@
+import express from 'express';
+import http from 'http';
+import { Server as SocketIOServer } from 'socket.io';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+import { setupWebSocket } from './websocket/socketHandler.js';
+import deviceRoutes from './routes/deviceRoutes.js';
+import dashboardRoutes from './routes/dashboardRoutes.js';
+import alertRoutes from './routes/alertRoutes.js';
+import logRoutes from './routes/logRoutes.js';
+import monitoringRoutes from './routes/monitoringRoutes.js';
+import settingRoutes from './routes/settingRoutes.js';
+import diagnosticRoutes from './routes/diagnosticRoutes.js';
+import dnsRoutes from './routes/dnsRoutes.js';
+import domainRoutes from './routes/domainRoutes.js';
+import domainHealthRoutes from './routes/domainHealthRoutes.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Load .env from root
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
+
+const app = express();
+const server = http.createServer(app);
+
+const PORT = process.env.PORT || 5000;
+const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN || 'http://localhost:5173';
+
+// Setup CORS
+const allowedOrigins = [CLIENT_ORIGIN, 'http://localhost:5173', 'http://127.0.0.1:5173'];
+app.use(cors({
+  origin: (origin, callback) => {
+    // allow requests with no origin (like mobile apps, curl, python workers)
+    if (!origin || allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    return callback(null, true); // Permissive in dev to avoid CORS blocking
+  },
+  credentials: true
+}));
+
+app.use(express.json());
+
+// Setup Socket.IO
+const io = new SocketIOServer(server, {
+  cors: {
+    origin: '*',
+    methods: ['GET', 'POST']
+  }
+});
+setupWebSocket(io);
+
+// Health check
+app.get('/api/health', (req, res) => {
+  res.json({
+    status: 'healthy',
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime()
+  });
+});
+
+// API Routes
+app.use('/api/devices', deviceRoutes);
+app.use('/api/dashboard', dashboardRoutes);
+app.use('/api/alerts', alertRoutes);
+app.use('/api/logs', logRoutes);
+app.use('/api/monitoring', monitoringRoutes);
+app.use('/api/settings', settingRoutes);
+app.use('/api/diagnostics', diagnosticRoutes);
+app.use('/api/dns', dnsRoutes);
+app.use('/api/domains', domainRoutes);
+app.use('/api/domain-health', domainHealthRoutes);
+
+// Error Handling Middleware
+app.use((err, req, res, next) => {
+  console.error('[Server Error]', err);
+  res.status(err.status || 500).json({
+    error: err.message || 'Internal Server Error'
+  });
+});
+
+server.listen(PORT, () => {
+  console.log(`===============================================`);
+  console.log(`🚀 Network Monitoring Server running on port ${PORT}`);
+  console.log(`📡 WebSocket ready`);
+  console.log(`🌐 Client Origin: ${CLIENT_ORIGIN}`);
+  console.log(`📁 Data Directory: ${process.env.DATA_DIR || './data'}`);
+  console.log(`===============================================`);
+});
+
+export { app, server };

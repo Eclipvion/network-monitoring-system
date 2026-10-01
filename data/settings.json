@@ -1,0 +1,14 @@
+{
+  "defaultInterval": 30,
+  "latencyWarningThresholdMs": 150,
+  "packetLossWarningPercent": 20,
+  "retryCountBeforeDown": 2,
+  "dnsResolvers": [
+    { "name": "Google", "ip": "8.8.8.8" },
+    { "name": "Cloudflare", "ip": "1.1.1.1" },
+    { "name": "Quad9", "ip": "9.9.9.9" }
+  ],
+  "dnsTestDomains": ["google.com", "cloudflare.com"],
+  "dnsCheckIntervalSeconds": 300,
+  "sslWarningDaysThreshold": 14
+}

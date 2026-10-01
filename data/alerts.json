@@ -1,0 +1,90 @@
+[
+  {
+    "id": "f04c285a-47be-4d4d-b2cd-d0f2c5797c35",
+    "deviceId": 3,
+    "deviceName": "Test PC",
+    "deviceIp": "172.18.10.189",
+    "type": "DOWN",
+    "timestamp": "2026-10-01T06:59:23.442357+00:00",
+    "resolved": true,
+    "resolvedAt": "2026-10-01T07:04:29.666221+00:00",
+    "message": "Ping failed (2/2 retries): Destination Host Unreachable"
+  },
+  {
+    "id": "646b624f-b58c-4fb4-adee-1e420b788b1a",
+    "deviceId": 2,
+    "deviceName": "Sharing Server",
+    "deviceIp": "172.18.10.9",
+    "type": "DOWN",
+    "timestamp": "2026-10-01T06:59:18.574200+00:00",
+    "resolved": false,
+    "resolvedAt": null,
+    "message": "Ping failed (2/2 retries): Destination Host Unreachable"
+  },
+  {
+    "id": "47318853-5d8e-468a-91d1-484eea9475e0",
+    "deviceId": 1,
+    "deviceName": "AD Server",
+    "deviceIp": "172.18.10.7",
+    "type": "DOWN",
+    "timestamp": "2026-10-01T06:59:13.695787+00:00",
+    "resolved": true,
+    "resolvedAt": "2026-10-01T07:01:59.316825+00:00",
+    "message": "Ping failed (2/2 retries): Destination Host Unreachable"
+  },
+  {
+    "id": "8f2dc021-b047-4edf-afcf-407cd2e6527b",
+    "deviceId": 4,
+    "deviceName": "abcd",
+    "deviceIp": "172.18.1.5",
+    "type": "DOWN",
+    "timestamp": "2026-10-01T06:58:58.003774+00:00",
+    "resolved": true,
+    "resolvedAt": "2026-10-01T06:59:23.846307+00:00",
+    "message": "Ping failed (2/2 retries): Destination Host Unreachable"
+  },
+  {
+    "id": "bb0fdb8e-a0e6-4c1a-8a2d-2b0553bed66e",
+    "deviceId": 3,
+    "deviceName": "Test PC",
+    "deviceIp": "172.18.10.189",
+    "type": "DOWN",
+    "timestamp": "2026-09-28T10:34:32.137680+00:00",
+    "resolved": true,
+    "resolvedAt": "2026-10-01T06:58:37.496127+00:00",
+    "message": "Ping failed (2/2 retries): Destination Host Unreachable"
+  },
+  {
+    "id": "d99da14b-33d1-402e-92ff-3e6c09d23ede",
+    "deviceId": 2,
+    "deviceName": "Sharing Server",
+    "deviceIp": "172.18.10.9",
+    "type": "DOWN",
+    "timestamp": "2026-09-28T10:34:27.286568+00:00",
+    "resolved": true,
+    "resolvedAt": "2026-10-01T06:58:32.637806+00:00",
+    "message": "Ping failed (2/2 retries): Destination Host Unreachable"
+  },
+  {
+    "id": "1d957e46-b486-457a-b58f-548fea46325f",
+    "deviceId": 1,
+    "deviceName": "AD Server",
+    "deviceIp": "172.18.10.7",
+    "type": "DOWN",
+    "timestamp": "2026-09-28T10:34:12.043998+00:00",
+    "resolved": true,
+    "resolvedAt": "2026-10-01T06:58:27.584911+00:00",
+    "message": "Ping failed (2/2 retries): Destination Host Unreachable"
+  },
+  {
+    "id": "7706bd6f-f2f4-45b1-b144-1b5c4c7e3be0",
+    "deviceId": 1,
+    "deviceName": "AD Server",
+    "deviceIp": "172.18.10.7",
+    "type": "DOWN",
+    "timestamp": "2026-09-28T08:02:23.653211+00:00",
+    "resolved": true,
+    "resolvedAt": "2026-09-28T08:02:35.556Z",
+    "message": "Ping failed (2/2 retries): Destination Host Unreachable"
+  }
+]

@@ -1,0 +1,22 @@
+{
+  "name": "network-monitoring-system",
+  "version": "1.0.0",
+  "description": "NetPulse — Custom Enterprise Network Monitoring System built with React, Node.js, Express, Socket.IO, and Python",
+  "scripts": {
+    "install:server": "cd server && npm install",
+    "install:client": "cd client && npm install",
+    "install:all": "npm run install:server && npm run install:client",
+    "server": "cd server && npm run dev",
+    "client": "cd client && npm run dev",
+    "start": "node server/server.js"
+  },
+  "keywords": [
+    "network-monitoring",
+    "netpulse",
+    "socketio",
+    "ping",
+    "telemetry"
+  ],
+  "author": "",
+  "license": "ISC"
+}

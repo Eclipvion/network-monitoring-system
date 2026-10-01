@@ -1,0 +1,53 @@
+[
+  {
+    "id": 1,
+    "name": "Attendece",
+    "ip": "172.18.1.245",
+    "type": "server",
+    "monitoring": true,
+    "interval": 7,
+    "isSeed": true
+  },
+  {
+    "id": 2,
+    "name": "Sharing Server",
+    "ip": "172.18.1.55",
+    "type": "server",
+    "monitoring": true,
+    "interval": 30,
+    "isSeed": true
+  },
+  {
+    "id": 3,
+    "name": "Attendence Machine",
+    "ip": "172.18.1.230",
+    "type": "other",
+    "monitoring": true,
+    "interval": 7,
+    "isSeed": true
+  },
+  {
+    "id": 4,
+    "name": "abcd",
+    "ip": "172.18.1.5",
+    "type": "server",
+    "monitoring": true,
+    "interval": 10
+  },
+  {
+    "id": 5,
+    "name": "Uber",
+    "ip": "8.8.8.8",
+    "type": "other",
+    "monitoring": true,
+    "interval": 10
+  },
+  {
+    "id": 6,
+    "name": "cloudfare",
+    "ip": "1.1.1.1",
+    "type": "other",
+    "monitoring": true,
+    "interval": 8
+  }
+]
