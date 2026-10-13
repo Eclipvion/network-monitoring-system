@@ -160,6 +160,91 @@ export default function SettingsPage({ onSettingsUpdated }) {
             </div>
           </div>
 
+          {/* Section: Enterprise & White-Label Branding */}
+          <div className="pt-6 border-t border-slate-200 dark:border-slate-800 space-y-4">
+            <div>
+              <h4 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <Wifi className="w-4 h-4 text-emerald-500" />
+                Enterprise White-Labeling & SLA Targets
+              </h4>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                Configure your company name, custom logo, and SLA threshold displayed on exported customer PDF reports and audit trails.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {/* Organization Name */}
+              <div className="space-y-1.5">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                  Organization / Company Name
+                </label>
+                <input
+                  type="text"
+                  value={settings.organizationName || ''}
+                  onChange={(e) => setSettings({ ...settings, organizationName: e.target.value })}
+                  placeholder="e.g. Acme Telecom NOC"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
+                />
+                <p className="text-[11px] text-slate-400">
+                  Featured prominently at the top of generated PDF reports and audit exports.
+                </p>
+              </div>
+
+              {/* Report Subtitle */}
+              <div className="space-y-1.5">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                  Report Header Title
+                </label>
+                <input
+                  type="text"
+                  value={settings.reportSubtitle || ''}
+                  onChange={(e) => setSettings({ ...settings, reportSubtitle: e.target.value })}
+                  placeholder="e.g. Infrastructure SLA & Downtime Audit Report"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
+                />
+                <p className="text-[11px] text-slate-400">
+                  Subtitle printed on executive reports.
+                </p>
+              </div>
+
+              {/* SLA Target % */}
+              <div className="space-y-1.5">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                  Target Uptime SLA Commitment (%)
+                </label>
+                <input
+                  type="number"
+                  step="0.01"
+                  min="50"
+                  max="100"
+                  value={settings.slaTargetPercent ?? 99.9}
+                  onChange={(e) => setSettings({ ...settings, slaTargetPercent: Number(e.target.value) })}
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm font-mono font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
+                />
+                <p className="text-[11px] text-slate-400">
+                  SLA target (e.g. 99.90%) against which compliance is benchmarked.
+                </p>
+              </div>
+
+              {/* Custom Logo URL */}
+              <div className="space-y-1.5">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                  Custom Logo URL (Optional)
+                </label>
+                <input
+                  type="url"
+                  value={settings.reportLogoUrl || ''}
+                  onChange={(e) => setSettings({ ...settings, reportLogoUrl: e.target.value })}
+                  placeholder="https://yourcompany.com/logo.png"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
+                />
+                <p className="text-[11px] text-slate-400">
+                  URL to an image logo to replace the default icon on reports.
+                </p>
+              </div>
+            </div>
+          </div>
+
           <div className="pt-4 border-t border-slate-200 dark:border-slate-800 flex justify-end">
             <button
               type="submit"

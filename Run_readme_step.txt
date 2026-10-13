@@ -114,15 +114,39 @@ DASHBOARD PAR KYA KYA DEKH SAKTE HAIN:
    - Side me live WebSocket telemetry feed real-time me update hoti nazar aayegi 
      (page refresh karne ki zaroorat nahi padti).
 
-4. "Alerts" Tab:
+4. "Reports & Audits" Tab:
+   - SLA uptime percentage (e.g. 99.9% badge) aur executive system summary.
+   - White-label PDF export (custom company title, logo URL, technician note).
+   - Export CSV report aur Comprehensive Audit Logs with severity filter (INFO, WARN, CRITICAL).
+
+5. "Diagnostics" Tab (Enterprise Network Diagnostics Suite):
+   - Multi-Hop Visual Traceroute: Har hop ki latency bar, IP, host, aur packet loss detection.
+   - Deep Ping & Jitter Prober: Sequence-by-sequence ping breakdown, RFC 3550 jitter calculation, aur VoIP MOS audio quality score.
+   - TCP Port & Service Scanner: Common service presets (Web 80/443, SSH 22, RDP 3389, DBs 3306/5432, custom port range).
+
+6. "DNS Performance" Tab (Global 40+ Resolvers Speed Benchmark - Inspired by dnsspeedtest.online):
+   - Multi-Threaded Parallel Speed Race: 40+ world-class public DNS servers (Cloudflare, Google, Quad9, OpenDNS, Level3, AdGuard, NextDNS, Control D, Mullvad, AliDNS, etc.) simultaneous benchmark.
+   - Nearest/Fastest Server Finder: User ke actual connection se exact ping latency (ms) measure karta hai aur batata hai ke kaunsa DNS sabse kareeb aur tez hai.
+   - Top 3 Recommendation Podium:
+     * 🥇 #1 Fastest (Lowest Ping / Gaming)
+     * 🛡️ Best Security & Threat Blocker (Quad9 / CleanBrowsing)
+     * 🚫 Best Network-Wide Ad-Blocker (AdGuard / Mullvad)
+   - Category Filters (Ultra-Fast Anycast, Privacy, Ad-Blockers, Security, Family Shield).
+   - Comparative Bar Chart & 40+ Resolvers Detailed Ranked Table.
+   - 1-Click "Apply & Setup Guide" (Windows 11/10 PowerShell command, Home Wi-Fi Router guide) + CSV export.
+
+7. "Domain Health" Tab (SSL / TLS Inspector):
+   - Real-time SSL certificate validation, expiry countdown (days remaining), issuer, TLS version (TLS 1.3/1.2), cipher suite, aur HTTP response check.
+
+8. "Alerts" Tab:
    - Agar koi device consecutive pings fail karega to DOWN alert ban jayega.
    - Jab device wapas theek hoga to automatically RECOVERY hokar resolve ho jayega.
    - Aap khud bhi "Mark Resolved" button se alert resolve kar sakte hain.
 
-5. "Logs" Tab:
+9. "Logs" Tab:
    - Purane tamam audit aur outage logs pagination ke sath dekh sakte hain.
 
-6. "Settings" Tab:
+10. "Settings" Tab:
    - Default ping interval, latency warning ms, packet loss %, aur retry count 
      apni marzi se change kar ke "Save Configuration" kar sakte hain.
 

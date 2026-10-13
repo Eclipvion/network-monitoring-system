@@ -9,8 +9,13 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const router = express.Router();
 
+import fs from 'fs';
+
 const dnsScriptPath = path.resolve(__dirname, '../../python-monitor/dns_check.py');
-const pythonExecutable = process.env.PYTHON_PATH || 'C:\\Users\\Ability\\AppData\\Local\\Programs\\Python\\Python312\\python.exe';
+let pythonExecutable = process.env.PYTHON_PATH || 'C:\\Users\\Ability\\AppData\\Local\\Programs\\Python\\Python312\\python.exe';
+if (!fs.existsSync(pythonExecutable)) {
+  pythonExecutable = 'python';
+}
 
 // GET /api/dns/results - List recent DNS benchmark results
 router.get('/results', async (req, res) => {
@@ -58,6 +63,32 @@ router.post('/result', async (req, res) => {
     res.status(201).json(saved);
   } catch (err) {
     console.error('Error saving DNS result:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// GET /api/dns/directory - Return the full list of 40+ resolvers
+router.get('/directory', async (req, res) => {
+  try {
+    const { DNS_RESOLVER_DIRECTORY } = await import('../services/dnsBenchmarkService.js');
+    res.json({
+      total: DNS_RESOLVER_DIRECTORY.length,
+      resolvers: DNS_RESOLVER_DIRECTORY
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// POST /api/dns/benchmark-all - High-performance parallel speed race across 40+ resolvers
+router.post('/benchmark-all', async (req, res) => {
+  try {
+    const { domain = 'google.com', category = 'all', timeoutMs = 2500 } = req.body;
+    const { runFullDnsBenchmark } = await import('../services/dnsBenchmarkService.js');
+    const result = await runFullDnsBenchmark({ domain, category, timeoutMs });
+    res.json(result);
+  } catch (err) {
+    console.error('DNS Benchmark error:', err);
     res.status(500).json({ error: err.message });
   }
 });

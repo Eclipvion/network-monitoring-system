@@ -8,7 +8,9 @@ import {
   Percent,
   TrendingUp,
   RefreshCw,
-  Server
+  Server,
+  Printer,
+  Zap
 } from 'lucide-react';
 import {
   AreaChart,
@@ -28,6 +30,20 @@ export default function DeviceDetailsModal({ isOpen, onClose, deviceId }) {
   const [range, setRange] = useState('24h');
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
+  const [pinging, setPinging] = useState(false);
+
+  const handleInstantPing = async () => {
+    if (!deviceId) return;
+    setPinging(true);
+    try {
+      await api.pingNow(deviceId);
+      await fetchDetails(range);
+    } catch (e) {
+      console.error('Instant ping failed:', e);
+    } finally {
+      setPinging(false);
+    }
+  };
 
   const fetchDetails = async (selectedRange = range) => {
     if (!deviceId) return;
@@ -89,6 +105,26 @@ export default function DeviceDetailsModal({ isOpen, onClose, deviceId }) {
             </div>
           </div>
           <div className="flex items-center gap-2">
+            <button
+              onClick={() => {
+                const days = range === '7d' ? 7 : 1;
+                window.open(api.getReportExportUrl({ format: 'html', deviceId, days }), '_blank');
+              }}
+              title="Print or Save PDF Report for this device"
+              className="px-3 py-1.5 rounded-xl text-xs font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/20 flex items-center gap-1.5 transition-colors"
+            >
+              <Printer className="w-3.5 h-3.5" />
+              <span>PDF Report</span>
+            </button>
+            <button
+              onClick={handleInstantPing}
+              disabled={pinging}
+              title="⚡ Ping Now (Instant Re-check)"
+              className="px-3 py-1.5 rounded-xl text-xs font-semibold text-amber-600 dark:text-amber-400 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/20 flex items-center gap-1.5 transition-colors disabled:opacity-40"
+            >
+              <Zap className={`w-3.5 h-3.5 ${pinging ? 'animate-bounce text-amber-500' : ''}`} />
+              <span>{pinging ? 'Pinging...' : 'Ping Now'}</span>
+            </button>
             <button
               onClick={() => fetchDetails(range)}
               disabled={refreshing}

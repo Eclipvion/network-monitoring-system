@@ -1,6 +1,7 @@
 import sys
 import time
 import re
+import socket
 import subprocess
 import platform
 import logging
@@ -58,7 +59,7 @@ def ping_system_fallback(ip, timeout_sec=1.5):
     timeout_ms = int(timeout_sec * 1000)
 
     if is_windows:
-        cmd = ['ping', '-n', '1', '-w', str(timeout_ms), ip]
+        cmd = ['ping', '-4', '-n', '1', '-w', str(timeout_ms), ip]
     else:
         cmd = ['ping', '-c', '1', '-W', str(int(timeout_sec)), ip]
 
@@ -100,16 +101,74 @@ def single_ping(ip, timeout_sec):
         # Fallback to system ping for any other socket/OS error
         return ping_system_fallback(ip, timeout_sec)
 
-def probe_device(ip, probes=3, timeout_sec=1.5):
+def tcp_ping(host, port, timeout_sec=2.0):
     """
-    Probes an IP address multiple times to calculate latency and packet loss.
+    Measures TCP handshake latency (identical to Sysinternals PsPing).
+    Works for cloud providers (Azure, AWS, Cloudflare) that drop ICMP echo packets.
+    """
+    start = time.perf_counter()
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.settimeout(timeout_sec)
+    try:
+        sock.connect((host, int(port)))
+        elapsed_ms = (time.perf_counter() - start) * 1000.0
+        sock.close()
+        return round(elapsed_ms, 2)
+    except Exception:
+        try:
+            sock.close()
+        except Exception:
+            pass
+        return None
+
+def probe_device(target, probes=3, timeout_sec=1.5):
+    """
+    Probes an IP address or hostname multiple times to calculate latency and packet loss.
+    Supports:
+      1. ICMP ping (raw socket ping3 with OS IPv4 ping fallback)
+      2. Explicit TCP ping if port is provided (e.g., target: "57.150.61.1:443")
+      3. Automatic TCP fallback (port 443/80) when ICMP is blocked by cloud firewalls like Azure
     Returns: (avg_latency_ms, packet_loss_percent, success_probes)
     """
     latencies = []
     lost_packets = 0
 
+    # Parse target into host and optional port
+    raw_target = str(target).strip()
+    host = raw_target
+    port = None
+
+    if ':' in raw_target and not raw_target.startswith('['):
+        parts = raw_target.rsplit(':', 1)
+        host = parts[0]
+        try:
+            port = int(parts[1])
+        except ValueError:
+            port = None
+
+    # Pre-resolve hostname to IPv4 outside the timing loop so DNS resolution
+    # overhead does not artificially inflate network latency.
+    resolved_host = host
+    if not re.match(r'^(?:\d{1,3}\.){3}\d{1,3}$', host):
+        try:
+            resolved_host = socket.gethostbyname(host)
+        except Exception:
+            resolved_host = host
+
     for _ in range(probes):
-        lat = single_ping(ip, timeout_sec)
+        lat = None
+        if port is not None:
+            # Explicit port specified -> Use TCP ping directly (PsPing mode)
+            lat = tcp_ping(resolved_host, port, timeout_sec=timeout_sec)
+        else:
+            # Try ICMP ping first on the resolved IPv4 target
+            lat = single_ping(resolved_host, timeout_sec)
+            # If ICMP is blocked/dropped (standard behavior for Azure), fallback to TCP port 443 then 80
+            if lat is None:
+                lat = tcp_ping(resolved_host, 443, timeout_sec=timeout_sec)
+                if lat is None:
+                    lat = tcp_ping(resolved_host, 80, timeout_sec=timeout_sec)
+
         if lat is not None:
             latencies.append(lat)
         else:
@@ -117,7 +176,7 @@ def probe_device(ip, probes=3, timeout_sec=1.5):
         time.sleep(0.1)
 
     packet_loss = (lost_packets / probes) * 100.0
-    avg_latency = (sum(latencies) / len(latencies)) if latencies else None
+    avg_latency = round(sum(latencies) / len(latencies), 1) if latencies else None
 
     return avg_latency, packet_loss, len(latencies)
 

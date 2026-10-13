@@ -17,6 +17,7 @@ import diagnosticRoutes from './routes/diagnosticRoutes.js';
 import dnsRoutes from './routes/dnsRoutes.js';
 import domainRoutes from './routes/domainRoutes.js';
 import domainHealthRoutes from './routes/domainHealthRoutes.js';
+import reportRoutes from './routes/reportRoutes.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -74,6 +75,7 @@ app.use('/api/diagnostics', diagnosticRoutes);
 app.use('/api/dns', dnsRoutes);
 app.use('/api/domains', domainRoutes);
 app.use('/api/domain-health', domainHealthRoutes);
+app.use('/api/reports', reportRoutes);
 
 // Error Handling Middleware
 app.use((err, req, res, next) => {

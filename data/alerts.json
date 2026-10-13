@@ -1,5 +1,126 @@
 [
   {
+    "id": "749d30e2-9e23-431d-99e7-e15a17767139",
+    "deviceId": 20,
+    "deviceName": "DESKTOP-56",
+    "deviceIp": "172.18.1.75",
+    "type": "DOWN",
+    "timestamp": "2026-10-13T13:03:46.536998+00:00",
+    "resolved": false,
+    "resolvedAt": null,
+    "message": "Ping failed (2/2 retries): Destination Host Unreachable"
+  },
+  {
+    "id": "b68f7384-5c8c-4cce-b557-69e1ae5a0117",
+    "deviceId": 29,
+    "deviceName": "DESKTOP-29",
+    "deviceIp": "172.18.1.143",
+    "type": "DOWN",
+    "timestamp": "2026-10-13T06:19:39.117719+00:00",
+    "resolved": false,
+    "resolvedAt": null,
+    "message": "Ping failed (2/2 retries): Destination Host Unreachable"
+  },
+  {
+    "id": "eccb0df8-1009-48e8-9805-3c91f69a1690",
+    "deviceId": 29,
+    "deviceName": "DESKTOP-29",
+    "deviceIp": "172.18.1.143",
+    "type": "DOWN",
+    "timestamp": "2026-10-12T10:50:38.561409+00:00",
+    "resolved": true,
+    "resolvedAt": "2026-10-13T06:18:47.413931+00:00",
+    "message": "Ping failed (2/2 retries): Destination Host Unreachable"
+  },
+  {
+    "id": "b70aad8f-f21a-4a3d-808d-69919d6273e6",
+    "deviceId": 7,
+    "deviceName": "Azure West US (Blob Storage)",
+    "deviceIp": "57.150.61.1:443",
+    "type": "DOWN",
+    "timestamp": "2026-10-12T08:45:51.645879+00:00",
+    "resolved": true,
+    "resolvedAt": "2026-10-12T08:50:39.750383+00:00",
+    "message": "Ping failed (26/2 retries): Destination Host Unreachable"
+  },
+  {
+    "id": "1dd9ce2e-a496-45db-85cb-6d6678a69852",
+    "deviceId": 7,
+    "deviceName": "Azure DNS",
+    "deviceIp": "168.63.129.16",
+    "type": "DOWN",
+    "timestamp": "2026-10-12T08:35:15.785882+00:00",
+    "resolved": true,
+    "resolvedAt": "2026-10-12T08:41:47.701Z",
+    "message": "Ping failed (2/2 retries): Destination Host Unreachable"
+  },
+  {
+    "id": "872e67b9-09fa-4618-b9e4-a5c8238d354e",
+    "deviceId": 4,
+    "deviceName": "abcd",
+    "deviceIp": "172.18.1.5",
+    "type": "DOWN",
+    "timestamp": "2026-10-12T07:44:06.246817+00:00",
+    "resolved": true,
+    "resolvedAt": "2026-10-12T08:31:59.322485+00:00",
+    "message": "Ping failed (2/2 retries): Destination Host Unreachable"
+  },
+  {
+    "id": "c7f57967-6c32-44bc-b03f-5c88e87eeea2",
+    "deviceId": 3,
+    "deviceName": "Attendence Machine",
+    "deviceIp": "172.18.1.230",
+    "type": "DOWN",
+    "timestamp": "2026-10-12T07:44:01.396553+00:00",
+    "resolved": true,
+    "resolvedAt": "2026-10-12T08:31:58.968677+00:00",
+    "message": "Ping failed (2/2 retries): Destination Host Unreachable"
+  },
+  {
+    "id": "fa0dc2bc-0586-4430-8414-e9287b8c890b",
+    "deviceId": 1,
+    "deviceName": "Attendece",
+    "deviceIp": "172.18.1.245",
+    "type": "DOWN",
+    "timestamp": "2026-10-12T07:43:56.534642+00:00",
+    "resolved": true,
+    "resolvedAt": "2026-10-12T08:32:10.428394+00:00",
+    "message": "Ping failed (2/2 retries): Destination Host Unreachable"
+  },
+  {
+    "id": "c7c9d154-968d-484f-86ac-23fd9d862592",
+    "deviceId": 4,
+    "deviceName": "abcd",
+    "deviceIp": "172.18.1.5",
+    "type": "DOWN",
+    "timestamp": "2026-10-03T05:32:32.111660+00:00",
+    "resolved": true,
+    "resolvedAt": "2026-10-03T05:32:48.893777+00:00",
+    "message": "Ping failed (2/2 retries): Destination Host Unreachable"
+  },
+  {
+    "id": "054eba11-9e02-42cb-aa7f-9f238ca933ca",
+    "deviceId": 3,
+    "deviceName": "Attendence Machine",
+    "deviceIp": "172.18.1.230",
+    "type": "DOWN",
+    "timestamp": "2026-10-03T05:32:29.502020+00:00",
+    "resolved": true,
+    "resolvedAt": "2026-10-03T05:32:48.557789+00:00",
+    "message": "Ping failed (2/2 retries): Destination Host Unreachable"
+  },
+  {
+    "id": "f4bd9e90-94d1-417b-89dd-16e85b08a002",
+    "deviceId": 2,
+    "deviceName": "Sharing Server",
+    "deviceIp": "172.18.1.55",
+    "type": "DOWN",
+    "timestamp": "2026-10-02T07:51:44.601505+00:00",
+    "resolved": true,
+    "resolvedAt": "2026-10-12T08:41:48.578Z",
+    "message": "Ping failed (2/2 retries): Destination Host Unreachable"
+  },
+  {
     "id": "f04c285a-47be-4d4d-b2cd-d0f2c5797c35",
     "deviceId": 3,
     "deviceName": "Test PC",
@@ -17,8 +138,8 @@
     "deviceIp": "172.18.10.9",
     "type": "DOWN",
     "timestamp": "2026-10-01T06:59:18.574200+00:00",
-    "resolved": false,
-    "resolvedAt": null,
+    "resolved": true,
+    "resolvedAt": "2026-10-02T07:50:59.135574+00:00",
     "message": "Ping failed (2/2 retries): Destination Host Unreachable"
   },
   {

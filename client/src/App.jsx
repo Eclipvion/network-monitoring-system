@@ -4,9 +4,12 @@ import Navbar from './components/Navbar';
 import OverviewPage from './pages/OverviewPage';
 import DevicesPage from './pages/DevicesPage';
 import MonitoringPage from './pages/MonitoringPage';
+import ReportsPage from './pages/ReportsPage';
 import AlertsPage from './pages/AlertsPage';
 import LogsPage from './pages/LogsPage';
 import SettingsPage from './pages/SettingsPage';
+import DiagnosticsPage from './pages/DiagnosticsPage';
+import DnsPerformancePage from './pages/DnsPerformancePage';
 import DeviceModal from './components/DeviceModal';
 import DeviceDetailsModal from './components/DeviceDetailsModal';
 import api from './services/api';
@@ -271,6 +274,7 @@ export default function App() {
                 onDeleteDevice={(dev) => setDeletingDevice(dev)}
                 onToggleMonitoring={handleToggleMonitoring}
                 onOpenDetails={handleOpenDetails}
+                onRefreshDevices={refreshAllData}
               />
             )}
 
@@ -279,6 +283,32 @@ export default function App() {
                 devices={devices}
                 liveEvents={liveEvents}
                 onOpenDetails={handleOpenDetails}
+                onRefreshDevices={refreshAllData}
+              />
+            )}
+
+            {activeTab === 'reports' && (
+              <ReportsPage
+                devices={devices}
+                initialDeviceId="all"
+              />
+            )}
+
+            {activeTab === 'diagnostics' && (
+              <DiagnosticsPage
+                devices={devices}
+                initialTool="traceroute"
+              />
+            )}
+
+            {activeTab === 'dns' && (
+              <DnsPerformancePage />
+            )}
+
+            {activeTab === 'domains' && (
+              <DiagnosticsPage
+                devices={devices}
+                initialTool="ssl"
               />
             )}
 

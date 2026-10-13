@@ -20,6 +20,29 @@ class AsyncMutex {
 }
 
 /**
+ * Validates IPv4, IPv6, FQDN Hostnames, and optional port numbers (e.g. 57.150.61.1:443)
+ */
+export function isValidTarget(target) {
+  if (!target || typeof target !== 'string') return false;
+  const trimmed = target.trim();
+  
+  // Extract optional port
+  const hostPortMatch = trimmed.match(/^([^:]+):(\d+)$/);
+  let host = trimmed;
+  if (hostPortMatch) {
+    host = hostPortMatch[1];
+    const port = parseInt(hostPortMatch[2], 10);
+    if (port < 1 || port > 65535) return false;
+  }
+
+  const ipv4Regex = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+  const ipv6Regex = /^([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$/;
+  const hostnameRegex = /^(?=.{1,253}$)(?!-)[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*$/;
+
+  return ipv4Regex.test(host) || ipv6Regex.test(host) || hostnameRegex.test(host);
+}
+
+/**
  * Base Abstract Interface for DataStore.
  * Allows seamless swap from JSONDataStore to PostgreSQLDataStore in Phase 2.
  */
@@ -97,17 +120,16 @@ export class JSONDataStore extends BaseDataStore {
     return this.mutex.runExclusive(async () => {
       const devices = await this._readJson(this.devicesFile, []);
 
-      // Validate IP format
+      // Validate IP or Hostname format
       const ip = (deviceData.ip || '').trim();
-      const ipRegex = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$|^([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$/;
-      if (!ipRegex.test(ip)) {
-        throw new Error('Invalid IP address format');
+      if (!isValidTarget(ip)) {
+        throw new Error('Invalid IP address or Hostname format (e.g. 192.168.1.1, 57.150.61.1:443, or s8westus.blob.core.windows.net:443)');
       }
 
-      // Reject duplicate IP
+      // Reject duplicate IP / Target
       const exists = devices.some(d => d.ip.toLowerCase() === ip.toLowerCase());
       if (exists) {
-        throw new Error(`Device with IP ${ip} already exists`);
+        throw new Error(`Device with target ${ip} already exists`);
       }
 
       const nextId = devices.length > 0 ? Math.max(...devices.map(d => Number(d.id) || 0)) + 1 : 1;
@@ -137,6 +159,48 @@ export class JSONDataStore extends BaseDataStore {
     });
   }
 
+  async batchAddDevices(deviceList) {
+    return this.mutex.runExclusive(async () => {
+      const devices = await this._readJson(this.devicesFile, []);
+      const settings = await this._readJson(this.settingsFile, { defaultInterval: 30 });
+      let nextId = devices.length > 0 ? Math.max(...devices.map(d => Number(d.id) || 0)) + 1 : 1;
+      const added = [];
+
+      for (const item of deviceList) {
+        const ip = (item.ip || '').trim();
+        if (!isValidTarget(ip)) continue;
+        const exists = devices.some(d => d.ip.toLowerCase() === ip.toLowerCase());
+        if (exists) continue;
+
+        const newDevice = {
+          id: nextId++,
+          name: (item.name || `Device ${ip}`).trim(),
+          ip: ip,
+          type: item.type || 'server',
+          group: item.group || 'Local Network',
+          monitoring: item.monitoring !== undefined ? Boolean(item.monitoring) : true,
+          interval: Number(item.interval) || settings.defaultInterval || 30
+        };
+
+        devices.push(newDevice);
+        added.push(newDevice);
+
+        await this._appendLogInternal({
+          deviceId: newDevice.id,
+          device: newDevice.name,
+          event: 'DEVICE_CREATED',
+          status: 'INFO',
+          message: `Auto-detected device ${newDevice.name} (${newDevice.ip}) added to monitoring`
+        });
+      }
+
+      if (added.length > 0) {
+        await this._writeJson(this.devicesFile, devices);
+      }
+      return added;
+    });
+  }
+
   async updateDevice(id, data) {
     return this.mutex.runExclusive(async () => {
       const devices = await this._readJson(this.devicesFile, []);
@@ -149,13 +213,12 @@ export class JSONDataStore extends BaseDataStore {
 
       if (data.ip && data.ip.trim() !== target.ip) {
         const ip = data.ip.trim();
-        const ipRegex = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$|^([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$/;
-        if (!ipRegex.test(ip)) {
-          throw new Error('Invalid IP address format');
+        if (!isValidTarget(ip)) {
+          throw new Error('Invalid IP address or Hostname format (e.g. 192.168.1.1, 57.150.61.1:443, or s8westus.blob.core.windows.net:443)');
         }
         const duplicate = devices.some(d => Number(d.id) !== Number(id) && d.ip.toLowerCase() === ip.toLowerCase());
         if (duplicate) {
-          throw new Error(`Device with IP ${ip} already exists`);
+          throw new Error(`Device with target ${ip} already exists`);
         }
         target.ip = ip;
       }
@@ -396,29 +459,37 @@ export class JSONDataStore extends BaseDataStore {
 
   async getSettings() {
     return this.mutex.runExclusive(async () => {
-      return this._readJson(this.settingsFile, {
+      const defaults = {
         defaultInterval: 30,
         latencyWarningThresholdMs: 150,
         packetLossWarningPercent: 20,
-        retryCountBeforeDown: 2
-      });
+        retryCountBeforeDown: 2,
+        organizationName: 'NetPulse Enterprise NOC',
+        reportSubtitle: 'Infrastructure SLA & Downtime Audit Report',
+        slaTargetPercent: 99.9,
+        reportLogoUrl: '',
+        auditRetentionDays: 90
+      };
+      const loaded = await this._readJson(this.settingsFile, defaults);
+      return { ...defaults, ...loaded };
     });
   }
 
   async updateSettings(data) {
     return this.mutex.runExclusive(async () => {
-      const current = await this._readJson(this.settingsFile, {
-        defaultInterval: 30,
-        latencyWarningThresholdMs: 150,
-        packetLossWarningPercent: 20,
-        retryCountBeforeDown: 2
-      });
+      const current = await this._readJson(this.settingsFile, {});
 
       const updated = {
+        ...current,
         defaultInterval: Number(data.defaultInterval) || current.defaultInterval || 30,
         latencyWarningThresholdMs: Number(data.latencyWarningThresholdMs) || current.latencyWarningThresholdMs || 150,
         packetLossWarningPercent: Number(data.packetLossWarningPercent) || current.packetLossWarningPercent || 20,
-        retryCountBeforeDown: Number(data.retryCountBeforeDown) || current.retryCountBeforeDown || 2
+        retryCountBeforeDown: Number(data.retryCountBeforeDown) || current.retryCountBeforeDown || 2,
+        organizationName: typeof data.organizationName === 'string' ? data.organizationName.trim() : (current.organizationName || 'NetPulse Enterprise NOC'),
+        reportSubtitle: typeof data.reportSubtitle === 'string' ? data.reportSubtitle.trim() : (current.reportSubtitle || 'Infrastructure SLA & Downtime Audit Report'),
+        slaTargetPercent: data.slaTargetPercent !== undefined && !isNaN(Number(data.slaTargetPercent)) ? Number(data.slaTargetPercent) : (current.slaTargetPercent || 99.9),
+        reportLogoUrl: typeof data.reportLogoUrl === 'string' ? data.reportLogoUrl.trim() : (current.reportLogoUrl || ''),
+        auditRetentionDays: Number(data.auditRetentionDays) || current.auditRetentionDays || 90
       };
 
       await this._writeJson(this.settingsFile, updated);
@@ -428,14 +499,17 @@ export class JSONDataStore extends BaseDataStore {
         device: 'System',
         event: 'SETTINGS_UPDATED',
         status: 'INFO',
-        message: `System monitoring settings updated`
+        severity: 'SECURITY',
+        actor: data.actor || 'Admin (Console)',
+        ip: data.ip || '127.0.0.1',
+        message: `System monitoring and organization branding settings updated`
       });
 
       return updated;
     });
   }
 
-  async getLogs({ page = 1, limit = 50, deviceId, event } = {}) {
+  async getLogs({ page = 1, limit = 50, deviceId, event, severity, search, from, to } = {}) {
     return this.mutex.runExclusive(async () => {
       const logs = await this._readJson(this.logsFile, []);
       let filtered = logs;
@@ -444,7 +518,28 @@ export class JSONDataStore extends BaseDataStore {
         filtered = filtered.filter(l => Number(l.deviceId) === Number(deviceId));
       }
       if (event) {
-        filtered = filtered.filter(l => l.event.toLowerCase() === event.toLowerCase());
+        filtered = filtered.filter(l => l.event && l.event.toLowerCase() === event.toLowerCase());
+      }
+      if (severity) {
+        filtered = filtered.filter(l => (l.severity || l.status || '').toLowerCase() === severity.toLowerCase());
+      }
+      if (from) {
+        const fromTime = new Date(from).getTime();
+        filtered = filtered.filter(l => new Date(l.timestamp).getTime() >= fromTime);
+      }
+      if (to) {
+        const toTime = new Date(to).getTime();
+        filtered = filtered.filter(l => new Date(l.timestamp).getTime() <= toTime);
+      }
+      if (search && search.trim()) {
+        const term = search.trim().toLowerCase();
+        filtered = filtered.filter(l => 
+          (l.message && l.message.toLowerCase().includes(term)) ||
+          (l.device && l.device.toLowerCase().includes(term)) ||
+          (l.event && l.event.toLowerCase().includes(term)) ||
+          (l.actor && l.actor.toLowerCase().includes(term)) ||
+          (l.ip && l.ip.toLowerCase().includes(term))
+        );
       }
 
       // Sort newest first
@@ -466,6 +561,65 @@ export class JSONDataStore extends BaseDataStore {
     });
   }
 
+  async getLogsExport({ deviceId, event, severity, search, from, to, format = 'csv' } = {}) {
+    return this.mutex.runExclusive(async () => {
+      const logs = await this._readJson(this.logsFile, []);
+      let filtered = logs;
+
+      if (deviceId) {
+        filtered = filtered.filter(l => Number(l.deviceId) === Number(deviceId));
+      }
+      if (event) {
+        filtered = filtered.filter(l => l.event && l.event.toLowerCase() === event.toLowerCase());
+      }
+      if (severity) {
+        filtered = filtered.filter(l => (l.severity || l.status || '').toLowerCase() === severity.toLowerCase());
+      }
+      if (from) {
+        const fromTime = new Date(from).getTime();
+        filtered = filtered.filter(l => new Date(l.timestamp).getTime() >= fromTime);
+      }
+      if (to) {
+        const toTime = new Date(to).getTime();
+        filtered = filtered.filter(l => new Date(l.timestamp).getTime() <= toTime);
+      }
+      if (search && search.trim()) {
+        const term = search.trim().toLowerCase();
+        filtered = filtered.filter(l => 
+          (l.message && l.message.toLowerCase().includes(term)) ||
+          (l.device && l.device.toLowerCase().includes(term)) ||
+          (l.event && l.event.toLowerCase().includes(term)) ||
+          (l.actor && l.actor.toLowerCase().includes(term)) ||
+          (l.ip && l.ip.toLowerCase().includes(term))
+        );
+      }
+
+      filtered.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+      if (format.toLowerCase() === 'json') {
+        return JSON.stringify(filtered, null, 2);
+      }
+
+      // Format CSV
+      const rows = [];
+      rows.push(['Timestamp', 'Target Device', 'Event Type', 'Severity', 'Actor / Operator', 'IP Address', 'Status', 'Message'].join(','));
+      for (const log of filtered) {
+        const esc = (val) => `"${String(val || '').replace(/"/g, '""')}"`;
+        rows.push([
+          esc(log.timestamp),
+          esc(log.device),
+          esc(log.event),
+          esc(log.severity || log.status || 'INFO'),
+          esc(log.actor || 'System'),
+          esc(log.ip || '127.0.0.1'),
+          esc(log.status || 'INFO'),
+          esc(log.message)
+        ].join(','));
+      }
+      return rows.join('\r\n');
+    });
+  }
+
   async appendLog(logEntry) {
     return this.mutex.runExclusive(async () => {
       return this._appendLogInternal(logEntry);
@@ -474,19 +628,39 @@ export class JSONDataStore extends BaseDataStore {
 
   async _appendLogInternal(entry) {
     const logs = await this._readJson(this.logsFile, []);
+    
+    // Auto infer severity if not provided
+    let inferredSeverity = entry.severity;
+    if (!inferredSeverity) {
+      if (entry.event === 'ALERT_DOWN' || entry.status === 'CRITICAL') {
+        inferredSeverity = 'CRITICAL';
+      } else if (entry.event === 'RECOVERY' || entry.status === 'SUCCESS') {
+        inferredSeverity = 'SUCCESS';
+      } else if (entry.status === 'WARNING') {
+        inferredSeverity = 'WARNING';
+      } else if (entry.event.startsWith('DEVICE_') || entry.event.startsWith('SETTINGS_') || entry.event.includes('MANUAL')) {
+        inferredSeverity = 'SECURITY';
+      } else {
+        inferredSeverity = 'INFO';
+      }
+    }
+
     const newLog = {
       id: crypto.randomUUID(),
       timestamp: new Date().toISOString(),
       deviceId: entry.deviceId || null,
       device: entry.device || 'System',
       event: entry.event || 'GENERAL',
+      severity: inferredSeverity,
+      actor: entry.actor || (entry.event.startsWith('DEVICE_') || entry.event.startsWith('SETTINGS_') || entry.event.includes('MANUAL') ? 'Admin (Console)' : 'Automated Monitor Engine'),
+      ip: entry.ip || '127.0.0.1',
       status: entry.status || 'INFO',
       message: entry.message || ''
     };
     logs.unshift(newLog);
-    // Keep max 2000 log entries
-    if (logs.length > 2000) {
-      logs.length = 2000;
+    // Keep max 2500 log entries
+    if (logs.length > 2500) {
+      logs.length = 2500;
     }
     await this._writeJson(this.logsFile, logs);
     return newLog;
@@ -914,7 +1088,7 @@ export class JSONDataStore extends BaseDataStore {
     });
   }
 
-  // --- REPORT EXPORT ---
+  // --- REPORT EXPORT & ANALYTICS ---
   async getMonitoringExportData({ type, status, from, to } = {}) {
     return this.mutex.runExclusive(async () => {
       const summary = await this.getDashboardSummary();
@@ -939,9 +1113,448 @@ export class JSONDataStore extends BaseDataStore {
       }));
     });
   }
+
+  /**
+   * Comprehensive Report Analytics for Uptime, Downtime, Incidents, and Telemetry Trends
+   */
+  async getReportAnalytics({ deviceId, days, from, to, type, status } = {}) {
+    return this.mutex.runExclusive(async () => {
+      const devices = await this._readJson(this.devicesFile, []);
+      const results = await this._readJson(this.resultsFile, []);
+      const alerts = await this._readJson(this.alertsFile, []);
+      const settings = await this._readJson(this.settingsFile, {
+        organizationName: 'NetPulse Enterprise NOC',
+        reportSubtitle: 'Infrastructure SLA & Downtime Audit Report',
+        slaTargetPercent: 99.9,
+        reportLogoUrl: ''
+      });
+
+      // Calculate time window
+      const now = Date.now();
+      const isCustomRange = Boolean(from || to);
+      let fromTime;
+      let toTime;
+
+      if (isCustomRange) {
+        if (from) {
+          fromTime = new Date(from).getTime();
+        } else {
+          fromTime = (to ? new Date(to).getTime() : now) - 7 * 24 * 60 * 60 * 1000;
+        }
+
+        if (to) {
+          if (typeof to === 'string' && to.length === 10) {
+            toTime = new Date(`${to}T23:59:59.999`).getTime();
+          } else {
+            toTime = new Date(to).getTime();
+          }
+        } else {
+          toTime = now;
+        }
+      } else if (days !== undefined && days !== null && days !== '' && !isNaN(Number(days))) {
+        const numDays = Math.max(0.01, Number(days));
+        toTime = now;
+        fromTime = now - numDays * 24 * 60 * 60 * 1000;
+      } else {
+        toTime = now;
+        fromTime = now - 7 * 24 * 60 * 60 * 1000;
+      }
+
+      if (isNaN(fromTime)) fromTime = now - 7 * 24 * 60 * 60 * 1000;
+      if (isNaN(toTime)) toTime = now;
+      if (toTime < fromTime) {
+        const tmp = toTime;
+        toTime = fromTime;
+        fromTime = tmp;
+      }
+
+      const diffDays = Number(((toTime - fromTime) / (24 * 60 * 60 * 1000)).toFixed(1));
+
+      // Filter target devices
+      let targetDevices = [...devices];
+      const isSpecificDevice = deviceId && deviceId !== 'all';
+      if (isSpecificDevice) {
+        targetDevices = targetDevices.filter(d => Number(d.id) === Number(deviceId));
+      }
+      if (type && type !== 'ALL') {
+        targetDevices = targetDevices.filter(d => (d.type || '').toLowerCase() === type.toLowerCase());
+      }
+
+      const targetDeviceIds = new Set(targetDevices.map(d => Number(d.id)));
+
+      // Filter results in date range & target devices
+      const filteredResults = results.filter(r => {
+        if (!targetDeviceIds.has(Number(r.deviceId))) return false;
+        const t = new Date(r.timestamp).getTime();
+        return t >= fromTime && t <= toTime;
+      });
+
+      // Sort chronological
+      filteredResults.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+
+      // Device map for quick info lookup
+      const deviceMap = new Map(devices.map(d => [Number(d.id), d]));
+
+      // 1. Overall counts
+      const totalChecks = filteredResults.length;
+      let upChecks = 0;
+      let downChecks = 0;
+      let warningChecks = 0;
+      let totalLatency = 0;
+      let validLatencyCount = 0;
+      let minLatency = Infinity;
+      let maxLatency = 0;
+      let totalPacketLoss = 0;
+      let maxPacketLoss = 0;
+
+      for (const r of filteredResults) {
+        if (r.status === 'UP') upChecks++;
+        else if (r.status === 'DOWN') downChecks++;
+        else if (r.status === 'WARNING') warningChecks++;
+
+        if (r.latency !== null && r.latency !== undefined && typeof r.latency === 'number' && r.latency >= 0) {
+          totalLatency += r.latency;
+          validLatencyCount++;
+          if (r.latency < minLatency) minLatency = r.latency;
+          if (r.latency > maxLatency) maxLatency = r.latency;
+        }
+
+        if (typeof r.packetLoss === 'number') {
+          totalPacketLoss += r.packetLoss;
+          if (r.packetLoss > maxPacketLoss) maxPacketLoss = r.packetLoss;
+        }
+      }
+
+      const uptimePercent = totalChecks > 0 ? Number(((upChecks + warningChecks) / totalChecks * 100).toFixed(2)) : 100;
+      const pureUptimePercent = totalChecks > 0 ? Number((upChecks / totalChecks * 100).toFixed(2)) : 100;
+      const downtimePercent = totalChecks > 0 ? Number((downChecks / totalChecks * 100).toFixed(2)) : 0;
+      const warningPercent = totalChecks > 0 ? Number((warningChecks / totalChecks * 100).toFixed(2)) : 0;
+      const avgLatency = validLatencyCount > 0 ? Number((totalLatency / validLatencyCount).toFixed(1)) : null;
+      const avgPacketLoss = totalChecks > 0 ? Number((totalPacketLoss / totalChecks).toFixed(1)) : 0;
+      if (minLatency === Infinity) minLatency = null;
+
+      // Helper function to format duration in readable format
+      const formatDuration = (seconds) => {
+        if (!seconds || seconds <= 0) return '0s';
+        const days = Math.floor(seconds / 86400);
+        const hours = Math.floor((seconds % 86400) / 3600);
+        const minutes = Math.floor((seconds % 3600) / 60);
+        const secs = seconds % 60;
+
+        const parts = [];
+        if (days > 0) parts.push(`${days}d`);
+        if (hours > 0) parts.push(`${hours}h`);
+        if (minutes > 0) parts.push(`${minutes}m`);
+        if (secs > 0 || parts.length === 0) parts.push(`${secs}s`);
+        return parts.slice(0, 3).join(' ');
+      };
+
+      // 2. Incident & Outage history (When did it go DOWN, when did it recover, why/reason, duration)
+      // Extract from alerts table first
+      const relevantAlerts = alerts.filter(a => {
+        if (!targetDeviceIds.has(Number(a.deviceId))) return false;
+        const downTime = new Date(a.timestamp).getTime();
+        const resolvedTime = a.resolvedAt ? new Date(a.resolvedAt).getTime() : now;
+        return downTime <= toTime && resolvedTime >= fromTime;
+      });
+
+      const incidents = relevantAlerts.map(a => {
+        const downDate = new Date(a.timestamp);
+        const resolvedDate = a.resolvedAt ? new Date(a.resolvedAt) : null;
+        const durationMs = (resolvedDate ? resolvedDate.getTime() : Math.min(now, toTime)) - downDate.getTime();
+        const durationSec = Math.max(0, Math.round(durationMs / 1000));
+
+        const dev = deviceMap.get(Number(a.deviceId));
+        return {
+          id: a.id,
+          deviceId: Number(a.deviceId),
+          deviceName: a.deviceName || dev?.name || `Device #${a.deviceId}`,
+          deviceIp: a.deviceIp || dev?.ip || 'N/A',
+          downAt: a.timestamp,
+          upAt: a.resolved ? a.resolvedAt : null,
+          isResolved: Boolean(a.resolved),
+          durationSeconds: durationSec,
+          durationFormatted: formatDuration(durationSec),
+          reason: a.message || 'Host is unreachable / Ping probes failed',
+          type: a.type || 'DOWN'
+        };
+      });
+
+      // Also discover any transitions in filteredResults not already in incidents
+      const resultsByDevice = new Map();
+      for (const r of filteredResults) {
+        const list = resultsByDevice.get(r.deviceId) || [];
+        list.push(r);
+        resultsByDevice.set(r.deviceId, list);
+      }
+
+      for (const [devId, dResults] of resultsByDevice.entries()) {
+        let currentOutage = null;
+        for (let i = 0; i < dResults.length; i++) {
+          const r = dResults[i];
+          if (r.status === 'DOWN') {
+            if (!currentOutage) {
+              currentOutage = {
+                downAt: r.timestamp,
+                reason: r.message || 'Destination Host Unreachable',
+                deviceId: devId
+              };
+            }
+          } else {
+            if (currentOutage) {
+              const downT = new Date(currentOutage.downAt).getTime();
+              const upT = new Date(r.timestamp).getTime();
+              const durSec = Math.max(0, Math.round((upT - downT) / 1000));
+              const alreadyCovered = incidents.some(inc => 
+                inc.deviceId === devId && Math.abs(new Date(inc.downAt).getTime() - downT) < 60000
+              );
+              if (!alreadyCovered && durSec > 0) {
+                const dev = deviceMap.get(devId);
+                incidents.push({
+                  id: `tr-${devId}-${downT}`,
+                  deviceId: devId,
+                  deviceName: dev?.name || `Device #${devId}`,
+                  deviceIp: dev?.ip || 'N/A',
+                  downAt: currentOutage.downAt,
+                  upAt: r.timestamp,
+                  isResolved: true,
+                  durationSeconds: durSec,
+                  durationFormatted: formatDuration(durSec),
+                  reason: currentOutage.reason,
+                  type: 'DOWN'
+                });
+              }
+              currentOutage = null;
+            }
+          }
+        }
+        if (currentOutage) {
+          const downT = new Date(currentOutage.downAt).getTime();
+          const durSec = Math.max(0, Math.round((toTime - downT) / 1000));
+          const alreadyCovered = incidents.some(inc => 
+            inc.deviceId === devId && Math.abs(new Date(inc.downAt).getTime() - downT) < 60000
+          );
+          if (!alreadyCovered) {
+            const dev = deviceMap.get(devId);
+            incidents.push({
+              id: `tr-${devId}-${downT}`,
+              deviceId: devId,
+              deviceName: dev?.name || `Device #${devId}`,
+              deviceIp: dev?.ip || 'N/A',
+              downAt: currentOutage.downAt,
+              upAt: null,
+              isResolved: false,
+              durationSeconds: durSec,
+              durationFormatted: `Ongoing (${formatDuration(durSec)})`,
+              reason: currentOutage.reason,
+              type: 'DOWN'
+            });
+          }
+        }
+      }
+
+      // Sort incidents descending (newest first)
+      incidents.sort((a, b) => new Date(b.downAt) - new Date(a.downAt));
+
+      const totalDowntimeSeconds = incidents.reduce((acc, curr) => acc + (curr.durationSeconds || 0), 0);
+      const totalIncidents = incidents.length;
+      const mttrSeconds = totalIncidents > 0 ? Math.round(totalDowntimeSeconds / totalIncidents) : 0;
+
+      // 3. Time Series aggregation for charts (up to 30 data points)
+      const numBuckets = 30;
+      const bucketSizeMs = Math.max(60000, Math.floor((toTime - fromTime) / numBuckets));
+      const timeSeries = [];
+
+      const formatTimeTick = (date, windowMs) => {
+        if (windowMs <= 24 * 3600 * 1000) {
+          return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        }
+        return date.toLocaleDateString([], { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+      };
+
+      for (let b = 0; b < numBuckets; b++) {
+        const bStart = fromTime + b * bucketSizeMs;
+        const bEnd = bStart + bucketSizeMs;
+        const inBucket = filteredResults.filter(r => {
+          const t = new Date(r.timestamp).getTime();
+          return t >= bStart && t < bEnd;
+        });
+
+        if (inBucket.length > 0) {
+          let bLatSum = 0;
+          let bLatCount = 0;
+          let bLossSum = 0;
+          let bDown = 0;
+          let bWarn = 0;
+          let bUp = 0;
+
+          for (const item of inBucket) {
+            if (item.status === 'UP') bUp++;
+            else if (item.status === 'DOWN') bDown++;
+            else if (item.status === 'WARNING') bWarn++;
+
+            if (typeof item.latency === 'number' && item.latency >= 0) {
+              bLatSum += item.latency;
+              bLatCount++;
+            }
+            if (typeof item.packetLoss === 'number') {
+              bLossSum += item.packetLoss;
+            }
+          }
+
+          const avgLat = bLatCount > 0 ? Number((bLatSum / bLatCount).toFixed(1)) : 0;
+          const avgLoss = Number((bLossSum / inBucket.length).toFixed(1));
+          let bucketStatus = 'UP';
+          if (bDown > 0) bucketStatus = 'DOWN';
+          else if (bWarn > 0) bucketStatus = 'WARNING';
+
+          timeSeries.push({
+            timestamp: new Date(bStart).toISOString(),
+            timeLabel: formatTimeTick(new Date(bStart), (toTime - fromTime)),
+            latency: avgLat,
+            packetLoss: avgLoss,
+            status: bucketStatus,
+            upCount: bUp,
+            downCount: bDown,
+            warningCount: bWarn,
+            totalChecks: inBucket.length
+          });
+        } else {
+          timeSeries.push({
+            timestamp: new Date(bStart).toISOString(),
+            timeLabel: formatTimeTick(new Date(bStart), (toTime - fromTime)),
+            latency: null,
+            packetLoss: 0,
+            status: 'NO_DATA',
+            upCount: 0,
+            downCount: 0,
+            warningCount: 0,
+            totalChecks: 0
+          });
+        }
+      }
+
+      // 4. Device Summaries
+      const deviceSummaries = targetDevices.map(d => {
+        const devResults = filteredResults.filter(r => Number(r.deviceId) === Number(d.id));
+        const devChecks = devResults.length;
+        const devUp = devResults.filter(r => r.status === 'UP').length;
+        const devWarn = devResults.filter(r => r.status === 'WARNING').length;
+        const devDown = devResults.filter(r => r.status === 'DOWN').length;
+        const devUptime = devChecks > 0 ? Number(((devUp + devWarn) / devChecks * 100).toFixed(1)) : 100;
+        
+        const devLatencies = devResults.filter(r => typeof r.latency === 'number' && r.latency >= 0).map(r => r.latency);
+        const devAvgLat = devLatencies.length > 0 ? Number((devLatencies.reduce((a, b) => a + b, 0) / devLatencies.length).toFixed(1)) : 'N/A';
+
+        const devIncidents = incidents.filter(i => i.deviceId === Number(d.id));
+        const devDowntimeSec = devIncidents.reduce((a, b) => a + (b.durationSeconds || 0), 0);
+        const isFlapping = devIncidents.length >= 3;
+
+        return {
+          id: d.id,
+          name: d.name,
+          ip: d.ip,
+          type: d.type || 'server',
+          interval: d.interval,
+          monitoring: d.monitoring,
+          totalChecks: devChecks,
+          upChecks: devUp,
+          warningChecks: devWarn,
+          downChecks: devDown,
+          uptimePercent: devUptime,
+          avgLatency: devAvgLat,
+          incidentsCount: devIncidents.length,
+          totalDowntimeSeconds: devDowntimeSec,
+          totalDowntimeFormatted: formatDuration(devDowntimeSec),
+          isFlapping,
+          currentStatus: devResults.length > 0 ? devResults[devResults.length - 1].status : (d.monitoring ? 'UNKNOWN' : 'PAUSED')
+        };
+      });
+
+      // Flapping & Health Score calculations
+      const flappingDevices = deviceSummaries.filter(d => d.isFlapping);
+      const targetSlaPercent = Number(settings.slaTargetPercent) || 99.9;
+      const slaMet = uptimePercent >= targetSlaPercent;
+      const slaGap = Number((uptimePercent - targetSlaPercent).toFixed(2));
+
+      // Enterprise Fleet Health Score (0 - 100)
+      let healthScore = 100;
+      healthScore -= (100 - uptimePercent) * 3.0; // Penalty for downtime
+      healthScore -= (avgPacketLoss || 0) * 1.5;   // Penalty for packet loss
+      if (typeof avgLatency === 'number' && avgLatency > 120) {
+        healthScore -= Math.min(15, (avgLatency - 120) / 10);
+      }
+      const activeOutages = incidents.filter(i => !i.isResolved).length;
+      healthScore -= activeOutages * 10;
+      healthScore -= flappingDevices.length * 5;
+      healthScore = Math.max(0, Math.min(100, Math.round(healthScore)));
+
+      let healthGrade = 'A+';
+      if (healthScore >= 98) healthGrade = 'A+';
+      else if (healthScore >= 90) healthGrade = 'A';
+      else if (healthScore >= 80) healthGrade = 'B';
+      else if (healthScore >= 70) healthGrade = 'C';
+      else healthGrade = 'F';
+
+      return {
+        filter: {
+          deviceId: isSpecificDevice ? Number(deviceId) : 'all',
+          deviceName: isSpecificDevice ? (targetDevices[0]?.name || `Device #${deviceId}`) : 'All Network Devices',
+          deviceIp: isSpecificDevice ? targetDevices[0]?.ip : null,
+          from: new Date(fromTime).toISOString(),
+          to: new Date(toTime).toISOString(),
+          days: diffDays,
+          isCustomRange,
+          type: type || 'ALL'
+        },
+        branding: {
+          organizationName: settings.organizationName || 'NetPulse Enterprise NOC',
+          reportSubtitle: settings.reportSubtitle || 'Infrastructure SLA & Downtime Audit Report',
+          reportLogoUrl: settings.reportLogoUrl || '',
+          slaTargetPercent: targetSlaPercent
+        },
+        compliance: {
+          targetSlaPercent,
+          actualUptimePercent: uptimePercent,
+          slaStatus: slaMet ? 'SLA_MET' : 'SLA_BREACHED',
+          slaGap,
+          healthScore,
+          healthGrade
+        },
+        flappingDevices,
+        metrics: {
+          totalChecks,
+          upChecks,
+          warningChecks,
+          downChecks,
+          uptimePercent,
+          pureUptimePercent,
+          downtimePercent,
+          warningPercent,
+          avgLatency,
+          minLatency,
+          maxLatency,
+          avgPacketLoss,
+          maxPacketLoss,
+          totalIncidents,
+          totalDowntimeSeconds,
+          totalDowntimeFormatted: formatDuration(totalDowntimeSeconds),
+          mttrSeconds,
+          mttrFormatted: formatDuration(mttrSeconds),
+          healthScore,
+          healthGrade,
+          slaStatus: slaMet ? 'SLA_MET' : 'SLA_BREACHED'
+        },
+        incidents,
+        timeSeries,
+        deviceSummaries
+      };
+    });
+  }
 }
 
 // Export singleton instance based on environment or default JSONDataStore
 const defaultDataDir = process.env.DATA_DIR || path.resolve(__dirname, '../../data');
 export const dataStore = new JSONDataStore(defaultDataDir);
 export default dataStore;
+

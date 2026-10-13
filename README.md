@@ -180,3 +180,8 @@ PYTHON_WORKER_POLL_INTERVAL=10
 | `POST` | `/api/monitoring/result` | Ingest monitoring results from Python worker |
 | `GET` | `/api/settings` | Get threshold and interval settings |
 | `PUT` | `/api/settings` | Update threshold settings |
+
+
+git add .
+git commit -m "Update project"
+git push

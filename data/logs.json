@@ -1,5 +1,512 @@
 [
   {
+    "id": "bfe92226-d4a2-41f3-9a8c-1f25f6539885",
+    "timestamp": "2026-10-13T13:03:46.623Z",
+    "deviceId": 20,
+    "device": "DESKTOP-56",
+    "event": "ALERT_DOWN",
+    "severity": "CRITICAL",
+    "actor": "Automated Monitor Engine",
+    "ip": "127.0.0.1",
+    "status": "DOWN",
+    "message": "Alert triggered: DESKTOP-56 is DOWN (Ping failed (2/2 retries): Destination Host Unreachable)"
+  },
+  {
+    "id": "d5061b6c-b8a2-4315-bdf5-7c6ae59e08a5",
+    "timestamp": "2026-10-13T06:19:39.174Z",
+    "deviceId": 29,
+    "device": "DESKTOP-29",
+    "event": "ALERT_DOWN",
+    "status": "DOWN",
+    "message": "Alert triggered: DESKTOP-29 is DOWN (Ping failed (2/2 retries): Destination Host Unreachable)"
+  },
+  {
+    "id": "19dc5947-1595-4ad1-88c2-c5d771de8c3d",
+    "timestamp": "2026-10-13T06:18:47.474Z",
+    "deviceId": 29,
+    "device": "DESKTOP-29",
+    "event": "RECOVERY",
+    "status": "WARNING",
+    "message": "Device DESKTOP-29 recovered to WARNING (latency: 0ms)"
+  },
+  {
+    "id": "067c99fe-6937-4f1b-9373-3b1ac2dadf6b",
+    "timestamp": "2026-10-12T10:50:38.604Z",
+    "deviceId": 29,
+    "device": "DESKTOP-29",
+    "event": "ALERT_DOWN",
+    "status": "DOWN",
+    "message": "Alert triggered: DESKTOP-29 is DOWN (Ping failed (2/2 retries): Destination Host Unreachable)"
+  },
+  {
+    "id": "54d17cad-6f45-4f24-9200-02ef925c8c92",
+    "timestamp": "2026-10-12T10:49:13.785Z",
+    "deviceId": 32,
+    "device": "SKIF-PC",
+    "event": "DEVICE_CREATED",
+    "status": "INFO",
+    "message": "Auto-detected device SKIF-PC (172.18.1.252) added to monitoring"
+  },
+  {
+    "id": "89a567fc-577f-4582-9789-8be960da7855",
+    "timestamp": "2026-10-12T10:49:13.783Z",
+    "deviceId": 31,
+    "device": "Host (172.18.1.241)",
+    "event": "DEVICE_CREATED",
+    "status": "INFO",
+    "message": "Auto-detected device Host (172.18.1.241) (172.18.1.241) added to monitoring"
+  },
+  {
+    "id": "4f9f9420-9bdf-4e60-8d38-1434d6375a05",
+    "timestamp": "2026-10-12T10:49:13.780Z",
+    "deviceId": 30,
+    "device": "Host (172.18.1.201)",
+    "event": "DEVICE_CREATED",
+    "status": "INFO",
+    "message": "Auto-detected device Host (172.18.1.201) (172.18.1.201) added to monitoring"
+  },
+  {
+    "id": "97082d33-76ca-4c39-8718-c52112b95772",
+    "timestamp": "2026-10-12T10:49:13.778Z",
+    "deviceId": 29,
+    "device": "DESKTOP-29",
+    "event": "DEVICE_CREATED",
+    "status": "INFO",
+    "message": "Auto-detected device DESKTOP-29 (172.18.1.143) added to monitoring"
+  },
+  {
+    "id": "899e96c5-62ab-4506-8971-2db1c99a8945",
+    "timestamp": "2026-10-12T10:49:13.776Z",
+    "deviceId": 28,
+    "device": "DESKTOP-67",
+    "event": "DEVICE_CREATED",
+    "status": "INFO",
+    "message": "Auto-detected device DESKTOP-67 (172.18.1.109) added to monitoring"
+  },
+  {
+    "id": "87c17547-527f-4a6b-971c-e918791157bb",
+    "timestamp": "2026-10-12T10:49:13.773Z",
+    "deviceId": 27,
+    "device": "Host (172.18.1.91)",
+    "event": "DEVICE_CREATED",
+    "status": "INFO",
+    "message": "Auto-detected device Host (172.18.1.91) (172.18.1.91) added to monitoring"
+  },
+  {
+    "id": "0d62f305-b0f2-4a5d-b054-3034b700ffca",
+    "timestamp": "2026-10-12T10:49:13.771Z",
+    "deviceId": 26,
+    "device": "Host (172.18.1.90)",
+    "event": "DEVICE_CREATED",
+    "status": "INFO",
+    "message": "Auto-detected device Host (172.18.1.90) (172.18.1.90) added to monitoring"
+  },
+  {
+    "id": "d31bd850-1a43-4ffc-aaa7-69910743e163",
+    "timestamp": "2026-10-12T10:49:13.768Z",
+    "deviceId": 25,
+    "device": "DESKTOP-70",
+    "event": "DEVICE_CREATED",
+    "status": "INFO",
+    "message": "Auto-detected device DESKTOP-70 (172.18.1.89) added to monitoring"
+  },
+  {
+    "id": "a78c0bac-24ec-48d6-97cd-a7a232f68aee",
+    "timestamp": "2026-10-12T10:49:13.766Z",
+    "deviceId": 24,
+    "device": "DESKTOP-69",
+    "event": "DEVICE_CREATED",
+    "status": "INFO",
+    "message": "Auto-detected device DESKTOP-69 (172.18.1.88) added to monitoring"
+  },
+  {
+    "id": "064b9491-309f-48ec-96e4-1a5217858f47",
+    "timestamp": "2026-10-12T10:49:13.764Z",
+    "deviceId": 23,
+    "device": "DESKTOP-66",
+    "event": "DEVICE_CREATED",
+    "status": "INFO",
+    "message": "Auto-detected device DESKTOP-66 (172.18.1.85) added to monitoring"
+  },
+  {
+    "id": "1fb44958-0fcf-46bc-a208-d8332913c320",
+    "timestamp": "2026-10-12T10:49:13.761Z",
+    "deviceId": 22,
+    "device": "DESKTOP-58",
+    "event": "DEVICE_CREATED",
+    "status": "INFO",
+    "message": "Auto-detected device DESKTOP-58 (172.18.1.77) added to monitoring"
+  },
+  {
+    "id": "690e17b4-17a2-4e61-beb3-ced42d838d66",
+    "timestamp": "2026-10-12T10:49:13.759Z",
+    "deviceId": 21,
+    "device": "DESKTOP-5723323",
+    "event": "DEVICE_CREATED",
+    "status": "INFO",
+    "message": "Auto-detected device DESKTOP-5723323 (172.18.1.76) added to monitoring"
+  },
+  {
+    "id": "5000fc11-fcef-4411-bd25-2d63a11077ad",
+    "timestamp": "2026-10-12T10:49:13.757Z",
+    "deviceId": 20,
+    "device": "DESKTOP-56",
+    "event": "DEVICE_CREATED",
+    "status": "INFO",
+    "message": "Auto-detected device DESKTOP-56 (172.18.1.75) added to monitoring"
+  },
+  {
+    "id": "c81f3799-9117-4e7c-bbd1-591579dd313c",
+    "timestamp": "2026-10-12T10:49:13.755Z",
+    "deviceId": 19,
+    "device": "DESKTOP-55",
+    "event": "DEVICE_CREATED",
+    "status": "INFO",
+    "message": "Auto-detected device DESKTOP-55 (172.18.1.74) added to monitoring"
+  },
+  {
+    "id": "bd48ea58-7dd5-4284-9419-660f332faa66",
+    "timestamp": "2026-10-12T10:49:13.752Z",
+    "deviceId": 18,
+    "device": "DESKTOP-50",
+    "event": "DEVICE_CREATED",
+    "status": "INFO",
+    "message": "Auto-detected device DESKTOP-50 (172.18.1.69) added to monitoring"
+  },
+  {
+    "id": "94205122-893e-451f-b883-afff0c2ff1cd",
+    "timestamp": "2026-10-12T10:49:13.750Z",
+    "deviceId": 17,
+    "device": "DESKTOP-37",
+    "event": "DEVICE_CREATED",
+    "status": "INFO",
+    "message": "Auto-detected device DESKTOP-37 (172.18.1.56) added to monitoring"
+  },
+  {
+    "id": "354552dd-2ce8-4daf-a958-ffe23fa27878",
+    "timestamp": "2026-10-12T10:49:13.747Z",
+    "deviceId": 16,
+    "device": "Ability-35",
+    "event": "DEVICE_CREATED",
+    "status": "INFO",
+    "message": "Auto-detected device Ability-35 (172.18.1.54) added to monitoring"
+  },
+  {
+    "id": "6a25bdfd-eb39-4ca3-95ca-31ee32cf40a4",
+    "timestamp": "2026-10-12T10:49:13.745Z",
+    "deviceId": 15,
+    "device": "DESKTOP-0902",
+    "event": "DEVICE_CREATED",
+    "status": "INFO",
+    "message": "Auto-detected device DESKTOP-0902 (172.18.1.28) added to monitoring"
+  },
+  {
+    "id": "0d42df0a-7cc8-4c63-a9b8-b4778d93bd75",
+    "timestamp": "2026-10-12T10:49:13.743Z",
+    "deviceId": 14,
+    "device": "DESKTOP-08",
+    "event": "DEVICE_CREATED",
+    "status": "INFO",
+    "message": "Auto-detected device DESKTOP-08 (172.18.1.27) added to monitoring"
+  },
+  {
+    "id": "5915d8fd-1ce2-454b-a80e-7d084f351899",
+    "timestamp": "2026-10-12T10:49:13.740Z",
+    "deviceId": 13,
+    "device": "DESKTOP-0001",
+    "event": "DEVICE_CREATED",
+    "status": "INFO",
+    "message": "Auto-detected device DESKTOP-0001 (172.18.1.20) added to monitoring"
+  },
+  {
+    "id": "96288b15-47b9-451b-a6be-3cfcb720b3e2",
+    "timestamp": "2026-10-12T10:49:13.737Z",
+    "deviceId": 12,
+    "device": "Desk-Datacentre",
+    "event": "DEVICE_CREATED",
+    "status": "INFO",
+    "message": "Auto-detected device Desk-Datacentre (172.18.1.14) added to monitoring"
+  },
+  {
+    "id": "b335f0f1-61e7-4c02-838a-b8ff8938158d",
+    "timestamp": "2026-10-12T10:49:13.733Z",
+    "deviceId": 11,
+    "device": "DESKTOP-8D1GBAG",
+    "event": "DEVICE_CREATED",
+    "status": "INFO",
+    "message": "Auto-detected device DESKTOP-8D1GBAG (172.18.1.11) added to monitoring"
+  },
+  {
+    "id": "a6e75f3d-0d64-4c1f-b229-1f00c48e84dd",
+    "timestamp": "2026-10-12T10:49:13.730Z",
+    "deviceId": 10,
+    "device": "Host (172.18.1.10)",
+    "event": "DEVICE_CREATED",
+    "status": "INFO",
+    "message": "Auto-detected device Host (172.18.1.10) (172.18.1.10) added to monitoring"
+  },
+  {
+    "id": "1becc955-ca8c-4b81-be30-4b800552dae2",
+    "timestamp": "2026-10-12T10:49:13.726Z",
+    "deviceId": 9,
+    "device": "Host (172.18.1.1)",
+    "event": "DEVICE_CREATED",
+    "status": "INFO",
+    "message": "Auto-detected device Host (172.18.1.1) (172.18.1.1) added to monitoring"
+  },
+  {
+    "id": "04390bfa-f2f8-4872-b645-a2e5b30df0cb",
+    "timestamp": "2026-10-12T09:02:27.009Z",
+    "deviceId": 8,
+    "device": "g",
+    "event": "DEVICE_CREATED",
+    "status": "INFO",
+    "message": "Device g (google.com) added"
+  },
+  {
+    "id": "62dc48d0-73ba-4ad1-95c3-dda014a12509",
+    "timestamp": "2026-10-12T09:00:23.906Z",
+    "deviceId": 7,
+    "device": "Azure West US (Blob Storage)",
+    "event": "DEVICE_UPDATED",
+    "status": "INFO",
+    "message": "Device Azure West US (Blob Storage) configuration updated"
+  },
+  {
+    "id": "66ebef10-8096-45d0-9d2e-cb899272096d",
+    "timestamp": "2026-10-12T09:00:22.586Z",
+    "deviceId": 7,
+    "device": "Azure West US (Blob Storage)",
+    "event": "DEVICE_UPDATED",
+    "status": "INFO",
+    "message": "Device Azure West US (Blob Storage) configuration updated"
+  },
+  {
+    "id": "2c1e6143-974e-49c7-909b-fb59e928708c",
+    "timestamp": "2026-10-12T08:50:39.786Z",
+    "deviceId": 7,
+    "device": "Azure West US (Blob Storage)",
+    "event": "RECOVERY",
+    "status": "WARNING",
+    "message": "Device Azure West US (Blob Storage) recovered to WARNING (latency: 261.9ms)"
+  },
+  {
+    "id": "7b13d4bc-f5c2-478d-afe7-7c544b353430",
+    "timestamp": "2026-10-12T08:45:51.681Z",
+    "deviceId": 7,
+    "device": "Azure West US (Blob Storage)",
+    "event": "ALERT_DOWN",
+    "status": "DOWN",
+    "message": "Alert triggered: Azure West US (Blob Storage) is DOWN (Ping failed (26/2 retries): Destination Host Unreachable)"
+  },
+  {
+    "id": "26e72f68-420e-4662-a873-c5abdc8065ce",
+    "timestamp": "2026-10-12T08:41:48.582Z",
+    "deviceId": 2,
+    "device": "Sharing Server",
+    "event": "ALERT_RESOLVED_MANUAL",
+    "status": "INFO",
+    "message": "Alert f4bd9e90-94d1-417b-89dd-16e85b08a002 manually resolved"
+  },
+  {
+    "id": "3b0bc389-f633-4aaf-a78d-3ab881279dd1",
+    "timestamp": "2026-10-12T08:41:47.704Z",
+    "deviceId": 7,
+    "device": "Azure DNS",
+    "event": "ALERT_RESOLVED_MANUAL",
+    "status": "INFO",
+    "message": "Alert 1dd9ce2e-a496-45db-85cb-6d6678a69852 manually resolved"
+  },
+  {
+    "id": "9c12e1fa-c46f-4392-a340-87465cbf7d75",
+    "timestamp": "2026-10-12T08:41:41.010Z",
+    "deviceId": 7,
+    "device": "Azure DNS",
+    "event": "DEVICE_DELETED",
+    "status": "INFO",
+    "message": "Device Azure DNS (57.150.61.1) deleted"
+  },
+  {
+    "id": "91f6dd96-d7d6-4498-b8fd-ee34beb2d0fa",
+    "timestamp": "2026-10-12T08:39:13.252Z",
+    "deviceId": 7,
+    "device": "Azure DNS",
+    "event": "DEVICE_UPDATED",
+    "status": "INFO",
+    "message": "Device Azure DNS configuration updated"
+  },
+  {
+    "id": "facd0d81-9ffb-40fc-8130-d2c090c1c94e",
+    "timestamp": "2026-10-12T08:35:15.806Z",
+    "deviceId": 7,
+    "device": "Azure DNS",
+    "event": "ALERT_DOWN",
+    "status": "DOWN",
+    "message": "Alert triggered: Azure DNS is DOWN (Ping failed (2/2 retries): Destination Host Unreachable)"
+  },
+  {
+    "id": "b31fb98f-0438-4645-8765-78bb11ad9330",
+    "timestamp": "2026-10-12T08:35:04.090Z",
+    "deviceId": 7,
+    "device": "Azure DNS",
+    "event": "DEVICE_UPDATED",
+    "status": "INFO",
+    "message": "Device Azure DNS configuration updated"
+  },
+  {
+    "id": "3b23f1a8-ae38-4417-9100-dcb38cf2bc4c",
+    "timestamp": "2026-10-12T08:34:51.792Z",
+    "deviceId": 7,
+    "device": "Azure DNS",
+    "event": "DEVICE_CREATED",
+    "status": "INFO",
+    "message": "Device Azure DNS (168.63.129.16) added"
+  },
+  {
+    "id": "a877ae9b-3bca-4643-96e3-028dd80a2b0d",
+    "timestamp": "2026-10-12T08:33:52.648Z",
+    "deviceId": 5,
+    "device": "Google DNS",
+    "event": "DEVICE_UPDATED",
+    "status": "INFO",
+    "message": "Device Google DNS configuration updated"
+  },
+  {
+    "id": "e1f216fc-b29b-4397-8066-d7978ed26469",
+    "timestamp": "2026-10-12T08:33:28.730Z",
+    "deviceId": 2,
+    "device": "Sharing Server",
+    "event": "DEVICE_DELETED",
+    "status": "INFO",
+    "message": "Device Sharing Server (172.18.1.49) deleted"
+  },
+  {
+    "id": "abf88ec8-3200-4ff4-9d35-48b77f53572f",
+    "timestamp": "2026-10-12T08:33:18.209Z",
+    "deviceId": 2,
+    "device": "Sharing Server",
+    "event": "DEVICE_UPDATED",
+    "status": "INFO",
+    "message": "Device Sharing Server configuration updated"
+  },
+  {
+    "id": "16237c74-45a0-4305-a738-a0ce62e450f7",
+    "timestamp": "2026-10-12T08:33:04.813Z",
+    "deviceId": 2,
+    "device": "Sharing Server",
+    "event": "DEVICE_UPDATED",
+    "status": "INFO",
+    "message": "Device Sharing Server configuration updated"
+  },
+  {
+    "id": "0dd62cd3-fe54-4b2c-b237-df5144941fe2",
+    "timestamp": "2026-10-12T08:32:10.461Z",
+    "deviceId": 1,
+    "device": "Attendece",
+    "event": "RECOVERY",
+    "status": "UP",
+    "message": "Device Attendece recovered to UP (latency: 0.68ms)"
+  },
+  {
+    "id": "584acf53-ff58-43a1-b2f5-e2630e895732",
+    "timestamp": "2026-10-12T08:31:59.344Z",
+    "deviceId": 4,
+    "device": "abcd",
+    "event": "RECOVERY",
+    "status": "UP",
+    "message": "Device abcd recovered to UP (latency: 0.33ms)"
+  },
+  {
+    "id": "44b152a7-9c3f-441d-a392-cea4f685f14c",
+    "timestamp": "2026-10-12T08:31:59.012Z",
+    "deviceId": 3,
+    "device": "Attendence Machine",
+    "event": "RECOVERY",
+    "status": "WARNING",
+    "message": "Device Attendence Machine recovered to WARNING (latency: 256.57ms)"
+  },
+  {
+    "id": "7fa3b226-fe65-46a7-ad93-48be2b3b9880",
+    "timestamp": "2026-10-12T07:44:06.282Z",
+    "deviceId": 4,
+    "device": "abcd",
+    "event": "ALERT_DOWN",
+    "status": "DOWN",
+    "message": "Alert triggered: abcd is DOWN (Ping failed (2/2 retries): Destination Host Unreachable)"
+  },
+  {
+    "id": "9bdeecd1-cdc3-4a44-b75d-908a434fbc3a",
+    "timestamp": "2026-10-12T07:44:01.431Z",
+    "deviceId": 3,
+    "device": "Attendence Machine",
+    "event": "ALERT_DOWN",
+    "status": "DOWN",
+    "message": "Alert triggered: Attendence Machine is DOWN (Ping failed (2/2 retries): Destination Host Unreachable)"
+  },
+  {
+    "id": "9e648d39-5e74-48cf-9181-1fa02ec5bf69",
+    "timestamp": "2026-10-12T07:43:56.569Z",
+    "deviceId": 1,
+    "device": "Attendece",
+    "event": "ALERT_DOWN",
+    "status": "DOWN",
+    "message": "Alert triggered: Attendece is DOWN (Ping failed (2/2 retries): Destination Host Unreachable)"
+  },
+  {
+    "id": "b1e36bfc-7d2f-4ca8-8e1f-bca2c78bc10c",
+    "timestamp": "2026-10-03T05:32:48.926Z",
+    "deviceId": 4,
+    "device": "abcd",
+    "event": "RECOVERY",
+    "status": "UP",
+    "message": "Device abcd recovered to UP (latency: 1.68ms)"
+  },
+  {
+    "id": "cbbf5485-dd62-4cd6-a45e-b2a1a9a35ba9",
+    "timestamp": "2026-10-03T05:32:48.581Z",
+    "deviceId": 3,
+    "device": "Attendence Machine",
+    "event": "RECOVERY",
+    "status": "UP",
+    "message": "Device Attendence Machine recovered to UP (latency: 3.58ms)"
+  },
+  {
+    "id": "3443c00a-e68e-4ee3-8c06-1893b78621fc",
+    "timestamp": "2026-10-03T05:32:32.180Z",
+    "deviceId": 4,
+    "device": "abcd",
+    "event": "ALERT_DOWN",
+    "status": "DOWN",
+    "message": "Alert triggered: abcd is DOWN (Ping failed (2/2 retries): Destination Host Unreachable)"
+  },
+  {
+    "id": "cd34a3f9-ddb9-4e32-afcb-69f414a376aa",
+    "timestamp": "2026-10-03T05:32:31.573Z",
+    "deviceId": 3,
+    "device": "Attendence Machine",
+    "event": "ALERT_DOWN",
+    "status": "DOWN",
+    "message": "Alert triggered: Attendence Machine is DOWN (Ping failed (2/2 retries): Destination Host Unreachable)"
+  },
+  {
+    "id": "a94f8e5a-cd09-4a3e-a83d-ea428e5248ef",
+    "timestamp": "2026-10-02T07:51:44.649Z",
+    "deviceId": 2,
+    "device": "Sharing Server",
+    "event": "ALERT_DOWN",
+    "status": "DOWN",
+    "message": "Alert triggered: Sharing Server is DOWN (Ping failed (2/2 retries): Destination Host Unreachable)"
+  },
+  {
+    "id": "900b5558-e744-43d6-b034-1ed5ebd2a2a0",
+    "timestamp": "2026-10-02T07:50:59.163Z",
+    "deviceId": 2,
+    "device": "Sharing Server",
+    "event": "RECOVERY",
+    "status": "WARNING",
+    "message": "Device Sharing Server recovered to WARNING (latency: 0ms)"
+  },
+  {
     "id": "33dea3f8-d56a-4e3d-b40c-98a6e9cbbda6",
     "timestamp": "2026-10-01T07:04:29.687Z",
     "deviceId": 3,

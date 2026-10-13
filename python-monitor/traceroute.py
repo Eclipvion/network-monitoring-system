@@ -16,6 +16,8 @@ from datetime import datetime, timezone
 
 def run_traceroute(target, max_hops=30, timeout_ms=2000):
     target = target.strip().replace('http://', '').replace('https://', '').split('/')[0]
+    if ':' in target and not target.startswith('['):
+        target = target.rsplit(':', 1)[0]
     is_windows = platform.system().lower() == 'windows'
 
     if is_windows:
@@ -108,11 +110,32 @@ def run_traceroute(target, max_hops=30, timeout_ms=2000):
 
 if __name__ == '__main__':
     target = '8.8.8.8'
-    if len(sys.argv) > 1:
-        if sys.argv[1] == '--target' and len(sys.argv) > 2:
-            target = sys.argv[2]
-        else:
-            target = sys.argv[1]
+    max_hops = 30
+    timeout_ms = 2000
 
-    data = run_traceroute(target)
+    args = sys.argv[1:]
+    i = 0
+    while i < len(args):
+        if args[i] == '--target' and i + 1 < len(args):
+            target = args[i + 1]
+            i += 2
+        elif args[i] == '--hops' and i + 1 < len(args):
+            try:
+                max_hops = int(args[i + 1])
+            except ValueError:
+                pass
+            i += 2
+        elif args[i] == '--timeout' and i + 1 < len(args):
+            try:
+                timeout_ms = int(args[i + 1])
+            except ValueError:
+                pass
+            i += 2
+        else:
+            if not target or target == '8.8.8.8':
+                target = args[i]
+            i += 1
+
+    data = run_traceroute(target, max_hops=max_hops, timeout_ms=timeout_ms)
     print(json.dumps(data, indent=2))
+

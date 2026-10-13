@@ -9,8 +9,13 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const router = express.Router();
 
+import fs from 'fs';
+
 const domainScriptPath = path.resolve(__dirname, '../../python-monitor/domain_health.py');
-const pythonExecutable = process.env.PYTHON_PATH || 'C:\\Users\\Ability\\AppData\\Local\\Programs\\Python\\Python312\\python.exe';
+let pythonExecutable = process.env.PYTHON_PATH || 'C:\\Users\\Ability\\AppData\\Local\\Programs\\Python\\Python312\\python.exe';
+if (!fs.existsSync(pythonExecutable)) {
+  pythonExecutable = 'python';
+}
 
 // GET /api/domains - List all domains enriched with latest health & SSL status
 router.get('/', async (req, res) => {
