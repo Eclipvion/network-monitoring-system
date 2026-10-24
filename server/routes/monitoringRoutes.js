@@ -37,7 +37,7 @@ router.get('/export', async (req, res) => {
 // POST /api/monitoring/result
 router.post('/result', async (req, res) => {
   try {
-    const { deviceId, status, latency, packetLoss, message, timestamp } = req.body;
+    const { deviceId, status, latency, packetLoss, jitter, message, timestamp, trafficIn, trafficOut } = req.body;
 
     if (deviceId === undefined || !status) {
       return res.status(400).json({ error: 'deviceId and status are required fields' });
@@ -48,6 +48,9 @@ router.post('/result', async (req, res) => {
       status,
       latency: latency !== undefined ? Number(latency) : null,
       packetLoss: packetLoss !== undefined ? Number(packetLoss) : 0,
+      jitter: jitter !== undefined ? Number(jitter) : undefined,
+      trafficIn: trafficIn !== undefined ? Number(trafficIn) : undefined,
+      trafficOut: trafficOut !== undefined ? Number(trafficOut) : undefined,
       message,
       timestamp
     });
@@ -60,6 +63,10 @@ router.post('/result', async (req, res) => {
       status: result.status,
       latency: result.latency,
       packetLoss: result.packetLoss,
+      jitter: result.jitter,
+      trafficIn: result.trafficIn,
+      trafficOut: result.trafficOut,
+      speedMbps: result.speedMbps,
       timestamp: result.timestamp,
       message: result.message
     });

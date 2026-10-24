@@ -11,13 +11,12 @@ function renderLatencySvgChart(timeSeries = []) {
   const chartH = height - padding.top - padding.bottom;
 
   const validPoints = timeSeries.filter(p => p.latency !== null && p.latency !== undefined);
-  let maxLatency = 50;
+  let highestLat = 0;
   for (const p of validPoints) {
-    if (p.latency > maxLatency) maxLatency = p.latency;
+    if (p.latency > highestLat) highestLat = p.latency;
   }
-  // Round up maxLatency to nice round number
-  maxLatency = Math.ceil(maxLatency * 1.25 / 10) * 10;
-  if (maxLatency <= 0) maxLatency = 50;
+  let maxLatency = highestLat > 10 ? Math.ceil(highestLat * 1.25 / 10) * 10 : Math.max(5, Math.ceil(highestLat * 1.5));
+  if (maxLatency <= 0) maxLatency = 10;
 
   // Horizontal grid lines
   const gridLines = [0, 0.25, 0.5, 0.75, 1].map(fraction => {
@@ -459,7 +458,7 @@ export class ReportService {
         <div class="kpi-box" style="border-left: 3px solid #6366f1;">
           <div class="kpi-label">Health Index</div>
           <div class="kpi-value" style="color: #6366f1;">
-            ${compliance?.healthScore || 100}/100
+            ${compliance?.healthScore ?? 100}/100
           </div>
           <div style="font-size: 10px; font-weight: 700; color: #4f46e5; margin-top: 2px;">
             Grade: ${compliance?.healthGrade || 'A+'}
@@ -631,13 +630,14 @@ export class ReportService {
     lines.push(`Scope,${filter.deviceName}`);
     lines.push(`From,${filter.from}`);
     lines.push(`To,${filter.to}`);
-    lines.push(`Target SLA %,${compliance?.targetSlaPercent || 99.9}%`);
+    lines.push(`Target SLA %,${compliance?.targetSlaPercent ?? 99.9}%`);
     lines.push(`Actual Uptime %,${metrics.uptimePercent}%`);
     lines.push(`SLA Status,${compliance?.slaStatus || 'SLA_MET'}`);
-    lines.push(`Fleet Health Index,${compliance?.healthScore || 100}/100 (Grade ${compliance?.healthGrade || 'A+'})`);
+    lines.push(`Fleet Health Index,${compliance?.healthScore ?? 100}/100 (Grade ${compliance?.healthGrade || 'A+'})`);
+    lines.push(`Active Outages Now,${incidents.filter(i => !i.isResolved).length}`);
     lines.push(`Unstable/Flapping Hosts Count,${flappingDevices.length}`);
     lines.push(`Total Downtime Incidents,${metrics.totalIncidents}`);
-    lines.push(`Total Downtime Duration,${metrics.totalDowntimeFormatted}`);
+    lines.push(`Fleet Downtime Duration (Cumulative All Devices),${metrics.totalDowntimeFormatted}`);
     lines.push(`Avg Latency,${metrics.avgLatency !== null ? `${metrics.avgLatency}ms` : 'N/A'}`);
     lines.push(``);
 

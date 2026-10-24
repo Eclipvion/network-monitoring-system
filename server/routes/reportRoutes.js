@@ -1,18 +1,13 @@
 import express from 'express';
 import reportService from '../services/reportService.js';
+import emailReportRoutes from './emailReportRoutes.js';
 
 const router = express.Router();
 
-/**
- * GET /api/reports/analytics
- * Query parameters:
- *  - deviceId: 'all' or device numeric ID
- *  - days: e.g. 1, 3, 7, 14, 30
- *  - from: ISO date string
- *  - to: ISO date string
- *  - type: 'ALL', 'server', 'router', etc.
- */
-router.get('/analytics', async (req, res) => {
+router.use('/email', emailReportRoutes);
+
+// Alias for /api/reports and /api/reports/analytics
+const handleGetAnalytics = async (req, res) => {
   try {
     const analytics = await reportService.getReportAnalytics(req.query);
     res.json(analytics);
@@ -20,7 +15,10 @@ router.get('/analytics', async (req, res) => {
     console.error('Error fetching report analytics:', err);
     res.status(500).json({ error: err.message || 'Failed to generate report analytics' });
   }
-});
+};
+
+router.get('/', handleGetAnalytics);
+router.get('/analytics', handleGetAnalytics);
 
 /**
  * GET /api/reports/export

@@ -1,82 +1,454 @@
 [
   {
     "id": 1,
-    "name": "Attendece",
-    "ip": "172.18.1.245",
-    "type": "server",
+    "name": "LAN Device (172.18.1.1)",
+    "ip": "172.18.1.1",
+    "type": "workstation",
     "monitoring": true,
-    "interval": 7,
-    "isSeed": true
+    "interval": 15
+  },
+  {
+    "id": 2,
+    "name": "LAN Device (172.18.1.5)",
+    "ip": "172.18.1.5",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
   },
   {
     "id": 3,
-    "name": "Attendence Machine",
-    "ip": "172.18.1.230",
-    "type": "other",
+    "name": "LAN Device (172.18.1.10)",
+    "ip": "172.18.1.10",
+    "type": "workstation",
     "monitoring": true,
-    "interval": 7,
-    "isSeed": true
+    "interval": 15
   },
   {
     "id": 4,
-    "name": "abcd",
-    "ip": "172.18.1.5",
-    "type": "server",
+    "name": "LAN Device (172.18.1.14)",
+    "ip": "172.18.1.14",
+    "type": "workstation",
     "monitoring": true,
-    "interval": 10
+    "interval": 15
   },
   {
     "id": 5,
-    "name": "Google DNS",
-    "ip": "8.8.8.8",
-    "type": "other",
+    "name": "LAN Device (172.18.1.20)",
+    "ip": "172.18.1.20",
+    "type": "workstation",
     "monitoring": true,
-    "interval": 10
+    "interval": 15
   },
   {
     "id": 6,
-    "name": "cloudfare",
-    "ip": "1.1.1.1",
-    "type": "other",
+    "name": "LAN Device (172.18.1.21)",
+    "ip": "172.18.1.21",
+    "type": "workstation",
     "monitoring": true,
-    "interval": 8
+    "interval": 15
   },
   {
     "id": 7,
-    "name": "Azure West US (Blob Storage)",
-    "ip": "57.150.61.1:443",
-    "type": "server",
+    "name": "LAN Device (172.18.1.22)",
+    "ip": "172.18.1.22",
+    "type": "workstation",
     "monitoring": true,
-    "interval": 10
+    "interval": 15
   },
   {
     "id": 8,
-    "name": "g",
-    "ip": "google.com",
-    "type": "server",
+    "name": "LAN Device (172.18.1.23)",
+    "ip": "172.18.1.23",
+    "type": "workstation",
     "monitoring": true,
-    "interval": 30
+    "interval": 15
   },
   {
     "id": 9,
-    "name": "Host (172.18.1.1)",
-    "ip": "172.18.1.1",
-    "type": "server",
-    "group": "Local Network",
+    "name": "LAN Device (172.18.1.26)",
+    "ip": "172.18.1.26",
+    "type": "workstation",
     "monitoring": true,
     "interval": 15
   },
   {
     "id": 10,
-    "name": "Host (172.18.1.10)",
-    "ip": "172.18.1.10",
-    "type": "server",
-    "group": "Local Network",
+    "name": "LAN Device (172.18.1.27)",
+    "ip": "172.18.1.27",
+    "type": "workstation",
     "monitoring": true,
     "interval": 15
   },
   {
     "id": 11,
+    "name": "LAN Device (172.18.1.28)",
+    "ip": "172.18.1.28",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 12,
+    "name": "LAN Device (172.18.1.30)",
+    "ip": "172.18.1.30",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 13,
+    "name": "LAN Device (172.18.1.31)",
+    "ip": "172.18.1.31",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 14,
+    "name": "LAN Device (172.18.1.33)",
+    "ip": "172.18.1.33",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 15,
+    "name": "LAN Device (172.18.1.34)",
+    "ip": "172.18.1.34",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 16,
+    "name": "LAN Device (172.18.1.36)",
+    "ip": "172.18.1.36",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 17,
+    "name": "LAN Device (172.18.1.39)",
+    "ip": "172.18.1.39",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 18,
+    "name": "LAN Device (172.18.1.42)",
+    "ip": "172.18.1.42",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 19,
+    "name": "LAN Device (172.18.1.44)",
+    "ip": "172.18.1.44",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 20,
+    "name": "LAN Device (172.18.1.46)",
+    "ip": "172.18.1.46",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 21,
+    "name": "LAN Device (172.18.1.47)",
+    "ip": "172.18.1.47",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 22,
+    "name": "LAN Device (172.18.1.49)",
+    "ip": "172.18.1.49",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 23,
+    "name": "LAN Device (172.18.1.51)",
+    "ip": "172.18.1.51",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 24,
+    "name": "LAN Device (172.18.1.52)",
+    "ip": "172.18.1.52",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 25,
+    "name": "LAN Device (172.18.1.54)",
+    "ip": "172.18.1.54",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 26,
+    "name": "LAN Device (172.18.1.56)",
+    "ip": "172.18.1.56",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 27,
+    "name": "LAN Device (172.18.1.65)",
+    "ip": "172.18.1.65",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 28,
+    "name": "LAN Device (172.18.1.69)",
+    "ip": "172.18.1.69",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 29,
+    "name": "LAN Device (172.18.1.72)",
+    "ip": "172.18.1.72",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 30,
+    "name": "LAN Device (172.18.1.74)",
+    "ip": "172.18.1.74",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 31,
+    "name": "LAN Device (172.18.1.75)",
+    "ip": "172.18.1.75",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 32,
+    "name": "LAN Device (172.18.1.76)",
+    "ip": "172.18.1.76",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 33,
+    "name": "LAN Device (172.18.1.77)",
+    "ip": "172.18.1.77",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 34,
+    "name": "LAN Device (172.18.1.78)",
+    "ip": "172.18.1.78",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 35,
+    "name": "LAN Device (172.18.1.85)",
+    "ip": "172.18.1.85",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 36,
+    "name": "LAN Device (172.18.1.88)",
+    "ip": "172.18.1.88",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 37,
+    "name": "LAN Device (172.18.1.89)",
+    "ip": "172.18.1.89",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 38,
+    "name": "LAN Device (172.18.1.90)",
+    "ip": "172.18.1.90",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 39,
+    "name": "LAN Device (172.18.1.91)",
+    "ip": "172.18.1.91",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 40,
+    "name": "LAN Device (172.18.1.106)",
+    "ip": "172.18.1.106",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 41,
+    "name": "LAN Device (172.18.1.108)",
+    "ip": "172.18.1.108",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 42,
+    "name": "LAN Device (172.18.1.109)",
+    "ip": "172.18.1.109",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 43,
+    "name": "LAN Device (172.18.1.110)",
+    "ip": "172.18.1.110",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 44,
+    "name": "LAN Device (172.18.1.113)",
+    "ip": "172.18.1.113",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 45,
+    "name": "LAN Device (172.18.1.123)",
+    "ip": "172.18.1.123",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 46,
+    "name": "LAN Device (172.18.1.126)",
+    "ip": "172.18.1.126",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 47,
+    "name": "LAN Device (172.18.1.143)",
+    "ip": "172.18.1.143",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 48,
+    "name": "LAN Device (172.18.1.154)",
+    "ip": "172.18.1.154",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 49,
+    "name": "LAN Device (172.18.1.195)",
+    "ip": "172.18.1.195",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 50,
+    "name": "LAN Device (172.18.1.201)",
+    "ip": "172.18.1.201",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 51,
+    "name": "LAN Device (172.18.1.226)",
+    "ip": "172.18.1.226",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 52,
+    "name": "LAN Device (172.18.1.230)",
+    "ip": "172.18.1.230",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 53,
+    "name": "LAN Device (172.18.1.241)",
+    "ip": "172.18.1.241",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 54,
+    "name": "LAN Device (172.18.1.245)",
+    "ip": "172.18.1.245",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 55,
+    "name": "LAN Device (172.18.1.250)",
+    "ip": "172.18.1.250",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 56,
+    "name": "LAN Device (172.18.1.252)",
+    "ip": "172.18.1.252",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 57,
     "name": "DESKTOP-8D1GBAG",
     "ip": "172.18.1.11",
     "type": "workstation",
@@ -85,191 +457,10 @@
     "interval": 15
   },
   {
-    "id": 12,
-    "name": "Desk-Datacentre",
-    "ip": "172.18.1.14",
+    "id": 58,
+    "name": "LAN Device (172.18.1.8)",
+    "ip": "172.18.1.8",
     "type": "workstation",
-    "group": "Local Network",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 13,
-    "name": "DESKTOP-0001",
-    "ip": "172.18.1.20",
-    "type": "workstation",
-    "group": "Local Network",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 14,
-    "name": "DESKTOP-08",
-    "ip": "172.18.1.27",
-    "type": "workstation",
-    "group": "Local Network",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 15,
-    "name": "DESKTOP-0902",
-    "ip": "172.18.1.28",
-    "type": "workstation",
-    "group": "Local Network",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 16,
-    "name": "Ability-35",
-    "ip": "172.18.1.54",
-    "type": "workstation",
-    "group": "Local Network",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 17,
-    "name": "DESKTOP-37",
-    "ip": "172.18.1.56",
-    "type": "workstation",
-    "group": "Local Network",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 18,
-    "name": "DESKTOP-50",
-    "ip": "172.18.1.69",
-    "type": "workstation",
-    "group": "Local Network",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 19,
-    "name": "DESKTOP-55",
-    "ip": "172.18.1.74",
-    "type": "workstation",
-    "group": "Local Network",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 20,
-    "name": "DESKTOP-56",
-    "ip": "172.18.1.75",
-    "type": "workstation",
-    "group": "Local Network",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 21,
-    "name": "DESKTOP-5723323",
-    "ip": "172.18.1.76",
-    "type": "workstation",
-    "group": "Local Network",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 22,
-    "name": "DESKTOP-58",
-    "ip": "172.18.1.77",
-    "type": "workstation",
-    "group": "Local Network",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 23,
-    "name": "DESKTOP-66",
-    "ip": "172.18.1.85",
-    "type": "workstation",
-    "group": "Local Network",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 24,
-    "name": "DESKTOP-69",
-    "ip": "172.18.1.88",
-    "type": "workstation",
-    "group": "Local Network",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 25,
-    "name": "DESKTOP-70",
-    "ip": "172.18.1.89",
-    "type": "workstation",
-    "group": "Local Network",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 26,
-    "name": "Host (172.18.1.90)",
-    "ip": "172.18.1.90",
-    "type": "server",
-    "group": "Local Network",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 27,
-    "name": "Host (172.18.1.91)",
-    "ip": "172.18.1.91",
-    "type": "server",
-    "group": "Local Network",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 28,
-    "name": "DESKTOP-67",
-    "ip": "172.18.1.109",
-    "type": "workstation",
-    "group": "Local Network",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 29,
-    "name": "DESKTOP-29",
-    "ip": "172.18.1.143",
-    "type": "workstation",
-    "group": "Local Network",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 30,
-    "name": "Host (172.18.1.201)",
-    "ip": "172.18.1.201",
-    "type": "server",
-    "group": "Local Network",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 31,
-    "name": "Host (172.18.1.241)",
-    "ip": "172.18.1.241",
-    "type": "server",
-    "group": "Local Network",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 32,
-    "name": "SKIF-PC",
-    "ip": "172.18.1.252",
-    "type": "workstation",
-    "group": "Local Network",
     "monitoring": true,
     "interval": 15
   }

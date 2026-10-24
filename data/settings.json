@@ -4,11 +4,38 @@
   "packetLossWarningPercent": 20,
   "retryCountBeforeDown": 2,
   "dnsResolvers": [
-    { "name": "Google", "ip": "8.8.8.8" },
-    { "name": "Cloudflare", "ip": "1.1.1.1" },
-    { "name": "Quad9", "ip": "9.9.9.9" }
+    {
+      "name": "Google",
+      "ip": "8.8.8.8"
+    },
+    {
+      "name": "Cloudflare",
+      "ip": "1.1.1.1"
+    },
+    {
+      "name": "Quad9",
+      "ip": "9.9.9.9"
+    }
   ],
-  "dnsTestDomains": ["google.com", "cloudflare.com"],
+  "dnsTestDomains": [
+    "google.com",
+    "cloudflare.com"
+  ],
   "dnsCheckIntervalSeconds": 300,
-  "sslWarningDaysThreshold": 14
+  "sslWarningDaysThreshold": 14,
+  "jitterWarningThresholdMs": 35,
+  "organizationName": "NetPulse Enterprise NOC",
+  "reportSubtitle": "Infrastructure SLA & Downtime Audit Report",
+  "slaTargetPercent": 99.9,
+  "reportLogoUrl": "",
+  "auditRetentionDays": 90,
+  "ispPublicIp": "59.103.117.3",
+  "ispGatewayIp": "172.18.1.1",
+  "ispName": "Pakistan Telecommuication company limited",
+  "ispPool": "59.103.117.0/24",
+  "enableWebhookAlerts": false,
+  "webhookUrl": "",
+  "enableSoundAlerts": false,
+  "enableDesktopNotifications": false,
+  "maintenanceMode": false
 }

@@ -16,8 +16,13 @@ import settingRoutes from './routes/settingRoutes.js';
 import diagnosticRoutes from './routes/diagnosticRoutes.js';
 import dnsRoutes from './routes/dnsRoutes.js';
 import domainRoutes from './routes/domainRoutes.js';
-import domainHealthRoutes from './routes/domainHealthRoutes.js';
 import reportRoutes from './routes/reportRoutes.js';
+import securityRoutes from './routes/securityRoutes.js';
+import telemetryRoutes from './routes/telemetryRoutes.js';
+import discoveryRoutes from './routes/discoveryRoutes.js';
+import { startBackgroundMonitor } from './services/backgroundMonitor.js';
+import { startTelemetryCollector } from './services/telemetryService.js';
+import { startNetworkWatchdog } from './services/discovery/networkWatchdog.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -54,6 +59,9 @@ const io = new SocketIOServer(server, {
   }
 });
 setupWebSocket(io);
+startBackgroundMonitor(5000);
+startTelemetryCollector();
+startNetworkWatchdog(60);
 
 // Health check
 app.get('/api/health', (req, res) => {
@@ -74,8 +82,10 @@ app.use('/api/settings', settingRoutes);
 app.use('/api/diagnostics', diagnosticRoutes);
 app.use('/api/dns', dnsRoutes);
 app.use('/api/domains', domainRoutes);
-app.use('/api/domain-health', domainHealthRoutes);
 app.use('/api/reports', reportRoutes);
+app.use('/api/security', securityRoutes);
+app.use('/api/telemetry', telemetryRoutes);
+app.use('/api/discovery', discoveryRoutes);
 
 // Error Handling Middleware
 app.use((err, req, res, next) => {

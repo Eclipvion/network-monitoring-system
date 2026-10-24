@@ -1,0 +1,32 @@
+[
+  {
+    "id": "hit-1792741670766-guel",
+    "timestamp": "2026-10-23T07:47:50.766Z",
+    "attackerIp": "127.0.0.1",
+    "attackerPort": 58715,
+    "targetPort": 2222,
+    "emulatedService": "ssh",
+    "probeType": "SSH Handshake Reconnaissance",
+    "payloadSnippet": "SSH-2.0-NetPulse_Audit_Probe_1792741670555",
+    "firewallRule": {
+      "powershell": "New-NetFirewallRule -DisplayName \"NetPulse-Ban-127.0.0.1\" -Direction Inbound -RemoteAddress 127.0.0.1 -Action Block",
+      "linuxUfw": "sudo ufw insert 1 deny from 127.0.0.1 to any comment 'NetPulse Honeypot Ban'",
+      "linuxIptables": "sudo iptables -I INPUT -s 127.0.0.1 -j DROP"
+    }
+  },
+  {
+    "id": "hit-1792741132916-gyhj",
+    "timestamp": "2026-10-23T07:38:52.916Z",
+    "attackerIp": "127.0.0.1",
+    "attackerPort": 62712,
+    "targetPort": 2222,
+    "emulatedService": "ssh",
+    "probeType": "SSH Handshake Reconnaissance",
+    "payloadSnippet": "SSH-2.0-NetPulse_Audit_Probe_1792741132698",
+    "firewallRule": {
+      "powershell": "New-NetFirewallRule -DisplayName \"NetPulse-Ban-127.0.0.1\" -Direction Inbound -RemoteAddress 127.0.0.1 -Action Block",
+      "linuxUfw": "sudo ufw insert 1 deny from 127.0.0.1 to any comment 'NetPulse Honeypot Ban'",
+      "linuxIptables": "sudo iptables -I INPUT -s 127.0.0.1 -j DROP"
+    }
+  }
+]

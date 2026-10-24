@@ -1,0 +1,265 @@
+================================================================================
+    NETPULSE - CYBERSECURITY, THREAT DEFENSE & PORT AUDITING ROADMAP
+================================================================================
+STATUS: IMPLEMENTED & OPERATIONAL (V2.0 COMPLETED)
+Last Updated: October 2026
+
+Yeh document NetPulse Network Monitoring System ke andar "Cyber Threat Defense, 
+Open Ports Vulnerability Scanner, User Web/DNS Search Traffic Inspector, aur 
+Interactive Vulnerability Remediation Engine" ka mukammal technical architecture 
+aur execution record hai.
+
+================================================================================
+1. FEASIBILITY & REALITY CHECK (KYA POSSIBLE HAI AUR KAISE?)
+================================================================================
+
+A. "User Kya Search Kar Raha Hai / Kaunsi Website Access Kar Raha Hai":
+   -----------------------------------------------------------------------------
+   * Direct Search Payload: Modern web traffic HTTPS (Port 443 - TLS Encryption) 
+     use karta hai, is liye bina corporate root certificate / SSL-decrypting proxy 
+     ke exact Google search query read nahi hoti.
+   * Lekin Network Level par Domain / DNS Traffic:
+     Koi bhi device jab search karta hai ya website kholta hai, pehle DNS query 
+     bhejta hai (Port 53 / UDP).
+     Python background listener (`python-monitor/threat_sniffer.py`) aur Windows 
+     DNS cache harvester ke zariye network devices ki requested domains 
+     (e.g. google.com, youtube.com, torrent-trackers, malware-c2-domains) 
+     real-time capture karke categorize aur display ki ja rahi hain!
+
+B. "Kaunsi Port Open Hai (Server, Local Network & Added Devices)":
+   -----------------------------------------------------------------------------
+   * Network ke har added device aur local host par automated vulnerability scan:
+     - 445 (SMB)   -> Critical Risk (WannaCry / EternalBlue Ransomware attack surface)
+     - 3389 (RDP)  -> Critical Risk (BlueKeep / Remote Desktop Brute Force)
+     - 23 (Telnet) -> Critical Risk (Mirai Botnet / Plaintext command execution)
+     - 27017 (Mongo)-> Critical Risk (Unauthenticated database data dumps)
+     - 6379 (Redis)-> Critical Risk (Cron RCE / Unauthorized cache wipe)
+     - 135 (RPC)   -> High Risk (Blaster worm / buffer overflows)
+     - 139 (NetBIOS)-> High Risk (LLMNR / NTLM hash relay attacks)
+     - 1433 (MSSQL)-> High Risk (xp_cmdshell command execution)
+     - 3306 (MySQL)-> Medium Risk (Credential brute force / external exposure)
+     - 5432 (PgSQL)-> Medium Risk (Table data dump / dictionary attacks)
+     - 21 (FTP)    -> Medium Risk (Plaintext credentials sniffing)
+     - 22 (SSH)    -> Low Risk (Dictionary brute-force monitor)
+     - 80/443      -> Web server monitoring (HTTP cleartext vs HTTPS encrypted)
+   * Har device ko uske open ports ke mutabiq "Security Risk Score" (Safe, Warning, Critical) 
+     aur grade (A, B, C, F) assign kiya jata hai.
+
+C. "Cyber Attack & Threat Detection":
+   -----------------------------------------------------------------------------
+   * Port Exposure Alerts: Jab kisi device par high-risk port khuli mile to instant alert.
+   * Malicious Domain Lookup: Known phishing, crypto-mining, ya C2 domains access par red flag.
+   * Ransomware Attack Surface: Unfiltered SMB / RDP perimeter exposure par threat banner.
+
+
+================================================================================
+2. IMPLEMENTED FILE STRUCTURE (MODULAR & ISOLATED)
+================================================================================
+
+Purani files ko disturb kiye baghair yeh feature isolated clean files me banaya gaya hai:
+
+Network Monitoring System/
+├── client/src/
+│   ├── pages/
+│   │   └── SecurityHubPage.jsx        <-- Main UI: Attack Surface, DNS Stream, Threat Incidents, Port Catalog & Deep-Dive Modal
+│   ├── components/
+│   │   └── Sidebar.jsx                <-- Navigation item: "Security Hub" (ShieldAlert Icon)
+│   └── services/
+│       └── api.js                     <-- Security endpoints connection (scan, harvest, probePort)
+│
+├── server/
+│   ├── routes/
+│   │   └── securityRoutes.js          <-- Naye API Endpoints (/api/security/...)
+│   └── services/
+│       └── securityService.js         <-- 16-Port Catalog, TCP Socket Prober, Reachability Pre-check, Risk Scoring
+│
+├── python-monitor/
+│   └── threat_sniffer.py              <-- Raw socket DNS query capture & domain threat classifier
+├── run_threat_sniffer.bat             <-- 1-Click launcher for Python threat sniffer
+│
+└── data/
+    ├── security_audits.json           <-- Saved device port vulnerability reports
+    ├── dns_traffic.json               <-- Captured domain queries & web searches
+    └── threat_alerts.json             <-- Active unresolved security threat incidents
+
+
+================================================================================
+3. COMPLETED FEATURES & IMPLEMENTATION BREAKDOWN
+================================================================================
+
+--------------------------------------------------------------------------------
+FEATURE 1: REACHABILITY PRE-CHECK & OFFLINE HOST INTELLIGENCE
+--------------------------------------------------------------------------------
+* Problem Solved: 
+  Pehle jab device band (DOWN / Offline) hoti thi, to 16 ports socket timeouts 
+  ki wajah se 0 open ports milti theen. Naive scanner samajhta tha ke 0 open ports 
+  matlab "100/100 SAFE" hai, aur 40+ dead devices par scan 40+ seconds tak phas jata tha.
+* Implementation:
+  1. `server/services/securityService.js`:
+     - Device audit se pehle reachability check (`checkHostReachable` via fast ICMP/ping 
+       aur monitor status verification).
+     - Agar device DOWN ya PAUSED hai, to port socket probing foran SKIP ho jati hai.
+     - Device ko instantly `overallLevel: 'OFFLINE'`, `isOnline: false`, aur `riskScore: null (N/A)` 
+       mark kar diya jata hai.
+  2. Scan Speed Optimization:
+     - 42 devices ka scan ab 40 seconds ki bajaye sirf 1-2 seconds me complete hota hai.
+  3. Score Integrity:
+     - Network Cyber Score me sirf active online devices count hoti hain. Offline devices 
+       score ko fake inflate nahi karti.
+  4. UI Guidance:
+     - Device card par gray `Offline (N/A)` badge aur troubleshooting banner:
+       "Verify physical power & LAN cabling, check DHCP lease / IP reservation on your router, 
+        and ensure host firewall allows ICMP Echo requests before scanning."
+
+--------------------------------------------------------------------------------
+FEATURE 2: INTERACTIVE VULNERABILITY & THREAT DEEP-DIVE INSPECTOR MODAL
+--------------------------------------------------------------------------------
+* User Requirement:
+  "or agr bnda usko click kry vanublurity kp tu devoce name amd ip detai ajay aur recommendation bhi ho"
+* Implementation:
+  1. Clickable Triggers:
+     - Attack Surface Grid me kisi bhi Open Port Badge (e.g. 445 SMB, 3389 RDP) par click karein.
+     - Device Card ke andar "Critical Exposure Warning(s)" item par click karein.
+     - "Threat Incidents" sub-tab me kisi bhi alert ya "Inspect & Fix" button par click karein.
+     - "Port Catalog" me kisi bhi exposed network host button par click karein.
+  2. Modal Display Details:
+     - Target Device Identification: Device Name, Target IP Address (with 1-click copy), 
+       Device Type (Server / Host / Router), aur Monitored Status.
+     - Threat & CVE Breakdown: Specific CVE ID (e.g. CVE-2017-0144 EternalBlue, 
+       CVE-2019-0708 BlueKeep), Attack Type, aur Exploit Mechanism description.
+     - Actionable Step-by-Step Remediation Checklist: Ordered recommendations 
+       (e.g. disable SMBv1, enforce NLA, require WireGuard VPN, enable MFA).
+     - Instant Multi-OS Firewall Rules Generator:
+       * Tab 1: Windows PowerShell command
+       * Tab 2: Linux UFW command
+       * Tab 3: Linux iptables command
+       * 1-Click "Copy Rule" button with visual feedback.
+  3. Live Port Verification Tool:
+     - Modal ke andar "Test If Port Is Closed Now" button.
+     - Backend endpoint `POST /api/security/probe-port` ke zariye targeted device IP 
+       par single port ka live TCP probe bhejta hai.
+     - Live result display:
+       * ⚠️ "Port 445 is still OPEN! Firewall rule may not be active yet."
+       * ✓ "SUCCESS: Port 445 is now CLOSED & SECURED!"
+  4. Threat Resolution:
+     - "Acknowledge & Resolve Threat" button se alert resolve ho jata hai.
+
+--------------------------------------------------------------------------------
+FEATURE 3: WEB SEARCHES & DNS TRAFFIC INSPECTOR
+--------------------------------------------------------------------------------
+* Implementation:
+  1. Live DNS Cache Harvester (`POST /api/security/dns-harvest`):
+     - Local machine aur network adapters se active outbound DNS query records harvest karta hai.
+  2. Continuous Python Threat Sniffer (`python-monitor/threat_sniffer.py`):
+     - UDP Port 53 raw socket sniffer jo network wide domains capture karke 
+       server API (`POST /api/security/dns-log`) ko push karta hai.
+  3. Domain Threat Categorization:
+     - Search Engines (Google, Bing, Yahoo)
+     - Social Media (YouTube, Facebook, Twitter, TikTok)
+     - Developer & Cloud Infra (GitHub, AWS, Microsoft, Azure)
+     - Suspicious / High Risk (Crypto mining pools, Tor nodes, known malware C2)
+  4. UI Stream Table:
+     - Timestamp, Client IP, Requested Domain, Query Type (A/AAAA/DNS), 
+       Category, Threat Level (Safe/Suspicious/Malicious), aur Flag Reason.
+     - Search input, Category filter, aur Threat level filter.
+
+--------------------------------------------------------------------------------
+FEATURE 4: ACTIVE THREAT POSTURE & NETWORK SCORE
+--------------------------------------------------------------------------------
+* Implementation:
+  1. Network Cyber Score (0 to 100):
+     - Grade A (90-100), Grade B (75-89), Grade C (60-74), Grade F (<60).
+  2. Threat Posture:
+     - SECURED (All scanned ports safe / closed)
+     - ELEVATED (Medium risk services exposed)
+     - CRITICAL (Active SMB 445, RDP 3389, Telnet 23 exposures)
+  3. Quick Filters:
+     - All Devices, Online Only, Offline / Down Only, Vulnerable Devices, Shielded Devices.
+
+--------------------------------------------------------------------------------
+FEATURE 5: NETWORK SCOPE & LIVE REACHABILITY SEGREGATION (LAN vs CLOUD)
+--------------------------------------------------------------------------------
+* Implementation:
+  1. Zero False-Positives on Inactive Devices:
+     - ICMP Ping + TCP socket pre-check. Jo devices network par band hain unhe
+       kisi bhi port scan me enter nahi kiya jata aur strict `OFFLINE (N/A)` mark kiya jata hai.
+  2. Segregated Network Scope View:
+     - 🏠 Local Wi-Fi LAN (192.168.x.x / 10.x.x.x / 172.16-31.x.x):
+       User ke physical home/office devices (Router, Mobile phones, PC).
+     - 🌐 Public Internet / Cloud Endpoints:
+       DNS & Cloud targets (Google DNS 8.8.8.8, Cloudflare 1.1.1.1, Azure 57.150.61.1, Google.com).
+  3. Clear Segmented UI Pill Tabs & Badges:
+     - User 1-click se "Local Wi-Fi LAN" filter karke sirf apne 5-6 physical devices dekh sakta hai.
+     - Device cards aur tables me visual `LAN` aur `CLOUD` badges.
+     - Reachability stats me clear breakdown: `10 Online (6 Local LAN • 4 Cloud/Public)`.
+
+--------------------------------------------------------------------------------
+FEATURE 6: ENTERPRISE DOMAIN HEALTH & SSL CERTIFICATE HUB
+--------------------------------------------------------------------------------
+* Implementation:
+  1. Dedicated Domain Health Tab (`DomainHealthPage.jsx`):
+     - Sidebar par "Domain Health" tab ab dedicated enterprise dashboard open karta hai.
+  2. Live SSL / TLS Handshake & Certificate Tracking:
+     - Real-time certificate expiry countdown (Days Remaining).
+     - Color-coded progress bar (🟢 > 30 days, 🟡 8-30 days Expiring Soon, 🔴 ≤ 7 days / Expired).
+     - Certificate Issuer (Let's Encrypt, DigiCert, Google Trust Services) & Protocol (TLS 1.3).
+  3. Web HTTP Uptime & Latency Telemetry:
+     - HTTP Status Code (200 OK, 301, 404, 500) aur response roundtrip time ms.
+  4. DNS IPv4 A-Record Resolution:
+     - Live A-record resolution IP with one-click copy.
+  5. Interactive Domain Deep-Dive Inspector:
+     - Certificate specifications modal with interactive historical latency telemetry trend chart (Recharts).
+     - Global DNS propagation, Qualys SSL Labs, aur WHOIS registration direct links.
+  6. Instant Ad-Hoc SSL Lookup Tool:
+     - Watchlist me add kiye bina kisi bhi external domain (e.g. github.com) ka foran live SSL test.
+  7. Automated Fleet Audit:
+     - "Audit All Now" button to probe all active domains in parallel.
+
+
+================================================================================
+4. API ENDPOINTS SPECIFICATION
+================================================================================
+
+Method | Endpoint                     | Description
+-------|------------------------------|--------------------------------------------
+GET    | /api/domains                 | List all monitored domains with health & SSL status
+POST   | /api/domains                 | Add new domain for persistent monitoring
+PUT    | /api/domains/:id             | Update domain settings / interval / pause
+DELETE | /api/domains/:id             | Delete domain from monitoring watchlist
+POST   | /api/domains/:id/check-now   | Immediate live check for single domain
+POST   | /api/domains/check-all       | Bulk fleet check across all active domains
+GET    | /api/domains/:id/history     | Historical response time & uptime samples
+POST   | /api/domains/quick-probe     | Instant ad-hoc probe for any external domain
+GET    | /api/security/overview       | Network Cyber Score, threat posture, counts
+GET    | /api/security/audits         | Stored port vulnerability audit records
+POST   | /api/security/scan-device    | Single device 16-port TCP vulnerability probe
+POST   | /api/security/scan-all       | Bulk network audit (skips offline hosts)
+POST   | /api/security/probe-port     | Single port live re-test on specific IP
+GET    | /api/security/dns-traffic    | Query log of user web searches & DNS lookups
+POST   | /api/security/dns-log        | Ingest DNS record from Python sniffer
+POST   | /api/security/dns-harvest    | Pull live Windows DNS cache resolutions
+DELETE | /api/security/dns-traffic    | Clear captured DNS history log
+GET    | /api/security/threat-alerts  | Unresolved security vulnerability alerts
+POST   | /api/security/resolve-threat | Acknowledge & resolve a specific threat
+GET    | /api/security/ports-catalog  | 16-port threat matrix with CVEs & mitigations
+
+
+================================================================================
+5. HOW TO RUN & VERIFY
+================================================================================
+
+1. Run Full System:
+   👉 Double-click `start_all.bat` (or run `.\start_all.ps1` in PowerShell).
+   Backend starts on port 5000, Vite client starts on port 5173.
+
+2. Open Security Hub:
+   Browser me `http://localhost:5173` khol kar sidebar me "Security Hub" par click karein.
+
+3. Test Features:
+   - "Audit All Devices" dabayein: Online devices scan hongi, offline devices 
+     instant `Offline (N/A)` mark hongi bina kisi fake SAFE score ke.
+   - Kisi bhi Open Port chip ya Threat warning par CLICK karein:
+     Target Device Name, IP, CVE, Step-by-Step Remediation, copyable Firewall rule, 
+     aur "Test Port Now" button khul jayega!
+   - (Optional) Live Continuous DNS Traffic ke liye `run_threat_sniffer.bat` run karein.
+================================================================================

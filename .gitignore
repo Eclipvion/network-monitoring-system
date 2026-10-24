@@ -47,3 +47,6 @@ desktop.ini
 # Vite & Frontend Cache
 .vite/
 client/.vite/
+
+# Local sensitive configs
+server/data/email_report_config.json

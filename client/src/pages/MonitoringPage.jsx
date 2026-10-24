@@ -29,6 +29,7 @@ import {
   X
 } from 'lucide-react';
 import StatusBadge from '../components/StatusBadge';
+import BandwidthWidget from '../components/BandwidthWidget';
 import api from '../services/api';
 
 export default function MonitoringPage({
@@ -197,6 +198,9 @@ export default function MonitoringPage({
           <div style={{ width: `${pausedPct}%` }} className="bg-slate-400 dark:bg-slate-600 transition-all duration-500" title={`PAUSED: ${pausedPct}%`} />
         </div>
       </div>
+
+      {/* Real-Time Live Interface Bandwidth Telemetry Ribbon */}
+      <BandwidthWidget variant="ribbon" />
 
       {/* Adaptive Controls Toolbar */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-3.5">
@@ -412,11 +416,21 @@ export default function MonitoringPage({
 
                         <div className="text-right">
                           <span className="text-[10px] uppercase font-bold text-slate-400 block tracking-wider">
-                            Packet Loss
+                            Loss / Jitter
                           </span>
-                          <span className={`text-sm font-bold font-mono ${latest?.packetLoss > 0 ? 'text-rose-500' : 'text-slate-600 dark:text-slate-300'}`}>
-                            {latest?.packetLoss !== undefined ? `${latest.packetLoss}%` : '0%'}
-                          </span>
+                          <div className="flex items-center justify-end gap-1 font-mono text-xs">
+                            <span className={`font-bold ${latest?.packetLoss > 0 ? 'text-rose-500' : 'text-slate-600 dark:text-slate-300'}`}>
+                              {latest?.packetLoss !== undefined ? `${latest.packetLoss}%` : '0%'}
+                            </span>
+                            <span className="text-slate-300 dark:text-slate-700">•</span>
+                            <span className={`font-bold ${
+                              latest && typeof latest.jitter === 'number'
+                                ? latest.jitter < 5 ? 'text-emerald-500' : latest.jitter < 20 ? 'text-blue-500' : 'text-amber-500'
+                                : 'text-slate-400'
+                            }`} title="PRTG Jitter Variance">
+                              {latest && typeof latest.jitter === 'number' ? `±${latest.jitter}ms` : '0ms'}
+                            </span>
+                          </div>
                         </div>
                       </div>
 
@@ -509,6 +523,7 @@ export default function MonitoringPage({
                       <th className="py-3.5 px-4">Status</th>
                       <th className="py-3.5 px-4">Response Time</th>
                       <th className="py-3.5 px-4">Packet Loss</th>
+                      <th className="py-3.5 px-4">Jitter</th>
                       <th className="py-3.5 px-4">Location</th>
                       <th className="py-3.5 px-4">Last Probe</th>
                       <th className="py-3.5 px-4 text-right">Action</th>
@@ -548,6 +563,21 @@ export default function MonitoringPage({
                           </td>
                           <td className="py-3.5 px-4 font-mono">
                             {latest?.packetLoss !== undefined ? `${latest.packetLoss}%` : '0%'}
+                          </td>
+                          <td className="py-3.5 px-4 font-mono">
+                            {latest && typeof latest.jitter === 'number' ? (
+                              <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-semibold ${
+                                latest.jitter < 5
+                                  ? 'bg-emerald-500/10 text-emerald-500'
+                                  : latest.jitter < 20
+                                  ? 'bg-blue-500/10 text-blue-500'
+                                  : 'bg-amber-500/10 text-amber-500'
+                              }`}>
+                                {latest.jitter} ms
+                              </span>
+                            ) : (
+                              '—'
+                            )}
                           </td>
                           <td className="py-3.5 px-4 text-slate-500">
                             {device.group || 'Local Network'}

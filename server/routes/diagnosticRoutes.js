@@ -17,8 +17,11 @@ const __dirname = path.dirname(__filename);
 const router = express.Router();
 
 const tracerouteScriptPath = path.resolve(__dirname, '../../python-monitor/traceroute.py');
+const venvPython = path.resolve(__dirname, '../../.venv/Scripts/python.exe');
 let pythonExecutable = process.env.PYTHON_PATH || 'C:\\Users\\Ability\\AppData\\Local\\Programs\\Python\\Python312\\python.exe';
-if (!fs.existsSync(pythonExecutable)) {
+if (fs.existsSync(venvPython)) {
+  pythonExecutable = venvPython;
+} else if (!fs.existsSync(pythonExecutable)) {
   pythonExecutable = 'python';
 }
 

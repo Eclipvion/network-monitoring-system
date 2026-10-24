@@ -5,8 +5,29 @@
 Yeh guide aapko batayegi ke pura project (Backend Server, React Dashboard, 
 aur Python Monitoring Engine) kaise run karna hai aur browser me kaise dekhna hai.
 
-Poore system ko chalane ke liye aapko 3 alag alag Terminals (CMD ya PowerShell) 
-kholne honge.
+Poore system ko chalane ke 2 tareeqay hain:
+
+================================================================================
+⭐ TAREEQA 1: AUTOMATIC 1-CLICK RUN (SABSE AASAAN TARIQA)
+================================================================================
+Aapko 3 alag alag terminals khud kholne ki zaroorat nahi!
+Folder me ja kar sirf ek file par double-click karein:
+
+👉 start_all.bat par DOUBLE-CLICK karein!
+   (Ya PowerShell me likhein: .\start_all.ps1)
+
+Yeh script automatically:
+1. Backend Server ko alag terminal window me on kar degi.
+2. React Dashboard ko alag terminal window me on kar degi.
+3. Python Engine ko alag terminal window me on kar degi.
+4. 3 second baad Chrome/Edge browser me dashboard (http://localhost:5173) khud open kar degi!
+
+Jab sab band karna ho, to "stop_all.bat" par double click karein.
+
+--------------------------------------------------------------------------------
+TAREEQA 2: MANUAL RUN (MANUALLY 3 ALAG TERMINALS KHOL KAR)
+--------------------------------------------------------------------------------
+Agar aap manually chalana chahte hain:
 
 --------------------------------------------------------------------------------
 STEP 1: BACKEND SERVER CHALANA (Terminal 1)
@@ -138,15 +159,23 @@ DASHBOARD PAR KYA KYA DEKH SAKTE HAIN:
 7. "Domain Health" Tab (SSL / TLS Inspector):
    - Real-time SSL certificate validation, expiry countdown (days remaining), issuer, TLS version (TLS 1.3/1.2), cipher suite, aur HTTP response check.
 
-8. "Alerts" Tab:
+8. "Security Hub" Tab (🛡️ Cyber Threat Defense & Port Vulnerability Auditor):
+   - Network Cyber Score (0-100 Rating & Threat Posture: Safe / Elevated / Critical).
+   - Multi-Device Open Ports Audit: Har device ke high-risk ports (SMB 445 WannaCry, RDP 3389 BlueKeep, Telnet 23, MySQL 3306, MongoDB 27017, Redis 6379) check karta hai aur risk alerts generate karta hai.
+   - User Searches & Web/DNS Traffic Inspector: Network par users kaunsi websites / domains access kar rahe hain (Google, YouTube, Social Media, Crypto Mining pools, Suspicious TLDs) real-time me capture aur classify karta hai.
+   - Threat Incident Log: Active cyber risks aur unke step-by-step remediation / firewall defense recommendations.
+   - 1-Click "Audit All Devices" & "Harvest Live DNS" buttons.
+   - Optional: "run_threat_sniffer.bat" double-click karke real-time continuous DNS sniffer chala sakte hain.
+
+9. "Alerts" Tab:
    - Agar koi device consecutive pings fail karega to DOWN alert ban jayega.
    - Jab device wapas theek hoga to automatically RECOVERY hokar resolve ho jayega.
    - Aap khud bhi "Mark Resolved" button se alert resolve kar sakte hain.
 
-9. "Logs" Tab:
+10. "Logs" Tab:
    - Purane tamam audit aur outage logs pagination ke sath dekh sakte hain.
 
-10. "Settings" Tab:
+11. "Settings" Tab:
    - Default ping interval, latency warning ms, packet loss %, aur retry count 
      apni marzi se change kar ke "Save Configuration" kar sakte hain.
 

@@ -1,0 +1,302 @@
+[
+  {
+    "id": "dns-1792178015933-7xcj2",
+    "timestamp": "2026-10-16T19:13:35.933Z",
+    "clientIp": "Local Machine",
+    "domain": "f28ee653-cb3d-491e-ac47-d21a0a2dfd32.mshome.net",
+    "queryType": "A",
+    "category": "General Web Traffic",
+    "threatLevel": "SAFE",
+    "flagReason": "Normal Outbound Resolution"
+  },
+  {
+    "id": "dns-1792178015932-jujms",
+    "timestamp": "2026-10-16T19:13:35.932Z",
+    "clientIp": "Local Machine",
+    "domain": "graph.microsoft.com",
+    "queryType": "A",
+    "category": "Developer & Cloud Infra",
+    "threatLevel": "SAFE",
+    "flagReason": "Trusted Enterprise & Developer Service"
+  },
+  {
+    "id": "dns-1792178015930-fj5pf",
+    "timestamp": "2026-10-16T19:13:35.930Z",
+    "clientIp": "Local Machine",
+    "domain": "graph.microsoft.com",
+    "queryType": "A",
+    "category": "Developer & Cloud Infra",
+    "threatLevel": "SAFE",
+    "flagReason": "Trusted Enterprise & Developer Service"
+  },
+  {
+    "id": "dns-1792178015929-fm1hb",
+    "timestamp": "2026-10-16T19:13:35.929Z",
+    "clientIp": "Local Machine",
+    "domain": "graph.microsoft.com",
+    "queryType": "A",
+    "category": "Developer & Cloud Infra",
+    "threatLevel": "SAFE",
+    "flagReason": "Trusted Enterprise & Developer Service"
+  },
+  {
+    "id": "dns-1792178015928-g8ri0",
+    "timestamp": "2026-10-16T19:13:35.928Z",
+    "clientIp": "Local Machine",
+    "domain": "graph.microsoft.com",
+    "queryType": "DNS",
+    "category": "Developer & Cloud Infra",
+    "threatLevel": "SAFE",
+    "flagReason": "Trusted Enterprise & Developer Service"
+  },
+  {
+    "id": "dns-1792178015926-s1u7v",
+    "timestamp": "2026-10-16T19:13:35.926Z",
+    "clientIp": "Local Machine",
+    "domain": "graph.microsoft.com",
+    "queryType": "DNS",
+    "category": "Developer & Cloud Infra",
+    "threatLevel": "SAFE",
+    "flagReason": "Trusted Enterprise & Developer Service"
+  },
+  {
+    "id": "dns-1792178015925-ycyxw",
+    "timestamp": "2026-10-16T19:13:35.925Z",
+    "clientIp": "Local Machine",
+    "domain": "relay-744a31b5.net.anydesk.com",
+    "queryType": "A",
+    "category": "General Web Traffic",
+    "threatLevel": "SAFE",
+    "flagReason": "Normal Outbound Resolution"
+  },
+  {
+    "id": "dns-1792178015924-y7lq0",
+    "timestamp": "2026-10-16T19:13:35.924Z",
+    "clientIp": "Local Machine",
+    "domain": "ds-20",
+    "queryType": "A",
+    "category": "General Web Traffic",
+    "threatLevel": "SAFE",
+    "flagReason": "Normal Outbound Resolution"
+  },
+  {
+    "id": "dns-1792178015923-z9tgr",
+    "timestamp": "2026-10-16T19:13:35.923Z",
+    "clientIp": "Local Machine",
+    "domain": "1.80.23.172.in-addr.arpa",
+    "queryType": "DNS",
+    "category": "General Web Traffic",
+    "threatLevel": "SAFE",
+    "flagReason": "Normal Outbound Resolution"
+  },
+  {
+    "id": "dns-1792178015922-pxumt",
+    "timestamp": "2026-10-16T19:13:35.922Z",
+    "clientIp": "Local Machine",
+    "domain": "desktop-8d1gbag.mshome.net",
+    "queryType": "AAAA",
+    "category": "General Web Traffic",
+    "threatLevel": "SAFE",
+    "flagReason": "Normal Outbound Resolution"
+  },
+  {
+    "id": "dns-1792178015921-dwfpa",
+    "timestamp": "2026-10-16T19:13:35.921Z",
+    "clientIp": "Local Machine",
+    "domain": "desktop-8d1gbag.mshome.net",
+    "queryType": "A",
+    "category": "General Web Traffic",
+    "threatLevel": "SAFE",
+    "flagReason": "Normal Outbound Resolution"
+  },
+  {
+    "id": "dns-1792178015920-00u6b",
+    "timestamp": "2026-10-16T19:13:35.920Z",
+    "clientIp": "Local Machine",
+    "domain": "spreadsheets.google.com",
+    "queryType": "A",
+    "category": "Search Engine",
+    "threatLevel": "SAFE",
+    "flagReason": "Verified Public Search Provider"
+  },
+  {
+    "id": "dns-1792178015919-lz9hz",
+    "timestamp": "2026-10-16T19:13:35.919Z",
+    "clientIp": "Local Machine",
+    "domain": "spreadsheets.google.com",
+    "queryType": "A",
+    "category": "Search Engine",
+    "threatLevel": "SAFE",
+    "flagReason": "Verified Public Search Provider"
+  },
+  {
+    "id": "dns-1792178015918-xd63b",
+    "timestamp": "2026-10-16T19:13:35.918Z",
+    "clientIp": "Local Machine",
+    "domain": "spreadsheets.google.com",
+    "queryType": "A",
+    "category": "Search Engine",
+    "threatLevel": "SAFE",
+    "flagReason": "Verified Public Search Provider"
+  },
+  {
+    "id": "dns-1792178015917-n5sn9",
+    "timestamp": "2026-10-16T19:13:35.917Z",
+    "clientIp": "Local Machine",
+    "domain": "spreadsheets.google.com",
+    "queryType": "A",
+    "category": "Search Engine",
+    "threatLevel": "SAFE",
+    "flagReason": "Verified Public Search Provider"
+  },
+  {
+    "id": "dns-1792178015916-xze7j",
+    "timestamp": "2026-10-16T19:13:35.916Z",
+    "clientIp": "Local Machine",
+    "domain": "spreadsheets.google.com",
+    "queryType": "A",
+    "category": "Search Engine",
+    "threatLevel": "SAFE",
+    "flagReason": "Verified Public Search Provider"
+  },
+  {
+    "id": "dns-1792178015915-7hswz",
+    "timestamp": "2026-10-16T19:13:35.915Z",
+    "clientIp": "Local Machine",
+    "domain": "spreadsheets.google.com",
+    "queryType": "A",
+    "category": "Search Engine",
+    "threatLevel": "SAFE",
+    "flagReason": "Verified Public Search Provider"
+  },
+  {
+    "id": "dns-1792178015914-oc712",
+    "timestamp": "2026-10-16T19:13:35.914Z",
+    "clientIp": "Local Machine",
+    "domain": "spreadsheets.google.com",
+    "queryType": "DNS",
+    "category": "Search Engine",
+    "threatLevel": "SAFE",
+    "flagReason": "Verified Public Search Provider"
+  },
+  {
+    "id": "dns-1792178015912-lgum9",
+    "timestamp": "2026-10-16T19:13:35.912Z",
+    "clientIp": "Local Machine",
+    "domain": "one.one.one.one",
+    "queryType": "A",
+    "category": "General Web Traffic",
+    "threatLevel": "SAFE",
+    "flagReason": "Normal Outbound Resolution"
+  },
+  {
+    "id": "dns-1792178015911-qznd2",
+    "timestamp": "2026-10-16T19:13:35.911Z",
+    "clientIp": "Local Machine",
+    "domain": "one.one.one.one",
+    "queryType": "A",
+    "category": "General Web Traffic",
+    "threatLevel": "SAFE",
+    "flagReason": "Normal Outbound Resolution"
+  },
+  {
+    "id": "dns-1792178015910-y4ocx",
+    "timestamp": "2026-10-16T19:13:35.910Z",
+    "clientIp": "Local Machine",
+    "domain": "www.google.com",
+    "queryType": "A",
+    "category": "Search Engine",
+    "threatLevel": "SAFE",
+    "flagReason": "Verified Public Search Provider"
+  },
+  {
+    "id": "dns-1792178015909-n1nr5",
+    "timestamp": "2026-10-16T19:13:35.909Z",
+    "clientIp": "Local Machine",
+    "domain": "www.google.com",
+    "queryType": "A",
+    "category": "Search Engine",
+    "threatLevel": "SAFE",
+    "flagReason": "Verified Public Search Provider"
+  },
+  {
+    "id": "dns-1792178015908-xh4mp",
+    "timestamp": "2026-10-16T19:13:35.908Z",
+    "clientIp": "Local Machine",
+    "domain": "www.google.com",
+    "queryType": "A",
+    "category": "Search Engine",
+    "threatLevel": "SAFE",
+    "flagReason": "Verified Public Search Provider"
+  },
+  {
+    "id": "dns-1792178015906-cf6vg",
+    "timestamp": "2026-10-16T19:13:35.906Z",
+    "clientIp": "Local Machine",
+    "domain": "www.google.com",
+    "queryType": "A",
+    "category": "Search Engine",
+    "threatLevel": "SAFE",
+    "flagReason": "Verified Public Search Provider"
+  },
+  {
+    "id": "dns-1792178015905-3vfia",
+    "timestamp": "2026-10-16T19:13:35.905Z",
+    "clientIp": "Local Machine",
+    "domain": "www.google.com",
+    "queryType": "A",
+    "category": "Search Engine",
+    "threatLevel": "SAFE",
+    "flagReason": "Verified Public Search Provider"
+  },
+  {
+    "id": "dns-1792178015904-pfdxv",
+    "timestamp": "2026-10-16T19:13:35.904Z",
+    "clientIp": "Local Machine",
+    "domain": "www.google.com",
+    "queryType": "A",
+    "category": "Search Engine",
+    "threatLevel": "SAFE",
+    "flagReason": "Verified Public Search Provider"
+  },
+  {
+    "id": "dns-1792178015903-t4e89",
+    "timestamp": "2026-10-16T19:13:35.903Z",
+    "clientIp": "Local Machine",
+    "domain": "www.google.com",
+    "queryType": "A",
+    "category": "Search Engine",
+    "threatLevel": "SAFE",
+    "flagReason": "Verified Public Search Provider"
+  },
+  {
+    "id": "dns-1792178015902-clldo",
+    "timestamp": "2026-10-16T19:13:35.902Z",
+    "clientIp": "Local Machine",
+    "domain": "www.google.com",
+    "queryType": "A",
+    "category": "Search Engine",
+    "threatLevel": "SAFE",
+    "flagReason": "Verified Public Search Provider"
+  },
+  {
+    "id": "dns-1792178015901-enlw2",
+    "timestamp": "2026-10-16T19:13:35.901Z",
+    "clientIp": "Local Machine",
+    "domain": "12.212.22.72.in-addr.arpa",
+    "queryType": "DNS",
+    "category": "General Web Traffic",
+    "threatLevel": "SAFE",
+    "flagReason": "Normal Outbound Resolution"
+  },
+  {
+    "id": "dns-1792178015898-0q005",
+    "timestamp": "2026-10-16T19:13:35.898Z",
+    "clientIp": "Local Machine",
+    "domain": "relay-35c3173d.net.anydesk.com",
+    "queryType": "A",
+    "category": "General Web Traffic",
+    "threatLevel": "SAFE",
+    "flagReason": "Normal Outbound Resolution"
+  }
+]

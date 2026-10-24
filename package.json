@@ -8,7 +8,8 @@
     "install:all": "npm run install:server && npm run install:client",
     "server": "cd server && npm run dev",
     "client": "cd client && npm run dev",
-    "start": "node server/server.js"
+    "start": "node server/server.js",
+    "start:all": "cmd /c start_all.bat"
   },
   "keywords": [
     "network-monitoring",

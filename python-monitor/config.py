@@ -10,6 +10,6 @@ if dotenv_path.exists():
 
 PORT = os.getenv('PORT', '5000')
 API_BASE_URL = os.getenv('API_BASE_URL', f'http://localhost:{PORT}/api')
-PYTHON_WORKER_POLL_INTERVAL = float(os.getenv('PYTHON_WORKER_POLL_INTERVAL', '10'))
-PING_PROBES_COUNT = int(os.getenv('PING_PROBES_COUNT', '3'))
-PING_TIMEOUT_SECONDS = float(os.getenv('PING_TIMEOUT_SECONDS', '1.5'))
+PYTHON_WORKER_POLL_INTERVAL = float(os.getenv('PYTHON_WORKER_POLL_INTERVAL', '3'))
+PING_PROBES_COUNT = int(os.getenv('PING_PROBES_COUNT', '1'))
+PING_TIMEOUT_SECONDS = float(os.getenv('PING_TIMEOUT_SECONDS', '1.0'))

@@ -322,13 +322,20 @@ export default function NetworkScannerModal({ isOpen, onClose, onDevicesAdded, e
                                 const val = e.target.value;
                                 setDeviceNames((prev) => ({ ...prev, [dev.ip]: val }));
                               }}
-                              className="font-medium text-slate-900 dark:text-white bg-transparent border-b border-transparent hover:border-slate-300 dark:hover:border-slate-600 focus:border-emerald-500 focus:outline-none px-1 py-0.5 rounded text-xs w-48"
+                              className="font-medium text-slate-900 dark:text-white bg-transparent border-b border-transparent hover:border-slate-300 dark:hover:border-slate-600 focus:border-emerald-500 focus:outline-none px-1 py-0.5 rounded text-xs w-56"
                             />
-                            {dev.hostname && (
-                              <div className="text-[10px] text-slate-400 font-mono px-1">
-                                {dev.hostname}
-                              </div>
-                            )}
+                            <div className="flex flex-wrap items-center gap-1.5 mt-0.5 px-1">
+                              {dev.hostname && (
+                                <span className="text-[10px] text-slate-400 font-mono">
+                                  {dev.hostname}
+                                </span>
+                              )}
+                              {dev.vendor && (
+                                <span className="text-[9px] font-medium px-1.5 py-0.2 rounded bg-indigo-500/10 text-indigo-500 border border-indigo-500/20">
+                                  {dev.vendor}
+                                </span>
+                              )}
+                            </div>
                           </td>
 
                           <td className="py-3 px-4">
@@ -346,6 +353,11 @@ export default function NetworkScannerModal({ isOpen, onClose, onDevicesAdded, e
                                 )}
                               </button>
                             </div>
+                            {dev.mac && (
+                              <div className="text-[10px] text-slate-400 font-mono">
+                                {dev.mac}
+                              </div>
+                            )}
                           </td>
 
                           <td className="py-3 px-4">
@@ -358,12 +370,13 @@ export default function NetworkScannerModal({ isOpen, onClose, onDevicesAdded, e
                               }}
                               className="px-2 py-1 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs capitalize"
                             >
+                              <option value="mobile">Mobile / Phone</option>
+                              <option value="router">Router / Gateway</option>
+                              <option value="workstation">Workstation / PC</option>
                               <option value="server">Server</option>
-                              <option value="router">Router</option>
-                              <option value="switch">Switch</option>
-                              <option value="workstation">Workstation</option>
+                              <option value="iot">Smart / IoT</option>
                               <option value="printer">Printer</option>
-                              <option value="gateway">Gateway</option>
+                              <option value="switch">Switch</option>
                               <option value="other">Other</option>
                             </select>
                           </td>
@@ -375,18 +388,25 @@ export default function NetworkScannerModal({ isOpen, onClose, onDevicesAdded, e
                           </td>
 
                           <td className="py-3 px-4">
-                            <div className="flex flex-wrap gap-1">
-                              {dev.openPorts && dev.openPorts.length > 0 ? (
+                            <div className="flex flex-wrap items-center gap-1">
+                              {dev.method && (
+                                <span className={`px-1.5 py-0.5 rounded text-[10px] font-semibold ${
+                                  dev.method.includes('ARP') 
+                                    ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20' 
+                                    : 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20'
+                                }`}>
+                                  {dev.method}
+                                </span>
+                              )}
+                              {dev.openPorts && dev.openPorts.length > 0 && (
                                 dev.openPorts.map((p) => (
                                   <span
                                     key={p}
                                     className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono text-[10px]"
                                   >
-                                    {p}
+                                    :{p}
                                   </span>
                                 ))
-                              ) : (
-                                <span className="text-slate-400 text-[11px]">ICMP Only</span>
                               )}
                             </div>
                           </td>

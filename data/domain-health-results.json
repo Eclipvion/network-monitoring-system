@@ -1,1 +1,293 @@
-[]
+[
+  {
+    "domainId": 3,
+    "timestamp": "2026-10-17T20:27:33.105Z",
+    "httpStatus": 200,
+    "responseTimeMs": 739,
+    "sslValid": true,
+    "sslExpiresAt": "2026-12-10T07:07:39.000Z",
+    "sslDaysRemaining": 53,
+    "dnsResolved": true,
+    "resolvedIp": "208.115.236.10"
+  },
+  {
+    "domainId": 3,
+    "timestamp": "2026-10-17T20:27:33.183Z",
+    "httpStatus": 200,
+    "responseTimeMs": 809,
+    "sslValid": true,
+    "sslExpiresAt": "2026-12-10T07:07:39.000Z",
+    "sslDaysRemaining": 53,
+    "dnsResolved": true,
+    "resolvedIp": "208.115.236.10"
+  },
+  {
+    "domainId": 3,
+    "timestamp": "2026-10-17T20:28:21.494Z",
+    "httpStatus": 200,
+    "responseTimeMs": 856,
+    "sslValid": true,
+    "sslExpiresAt": "2026-12-10T07:07:39.000Z",
+    "sslDaysRemaining": 53,
+    "dnsResolved": true,
+    "resolvedIp": "208.115.236.10"
+  },
+  {
+    "domainId": 4,
+    "timestamp": "2026-10-17T20:31:26.474Z",
+    "httpStatus": 200,
+    "responseTimeMs": 328,
+    "sslValid": true,
+    "sslExpiresAt": "2026-10-25T23:59:59.000Z",
+    "sslDaysRemaining": 8,
+    "dnsResolved": true,
+    "resolvedIp": "157.240.227.35"
+  },
+  {
+    "domainId": 4,
+    "timestamp": "2026-10-17T20:31:26.475Z",
+    "httpStatus": 200,
+    "responseTimeMs": 363,
+    "sslValid": true,
+    "sslExpiresAt": "2026-10-25T23:59:59.000Z",
+    "sslDaysRemaining": 8,
+    "dnsResolved": true,
+    "resolvedIp": "157.240.227.35"
+  },
+  {
+    "domainId": 4,
+    "timestamp": "2026-10-17T20:31:39.055Z",
+    "httpStatus": 200,
+    "responseTimeMs": 611,
+    "sslValid": true,
+    "sslExpiresAt": "2026-10-25T23:59:59.000Z",
+    "sslDaysRemaining": 8,
+    "dnsResolved": true,
+    "resolvedIp": "57.144.148.1"
+  },
+  {
+    "domainId": 4,
+    "timestamp": "2026-10-17T20:36:58.231Z",
+    "httpStatus": 200,
+    "responseTimeMs": 409,
+    "sslValid": true,
+    "sslExpiresAt": "2026-10-25T23:59:59.000Z",
+    "sslDaysRemaining": 8,
+    "sslIssuer": "DigiCert Inc",
+    "sslSubject": "*.facebook.com",
+    "sslProtocol": "TLSv1.3",
+    "domainCreated": null,
+    "domainUpdated": null,
+    "domainExpires": null,
+    "domainDaysRemaining": null,
+    "domainRegistrar": "Unknown Registrar",
+    "whoisRaw": "No match for \"WWW.FACEBOOK.COM\".\r\n>>> Last update of whois database: 2026-10-17T20:36:41Z <<<\r\n\r\nNOTICE: The expiration date displayed in this record is the date the\r\nregistrar's sponsorship of the domain name registration in the registry is\r\ncurrently set to expire. This date does not necessarily reflect the expiration\r\ndate of the domain name registrant's agreement with the sponsoring\r\nregistrar.  Users may consult the sponsoring registrar's Whois database to\r\nview the registrar's reported date of expiration for this registration.\r\n\r\nTERMS OF USE: You are not authorized to access or query our Whois\r\ndatabase through the use of electronic processes that are high-volume and\r\nautomated except as reasonably necessary to register domain names or\r\nmodify existing registrations; the Data in VeriSign Global Registry\r\nServices' (\"VeriSign\") Whois database is provided by VeriSign for\r\ninformation purposes only, and to assist persons in obtaining information\r\nabout or related to a domain name registration record. VeriSign does not\r\nguarantee its accuracy. By submitting a Whois query, you agree to abide\r\nby the following terms of use: You agree that you may use this Data only\r\nfor lawful purposes and that under no circumstances will you use this Data\r\nto: (1) allow, enable, or otherwise support the transmission of mass\r\nunsolicited, commercial advertising or solicitations via e-mail, telephone,\r\nor facsimile; or (2) enable high volume, automated, electronic processes\r\nthat apply to VeriSign (or its computer systems). The compilation,\r\nrepackaging, dissemination or other use of this Data is expressly\r\nprohibited without the prior written consent of VeriSign. You agree not to\r\nuse electronic processes that are automated and high-volume to access or\r\nquery the Whois database except as reasonably necessary to register\r\ndomain names or modify existing registrations. VeriSign reserves the right\r\nto restrict your access to the Whois database in its sole discretion to ensure\r\noperational stability.  VeriSign may restrict or terminate your access to the\r\nWhois database for failure to abide by these terms of use. VeriSign\r\nreserves the right to modify these terms at any time.\r\n\r\nThe Registry database contains ONLY .COM, .NET, .EDU domains and\r\nRegistrars.\r\n",
+    "dnsResolved": true,
+    "resolvedIp": "157.240.227.35",
+    "allIps": [
+      "157.240.227.35"
+    ],
+    "nameServers": [],
+    "mailServers": []
+  },
+  {
+    "domainId": 3,
+    "timestamp": "2026-10-17T20:37:05.252Z",
+    "httpStatus": 200,
+    "responseTimeMs": 791,
+    "sslValid": true,
+    "sslExpiresAt": "2026-12-10T07:07:39.000Z",
+    "sslDaysRemaining": 53,
+    "sslIssuer": "Let's Encrypt",
+    "sslSubject": "cybervion.com",
+    "sslProtocol": "TLSv1.3",
+    "domainCreated": "2025-10-05T13:00:53.000Z",
+    "domainUpdated": "2026-10-08T15:25:54.000Z",
+    "domainExpires": "2027-10-05T13:00:53.000Z",
+    "domainDaysRemaining": 353,
+    "domainRegistrar": "MAT BAO CORPORATION",
+    "whoisRaw": "   Domain Name: CYBERVION.COM\r\n   Registry Domain ID: 3026098627_DOMAIN_COM-VRSN\r\n   Registrar WHOIS Server: whois.matbao.net\r\n   Registrar URL: http://www.matbao.net\r\n   Updated Date: 2026-10-08T15:25:54Z\r\n   Creation Date: 2025-10-05T13:00:53Z\r\n   Registry Expiry Date: 2027-10-05T13:00:53Z\r\n   Registrar: MAT BAO CORPORATION\r\n   Registrar IANA ID: 1586\r\n   Registrar Abuse Contact Email: abuse@matbao.com\r\n   Registrar Abuse Contact Phone: +84.2836229999\r\n   Domain Status: ok https://icann.org/epp#ok\r\n   Name Server: DNS1.HOSTERPK.COM\r\n   Name Server: DNS2.HOSTERPK.COM\r\n   DNSSEC: unsigned\r\n   URL of the ICANN Whois Inaccuracy Complaint Form: https://www.icann.org/wicf/\r\n>>> Last update of whois database: 2026-10-17T20:36:41Z <<<\r\n\r\nFor more information on Whois status codes, please visit https://icann.org/epp\r\n\r\nNOTICE: The expiration date displayed in this record is the date the\r\nregistrar's sponsorship of the domain name registration in the registry is\r\ncurrently set to expire. This date does not necessarily reflect the expiration\r\ndate of the domain name registrant's agreement with the sponsoring\r\nregistrar.  Users may consult the sponsoring registrar's Whois database to\r\nview the registrar's reported date of expiration for this registration.\r\n\r\nTERMS OF USE: You are not authorized to access or query our Whois\r\ndatabase through the use of electronic processes that are high-volume and\r\nautomated except as reasonably necessary to register domain names or\r\nmodify existing registrations; the Data in VeriSign Global Registry\r\nServices' (\"VeriSign\") Whois database is provided by VeriSign for\r\ninformation purposes only, and to assist persons in obtaining information\r\nabout or related to a domain name registration record. VeriSign does not\r\nguarantee its accuracy. By submitting a Whois query, you agree to abide\r\nby the following terms of use: You agree that you may use this Data only\r\nfor lawful purposes and that under no circumstances will you use this Data\r\nto: (1) allow, enable, or otherwise support the transmission of mass\r\nunsolicited, commercial advertising or solicitations via e-mail, telephone,\r\nor facsimile; or (2) enable high volume, automated, electronic processes\r\nthat apply to VeriSign (or its computer systems). The compilation,\r\nrepackaging, dissemination or other use of this Data is expressly\r\nprohibited without the prior written consent of VeriSign. You agree not to\r\nuse electronic processes that are automated and high-volume to access or\r\nquery the Whois database except as reasonably necessary to register\r\ndomain names or modify existing registrations. VeriSign reserves the right\r\nto restrict your access to the Whois database in its sole discretion to ensure\r\noperational stability.  VeriSign may restrict or terminate your access to the\r\nWhois database for failure to abide by these terms of use. VeriSign\r\nreserves the right to modify these terms at any time.\r\n\r\nThe Registry database contains ONLY .COM, .NET, .EDU domains and\r\nRegistrars.\r\n",
+    "dnsResolved": true,
+    "resolvedIp": "208.115.236.10",
+    "allIps": [
+      "208.115.236.10"
+    ],
+    "nameServers": [
+      "dns2.hosterpk.com",
+      "dns1.hosterpk.com"
+    ],
+    "mailServers": [
+      "cybervion.com"
+    ]
+  },
+  {
+    "domainId": 4,
+    "timestamp": "2026-10-17T20:38:22.434Z",
+    "httpStatus": 200,
+    "responseTimeMs": 379,
+    "sslValid": true,
+    "sslExpiresAt": "2026-10-25T23:59:59.000Z",
+    "sslDaysRemaining": 8,
+    "sslIssuer": "DigiCert Inc",
+    "sslSubject": "*.facebook.com",
+    "sslProtocol": "TLSv1.3",
+    "domainCreated": "1997-03-29T05:00:00.000Z",
+    "domainUpdated": "2025-04-23T19:08:37.000Z",
+    "domainExpires": "2034-03-30T04:00:00.000Z",
+    "domainDaysRemaining": 2720,
+    "domainRegistrar": "RegistrarSafe, LLC",
+    "whoisRaw": "Domain Name: facebook.com\nRegistry Domain ID: \nRegistrar WHOIS Server: whois.registrarsec.com\nRegistrar URL: https://registrarsec.com\nUpdated Date: 2025-04-23T19:08:37Z\nCreation Date: 1997-03-29T05:00:00Z\nRegistrar Registration Expiration Date: 2034-03-30T04:00:00Z\nRegistrar: RegistrarSafe, LLC\nRegistrar IANA ID: 3237\nDomain Status: clientDeleteProhibited https://www.icann.org/epp#clientDeleteProhibited\nDomain Status: clientTransferProhibited https://www.icann.org/epp#clientTransferProhibited\nDomain Status: clientUpdateProhibited https://www.icann.org/epp#clientUpdateProhibited\nDomain Status: serverDeleteProhibited https://www.icann.org/epp#serverDeleteProhibited\nDomain Status: serverTransferProhibited https://www.icann.org/epp#serverTransferProhibited\nDomain Status: serverUpdateProhibited https://www.icann.org/epp#serverUpdateProhibited\nRegistry Registrant ID:\nRegistrant Name: Domain Admin\nRegistrant Organization: Meta Platforms, Inc.\nRegistrant Street: 1601 Willow Rd\nRegistrant City: Menlo Park\nRegistrant State/Province: CA\nRegistrant Postal Code: 94025\nRegistrant Country: US\nRegistrant Phone: +1.6505434800\nRegistrant Phone Ext:\nRegistrant Fax: \nRegistrant Fax Ext:\nRegistrant Email: domain@fb.com\nRegistry Admin ID:\nAdmin Name: Domain Admin\nAdmin Organization: Meta Platforms, Inc.\nAdmin Street: 1601 Willow Rd\nAdmin City: Menlo Park\nAdmin State/Province: CA\nAdmin Postal Code: 94025\nAdmin Country: US\nAdmin Phone: +1.6505434800\nAdmin Phone Ext:\nAdmin Fax: \nAdmin Fax Ext:\nAdmin Email: domain@fb.com\nRegistry Tech ID:\nTech Name: Domain Admin\nTech Organization: Meta Platforms, Inc.\nTech Street: 1601 Willow Rd\nTech City: Menlo Park\nTech State/Province: CA\nTech Postal Code: 94025\nTech Country: US\nTech Phone: +1.6505434800\nTech Phone Ext:\nTech Fax: \nTech Fax Ext:\nTech Email: domain@fb.com\nName Server: a.ns.facebook.com\nName Server: b.ns.facebook.com\nName Server: c.ns.facebook.com\nName Server: d.ns.facebook.com\nDNSSEC: Unsigned Delegation\nRegistrar Abuse Contact Email: abusecomplaints@registrarsafe.com\nRegistrar Abuse Contact Phone: +1.6503087004\nURL of the ICANN WHOIS Data Problem Reporting System: http://wdprs.internic.net/\n>>> Last update of WHOIS database: 2026-10-17T20:38:22Z <<<\n\nFor more information on Whois status codes, please visit https://www.icann.org/resources/pages/epp-status-codes-2014-06-16-en\n\nPlease query the RDDS service of the Registrar of Record identified in this\noutput for information on how to contact the Registrant, Admin, or Tech contact\nof the queried domain name.\n\n-------------------------------------------------------------------------------\nSearch results obtained from the RegistrarSafe, LLC WHOIS database are\nprovided by RegistrarSafe, LLC for information purposes only, to assist\nusers in obtaining information concerning a domain name registration record.\nThe information contained therein is provided on an \"as is\" and \"as available\"\nbasis and RegistrarSafe, LLC does not guarantee the accuracy or completeness\nof any information provided through the WHOIS database.  By submitting a WHOIS query,\nyou agree to the following: (1) that you will use any information provided through\nthe WHOIS only for lawful purposes; (2) that you will comply with all ICANN rules\nand regulations governing use of the WHOIS; (3)  that you will not use any information\nprovided through the WHOIS to  enable, or otherwise cause the transmission of mass\nunsolicited, commercial advertising or solicitations via e-mail (i.e., spam); or\n(4) that you will not use the WHOIS to enable or otherwise utilize high volume,\nautomated, electronic processes that apply to or attach to RegistrarSafe, LLC or\nits systems. RegistrarSafe, LLC reserves the right to modify these terms\nat any time and to take any other appropriate actions, including but not limited to\nrestricting any access that violates these terms and conditions. By submitting this\nquery, you acknowledge and agree to abide by the foregoing terms, conditions and policies.\n----------------------",
+    "dnsResolved": true,
+    "resolvedIp": "57.144.148.1",
+    "allIps": [
+      "57.144.148.1"
+    ],
+    "nameServers": [],
+    "mailServers": []
+  },
+  {
+    "domainId": 3,
+    "timestamp": "2026-10-17T20:38:29.864Z",
+    "httpStatus": 200,
+    "responseTimeMs": 751,
+    "sslValid": true,
+    "sslExpiresAt": "2026-12-10T07:07:39.000Z",
+    "sslDaysRemaining": 53,
+    "sslIssuer": "Let's Encrypt",
+    "sslSubject": "cybervion.com",
+    "sslProtocol": "TLSv1.3",
+    "domainCreated": "2025-10-05T13:00:53.000Z",
+    "domainUpdated": "2026-10-08T15:25:54.000Z",
+    "domainExpires": "2027-10-05T13:00:53.000Z",
+    "domainDaysRemaining": 353,
+    "domainRegistrar": "MAT BAO CORPORATION",
+    "whoisRaw": "   Domain Name: CYBERVION.COM\r\n   Registry Domain ID: 3026098627_DOMAIN_COM-VRSN\r\n   Registrar WHOIS Server: whois.matbao.net\r\n   Registrar URL: http://www.matbao.net\r\n   Updated Date: 2026-10-08T15:25:54Z\r\n   Creation Date: 2025-10-05T13:00:53Z\r\n   Registry Expiry Date: 2027-10-05T13:00:53Z\r\n   Registrar: MAT BAO CORPORATION\r\n   Registrar IANA ID: 1586\r\n   Registrar Abuse Contact Email: abuse@matbao.com\r\n   Registrar Abuse Contact Phone: +84.2836229999\r\n   Domain Status: ok https://icann.org/epp#ok\r\n   Name Server: DNS1.HOSTERPK.COM\r\n   Name Server: DNS2.HOSTERPK.COM\r\n   DNSSEC: unsigned\r\n   URL of the ICANN Whois Inaccuracy Complaint Form: https://www.icann.org/wicf/\r\n>>> Last update of whois database: 2026-10-17T20:38:11Z <<<\r\n\r\nFor more information on Whois status codes, please visit https://icann.org/epp\r\n\r\nNOTICE: The expiration date displayed in this record is the date the\r\nregistrar's sponsorship of the domain name registration in the registry is\r\ncurrently set to expire. This date does not necessarily reflect the expiration\r\ndate of the domain name registrant's agreement with the sponsoring\r\nregistrar.  Users may consult the sponsoring registrar's Whois database to\r\nview the registrar's reported date of expiration for this registration.\r\n\r\nTERMS OF USE: You are not authorized to access or query our Whois\r\ndatabase through the use of electronic processes that are high-volume and\r\nautomated except as reasonably necessary to register domain names or\r\nmodify existing registrations; the Data in VeriSign Global Registry\r\nServices' (\"VeriSign\") Whois database is provided by VeriSign for\r\ninformation purposes only, and to assist persons in obtaining information\r\nabout or related to a domain name registration record. VeriSign does not\r\nguarantee its accuracy. By submitting a Whois query, you agree to abide\r\nby the following terms of use: You agree that you may use this Data only\r\nfor lawful purposes and that under no circumstances will you use this Data\r\nto: (1) allow, enable, or otherwise support the transmission of mass\r\nunsolicited, commercial advertising or solicitations via e-mail, telephone,\r\nor facsimile; or (2) enable high volume, automated, electronic processes\r\nthat apply to VeriSign (or its computer systems). The compilation,\r\nrepackaging, dissemination or other use of this Data is expressly\r\nprohibited without the prior written consent of VeriSign. You agree not to\r\nuse electronic processes that are automated and high-volume to access or\r\nquery the Whois database except as reasonably necessary to register\r\ndomain names or modify existing registrations. VeriSign reserves the right\r\nto restrict your access to the Whois database in its sole discretion to ensure\r\noperational stability.  VeriSign may restrict or terminate your access to the\r\nWhois database for failure to abide by these terms of use. VeriSign\r\nreserves the right to modify these terms at any time.\r\n\r\nThe Registry database contains ONLY .COM, .NET, .EDU domains and\r\nRegistrars.\r\n",
+    "dnsResolved": true,
+    "resolvedIp": "208.115.236.10",
+    "allIps": [
+      "208.115.236.10"
+    ],
+    "nameServers": [
+      "dns2.hosterpk.com",
+      "dns1.hosterpk.com"
+    ],
+    "mailServers": [
+      "cybervion.com"
+    ]
+  },
+  {
+    "domainId": 4,
+    "timestamp": "2026-10-22T06:09:58.707Z",
+    "httpStatus": 200,
+    "responseTimeMs": 303,
+    "sslValid": true,
+    "sslExpiresAt": "2026-10-29T23:59:59.000Z",
+    "sslDaysRemaining": 8,
+    "sslIssuer": "DigiCert Inc",
+    "sslSubject": "*.facebook.com",
+    "sslProtocol": "TLSv1.3",
+    "domainCreated": "1997-03-29T05:00:00.000Z",
+    "domainUpdated": "2025-04-23T19:08:37.000Z",
+    "domainExpires": "2034-03-30T04:00:00.000Z",
+    "domainDaysRemaining": 2716,
+    "domainRegistrar": "RegistrarSafe, LLC",
+    "whoisRaw": "Domain Name: facebook.com\nRegistry Domain ID: \nRegistrar WHOIS Server: whois.registrarsec.com\nRegistrar URL: https://registrarsec.com\nUpdated Date: 2025-04-23T19:08:37Z\nCreation Date: 1997-03-29T05:00:00Z\nRegistrar Registration Expiration Date: 2034-03-30T04:00:00Z\nRegistrar: RegistrarSafe, LLC\nRegistrar IANA ID: 3237\nDomain Status: clientDeleteProhibited https://www.icann.org/epp#clientDeleteProhibited\nDomain Status: clientTransferProhibited https://www.icann.org/epp#clientTransferProhibited\nDomain Status: clientUpdateProhibited https://www.icann.org/epp#clientUpdateProhibited\nDomain Status: serverDeleteProhibited https://www.icann.org/epp#serverDeleteProhibited\nDomain Status: serverTransferProhibited https://www.icann.org/epp#serverTransferProhibited\nDomain Status: serverUpdateProhibited https://www.icann.org/epp#serverUpdateProhibited\nRegistry Registrant ID:\nRegistrant Name: Domain Admin\nRegistrant Organization: Meta Platforms, Inc.\nRegistrant Street: 1601 Willow Rd\nRegistrant City: Menlo Park\nRegistrant State/Province: CA\nRegistrant Postal Code: 94025\nRegistrant Country: US\nRegistrant Phone: +1.6505434800\nRegistrant Phone Ext:\nRegistrant Fax: \nRegistrant Fax Ext:\nRegistrant Email: domain@fb.com\nRegistry Admin ID:\nAdmin Name: Domain Admin\nAdmin Organization: Meta Platforms, Inc.\nAdmin Street: 1601 Willow Rd\nAdmin City: Menlo Park\nAdmin State/Province: CA\nAdmin Postal Code: 94025\nAdmin Country: US\nAdmin Phone: +1.6505434800\nAdmin Phone Ext:\nAdmin Fax: \nAdmin Fax Ext:\nAdmin Email: domain@fb.com\nRegistry Tech ID:\nTech Name: Domain Admin\nTech Organization: Meta Platforms, Inc.\nTech Street: 1601 Willow Rd\nTech City: Menlo Park\nTech State/Province: CA\nTech Postal Code: 94025\nTech Country: US\nTech Phone: +1.6505434800\nTech Phone Ext:\nTech Fax: \nTech Fax Ext:\nTech Email: domain@fb.com\nName Server: a.ns.facebook.com\nName Server: b.ns.facebook.com\nName Server: c.ns.facebook.com\nName Server: d.ns.facebook.com\nDNSSEC: Unsigned Delegation\nRegistrar Abuse Contact Email: abusecomplaints@registrarsafe.com\nRegistrar Abuse Contact Phone: +1.6503087004\nURL of the ICANN WHOIS Data Problem Reporting System: http://wdprs.internic.net/\n>>> Last update of WHOIS database: 2026-10-22T06:09:58Z <<<\n\nFor more information on Whois status codes, please visit https://www.icann.org/resources/pages/epp-status-codes-2014-06-16-en\n\nPlease query the RDDS service of the Registrar of Record identified in this\noutput for information on how to contact the Registrant, Admin, or Tech contact\nof the queried domain name.\n\n-------------------------------------------------------------------------------\nSearch results obtained from the RegistrarSafe, LLC WHOIS database are\nprovided by RegistrarSafe, LLC for information purposes only, to assist\nusers in obtaining information concerning a domain name registration record.\nThe information contained therein is provided on an \"as is\" and \"as available\"\nbasis and RegistrarSafe, LLC does not guarantee the accuracy or completeness\nof any information provided through the WHOIS database.  By submitting a WHOIS query,\nyou agree to the following: (1) that you will use any information provided through\nthe WHOIS only for lawful purposes; (2) that you will comply with all ICANN rules\nand regulations governing use of the WHOIS; (3)  that you will not use any information\nprovided through the WHOIS to  enable, or otherwise cause the transmission of mass\nunsolicited, commercial advertising or solicitations via e-mail (i.e., spam); or\n(4) that you will not use the WHOIS to enable or otherwise utilize high volume,\nautomated, electronic processes that apply to or attach to RegistrarSafe, LLC or\nits systems. RegistrarSafe, LLC reserves the right to modify these terms\nat any time and to take any other appropriate actions, including but not limited to\nrestricting any access that violates these terms and conditions. By submitting this\nquery, you acknowledge and agree to abide by the foregoing terms, conditions and policies.\n----------------------",
+    "dnsResolved": true,
+    "resolvedIp": "57.144.148.1",
+    "allIps": [
+      "57.144.148.1"
+    ],
+    "nameServers": [],
+    "mailServers": []
+  },
+  {
+    "domainId": 3,
+    "timestamp": "2026-10-22T06:10:04.663Z",
+    "httpStatus": 200,
+    "responseTimeMs": 662,
+    "sslValid": true,
+    "sslExpiresAt": "2026-12-10T07:07:39.000Z",
+    "sslDaysRemaining": 49,
+    "sslIssuer": "Let's Encrypt",
+    "sslSubject": "cybervion.com",
+    "sslProtocol": "TLSv1.3",
+    "domainCreated": "2025-10-05T13:00:53.000Z",
+    "domainUpdated": "2026-10-08T15:25:54.000Z",
+    "domainExpires": "2027-10-05T13:00:53.000Z",
+    "domainDaysRemaining": 348,
+    "domainRegistrar": "MAT BAO CORPORATION",
+    "whoisRaw": "   Domain Name: CYBERVION.COM\r\n   Registry Domain ID: 3026098627_DOMAIN_COM-VRSN\r\n   Registrar WHOIS Server: whois.matbao.net\r\n   Registrar URL: http://www.matbao.net\r\n   Updated Date: 2026-10-08T15:25:54Z\r\n   Creation Date: 2025-10-05T13:00:53Z\r\n   Registry Expiry Date: 2027-10-05T13:00:53Z\r\n   Registrar: MAT BAO CORPORATION\r\n   Registrar IANA ID: 1586\r\n   Registrar Abuse Contact Email: abuse@matbao.com\r\n   Registrar Abuse Contact Phone: +84.2836229999\r\n   Domain Status: ok https://icann.org/epp#ok\r\n   Name Server: DNS1.HOSTERPK.COM\r\n   Name Server: DNS2.HOSTERPK.COM\r\n   DNSSEC: unsigned\r\n   URL of the ICANN Whois Inaccuracy Complaint Form: https://www.icann.org/wicf/\r\n>>> Last update of whois database: 2026-10-22T06:09:50Z <<<\r\n\r\nFor more information on Whois status codes, please visit https://icann.org/epp\r\n\r\nNOTICE: The expiration date displayed in this record is the date the\r\nregistrar's sponsorship of the domain name registration in the registry is\r\ncurrently set to expire. This date does not necessarily reflect the expiration\r\ndate of the domain name registrant's agreement with the sponsoring\r\nregistrar.  Users may consult the sponsoring registrar's Whois database to\r\nview the registrar's reported date of expiration for this registration.\r\n\r\nTERMS OF USE: You are not authorized to access or query our Whois\r\ndatabase through the use of electronic processes that are high-volume and\r\nautomated except as reasonably necessary to register domain names or\r\nmodify existing registrations; the Data in VeriSign Global Registry\r\nServices' (\"VeriSign\") Whois database is provided by VeriSign for\r\ninformation purposes only, and to assist persons in obtaining information\r\nabout or related to a domain name registration record. VeriSign does not\r\nguarantee its accuracy. By submitting a Whois query, you agree to abide\r\nby the following terms of use: You agree that you may use this Data only\r\nfor lawful purposes and that under no circumstances will you use this Data\r\nto: (1) allow, enable, or otherwise support the transmission of mass\r\nunsolicited, commercial advertising or solicitations via e-mail, telephone,\r\nor facsimile; or (2) enable high volume, automated, electronic processes\r\nthat apply to VeriSign (or its computer systems). The compilation,\r\nrepackaging, dissemination or other use of this Data is expressly\r\nprohibited without the prior written consent of VeriSign. You agree not to\r\nuse electronic processes that are automated and high-volume to access or\r\nquery the Whois database except as reasonably necessary to register\r\ndomain names or modify existing registrations. VeriSign reserves the right\r\nto restrict your access to the Whois database in its sole discretion to ensure\r\noperational stability.  VeriSign may restrict or terminate your access to the\r\nWhois database for failure to abide by these terms of use. VeriSign\r\nreserves the right to modify these terms at any time.\r\n\r\nThe Registry database contains ONLY .COM, .NET, .EDU domains and\r\nRegistrars.\r\n",
+    "dnsResolved": true,
+    "resolvedIp": "208.115.236.10",
+    "allIps": [
+      "208.115.236.10"
+    ],
+    "nameServers": [
+      "dns2.hosterpk.com",
+      "dns1.hosterpk.com"
+    ],
+    "mailServers": [
+      "cybervion.com"
+    ]
+  },
+  {
+    "domainId": 5,
+    "timestamp": "2026-10-22T06:10:32.092Z",
+    "httpStatus": 200,
+    "responseTimeMs": 543,
+    "sslValid": true,
+    "sslExpiresAt": "2026-12-18T09:32:47.000Z",
+    "sslDaysRemaining": 57,
+    "sslIssuer": "Let's Encrypt",
+    "sslSubject": "ability.com.pk",
+    "sslProtocol": "TLSv1.3",
+    "domainCreated": "2020-01-29T00:00:00.000Z",
+    "domainUpdated": null,
+    "domainExpires": "2028-01-29T00:00:00.000Z",
+    "domainDaysRemaining": 464,
+    "domainRegistrar": "Unknown Registrar",
+    "whoisRaw": "# WHOIS .PK Domains (PKNIC)\n\n    Domain: ability.com.pk\n    Status: Domain is Registered\n    \n\n    Creation Date: 2020-01-29\n    Expiry Date: 2028-01-29\n    Name Server: diva.ns.cloudflare.com\n    Name Server: plato.ns.cloudflare.com\n    Name Server: \n    Name Server: \n\n",
+    "dnsResolved": true,
+    "resolvedIp": "5.9.113.156",
+    "allIps": [
+      "5.9.113.156"
+    ],
+    "nameServers": [
+      "diva.ns.cloudflare.com",
+      "plato.ns.cloudflare.com"
+    ],
+    "mailServers": [
+      "ability-com-pk.mail.protection.outlook.com"
+    ]
+  },
+  {
+    "domainId": 5,
+    "timestamp": "2026-10-22T06:10:32.115Z",
+    "httpStatus": 200,
+    "responseTimeMs": 577,
+    "sslValid": true,
+    "sslExpiresAt": "2026-12-18T09:32:47.000Z",
+    "sslDaysRemaining": 57,
+    "sslIssuer": "Let's Encrypt",
+    "sslSubject": "ability.com.pk",
+    "sslProtocol": "TLSv1.3",
+    "domainCreated": "2020-01-29T00:00:00.000Z",
+    "domainUpdated": null,
+    "domainExpires": "2028-01-29T00:00:00.000Z",
+    "domainDaysRemaining": 464,
+    "domainRegistrar": "Unknown Registrar",
+    "whoisRaw": "# WHOIS .PK Domains (PKNIC)\n\n    Domain: ability.com.pk\n    Status: Domain is Registered\n    \n\n    Creation Date: 2020-01-29\n    Expiry Date: 2028-01-29\n    Name Server: diva.ns.cloudflare.com\n    Name Server: plato.ns.cloudflare.com\n    Name Server: \n    Name Server: \n\n",
+    "dnsResolved": true,
+    "resolvedIp": "5.9.113.156",
+    "allIps": [
+      "5.9.113.156"
+    ],
+    "nameServers": [
+      "diva.ns.cloudflare.com",
+      "plato.ns.cloudflare.com"
+    ],
+    "mailServers": [
+      "ability-com-pk.mail.protection.outlook.com"
+    ]
+  }
+]

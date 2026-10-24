@@ -1,0 +1,128 @@
+================================================================================
+    NETPULSE - ADVANCED ENTERPRISE EXPANSION ROADMAP & IMPLEMENTATION PLAN
+================================================================================
+Status: Active Implementation
+Last Updated: October 2026
+Version: NetPulse v2.5
+
+Yeh plan NetPulse Network Monitoring System ke 4 core enterprise modules ka 
+technical architecture aur execution roadmap hai (excluding Telegram notifications):
+
+================================================================================
+EXECUTIVE FEATURE MATRIX
+================================================================================
+1. [COMPLETED & ACTIVE] 🔍 Subnet Auto-Discovery & ARP Scanner (1-Click Auto-Detect)
+2. [COMPLETED & ACTIVE] 🗺️ Interactive Visual Network Topology Map (Canvas / SVG Graph)
+3. [COMPLETED & ACTIVE] ⚡ Real-Time Bandwidth & Interface Telemetry (Rx/Tx Speeds + WebSocket 1s Stream)
+4. [COMPLETED & ACTIVE] ⏱️ Network Outage Timeline & SLA Downtime Tracker (MTTR)
+
+================================================================================
+PHASE 1: SUBNET AUTO-DISCOVERY & ARP SCANNER (VERIFIED OPERATIONAL)
+================================================================================
+* Architecture:
+  - Backend: `server/routes/deviceRoutes.js` (/api/devices/network-info & /api/devices/scan-network)
+  - Engine: `python-monitor/scanner.py` (Hybrid Layer 2 ARP Cache + Windows SendARP API + ICMP Echo)
+  - Frontend: `client/src/components/NetworkScannerModal.jsx` (Triggered via "Auto-Detect Devices" in DevicesPage)
+* Operational Capabilities:
+  - Local Wi-Fi subnet detection (e.g. 192.168.46.0/24).
+  - High-speed ARP & ICMP scan in 3-5 seconds.
+  - OUI Hardware Vendor detection (Realtek, Apple, Samsung, Huawei, Intel).
+  - 1-Click batch import into NetPulse.
+
+================================================================================
+PHASE 2: INTERACTIVE VISUAL NETWORK TOPOLOGY MAP (GRAPH CANVAS)
+================================================================================
+* Problem Solved:
+  Devices abhi sirf rows aur cards me nazar aati hain. Enterprise network administrators 
+  aur clients ko ek visual bird's-eye view chahiye hota hai jahan network hierarchy 
+  aur interconnections clearly nazar aayen.
+
+* Architecture:
+  - Frontend Component: `client/src/pages/TopologyPage.jsx`
+  - Navigation: Sidebar me naya tab: "Topology Map" (Lucide Icon: GitFork / Network / Share2)
+  - Canvas: Pure lightweight interactive SVG Canvas (0 heavy external npm packages, fast, 60fps)
+
+* Core Layout Hierarchy (3-Tier Intelligent Auto-Layout):
+  1. Core Tier (Top / Center):
+     - Local Network Gateway / Wi-Fi Router (e.g. 192.168.46.1 or default gateway).
+  2. LAN Endpoints Tier (Middle Ring / Radial Branches):
+     - Workstations & PCs (Realtek, Intel, Desktop hosts).
+     - Local Servers & NAS.
+     - Mobile Devices & Wi-Fi Clients.
+  3. Cloud / Public Tier (Bottom / Outer Perimeter):
+     - Public DNS (Google 8.8.8.8, Cloudflare 1.1.1.1).
+     - Cloud Gateways & Monitored Domains (facebook.com, google.com).
+
+* Interactive & Visual Aesthetics:
+  - Animated Pulsing Links: Connecting wires ke upar laser pulses flow karenge:
+    * Green Pulsing Dots = Active / Low Latency (<30ms).
+    * Amber Pulsing Dots = High Latency (>100ms).
+    * Red Broken Wire = Host DOWN / Disconnected.
+  - Interactive Node Selection & Floating Inspector Drawer:
+    * Kisi bhi device icon par click karne se quick inspection card khulega:
+      Target IP, Vendor, Current Latency, Status, Monitored Ports, aur direct "Instant Ping" button.
+  - Controls:
+    * Zoom-In / Zoom-Out / Reset View.
+    * Pan Canvas via drag.
+    * Quick Scope Filter: "All Nodes", "Local LAN Only", "Cloud Only", "Vulnerable Only".
+
+================================================================================
+PHASE 3: REAL-TIME BANDWIDTH & INTERFACE TELEMETRY (LIVE SPEEDS)
+================================================================================
+* Architecture:
+  - Backend: `server/routes/telemetryRoutes.js`
+  - Engine: Native Windows Network Statistics (`netstat -e` / WMI performance counter delta)
+  - WebSocket: 1-second interval live payload broadcast (`telemetry:bandwidth`)
+  - Frontend: `client/src/components/BandwidthWidget.jsx` (OverviewPage & MonitoringPage)
+
+* Capabilities:
+  - Real-time Download Speed (KB/s / MB/s).
+  - Real-time Upload Speed (KB/s / MB/s).
+  - Total Session Data In/Out (GB).
+  - Live animated oscilloscope bandwidth area graph.
+  - Network saturation / congestion indicators.
+
+================================================================================
+PHASE 4: NETWORK OUTAGE TIMELINE & SLA DOWNTIME TRACKER (MTTR)
+================================================================================
+* Architecture:
+  - Backend Datastore: `data/outage_history.json`
+  - Background Monitor Hook: State transition listener (UP -> DOWN, DOWN -> UP)
+  - Frontend: `client/src/pages/ReportsPage.jsx` (SLA & Outages Sub-Tab)
+
+* Capabilities:
+  - Outage Incident Log (Device, Start Time, End Time, Total Downtime).
+  - MTTR (Mean Time To Recovery / Resolution) metrics.
+  - 99.9% SLA Compliance Scorecards (24-Hour, 7-Day, 30-Day compliance).
+  - Visual 24-Hour Uptime & Outage timeline bar.
+
+================================================================================
+PHASE 5: CONTINUOUS LIVE DEVICE WATCHDOG & AUTO-ADD/PRUNING ENGINE (ACTIVE)
+================================================================================
+* Architecture & Modular Folder Structure:
+  - Backend Services: `server/services/discovery/`
+    * `arpScanner.js`: Fast Windows ARP neighbor harvester & reverse DNS resolver
+    * `vendorCatalog.js`: MAC OUI hardware vendor identification
+    * `networkWatchdog.js`: Recurring background daemon (60s interval)
+  - Backend API: `server/routes/discoveryRoutes.js`
+  - Frontend Modular Components: `client/src/components/topology/`
+    * `WatchdogStatusBar.jsx`: Live ticker ribbon, sweep trigger, and audit events log
+    * `TopologyCanvas.jsx`: Interactive SVG map rendering links & nodes
+    * `TopologyNode.jsx`: Single node presentation with status glow & ripple
+    * `TopologyInspector.jsx`: Node details drawer & instant ping
+
+* User Business Logic Rules (Strictly Implemented):
+  1. Auto-Add on Join:
+     - Jab bhi koi new device network (Wi-Fi / LAN) par aati hai:
+       * Automatically adds to Monitoring list in database (`dataStore.addDevice`).
+       * Automatically appears on Topology Map with live link.
+       * Creates "JOINED" event in discovery audit log with timestamp.
+  2. Disconnect Handling (Topology vs Monitoring Segregation):
+     - Jab koi device network se disconnect ho ya hatt jaye:
+       * Topology Map se AUTOMATICALLY REMOVE ho jati hai (map remains clean with live active devices).
+       * Monitoring page se REMOVE NAHI hoti! Wahan par status "DOWN" show hota hai.
+       * Monitoring se device sirf tab remove hogi jab user explicitly manual delete karega.
+
+================================================================================
+ALL 5 PHASES OPERATIONAL & VERIFIED (OCTOBER 2026)
+================================================================================

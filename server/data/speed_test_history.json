@@ -1,0 +1,42 @@
+[
+  {
+    "id": "speed-1792827570615",
+    "timestamp": "2026-10-24T07:39:35.315Z",
+    "downloadMbps": 278.58,
+    "uploadMbps": 3.54,
+    "pingMs": 57.7,
+    "jitterMs": 4,
+    "serverLocation": "Edge Anycast CDN",
+    "durationSec": 4.7
+  },
+  {
+    "id": "speed-1792827563131",
+    "timestamp": "2026-10-24T07:39:23.755Z",
+    "downloadMbps": 258.63,
+    "uploadMbps": 73.71,
+    "pingMs": 60.5,
+    "jitterMs": 6.3,
+    "serverLocation": "Edge Anycast CDN",
+    "durationSec": 0.6
+  },
+  {
+    "id": "speed-1792827368069",
+    "timestamp": "2026-10-24T07:36:08.988Z",
+    "downloadMbps": 268.7,
+    "uploadMbps": 68.39,
+    "pingMs": 156.4,
+    "jitterMs": 36.5,
+    "serverLocation": "Edge Anycast CDN",
+    "durationSec": 0.9
+  },
+  {
+    "id": "speed-1792826843882",
+    "timestamp": "2026-10-24T07:27:25.228Z",
+    "downloadMbps": 298.7,
+    "uploadMbps": 16.72,
+    "pingMs": 76.2,
+    "jitterMs": 31.6,
+    "serverLocation": "Edge Anycast CDN",
+    "durationSec": 1.3
+  }
+]

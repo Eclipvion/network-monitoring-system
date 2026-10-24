@@ -44,6 +44,12 @@ export function broadcastDomainHealthUpdated(domainPayload) {
   }
 }
 
+export function broadcastBandwidth(bandwidthPayload) {
+  if (ioInstance) {
+    ioInstance.emit('telemetry:bandwidth', bandwidthPayload);
+  }
+}
+
 export function getIO() {
   return ioInstance;
 }
