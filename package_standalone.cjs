@@ -42,12 +42,63 @@ copyDirSync(
   path.join(targetDir, 'server')
 );
 
-// 3. Copy data
-console.log('-> Copying active data & databases...');
-copyDirSync(
-  path.join(rootDir, 'data'),
-  path.join(targetDir, 'data')
-);
+// 3. Initialize clean, empty production data databases (Zero clutter for fresh deployment)
+console.log('-> Initializing clean, empty production database in data/...');
+const targetDataDir = path.join(targetDir, 'data');
+fs.mkdirSync(targetDataDir, { recursive: true });
+fs.mkdirSync(path.join(targetDataDir, 'history'), { recursive: true });
+
+const cleanDatabaseTemplates = {
+  'devices.json': [],
+  'alerts.json': [],
+  'logs.json': [],
+  'monitoring-results.json': [],
+  'outages.json': [],
+  'discovery_events.json': [],
+  'threat_alerts.json': [],
+  'security_audits.json': [],
+  'domains.json': [],
+  'domain-health-results.json': [],
+  'traceroute-cache.json': {},
+  'dns_traffic.json': [],
+  'settings.json': {
+    defaultInterval: 30,
+    latencyWarningThresholdMs: 150,
+    packetLossWarningPercent: 20,
+    jitterWarningThresholdMs: 35,
+    retryCountBeforeDown: 2,
+    organizationName: 'NetPulse Enterprise NOC',
+    reportSubtitle: 'Infrastructure SLA & Downtime Audit Report',
+    slaTargetPercent: 99.9,
+    reportLogoUrl: '',
+    auditRetentionDays: 90,
+    ispPublicIp: '',
+    ispGatewayIp: '',
+    ispName: '',
+    ispPool: '',
+    enableWebhookAlerts: false,
+    webhookUrl: '',
+    enableSoundAlerts: false,
+    enableDesktopNotifications: false,
+    maintenanceMode: false,
+    dnsResolvers: [
+      { name: 'Google', ip: '8.8.8.8' },
+      { name: 'Cloudflare', ip: '1.1.1.1' },
+      { name: 'Quad9', ip: '9.9.9.9' }
+    ],
+    dnsTestDomains: ['google.com', 'cloudflare.com'],
+    dnsCheckIntervalSeconds: 300,
+    sslWarningDaysThreshold: 14
+  }
+};
+
+for (const [filename, content] of Object.entries(cleanDatabaseTemplates)) {
+  fs.writeFileSync(
+    path.join(targetDataDir, filename),
+    JSON.stringify(content, null, 2),
+    'utf-8'
+  );
+}
 
 // 4. Copy python-monitor (scanner & diagnostic tools)
 console.log('-> Copying python-monitor scripts...');

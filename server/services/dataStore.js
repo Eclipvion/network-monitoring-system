@@ -78,6 +78,7 @@ export class JSONDataStore extends BaseDataStore {
   constructor(dataDir) {
     super();
     this.dataDir = dataDir || path.resolve(__dirname, '../../data');
+    this.historyDir = path.join(this.dataDir, 'history');
     this.devicesFile = path.join(this.dataDir, 'devices.json');
     this.resultsFile = path.join(this.dataDir, 'monitoring-results.json');
     this.alertsFile = path.join(this.dataDir, 'alerts.json');
@@ -93,6 +94,67 @@ export class JSONDataStore extends BaseDataStore {
     this._resultsCache = null;
     this._resultsFlushTimer = null;
     this._latestStatusMap = new Map();
+
+    // Auto initialize store directories and clean temp files
+    this.initStore().catch(err => console.error('[DataStore Init Error]', err));
+  }
+
+  getDateKey(date = new Date()) {
+    try {
+      const d = typeof date === 'string' ? new Date(date) : date;
+      return d.toISOString().slice(0, 10); // YYYY-MM-DD
+    } catch (_) {
+      return new Date().toISOString().slice(0, 10);
+    }
+  }
+
+  getDailyResultsPath(dateStr) {
+    return path.join(this.historyDir, `results-${dateStr}.json`);
+  }
+
+  getDailyLogsPath(dateStr) {
+    return path.join(this.historyDir, `logs-${dateStr}.json`);
+  }
+
+  async _cleanTempFiles() {
+    try {
+      if (fs.existsSync(this.dataDir)) {
+        const files = await fs.readdir(this.dataDir);
+        for (const f of files) {
+          if (f.includes('.tmp.')) {
+            await fs.unlink(path.join(this.dataDir, f)).catch(() => {});
+          }
+        }
+      }
+    } catch (_) {}
+  }
+
+  async initStore() {
+    await fs.mkdir(this.dataDir, { recursive: true });
+    await fs.mkdir(this.historyDir, { recursive: true });
+    await this._cleanTempFiles();
+
+    // Auto verify that primary JSON database files exist on disk, initialize if missing
+    const defaultTemplates = [
+      { file: this.devicesFile, def: [] },
+      { file: this.resultsFile, def: [] },
+      { file: this.alertsFile, def: [] },
+      { file: this.logsFile, def: [] },
+      { file: this.domainsFile, def: [] },
+      { file: this.domainHealthResultsFile, def: [] },
+      { file: this.tracerouteCacheFile, def: {} },
+      { file: this.dnsResultsFile, def: [] }
+    ];
+
+    for (const item of defaultTemplates) {
+      try {
+        await fs.access(item.file);
+      } catch (err) {
+        if (err.code === 'ENOENT') {
+          await this._writeJson(item.file, item.def);
+        }
+      }
+    }
   }
 
   async _getResultsInMemory() {
@@ -115,7 +177,18 @@ export class JSONDataStore extends BaseDataStore {
       this._resultsFlushTimer = null;
       try {
         if (this._resultsCache) {
+          // 1. Flush in-memory cache to active results file
           await this._writeJson(this.resultsFile, this._resultsCache);
+
+          // 2. Also sync to today's date-based JSON file for easy daily telemetry audit
+          try {
+            const today = this.getDateKey();
+            const dailyFile = this.getDailyResultsPath(today);
+            const todaysResults = this._resultsCache.filter(r => r.timestamp && r.timestamp.startsWith(today));
+            if (todaysResults.length > 0) {
+              await this._writeJson(dailyFile, todaysResults);
+            }
+          } catch (_) {}
         }
       } catch (err) {
         console.error('Error in debounced results flush:', err);
@@ -140,8 +213,18 @@ export class JSONDataStore extends BaseDataStore {
   async _writeJson(filePath, data) {
     const tempFile = `${filePath}.tmp.${Date.now()}`;
     await fs.mkdir(path.dirname(filePath), { recursive: true });
-    await fs.writeFile(tempFile, JSON.stringify(data, null, 2), 'utf-8');
-    await fs.rename(tempFile, filePath);
+    try {
+      await fs.writeFile(tempFile, JSON.stringify(data, null, 2), 'utf-8');
+      await fs.rename(tempFile, filePath);
+    } catch (err) {
+      // Fallback: direct write if Windows locked the file during rename
+      try {
+        await fs.writeFile(filePath, JSON.stringify(data, null, 2), 'utf-8');
+        await fs.unlink(tempFile).catch(() => {});
+      } catch (e) {
+        console.error(`Failed writing to ${filePath}:`, e);
+      }
+    }
   }
 
   async getDevices() {
@@ -1045,6 +1128,17 @@ export class JSONDataStore extends BaseDataStore {
       logs.length = 2500;
     }
     await this._writeJson(this.logsFile, logs);
+
+    // Also sync to today's date-based log file for organized daily auditing
+    try {
+      const today = this.getDateKey();
+      const dailyLogFile = this.getDailyLogsPath(today);
+      const dailyLogs = await this._readJson(dailyLogFile, []);
+      dailyLogs.unshift(newLog);
+      if (dailyLogs.length > 2500) dailyLogs.length = 2500;
+      await this._writeJson(dailyLogFile, dailyLogs);
+    } catch (_) {}
+
     return newLog;
   }
 
