@@ -350,6 +350,13 @@ router.post('/batch-add', async (req, res) => {
       message: `Successfully added ${added.length} devices`,
       added
     });
+
+    // Trigger immediate background sweep for all newly added devices
+    setTimeout(() => {
+      import('../services/backgroundMonitor.js')
+        .then(m => m.runMonitoringSweep())
+        .catch(() => {});
+    }, 150);
   } catch (err) {
     console.error('Error batch adding devices:', err);
     res.status(500).json({ error: err.message });
@@ -464,6 +471,12 @@ export async function probeHostLive(target) {
   const tcpResult = await new Promise((resolve) => {
     let resolved = false;
     let completed = 0;
+    const watchdog = setTimeout(() => {
+      if (!resolved) {
+        resolved = true;
+        resolve(null);
+      }
+    }, 2200);
 
     for (const port of portsToTest) {
       const sock = new net.Socket();
@@ -473,6 +486,7 @@ export async function probeHostLive(target) {
       const finish = (isUp, latency, method, msg) => {
         if (!resolved && isUp) {
           resolved = true;
+          clearTimeout(watchdog);
           sock.destroy();
           const jitter = Number(Math.max(0.4, (latency * 0.12)).toFixed(1));
           resolve({
@@ -486,7 +500,9 @@ export async function probeHostLive(target) {
         } else {
           sock.destroy();
           completed++;
-          if (completed === portsToTest.length && !resolved) {
+          if (completed >= portsToTest.length && !resolved) {
+            resolved = true;
+            clearTimeout(watchdog);
             resolve(null);
           }
         }
@@ -598,6 +614,43 @@ router.post('/', async (req, res) => {
 
     const newDevice = await dataStore.addDevice({ name, ip, type, interval, monitoring });
     res.status(201).json(newDevice);
+
+    // Immediately trigger initial probe and broadcast status
+    if (newDevice.monitoring !== false) {
+      setTimeout(async () => {
+        try {
+          const probe = await probeHostLive(newDevice.ip);
+          const finalStatus = probe.status || 'DOWN';
+          const packetLoss = finalStatus === 'UP' ? 0 : finalStatus === 'WARNING' ? 25 : 100;
+          const timestamp = new Date().toISOString();
+
+          const { result, newAlert } = await dataStore.saveMonitoringResult({
+            deviceId: Number(newDevice.id),
+            timestamp,
+            status: finalStatus,
+            latency: probe.latency,
+            packetLoss,
+            message: probe.message || (finalStatus === 'UP' ? `OK: ${probe.latency}ms` : 'Host unreachable')
+          });
+
+          broadcastDeviceStatus({
+            deviceId: Number(newDevice.id),
+            name: newDevice.name,
+            ip: newDevice.ip,
+            status: result.status,
+            latency: result.latency,
+            packetLoss: result.packetLoss,
+            trafficIn: result.trafficIn,
+            trafficOut: result.trafficOut,
+            speedMbps: result.speedMbps,
+            timestamp: result.timestamp,
+            message: result.message
+          });
+
+          if (newAlert) broadcastNewAlert(newAlert);
+        } catch (_) {}
+      }, 150);
+    }
   } catch (err) {
     res.status(400).json({ error: err.message });
   }

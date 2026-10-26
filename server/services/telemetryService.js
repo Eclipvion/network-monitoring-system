@@ -122,7 +122,10 @@ function readOutagesData() {
   try {
     if (fs.existsSync(outagesFilePath)) {
       const content = fs.readFileSync(outagesFilePath, 'utf8');
-      return JSON.parse(content);
+      const parsed = JSON.parse(content);
+      if (parsed && typeof parsed === 'object' && !Array.isArray(parsed) && parsed.activeOutages) {
+        return parsed;
+      }
     }
   } catch (e) {
     console.error('Error reading outages.json:', e);
@@ -132,53 +135,65 @@ function readOutagesData() {
 
 function writeOutagesData(data) {
   try {
-    fs.writeFileSync(outagesFilePath, JSON.stringify(data, null, 2));
+    const safeData = {
+      activeOutages: (data && typeof data === 'object' && !Array.isArray(data) && data.activeOutages) ? data.activeOutages : {},
+      history: (data && Array.isArray(data.history)) ? data.history : []
+    };
+    fs.writeFileSync(outagesFilePath, JSON.stringify(safeData, null, 2));
   } catch (e) {
     console.error('Error writing outages.json:', e);
   }
 }
 
 export function handleDeviceOutageEvent(device, status) {
-  const data = readOutagesData();
-  const devId = String(device.id);
-  const now = new Date().toISOString();
+  try {
+    const rawData = readOutagesData();
+    const data = {
+      activeOutages: (rawData && typeof rawData === 'object' && !Array.isArray(rawData) && rawData.activeOutages) ? rawData.activeOutages : {},
+      history: (rawData && Array.isArray(rawData.history)) ? rawData.history : []
+    };
+    const devId = String(device.id);
+    const now = new Date().toISOString();
 
-  if (status === 'DOWN') {
-    // Check if not already in activeOutages
-    if (!data.activeOutages[devId]) {
-      data.activeOutages[devId] = {
-        id: `outage_${Date.now()}_${devId}`,
-        deviceId: device.id,
-        deviceName: device.name,
-        deviceIp: device.ip,
-        startTime: now,
-        status: 'ACTIVE'
-      };
-      writeOutagesData(data);
+    if (status === 'DOWN') {
+      // Check if not already in activeOutages
+      if (!data.activeOutages[devId]) {
+        data.activeOutages[devId] = {
+          id: `outage_${Date.now()}_${devId}`,
+          deviceId: device.id,
+          deviceName: device.name,
+          deviceIp: device.ip,
+          startTime: now,
+          status: 'ACTIVE'
+        };
+        writeOutagesData(data);
+      }
+    } else if (status === 'UP') {
+      // If was active outage, resolve it
+      if (data.activeOutages[devId]) {
+        const active = data.activeOutages[devId];
+        const startMs = new Date(active.startTime).getTime();
+        const endMs = new Date(now).getTime();
+        const durationSeconds = Math.max(Math.round((endMs - startMs) / 1000), 1);
+
+        const resolvedRecord = {
+          ...active,
+          endTime: now,
+          durationSeconds,
+          durationHuman: formatDuration(durationSeconds),
+          status: 'RESOLVED'
+        };
+
+        // Add to front of history
+        data.history.unshift(resolvedRecord);
+        if (data.history.length > 200) data.history.pop();
+
+        delete data.activeOutages[devId];
+        writeOutagesData(data);
+      }
     }
-  } else if (status === 'UP') {
-    // If was active outage, resolve it
-    if (data.activeOutages[devId]) {
-      const active = data.activeOutages[devId];
-      const startMs = new Date(active.startTime).getTime();
-      const endMs = new Date(now).getTime();
-      const durationSeconds = Math.max(Math.round((endMs - startMs) / 1000), 1);
-
-      const resolvedRecord = {
-        ...active,
-        endTime: now,
-        durationSeconds,
-        durationHuman: formatDuration(durationSeconds),
-        status: 'RESOLVED'
-      };
-
-      // Add to front of history
-      data.history.unshift(resolvedRecord);
-      if (data.history.length > 200) data.history.pop();
-
-      delete data.activeOutages[devId];
-      writeOutagesData(data);
-    }
+  } catch (err) {
+    console.error('[TelemetryService] Error handling device outage event:', err);
   }
 }
 

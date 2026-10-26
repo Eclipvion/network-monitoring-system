@@ -88,6 +88,7 @@ export class JSONDataStore extends BaseDataStore {
     this.dnsResultsFile = path.join(this.dataDir, 'dns-results.json');
     this.domainsFile = path.join(this.dataDir, 'domains.json');
     this.domainHealthResultsFile = path.join(this.dataDir, 'domain-health-results.json');
+    this.outagesFile = path.join(this.dataDir, 'outages.json');
     this.mutex = new AsyncMutex();
 
     // High-performance in-memory cache layer to prevent event loop / disk I/O lockups
@@ -143,7 +144,8 @@ export class JSONDataStore extends BaseDataStore {
       { file: this.domainsFile, def: [] },
       { file: this.domainHealthResultsFile, def: [] },
       { file: this.tracerouteCacheFile, def: {} },
-      { file: this.dnsResultsFile, def: [] }
+      { file: this.dnsResultsFile, def: [] },
+      { file: this.outagesFile, def: { activeOutages: {}, history: [] } }
     ];
 
     for (const item of defaultTemplates) {

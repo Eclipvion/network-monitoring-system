@@ -9,11 +9,6 @@ import {
   broadcastAlertResolved
 } from '../websocket/socketHandler.js';
 
-let isRunning = false;
-let monitorIntervalId = null;
-
-// Anti-flapping counter: require 2 consecutive failed probes before flipping a host DOWN
-const consecutiveFailures = new Map();
 
 /**
  * Ping an individual target (IPv4 or hostname).
@@ -116,12 +111,30 @@ function pingTarget(rawHost) {
   });
 }
 
+let isRunning = false;
+let sweepStartTime = 0;
+let monitorIntervalId = null;
+
+// Anti-flapping counter: require 2 consecutive failed probes before flipping a host DOWN
+const consecutiveFailures = new Map();
+
 /**
  * Execute a single monitoring sweep of all active devices.
  */
-async function runMonitoringSweep() {
-  if (isRunning) return;
+export async function runMonitoringSweep() {
+  const now = Date.now();
+  // Watchdog: If a previous sweep has been running for more than 25 seconds, force-reset lock
+  if (isRunning) {
+    if (now - sweepStartTime > 25000) {
+      console.warn('[BackgroundMonitor] ⚠️ Previous sweep exceeded 25s limit, auto-releasing lock');
+      isRunning = false;
+    } else {
+      return;
+    }
+  }
+
   isRunning = true;
+  sweepStartTime = Date.now();
 
   try {
     const devices = await dataStore.getDevices();
@@ -141,7 +154,14 @@ async function runMonitoringSweep() {
         chunk.map(async (device) => {
           try {
             const devId = Number(device.id);
-            const probe = await probeHostLive(device.ip);
+
+            // Strict 3.5s per-host watchdog timeout to prevent hanging sweeps
+            const probePromise = probeHostLive(device.ip);
+            const timeoutPromise = new Promise((resolve) =>
+              setTimeout(() => resolve({ success: false, status: 'DOWN', latency: null, message: 'Host unreachable (Timeout)' }), 3500)
+            );
+            const probe = await Promise.race([probePromise, timeoutPromise]);
+
             let finalStatus = probe.status || 'DOWN';
             let packetLoss = finalStatus === 'UP' ? 0 : finalStatus === 'WARNING' ? 25 : 100;
 
@@ -162,8 +182,12 @@ async function runMonitoringSweep() {
 
             const timestamp = new Date().toISOString();
 
-            // Track Outage & SLA state transitions
-            telemetryService.handleDeviceOutageEvent(device, finalStatus);
+            // Track Outage & SLA state transitions safely
+            try {
+              telemetryService.handleDeviceOutageEvent(device, finalStatus);
+            } catch (outageErr) {
+              console.warn('[BackgroundMonitor] Outage event tracking warning:', outageErr.message);
+            }
 
             const { result, newAlert, resolvedAlerts } = await dataStore.saveMonitoringResult({
               deviceId: devId,
@@ -199,7 +223,7 @@ async function runMonitoringSweep() {
               }
             }
           } catch (devErr) {
-            // Silently ignore individual device probe errors
+            console.error(`[BackgroundMonitor] Error probing device ${device.id} (${device.ip}):`, devErr.message);
           }
         })
       );
