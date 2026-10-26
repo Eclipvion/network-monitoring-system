@@ -50,3 +50,7 @@ client/.vite/
 
 # Local sensitive configs
 server/data/email_report_config.json
+
+# Generated standalone deployment package
+NetPulse-Server-Package/
+
