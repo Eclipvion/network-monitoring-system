@@ -87,6 +87,21 @@ app.use('/api/security', securityRoutes);
 app.use('/api/telemetry', telemetryRoutes);
 app.use('/api/discovery', discoveryRoutes);
 
+// Serve static client build if available (Unified Single Server deployment)
+const clientDistPath = path.resolve(__dirname, '../client/dist');
+app.use(express.static(clientDistPath));
+
+// SPA Fallback Route for direct browser refresh on routes like /settings
+app.get('*', (req, res, next) => {
+  if (req.path.startsWith('/api') || req.path.startsWith('/socket.io')) {
+    return next();
+  }
+  const indexPath = path.join(clientDistPath, 'index.html');
+  res.sendFile(indexPath, (err) => {
+    if (err) next();
+  });
+});
+
 // Error Handling Middleware
 app.use((err, req, res, next) => {
   console.error('[Server Error]', err);

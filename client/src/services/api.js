@@ -139,6 +139,13 @@ export const api = {
     method: 'PUT',
     body: JSON.stringify(settings),
   }),
+  resetSettings: () => request('/settings/reset', {
+    method: 'POST',
+  }),
+  importSettings: (payload) => request('/settings/import', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  }),
   testWebhook: (webhookUrl) => request('/settings/test-webhook', {
     method: 'POST',
     body: JSON.stringify({ webhookUrl }),

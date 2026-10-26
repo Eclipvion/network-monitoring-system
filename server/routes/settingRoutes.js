@@ -103,4 +103,37 @@ router.get('/backup', async (req, res) => {
   }
 });
 
+// POST /api/settings/reset - Restore factory defaults
+router.post('/reset', async (req, res) => {
+  try {
+    const defaults = await dataStore.resetSettingsToDefaults();
+    res.json({
+      success: true,
+      message: 'System settings successfully restored to factory defaults.',
+      settings: defaults
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// POST /api/settings/import - Import settings JSON
+router.post('/import', async (req, res) => {
+  try {
+    const payload = req.body;
+    const settingsData = payload.settings || payload;
+    if (!settingsData || typeof settingsData !== 'object') {
+      return res.status(400).json({ error: 'Invalid settings payload supplied for import' });
+    }
+    const updated = await dataStore.updateSettings(settingsData);
+    res.json({
+      success: true,
+      message: 'Settings successfully imported and applied.',
+      settings: updated
+    });
+  } catch (err) {
+    res.status(400).json({ error: `Import failed: ${err.message}` });
+  }
+});
+
 export default router;

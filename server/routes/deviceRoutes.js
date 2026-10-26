@@ -422,12 +422,19 @@ router.post('/ping-test', async (req, res) => {
 
   try {
     const result = await probeHostLive(target);
-    return res.json(result);
+    const isUp = Boolean(result.success && result.status !== 'DOWN');
+    return res.json({
+      ...result,
+      alive: isUp,
+      time: result.latency !== undefined ? result.latency : null
+    });
   } catch (err) {
     return res.status(500).json({
       success: false,
+      alive: false,
       status: 'DOWN',
       latency: null,
+      time: null,
       message: err.message || 'Ping probe error'
     });
   }

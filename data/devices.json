@@ -463,5 +463,13 @@
     "type": "workstation",
     "monitoring": true,
     "interval": 15
+  },
+  {
+    "id": 59,
+    "name": "LAN Device (172.18.1.242)",
+    "ip": "172.18.1.242",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15
   }
 ]

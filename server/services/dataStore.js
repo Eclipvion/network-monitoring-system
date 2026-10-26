@@ -778,7 +778,15 @@ export class JSONDataStore extends BaseDataStore {
         webhookUrl: '',
         enableSoundAlerts: false,
         enableDesktopNotifications: false,
-        maintenanceMode: false
+        maintenanceMode: false,
+        dnsResolvers: [
+          { name: 'Google', ip: '8.8.8.8' },
+          { name: 'Cloudflare', ip: '1.1.1.1' },
+          { name: 'Quad9', ip: '9.9.9.9' }
+        ],
+        dnsTestDomains: ['google.com', 'cloudflare.com'],
+        dnsCheckIntervalSeconds: 300,
+        sslWarningDaysThreshold: 14
       };
       const loaded = await this._readJson(this.settingsFile, defaults);
       return { ...defaults, ...loaded };
@@ -809,7 +817,15 @@ export class JSONDataStore extends BaseDataStore {
         webhookUrl: typeof data.webhookUrl === 'string' ? data.webhookUrl.trim() : (current.webhookUrl || ''),
         enableSoundAlerts: Boolean(data.enableSoundAlerts),
         enableDesktopNotifications: Boolean(data.enableDesktopNotifications),
-        maintenanceMode: Boolean(data.maintenanceMode)
+        maintenanceMode: Boolean(data.maintenanceMode),
+        dnsResolvers: Array.isArray(data.dnsResolvers) ? data.dnsResolvers : (current.dnsResolvers || [
+          { name: 'Google', ip: '8.8.8.8' },
+          { name: 'Cloudflare', ip: '1.1.1.1' },
+          { name: 'Quad9', ip: '9.9.9.9' }
+        ]),
+        dnsTestDomains: Array.isArray(data.dnsTestDomains) ? data.dnsTestDomains : (current.dnsTestDomains || ['google.com', 'cloudflare.com']),
+        dnsCheckIntervalSeconds: Number(data.dnsCheckIntervalSeconds) || current.dnsCheckIntervalSeconds || 300,
+        sslWarningDaysThreshold: Number(data.sslWarningDaysThreshold) || current.sslWarningDaysThreshold || 14
       };
 
       await this._writeJson(this.settingsFile, updated);
@@ -826,6 +842,52 @@ export class JSONDataStore extends BaseDataStore {
       });
 
       return updated;
+    });
+  }
+
+  async resetSettingsToDefaults() {
+    return this.mutex.runExclusive(async () => {
+      const defaults = {
+        defaultInterval: 30,
+        latencyWarningThresholdMs: 150,
+        packetLossWarningPercent: 20,
+        jitterWarningThresholdMs: 35,
+        retryCountBeforeDown: 2,
+        organizationName: 'NetPulse Enterprise NOC',
+        reportSubtitle: 'Infrastructure SLA & Downtime Audit Report',
+        slaTargetPercent: 99.9,
+        reportLogoUrl: '',
+        auditRetentionDays: 90,
+        ispPublicIp: '',
+        ispGatewayIp: '',
+        ispName: '',
+        ispPool: '',
+        enableWebhookAlerts: false,
+        webhookUrl: '',
+        enableSoundAlerts: false,
+        enableDesktopNotifications: false,
+        maintenanceMode: false,
+        dnsResolvers: [
+          { name: 'Google', ip: '8.8.8.8' },
+          { name: 'Cloudflare', ip: '1.1.1.1' },
+          { name: 'Quad9', ip: '9.9.9.9' }
+        ],
+        dnsTestDomains: ['google.com', 'cloudflare.com'],
+        dnsCheckIntervalSeconds: 300,
+        sslWarningDaysThreshold: 14
+      };
+      await this._writeJson(this.settingsFile, defaults);
+      await this._appendLogInternal({
+        deviceId: null,
+        device: 'System',
+        event: 'SETTINGS_RESET',
+        status: 'WARNING',
+        severity: 'SECURITY',
+        actor: 'Admin (Console)',
+        ip: '127.0.0.1',
+        message: 'System settings restored to factory defaults'
+      });
+      return defaults;
     });
   }
 
