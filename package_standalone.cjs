@@ -49,7 +49,15 @@ copyDirSync(
   path.join(targetDir, 'data')
 );
 
-// 4. Copy starter batch files
+// 4. Copy python-monitor (scanner & diagnostic tools)
+console.log('-> Copying python-monitor scripts...');
+copyDirSync(
+  path.join(rootDir, 'python-monitor'),
+  path.join(targetDir, 'python-monitor'),
+  (name) => name !== '__pycache__'
+);
+
+// 5. Copy starter batch files
 console.log('-> Copying starter batch files & guides...');
 const filesToCopy = [
   'START_PRODUCTION_SERVER.bat',
