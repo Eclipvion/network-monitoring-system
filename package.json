@@ -6,9 +6,12 @@
     "install:server": "cd server && npm install",
     "install:client": "cd client && npm install",
     "install:all": "npm run install:server && npm run install:client",
+    "build": "npm --prefix client run build",
+    "build:all": "npm run install:all && npm run build",
     "server": "cd server && npm run dev",
     "client": "cd client && npm run dev",
     "start": "node server/server.js",
+    "start:prod": "node server/server.js",
     "start:all": "cmd /c start_all.bat"
   },
   "keywords": [
