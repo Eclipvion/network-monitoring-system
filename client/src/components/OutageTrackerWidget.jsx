@@ -4,27 +4,39 @@ import {
   ShieldCheck,
   AlertOctagon,
   CheckCircle2,
-  Calendar,
   Activity,
   Layers,
-  ArrowRight,
   RefreshCw,
-  Server,
-  FileSpreadsheet
+  Trash2
 } from 'lucide-react';
 import api from '../services/api';
 
-export default function OutageTrackerWidget() {
+function safeDateStr(val) {
+  if (!val) return '—';
+  try {
+    const d = new Date(val);
+    if (isNaN(d.getTime())) return '—';
+    return d.toLocaleString();
+  } catch (_) {
+    return '—';
+  }
+}
+
+export default function OutageTrackerWidget({
+  reportIncidents = null,
+  reportMetrics = null,
+  selectedDeviceId = 'all',
+  onClearHistory = null
+}) {
   const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState('ALL'); // 'ALL' | 'ACTIVE' | 'RESOLVED'
+  const [clearing, setClearing] = useState(false);
 
   const fetchOutages = async () => {
     try {
       const res = await api.getOutageTelemetry();
       if (res) {
         setData(res);
-        setLoading(false);
       }
     } catch (e) {
       console.log('Outages fetch error:', e);
@@ -37,16 +49,70 @@ export default function OutageTrackerWidget() {
     return () => clearInterval(interval);
   }, []);
 
-  const activeOutages = data?.activeOutages || [];
-  const history = data?.history || [];
-  const slaPercentage = data?.slaPercentage ?? 99.9;
-  const mttrHuman = data?.mttrHuman || '0s';
-  const slaGrade = data?.slaGrade || 'A+ Elite (99.9%)';
+  const handleClear = async () => {
+    try {
+      setClearing(true);
+      await api.clearOutageTelemetry(selectedDeviceId);
+      if (onClearHistory) {
+        await onClearHistory('incidents');
+      }
+      await fetchOutages();
+    } catch (e) {
+      console.error('Failed to clear outage telemetry:', e);
+    } finally {
+      setClearing(false);
+    }
+  };
 
-  const combinedList = [
-    ...activeOutages.map(o => ({ ...o, isLive: true })),
-    ...history.map(h => ({ ...h, isLive: false }))
-  ];
+  // Merge or synchronize with reportIncidents if provided inside ReportsPage
+  const useReportData = Array.isArray(reportIncidents);
+
+  const activeOutages = useReportData
+    ? reportIncidents
+        .filter((i) => !i.isResolved)
+        .map((i) => ({
+          id: i.id,
+          deviceName: i.deviceName,
+          deviceIp: i.deviceIp,
+          startTime: i.downAt,
+          endTime: null,
+          durationHuman: i.durationFormatted,
+          reason: i.reason,
+          isLive: true
+        }))
+    : (data?.activeOutages || []).map((o) => ({ ...o, isLive: true }));
+
+  const history = useReportData
+    ? reportIncidents
+        .filter((i) => i.isResolved)
+        .map((i) => ({
+          id: i.id,
+          deviceName: i.deviceName,
+          deviceIp: i.deviceIp,
+          startTime: i.downAt,
+          endTime: i.upAt,
+          durationHuman: i.durationFormatted,
+          reason: i.reason,
+          isLive: false
+        }))
+    : (data?.history || []).map((h) => ({ ...h, isLive: false }));
+
+  const slaPercentage =
+    reportMetrics?.uptimePercent !== undefined
+      ? reportMetrics.uptimePercent
+      : (data?.slaPercentage ?? 99.9);
+
+  const mttrHuman =
+    reportMetrics?.mttrFormatted || data?.mttrHuman || '0s';
+
+  const slaGrade =
+    slaPercentage >= 99.9
+      ? 'A+ Elite (99.9%)'
+      : slaPercentage >= 99.0
+      ? 'A Tier (99.0%)'
+      : 'SLA Warning (<99%)';
+
+  const combinedList = [...activeOutages, ...history];
 
   const filteredIncidents = combinedList.filter((item) => {
     if (filter === 'ACTIVE') return item.isLive;
@@ -59,13 +125,13 @@ export default function OutageTrackerWidget() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100 dark:border-slate-800">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 to-rose-500 flex items-center justify-center text-white shadow-md shadow-amber-500/20">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 to-rose-500 flex items-center justify-center text-white shadow-md shadow-amber-500/20 shrink-0">
             <Clock className="w-5 h-5 stroke-[2.2]" />
           </div>
           <div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
               <h3 className="font-bold text-sm text-slate-900 dark:text-white">
-                Outage Timeline & SLA Downtime Tracker
+                Outage Timeline &amp; SLA Downtime Tracker
               </h3>
               <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
                 SLA Engine
@@ -77,13 +143,26 @@ export default function OutageTrackerWidget() {
           </div>
         </div>
 
-        <button
-          onClick={fetchOutages}
-          className="p-2 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors self-start sm:self-auto"
-          title="Refresh SLA Metrics"
-        >
-          <RefreshCw className="w-4 h-4" />
-        </button>
+        <div className="flex items-center gap-2 self-start sm:self-auto">
+          {combinedList.length > 0 && (
+            <button
+              onClick={handleClear}
+              disabled={clearing}
+              className="px-3 py-1.5 rounded-xl text-xs font-semibold text-rose-500 hover:bg-rose-500/10 border border-rose-500/20 flex items-center gap-1.5 transition-colors cursor-pointer disabled:opacity-50"
+              title="Clear recorded outage timeline history"
+            >
+              <Trash2 className="w-3.5 h-3.5" />
+              <span>{clearing ? 'Clearing...' : 'Clear Outages'}</span>
+            </button>
+          )}
+          <button
+            onClick={fetchOutages}
+            className="p-2 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors cursor-pointer"
+            title="Refresh SLA Metrics"
+          >
+            <RefreshCw className="w-4 h-4" />
+          </button>
+        </div>
       </div>
 
       {/* KPI Cards */}
@@ -119,20 +198,20 @@ export default function OutageTrackerWidget() {
         </div>
 
         {/* Active Outages */}
-        <div className={`p-3.5 rounded-xl border ${
-          activeOutages.length > 0
-            ? 'bg-rose-500/10 border-rose-500/40 text-rose-500'
-            : 'bg-slate-50 dark:bg-slate-800/40 border-slate-200/60 dark:border-slate-700/50'
-        }`}>
+        <div
+          className={`p-3.5 rounded-xl border ${
+            activeOutages.length > 0
+              ? 'bg-rose-500/10 border-rose-500/40 text-rose-500'
+              : 'bg-slate-50 dark:bg-slate-800/40 border-slate-200/60 dark:border-slate-700/50'
+          }`}
+        >
           <div className="flex items-center justify-between mb-1">
             <span className="font-semibold flex items-center gap-1.5">
               <AlertOctagon className="w-4 h-4" />
               Active Outages
             </span>
           </div>
-          <p className="text-2xl font-bold font-mono">
-            {activeOutages.length}
-          </p>
+          <p className="text-2xl font-bold font-mono">{activeOutages.length}</p>
           <p className="text-[11px] text-slate-400 mt-0.5">
             {activeOutages.length === 0 ? 'All nodes normal' : 'Hosts currently DOWN'}
           </p>
@@ -147,7 +226,7 @@ export default function OutageTrackerWidget() {
             </span>
           </div>
           <p className="text-2xl font-bold font-mono text-slate-900 dark:text-white">
-            {data?.totalIncidents || 0}
+            {combinedList.length}
           </p>
           <p className="text-[11px] text-slate-400 mt-0.5">Historical Outage Events</p>
         </div>
@@ -155,11 +234,11 @@ export default function OutageTrackerWidget() {
 
       {/* Filter Tabs & Incident Log Table */}
       <div className="space-y-3 pt-2">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center bg-slate-100 dark:bg-slate-800 p-1 rounded-xl text-xs">
+        <div className="flex items-center justify-between flex-wrap gap-2">
+          <div className="flex items-center bg-slate-100 dark:bg-slate-800 p-1 rounded-xl text-xs flex-wrap">
             <button
               onClick={() => setFilter('ALL')}
-              className={`px-3 py-1 rounded-lg font-medium transition-all ${
+              className={`px-3 py-1 rounded-lg font-medium transition-all cursor-pointer ${
                 filter === 'ALL'
                   ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm'
                   : 'text-slate-500 dark:text-slate-400'
@@ -169,7 +248,7 @@ export default function OutageTrackerWidget() {
             </button>
             <button
               onClick={() => setFilter('ACTIVE')}
-              className={`px-3 py-1 rounded-lg font-medium transition-all ${
+              className={`px-3 py-1 rounded-lg font-medium transition-all cursor-pointer ${
                 filter === 'ACTIVE'
                   ? 'bg-rose-500 text-white shadow-sm font-semibold'
                   : 'text-rose-500 dark:text-rose-400'
@@ -179,7 +258,7 @@ export default function OutageTrackerWidget() {
             </button>
             <button
               onClick={() => setFilter('RESOLVED')}
-              className={`px-3 py-1 rounded-lg font-medium transition-all ${
+              className={`px-3 py-1 rounded-lg font-medium transition-all cursor-pointer ${
                 filter === 'RESOLVED'
                   ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm'
                   : 'text-slate-500 dark:text-slate-400'
@@ -205,8 +284,11 @@ export default function OutageTrackerWidget() {
             </thead>
             <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60">
               {filteredIncidents.length > 0 ? (
-                filteredIncidents.map((inc) => (
-                  <tr key={inc.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+                filteredIncidents.slice(0, 50).map((inc) => (
+                  <tr
+                    key={inc.id}
+                    className="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors"
+                  >
                     <td className="py-2.5 px-3">
                       {inc.isLive ? (
                         <span className="px-2 py-0.5 rounded-full font-bold uppercase tracking-wider text-[10px] bg-rose-500/10 text-rose-500 border border-rose-500/30 flex items-center gap-1 w-max">
@@ -226,14 +308,14 @@ export default function OutageTrackerWidget() {
                     <td className="py-2.5 px-3 font-mono text-slate-500 dark:text-slate-400">
                       {inc.deviceIp}
                     </td>
-                    <td className="py-2.5 px-3 text-slate-500 dark:text-slate-400">
-                      {new Date(inc.startTime).toLocaleString()}
+                    <td className="py-2.5 px-3 font-mono text-slate-500 dark:text-slate-400">
+                      {safeDateStr(inc.startTime)}
                     </td>
-                    <td className="py-2.5 px-3 text-slate-500 dark:text-slate-400">
-                      {inc.endTime ? new Date(inc.endTime).toLocaleString() : 'Ongoing...'}
+                    <td className="py-2.5 px-3 font-mono text-slate-500 dark:text-slate-400">
+                      {inc.endTime ? safeDateStr(inc.endTime) : 'Ongoing...'}
                     </td>
                     <td className="py-2.5 px-3 font-mono font-bold text-slate-700 dark:text-slate-300">
-                      {inc.isLive ? 'In progress' : inc.durationHuman}
+                      {inc.isLive ? inc.durationHuman || 'In progress' : inc.durationHuman}
                     </td>
                   </tr>
                 ))

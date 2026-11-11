@@ -20,7 +20,8 @@ import {
   Copy,
   Check,
   Globe,
-  MapPin
+  MapPin,
+  User
 } from 'lucide-react';
 import StatusBadge from '../components/StatusBadge';
 import NetworkScannerModal from '../components/NetworkScannerModal';
@@ -202,17 +203,21 @@ export default function DevicesPage({
         {/* Total Devices */}
         <button
           onClick={() => setStatusFilter('ALL')}
-          className={`p-4 rounded-2xl border text-left transition-all ${
+          className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
             statusFilter === 'ALL'
-              ? 'bg-slate-900 dark:bg-slate-800 text-white border-slate-700 shadow-lg'
+              ? 'bg-emerald-600 dark:bg-slate-800 text-white border-emerald-600 dark:border-slate-700 shadow-lg shadow-emerald-600/15'
               : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-slate-300'
           }`}
         >
-          <div className="flex items-center justify-between text-xs text-slate-400 mb-1">
+          <div className={`flex items-center justify-between text-xs mb-1 ${
+            statusFilter === 'ALL' ? 'text-emerald-100 dark:text-slate-300' : 'text-slate-500 dark:text-slate-400'
+          }`}>
             <span>Total Devices</span>
-            <Server className="w-4 h-4 text-slate-400" />
+            <Server className={`w-4 h-4 ${statusFilter === 'ALL' ? 'text-white' : 'text-slate-400'}`} />
           </div>
-          <p className="text-2xl font-bold font-mono text-slate-900 dark:text-white">{totalCount}</p>
+          <p className={`text-2xl font-bold font-mono ${
+            statusFilter === 'ALL' ? 'text-white' : 'text-slate-900 dark:text-white'
+          }`}>{totalCount}</p>
         </button>
 
         {/* Online UP */}
@@ -478,8 +483,25 @@ export default function DevicesPage({
                         className="py-3.5 px-4 cursor-pointer"
                         onClick={() => onOpenDetails(device.id)}
                       >
-                        <div className="font-semibold text-slate-900 dark:text-white flex items-center gap-2">
+                        <div className="font-semibold text-slate-900 dark:text-white flex items-center gap-2 flex-wrap">
                           <span>{device.name}</span>
+                          {device.activeUser && (
+                            <span
+                              className="text-[10px] px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border border-cyan-500/25 font-semibold flex items-center gap-1"
+                              title={`Active Windows Account: ${device.activeUser} (${device.sessionState || 'Active'})`}
+                            >
+                              <User className="w-2.5 h-2.5 text-cyan-600 dark:text-cyan-400" />
+                              <span>{device.activeUser}</span>
+                            </span>
+                          )}
+                          {device.endpointPing?.google?.latency && (
+                            <span
+                              className="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-mono font-semibold"
+                              title={`Endpoint WAN Ping -> 8.8.8.8: ${device.endpointPing.google.latency}ms | 1.1.1.1: ${device.endpointPing.cloudflare?.latency || 2}ms`}
+                            >
+                              WAN: {device.endpointPing.google.latency}ms
+                            </span>
+                          )}
                           {device.isSeed && (
                             <span className="text-[9px] uppercase px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-500 font-mono">
                               Seed
@@ -668,10 +690,19 @@ export default function DevicesPage({
                       onClick={(e) => e.stopPropagation()}
                     />
                     <div className="cursor-pointer" onClick={() => onOpenDetails(device.id)}>
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 flex-wrap">
                         <h4 className="font-bold text-sm text-slate-900 dark:text-white">
                           {device.name}
                         </h4>
+                        {device.activeUser && (
+                          <span
+                            className="text-[9px] px-1.5 py-0.5 rounded-md bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border border-cyan-500/25 font-semibold flex items-center gap-1"
+                            title={`Active Windows Account: ${device.activeUser}`}
+                          >
+                            <User className="w-2.5 h-2.5 text-cyan-600 dark:text-cyan-400" />
+                            <span>{device.activeUser}</span>
+                          </span>
+                        )}
                         {device.isSeed && (
                           <span className="text-[9px] uppercase px-1.5 py-0.2 rounded bg-blue-500/10 text-blue-500 font-mono">
                             Seed

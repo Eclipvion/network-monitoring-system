@@ -1,475 +1,1319 @@
 [
   {
     "id": 1,
-    "name": "LAN Device (172.18.1.1)",
+    "name": "Router / Gateway (172.18.1.1)",
     "ip": "172.18.1.1",
-    "type": "workstation",
+    "type": "router",
+    "group": "Local Network",
     "monitoring": true,
     "interval": 15
   },
   {
     "id": 2,
-    "name": "LAN Device (172.18.1.5)",
+    "name": "SRV-AD-ABILITY",
     "ip": "172.18.1.5",
-    "type": "workstation",
+    "type": "server",
+    "group": "Local Network",
     "monitoring": true,
     "interval": 15
   },
   {
     "id": 3,
-    "name": "LAN Device (172.18.1.10)",
+    "name": "VMware Virtual (172.18.1.10)",
     "ip": "172.18.1.10",
-    "type": "workstation",
+    "type": "server",
+    "group": "Local Network",
     "monitoring": true,
     "interval": 15
   },
   {
     "id": 4,
-    "name": "LAN Device (172.18.1.14)",
-    "ip": "172.18.1.14",
+    "name": "DESKTOP-8D1GBAG",
+    "ip": "172.18.1.11",
     "type": "workstation",
+    "group": "Local Network",
     "monitoring": true,
-    "interval": 15
+    "interval": 15,
+    "activeUser": "Ability",
+    "userDomain": "DESKTOP-8D1GBAG",
+    "sessionState": "Active",
+    "endpointPing": {
+      "recentSamples": [
+        {
+          "google": 17.8,
+          "timestamp": "2026-11-10T06:52:09.9390946Z",
+          "loss": 0,
+          "jitter": 5,
+          "time": "11:52:09",
+          "cloudflare": 4.8
+        },
+        {
+          "google": 25,
+          "timestamp": "2026-11-10T07:22:09.7706776Z",
+          "loss": 0,
+          "jitter": 17,
+          "time": "12:22:09",
+          "cloudflare": 7.2
+        },
+        {
+          "google": 21,
+          "timestamp": "2026-11-10T07:52:10.0649690Z",
+          "loss": 0,
+          "jitter": 51,
+          "time": "12:52:10",
+          "cloudflare": 16.8
+        },
+        {
+          "google": 18.2,
+          "timestamp": "2026-11-10T08:22:09.9512801Z",
+          "loss": 0,
+          "jitter": 8,
+          "time": "13:22:09",
+          "cloudflare": 5.8
+        },
+        {
+          "google": 36,
+          "timestamp": "2026-11-10T09:52:10.1778084Z",
+          "loss": 0,
+          "jitter": 54,
+          "time": "14:52:10",
+          "cloudflare": 10
+        },
+        {
+          "google": 62,
+          "timestamp": "2026-11-10T10:22:11.4436359Z",
+          "loss": 0,
+          "jitter": 167,
+          "time": "15:22:11",
+          "cloudflare": 8.8
+        },
+        {
+          "google": 18,
+          "timestamp": "2026-11-10T10:52:10.0547211Z",
+          "loss": 0,
+          "jitter": 2,
+          "time": "15:52:10",
+          "cloudflare": 4.2
+        },
+        {
+          "google": 20.2,
+          "timestamp": "2026-11-10T11:22:09.6508271Z",
+          "loss": 0,
+          "jitter": 8,
+          "time": "16:22:09",
+          "cloudflare": 5.5
+        },
+        {
+          "google": 19.8,
+          "timestamp": "2026-11-10T11:52:09.2056102Z",
+          "loss": 0,
+          "jitter": 3,
+          "time": "16:52:09",
+          "cloudflare": 3.8
+        },
+        {
+          "google": 19.5,
+          "timestamp": "2026-11-10T12:22:09.6466727Z",
+          "loss": 0,
+          "jitter": 13,
+          "time": "17:22:09",
+          "cloudflare": 7.5
+        },
+        {
+          "google": 20.2,
+          "timestamp": "2026-11-10T12:52:09.2579848Z",
+          "loss": 0,
+          "jitter": 9,
+          "time": "17:52:09",
+          "cloudflare": 7.2
+        },
+        {
+          "google": 20.5,
+          "timestamp": "2026-11-10T13:22:10.3600529Z",
+          "loss": 0,
+          "jitter": 4,
+          "time": "18:22:10",
+          "cloudflare": 6
+        },
+        {
+          "google": 23,
+          "timestamp": "2026-11-10T13:52:10.3226297Z",
+          "loss": 0,
+          "jitter": 18,
+          "time": "18:52:10",
+          "cloudflare": 3.5
+        },
+        {
+          "google": 16.8,
+          "timestamp": "2026-11-11T05:22:10.4599068Z",
+          "loss": 0,
+          "jitter": 1,
+          "time": "10:22:10",
+          "cloudflare": 2
+        },
+        {
+          "google": 16.8,
+          "timestamp": "2026-11-11T05:52:11.3605596Z",
+          "loss": 0,
+          "jitter": 1,
+          "time": "10:52:11",
+          "cloudflare": 2.2
+        }
+      ],
+      "packetLoss": 0,
+      "testedAt": "2026-11-11T05:52:04.9196705Z",
+      "cloudflare": {
+        "loss": 0,
+        "avg": 2.2,
+        "latency": 2.2,
+        "status": "UP",
+        "target": "1.1.1.1",
+        "max": 3,
+        "min": 2,
+        "jitter": 1
+      },
+      "logFile": "C:\\Users\\Ability\\AppData\\Local\\NetPulseAgent\\endpoint_ping_telemetry.log",
+      "qualityScore": "Optimal (Grade A+)",
+      "google": {
+        "loss": 0,
+        "avg": 16.8,
+        "latency": 16.8,
+        "status": "UP",
+        "target": "8.8.8.8",
+        "max": 17,
+        "min": 16,
+        "jitter": 1
+      },
+      "jitter": 1
+    },
+    "lastAgentSync": "2026-11-11T05:52:15.308Z"
   },
   {
     "id": 5,
-    "name": "LAN Device (172.18.1.20)",
-    "ip": "172.18.1.20",
+    "name": "Desk-Datacentre",
+    "ip": "172.18.1.14",
     "type": "workstation",
+    "group": "Local Network",
     "monitoring": true,
-    "interval": 15
+    "interval": 15,
+    "activeUser": "Administrator",
+    "userDomain": "DESK-DATACENTRE",
+    "sessionState": "Active",
+    "endpointPing": {
+      "recentSamples": [
+        {
+          "google": 17.8,
+          "timestamp": "2026-11-10T09:34:08.6107652Z",
+          "loss": 0,
+          "jitter": 1,
+          "time": "14:34:08",
+          "cloudflare": 2.5
+        },
+        {
+          "google": 17.2,
+          "timestamp": "2026-11-10T10:04:08.2392380Z",
+          "loss": 0,
+          "jitter": 1,
+          "time": "15:04:08",
+          "cloudflare": 2.2
+        },
+        {
+          "google": 17.5,
+          "timestamp": "2026-11-10T10:34:08.2426436Z",
+          "loss": 0,
+          "jitter": 1,
+          "time": "15:34:08",
+          "cloudflare": 2.5
+        },
+        {
+          "google": 17.5,
+          "timestamp": "2026-11-10T11:04:09.1881440Z",
+          "loss": 0,
+          "jitter": 1,
+          "time": "16:04:09",
+          "cloudflare": 2.2
+        },
+        {
+          "google": 17.5,
+          "timestamp": "2026-11-10T11:34:08.3026253Z",
+          "loss": 0,
+          "jitter": 1,
+          "time": "16:34:08",
+          "cloudflare": 2.8
+        },
+        {
+          "google": 17.2,
+          "timestamp": "2026-11-10T12:04:08.3051165Z",
+          "loss": 0,
+          "jitter": 1,
+          "time": "17:04:08",
+          "cloudflare": 2.2
+        },
+        {
+          "google": 17.8,
+          "timestamp": "2026-11-10T12:34:08.6898893Z",
+          "loss": 0,
+          "jitter": 2,
+          "time": "17:34:08",
+          "cloudflare": 2.8
+        },
+        {
+          "google": 29.5,
+          "timestamp": "2026-11-10T13:04:08.3897674Z",
+          "loss": 0,
+          "jitter": 21,
+          "time": "18:04:08",
+          "cloudflare": 8.8
+        },
+        {
+          "google": 17.8,
+          "timestamp": "2026-11-10T13:34:08.2941005Z",
+          "loss": 0,
+          "jitter": 1,
+          "time": "18:34:08",
+          "cloudflare": 2
+        },
+        {
+          "google": 17.8,
+          "timestamp": "2026-11-10T14:04:08.6938443Z",
+          "loss": 0,
+          "jitter": 1,
+          "time": "19:04:08",
+          "cloudflare": 2.8
+        },
+        {
+          "google": 34.2,
+          "timestamp": "2026-11-10T14:34:08.4313779Z",
+          "loss": 0,
+          "jitter": 28,
+          "time": "19:34:08",
+          "cloudflare": 9.2
+        },
+        {
+          "google": 18.2,
+          "timestamp": "2026-11-10T15:04:08.3400857Z",
+          "loss": 0,
+          "jitter": 1,
+          "time": "20:04:08",
+          "cloudflare": 3
+        },
+        {
+          "google": 17.8,
+          "timestamp": "2026-11-10T15:34:08.7322357Z",
+          "loss": 0,
+          "jitter": 1,
+          "time": "20:34:08",
+          "cloudflare": 2.5
+        },
+        {
+          "google": 17.5,
+          "timestamp": "2026-11-11T05:04:08.9303833Z",
+          "loss": 0,
+          "jitter": 1,
+          "time": "10:04:08",
+          "cloudflare": 2.8
+        },
+        {
+          "google": 17.2,
+          "timestamp": "2026-11-11T05:34:08.0382011Z",
+          "loss": 0,
+          "jitter": 1,
+          "time": "10:34:08",
+          "cloudflare": 2.5
+        }
+      ],
+      "packetLoss": 0,
+      "testedAt": "2026-11-11T05:34:01.7091390Z",
+      "cloudflare": {
+        "loss": 0,
+        "avg": 2.5,
+        "latency": 2.5,
+        "status": "UP",
+        "target": "1.1.1.1",
+        "max": 3,
+        "min": 2,
+        "jitter": 1
+      },
+      "logFile": "C:\\Users\\Administrator\\AppData\\Local\\NetPulseAgent\\endpoint_ping_telemetry.log",
+      "qualityScore": "Optimal (Grade A+)",
+      "google": {
+        "loss": 0,
+        "avg": 17.2,
+        "latency": 17.2,
+        "status": "UP",
+        "target": "8.8.8.8",
+        "max": 18,
+        "min": 17,
+        "jitter": 1
+      },
+      "jitter": 1
+    },
+    "lastAgentSync": "2026-11-11T05:34:07.893Z"
   },
   {
     "id": 6,
-    "name": "LAN Device (172.18.1.21)",
-    "ip": "172.18.1.21",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 7,
-    "name": "LAN Device (172.18.1.22)",
-    "ip": "172.18.1.22",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 8,
-    "name": "LAN Device (172.18.1.23)",
-    "ip": "172.18.1.23",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 9,
-    "name": "LAN Device (172.18.1.26)",
-    "ip": "172.18.1.26",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 10,
-    "name": "LAN Device (172.18.1.27)",
-    "ip": "172.18.1.27",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 11,
-    "name": "LAN Device (172.18.1.28)",
-    "ip": "172.18.1.28",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 12,
-    "name": "LAN Device (172.18.1.30)",
-    "ip": "172.18.1.30",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 13,
-    "name": "LAN Device (172.18.1.31)",
-    "ip": "172.18.1.31",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 14,
-    "name": "LAN Device (172.18.1.33)",
-    "ip": "172.18.1.33",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 15,
-    "name": "LAN Device (172.18.1.34)",
-    "ip": "172.18.1.34",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 16,
-    "name": "LAN Device (172.18.1.36)",
-    "ip": "172.18.1.36",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 17,
-    "name": "LAN Device (172.18.1.39)",
-    "ip": "172.18.1.39",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 18,
-    "name": "LAN Device (172.18.1.42)",
-    "ip": "172.18.1.42",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 19,
-    "name": "LAN Device (172.18.1.44)",
-    "ip": "172.18.1.44",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 20,
-    "name": "LAN Device (172.18.1.46)",
-    "ip": "172.18.1.46",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 21,
-    "name": "LAN Device (172.18.1.47)",
-    "ip": "172.18.1.47",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 22,
-    "name": "LAN Device (172.18.1.49)",
-    "ip": "172.18.1.49",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 23,
-    "name": "LAN Device (172.18.1.51)",
-    "ip": "172.18.1.51",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 24,
-    "name": "LAN Device (172.18.1.52)",
-    "ip": "172.18.1.52",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 25,
-    "name": "LAN Device (172.18.1.54)",
-    "ip": "172.18.1.54",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 26,
-    "name": "LAN Device (172.18.1.56)",
-    "ip": "172.18.1.56",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 27,
-    "name": "LAN Device (172.18.1.65)",
-    "ip": "172.18.1.65",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 28,
-    "name": "LAN Device (172.18.1.69)",
-    "ip": "172.18.1.69",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 29,
-    "name": "LAN Device (172.18.1.72)",
-    "ip": "172.18.1.72",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 30,
-    "name": "LAN Device (172.18.1.74)",
-    "ip": "172.18.1.74",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 31,
-    "name": "LAN Device (172.18.1.75)",
-    "ip": "172.18.1.75",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 32,
-    "name": "LAN Device (172.18.1.76)",
-    "ip": "172.18.1.76",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 33,
-    "name": "LAN Device (172.18.1.77)",
-    "ip": "172.18.1.77",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 34,
-    "name": "LAN Device (172.18.1.78)",
-    "ip": "172.18.1.78",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 35,
-    "name": "LAN Device (172.18.1.85)",
-    "ip": "172.18.1.85",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 36,
-    "name": "LAN Device (172.18.1.88)",
-    "ip": "172.18.1.88",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 37,
-    "name": "LAN Device (172.18.1.89)",
-    "ip": "172.18.1.89",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 38,
-    "name": "LAN Device (172.18.1.90)",
-    "ip": "172.18.1.90",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 39,
-    "name": "LAN Device (172.18.1.91)",
-    "ip": "172.18.1.91",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 40,
-    "name": "LAN Device (172.18.1.106)",
-    "ip": "172.18.1.106",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 41,
-    "name": "LAN Device (172.18.1.108)",
-    "ip": "172.18.1.108",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 42,
-    "name": "LAN Device (172.18.1.109)",
-    "ip": "172.18.1.109",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 43,
-    "name": "LAN Device (172.18.1.110)",
-    "ip": "172.18.1.110",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 44,
-    "name": "LAN Device (172.18.1.113)",
-    "ip": "172.18.1.113",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 45,
-    "name": "LAN Device (172.18.1.123)",
-    "ip": "172.18.1.123",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 46,
-    "name": "LAN Device (172.18.1.126)",
-    "ip": "172.18.1.126",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 47,
-    "name": "LAN Device (172.18.1.143)",
-    "ip": "172.18.1.143",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 48,
-    "name": "LAN Device (172.18.1.154)",
-    "ip": "172.18.1.154",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 49,
-    "name": "LAN Device (172.18.1.195)",
-    "ip": "172.18.1.195",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 50,
-    "name": "LAN Device (172.18.1.201)",
-    "ip": "172.18.1.201",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 51,
-    "name": "LAN Device (172.18.1.226)",
-    "ip": "172.18.1.226",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 52,
-    "name": "LAN Device (172.18.1.230)",
-    "ip": "172.18.1.230",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 53,
-    "name": "LAN Device (172.18.1.241)",
-    "ip": "172.18.1.241",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 54,
-    "name": "LAN Device (172.18.1.245)",
-    "ip": "172.18.1.245",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 55,
-    "name": "LAN Device (172.18.1.250)",
-    "ip": "172.18.1.250",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 56,
-    "name": "LAN Device (172.18.1.252)",
-    "ip": "172.18.1.252",
-    "type": "workstation",
-    "monitoring": true,
-    "interval": 15
-  },
-  {
-    "id": 57,
-    "name": "DESKTOP-8D1GBAG",
-    "ip": "172.18.1.11",
+    "name": "DESKTOP-0001",
+    "ip": "172.18.1.20",
     "type": "workstation",
     "group": "Local Network",
     "monitoring": true,
     "interval": 15
   },
   {
-    "id": 58,
-    "name": "LAN Device (172.18.1.8)",
-    "ip": "172.18.1.8",
+    "id": 7,
+    "name": "Ability-PC-002",
+    "ip": "172.18.1.21",
     "type": "workstation",
+    "group": "Local Network",
     "monitoring": true,
     "interval": 15
   },
   {
-    "id": 59,
-    "name": "LAN Device (172.18.1.242)",
+    "id": 8,
+    "name": "Device (172.18.1.22)",
+    "ip": "172.18.1.22",
+    "type": "workstation",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 9,
+    "name": "DSK-027",
+    "ip": "172.18.1.26",
+    "type": "workstation",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 10,
+    "name": "DESKTOP-08",
+    "ip": "172.18.1.27",
+    "type": "workstation",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 11,
+    "name": "DESKTOP-0902",
+    "ip": "172.18.1.28",
+    "type": "workstation",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 12,
+    "name": "DESKTOP-11",
+    "ip": "172.18.1.30",
+    "type": "workstation",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 13,
+    "name": "DESKTOp-12",
+    "ip": "172.18.1.31",
+    "type": "workstation",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 14,
+    "name": "DESKTOP-14",
+    "ip": "172.18.1.33",
+    "type": "workstation",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 15,
+    "name": "DESKTOP-15",
+    "ip": "172.18.1.34",
+    "type": "workstation",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 16,
+    "name": "ABILITY-PC-10",
+    "ip": "172.18.1.36",
+    "type": "workstation",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15,
+    "activeUser": "muhib",
+    "userDomain": "ABILITY",
+    "sessionState": "Active",
+    "endpointPing": {
+      "recentSamples": [
+        {
+          "google": 18.2,
+          "timestamp": "2026-11-10T22:32:08.5031754Z",
+          "loss": 0,
+          "jitter": 1,
+          "time": "03:32:08",
+          "cloudflare": 2.8
+        },
+        {
+          "google": 18,
+          "timestamp": "2026-11-10T23:02:08.4888288Z",
+          "loss": 0,
+          "jitter": 0,
+          "time": "04:02:08",
+          "cloudflare": 3
+        },
+        {
+          "google": 18,
+          "timestamp": "2026-11-10T23:32:08.4889573Z",
+          "loss": 0,
+          "jitter": 1,
+          "time": "04:32:08",
+          "cloudflare": 2.2
+        },
+        {
+          "google": 18,
+          "timestamp": "2026-11-11T00:02:08.6027625Z",
+          "loss": 0,
+          "jitter": 1,
+          "time": "05:02:08",
+          "cloudflare": 2.8
+        },
+        {
+          "google": 24.5,
+          "timestamp": "2026-11-11T00:32:08.5282731Z",
+          "loss": 0,
+          "jitter": 9,
+          "time": "05:32:08",
+          "cloudflare": 3.5
+        },
+        {
+          "google": 18,
+          "timestamp": "2026-11-11T01:02:08.6330000Z",
+          "loss": 0,
+          "jitter": 37,
+          "time": "06:02:08",
+          "cloudflare": 12.2
+        },
+        {
+          "google": 17.8,
+          "timestamp": "2026-11-11T01:32:08.5174337Z",
+          "loss": 0,
+          "jitter": 1,
+          "time": "06:32:08",
+          "cloudflare": 3
+        },
+        {
+          "google": 18,
+          "timestamp": "2026-11-11T02:02:08.6097297Z",
+          "loss": 0,
+          "jitter": 0,
+          "time": "07:02:08",
+          "cloudflare": 3
+        },
+        {
+          "google": 18,
+          "timestamp": "2026-11-11T02:32:08.5055157Z",
+          "loss": 0,
+          "jitter": 0,
+          "time": "07:32:08",
+          "cloudflare": 3
+        },
+        {
+          "google": 20,
+          "timestamp": "2026-11-11T03:02:08.5507927Z",
+          "loss": 0,
+          "jitter": 6,
+          "time": "08:02:08",
+          "cloudflare": 5.8
+        },
+        {
+          "google": 18,
+          "timestamp": "2026-11-11T03:32:08.5490231Z",
+          "loss": 0,
+          "jitter": 1,
+          "time": "08:32:08",
+          "cloudflare": 2.8
+        },
+        {
+          "google": 18,
+          "timestamp": "2026-11-11T04:02:08.5440280Z",
+          "loss": 0,
+          "jitter": 1,
+          "time": "09:02:08",
+          "cloudflare": 3.2
+        },
+        {
+          "google": 17.5,
+          "timestamp": "2026-11-11T04:32:08.5712061Z",
+          "loss": 0,
+          "jitter": 1,
+          "time": "09:32:08",
+          "cloudflare": 3
+        },
+        {
+          "google": 17.8,
+          "timestamp": "2026-11-11T05:02:08.7957105Z",
+          "loss": 0,
+          "jitter": 33,
+          "time": "10:02:08",
+          "cloudflare": 12.8
+        },
+        {
+          "google": 17.5,
+          "timestamp": "2026-11-11T05:32:08.9537755Z",
+          "loss": 0,
+          "jitter": 1,
+          "time": "10:32:08",
+          "cloudflare": 2.2
+        }
+      ],
+      "packetLoss": 0,
+      "testedAt": "2026-11-11T05:32:02.4073580Z",
+      "cloudflare": {
+        "loss": 0,
+        "avg": 2.2,
+        "latency": 2.2,
+        "status": "UP",
+        "target": "1.1.1.1",
+        "max": 3,
+        "min": 2,
+        "jitter": 1
+      },
+      "logFile": "C:\\Users\\muhib\\AppData\\Local\\NetPulseAgent\\endpoint_ping_telemetry.log",
+      "qualityScore": "Optimal (Grade A+)",
+      "google": {
+        "loss": 0,
+        "avg": 17.5,
+        "latency": 17.5,
+        "status": "UP",
+        "target": "8.8.8.8",
+        "max": 18,
+        "min": 17,
+        "jitter": 1
+      },
+      "jitter": 1
+    },
+    "lastAgentSync": "2026-11-11T05:32:08.865Z"
+  },
+  {
+    "id": 17,
+    "name": "AbbadLaptop",
+    "ip": "172.18.1.39",
+    "type": "workstation",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 18,
+    "name": "DESKTOP-23",
+    "ip": "172.18.1.42",
+    "type": "workstation",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 19,
+    "name": "DESKTOP-120",
+    "ip": "172.18.1.44",
+    "type": "workstation",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 20,
+    "name": "AbilityPC_01",
+    "ip": "172.18.1.46",
+    "type": "workstation",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 21,
+    "name": "ABIKLITY-PC021",
+    "ip": "172.18.1.47",
+    "type": "workstation",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 22,
+    "name": "DESKTOP-30",
+    "ip": "172.18.1.49",
+    "type": "workstation",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 23,
+    "name": "DESKTOP-32",
+    "ip": "172.18.1.51",
+    "type": "workstation",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 24,
+    "name": "DESKTOP-38D",
+    "ip": "172.18.1.52",
+    "type": "workstation",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 25,
+    "name": "Ability-35",
+    "ip": "172.18.1.54",
+    "type": "workstation",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 26,
+    "name": "DESKTOP-37",
+    "ip": "172.18.1.56",
+    "type": "workstation",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 27,
+    "name": "Device (172.18.1.65)",
+    "ip": "172.18.1.65",
+    "type": "workstation",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 28,
+    "name": "DESKTOP-50",
+    "ip": "172.18.1.69",
+    "type": "workstation",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 29,
+    "name": "Inbound1",
+    "ip": "172.18.1.72",
+    "type": "workstation",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 30,
+    "name": "DESKTOP-56",
+    "ip": "172.18.1.75",
+    "type": "workstation",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 31,
+    "name": "DESKTOP-5723323",
+    "ip": "172.18.1.76",
+    "type": "workstation",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 32,
+    "name": "DESKTOP-58",
+    "ip": "172.18.1.77",
+    "type": "workstation",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 33,
+    "name": "DESKTOP-59",
+    "ip": "172.18.1.78",
+    "type": "workstation",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 34,
+    "name": "DESKTOP-70",
+    "ip": "172.18.1.89",
+    "type": "workstation",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 35,
+    "name": "Device (172.18.1.90)",
+    "ip": "172.18.1.90",
+    "type": "workstation",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 36,
+    "name": "Device (172.18.1.91)",
+    "ip": "172.18.1.91",
+    "type": "workstation",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 37,
+    "name": "Device (172.18.1.106)",
+    "ip": "172.18.1.106",
+    "type": "workstation",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 38,
+    "name": "Device (172.18.1.108)",
+    "ip": "172.18.1.108",
+    "type": "workstation",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 39,
+    "name": "DESKTOP-67",
+    "ip": "172.18.1.109",
+    "type": "workstation",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 40,
+    "name": "DESKTOP-LRFV6P8",
+    "ip": "172.18.1.113",
+    "type": "workstation",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 41,
+    "name": "DESKTOP-TNA36D0",
+    "ip": "172.18.1.123",
+    "type": "workstation",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 42,
+    "name": "DESKTOP-55",
+    "ip": "172.18.1.124",
+    "type": "workstation",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 43,
+    "name": "Device (172.18.1.126)",
+    "ip": "172.18.1.126",
+    "type": "workstation",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 44,
+    "name": "DESKTOP-29",
+    "ip": "172.18.1.143",
+    "type": "workstation",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 45,
+    "name": "Device (172.18.1.154)",
+    "ip": "172.18.1.154",
+    "type": "workstation",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 46,
+    "name": "Device (172.18.1.201)",
+    "ip": "172.18.1.201",
+    "type": "workstation",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 47,
+    "name": "Device (172.18.1.226)",
+    "ip": "172.18.1.226",
+    "type": "workstation",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 48,
+    "name": "Device (172.18.1.230)",
+    "ip": "172.18.1.230",
+    "type": "workstation",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 49,
+    "name": "VMware Virtual (172.18.1.241)",
+    "ip": "172.18.1.241",
+    "type": "server",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 50,
+    "name": "ZKTECO-PC",
+    "ip": "172.18.1.245",
+    "type": "server",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 51,
+    "name": "DESKTOP-31",
+    "ip": "172.18.1.250",
+    "type": "workstation",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 52,
+    "name": "SKIF-PC",
+    "ip": "172.18.1.252",
+    "type": "server",
+    "group": "Local Network",
+    "monitoring": true,
+    "interval": 15
+  },
+  {
+    "id": 53,
+    "name": "LAN Device (172.18.1.8)",
+    "ip": "172.18.1.8",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15,
+    "activeUser": null,
+    "userDomain": null,
+    "sessionState": null,
+    "endpointPing": null,
+    "lastAgentSync": null
+  },
+  {
+    "id": 54,
+    "name": "DESKTOP-PM49AGD",
     "ip": "172.18.1.242",
     "type": "workstation",
     "monitoring": true,
-    "interval": 15
+    "interval": 15,
+    "activeUser": null,
+    "userDomain": null,
+    "sessionState": null,
+    "endpointPing": null,
+    "lastAgentSync": null
+  },
+  {
+    "id": 55,
+    "name": "DESKTOP-69",
+    "ip": "172.18.1.88",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15,
+    "activeUser": null,
+    "userDomain": null,
+    "sessionState": null,
+    "endpointPing": null,
+    "lastAgentSync": null
+  },
+  {
+    "id": 56,
+    "name": "DESKTOP-04",
+    "ip": "172.18.1.23",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15,
+    "activeUser": null,
+    "userDomain": null,
+    "sessionState": null,
+    "endpointPing": null,
+    "lastAgentSync": null
+  },
+  {
+    "id": 57,
+    "name": "DESKTOP-8D1GBAG",
+    "ip": "172.32.1.9",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15,
+    "activeUser": null,
+    "userDomain": null,
+    "sessionState": null,
+    "endpointPing": null,
+    "lastAgentSync": null
+  },
+  {
+    "id": 58,
+    "name": "LAN Device (172.32.1.1)",
+    "ip": "172.32.1.1",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15,
+    "activeUser": null,
+    "userDomain": null,
+    "sessionState": null,
+    "endpointPing": null,
+    "lastAgentSync": null
+  },
+  {
+    "id": 59,
+    "name": "FRIDAY",
+    "ip": "172.32.1.12",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15,
+    "activeUser": null,
+    "userDomain": null,
+    "sessionState": null,
+    "endpointPing": null,
+    "lastAgentSync": null
+  },
+  {
+    "id": 60,
+    "name": "Intel Corporation (172.32.1.14)",
+    "ip": "172.32.1.14",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15,
+    "activeUser": null,
+    "userDomain": null,
+    "sessionState": null,
+    "endpointPing": null,
+    "lastAgentSync": null
+  },
+  {
+    "id": 61,
+    "name": "DESKTOP-COS4GUF",
+    "ip": "172.32.1.15",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15,
+    "activeUser": null,
+    "userDomain": null,
+    "sessionState": null,
+    "endpointPing": null,
+    "lastAgentSync": null
+  },
+  {
+    "id": 62,
+    "name": "LAN Device (172.32.1.18)",
+    "ip": "172.32.1.18",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15,
+    "activeUser": null,
+    "userDomain": null,
+    "sessionState": null,
+    "endpointPing": null,
+    "lastAgentSync": null
+  },
+  {
+    "id": 63,
+    "name": "Rachel",
+    "ip": "172.32.1.35",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15,
+    "activeUser": null,
+    "userDomain": null,
+    "sessionState": null,
+    "endpointPing": null,
+    "lastAgentSync": null
+  },
+  {
+    "id": 64,
+    "name": "LAN Device (172.32.1.47)",
+    "ip": "172.32.1.47",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15,
+    "activeUser": null,
+    "userDomain": null,
+    "sessionState": null,
+    "endpointPing": null,
+    "lastAgentSync": null
+  },
+  {
+    "id": 65,
+    "name": "LAPTOP-MAAZUDDIN",
+    "ip": "172.32.1.49",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15,
+    "activeUser": null,
+    "userDomain": null,
+    "sessionState": null,
+    "endpointPing": null,
+    "lastAgentSync": null
+  },
+  {
+    "id": 66,
+    "name": "LAN Device (172.32.1.59)",
+    "ip": "172.32.1.59",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15,
+    "activeUser": null,
+    "userDomain": null,
+    "sessionState": null,
+    "endpointPing": null,
+    "lastAgentSync": null
+  },
+  {
+    "id": 67,
+    "name": "LAN Device (172.32.1.60)",
+    "ip": "172.32.1.60",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15,
+    "activeUser": null,
+    "userDomain": null,
+    "sessionState": null,
+    "endpointPing": null,
+    "lastAgentSync": null
+  },
+  {
+    "id": 68,
+    "name": "LAN Device (172.32.1.61)",
+    "ip": "172.32.1.61",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15,
+    "activeUser": null,
+    "userDomain": null,
+    "sessionState": null,
+    "endpointPing": null,
+    "lastAgentSync": null
+  },
+  {
+    "id": 69,
+    "name": "ERFANALI",
+    "ip": "172.32.1.64",
+    "type": "mobile",
+    "monitoring": true,
+    "interval": 15,
+    "activeUser": null,
+    "userDomain": null,
+    "sessionState": null,
+    "endpointPing": null,
+    "lastAgentSync": null
+  },
+  {
+    "id": 70,
+    "name": "LAN Device (172.32.1.65)",
+    "ip": "172.32.1.65",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15,
+    "activeUser": null,
+    "userDomain": null,
+    "sessionState": null,
+    "endpointPing": null,
+    "lastAgentSync": null
+  },
+  {
+    "id": 71,
+    "name": "Mobile Device (Private Wi-Fi) (172.32.1.66)",
+    "ip": "172.32.1.66",
+    "type": "mobile",
+    "monitoring": true,
+    "interval": 15,
+    "activeUser": null,
+    "userDomain": null,
+    "sessionState": null,
+    "endpointPing": null,
+    "lastAgentSync": null
+  },
+  {
+    "id": 72,
+    "name": "LAN Device (172.32.1.70)",
+    "ip": "172.32.1.70",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15,
+    "activeUser": null,
+    "userDomain": null,
+    "sessionState": null,
+    "endpointPing": null,
+    "lastAgentSync": null
+  },
+  {
+    "id": 73,
+    "name": "Mobile Device (Private Wi-Fi) (172.32.1.74)",
+    "ip": "172.32.1.74",
+    "type": "mobile",
+    "monitoring": true,
+    "interval": 15,
+    "activeUser": null,
+    "userDomain": null,
+    "sessionState": null,
+    "endpointPing": null,
+    "lastAgentSync": null
+  },
+  {
+    "id": 74,
+    "name": "LAN Device (172.32.1.93)",
+    "ip": "172.32.1.93",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15,
+    "activeUser": null,
+    "userDomain": null,
+    "sessionState": null,
+    "endpointPing": null,
+    "lastAgentSync": null
+  },
+  {
+    "id": 75,
+    "name": "LAN Device (172.32.1.95)",
+    "ip": "172.32.1.95",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15,
+    "activeUser": null,
+    "userDomain": null,
+    "sessionState": null,
+    "endpointPing": null,
+    "lastAgentSync": null
+  },
+  {
+    "id": 76,
+    "name": "LAN Device (172.32.1.97)",
+    "ip": "172.32.1.97",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15,
+    "activeUser": null,
+    "userDomain": null,
+    "sessionState": null,
+    "endpointPing": null,
+    "lastAgentSync": null
+  },
+  {
+    "id": 77,
+    "name": "LAN Device (172.32.1.100)",
+    "ip": "172.32.1.100",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15,
+    "activeUser": null,
+    "userDomain": null,
+    "sessionState": null,
+    "endpointPing": null,
+    "lastAgentSync": null
+  },
+  {
+    "id": 78,
+    "name": "LAN Device (172.32.1.101)",
+    "ip": "172.32.1.101",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15,
+    "activeUser": null,
+    "userDomain": null,
+    "sessionState": null,
+    "endpointPing": null,
+    "lastAgentSync": null
+  },
+  {
+    "id": 79,
+    "name": "LAN Device (172.32.1.115)",
+    "ip": "172.32.1.115",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15,
+    "activeUser": null,
+    "userDomain": null,
+    "sessionState": null,
+    "endpointPing": null,
+    "lastAgentSync": null
+  },
+  {
+    "id": 80,
+    "name": "DESKTOP-VICTUS",
+    "ip": "172.32.1.55",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15,
+    "activeUser": null,
+    "userDomain": null,
+    "sessionState": null,
+    "endpointPing": null,
+    "lastAgentSync": null
+  },
+  {
+    "id": 81,
+    "name": "Erfan-Laptop-01",
+    "ip": "172.32.1.63",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15,
+    "activeUser": null,
+    "userDomain": null,
+    "sessionState": null,
+    "endpointPing": null,
+    "lastAgentSync": null
+  },
+  {
+    "id": 82,
+    "name": "DESKTOP-8D1GBAG",
+    "ip": "172.27.64.1",
+    "type": "workstation",
+    "monitoring": true,
+    "interval": 15,
+    "activeUser": null,
+    "userDomain": null,
+    "sessionState": null,
+    "endpointPing": null,
+    "lastAgentSync": null
   }
 ]

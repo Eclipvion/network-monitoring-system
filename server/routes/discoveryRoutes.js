@@ -16,7 +16,7 @@ router.get('/status', (req, res) => {
 // POST /api/discovery/trigger-sweep - 1-Click trigger manual sweep immediately
 router.post('/trigger-sweep', async (req, res) => {
   try {
-    await networkWatchdog.runWatchdogSweep();
+    await networkWatchdog.runWatchdogSweep({ forceFullScan: true });
     const status = networkWatchdog.getWatchdogStatus();
     res.json({ message: 'Sweep completed successfully', status });
   } catch (err) {

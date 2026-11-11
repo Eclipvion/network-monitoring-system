@@ -26,4 +26,15 @@ router.get('/outages', (req, res) => {
   }
 });
 
+// DELETE /api/telemetry/outages - Clear outage history
+router.delete('/outages', (req, res) => {
+  try {
+    const deviceId = req.query.deviceId || 'all';
+    const data = telemetryService.clearOutageHistory(deviceId);
+    res.json({ success: true, data });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 export default router;

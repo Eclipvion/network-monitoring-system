@@ -1,0 +1,33 @@
+{
+  "restrictedRules": [
+    "youtube.com",
+    "netflix.com",
+    "tiktok.com",
+    "olx.com.pk",
+    "daraz.pk",
+    "freeconvert.com",
+    "freedownloadmanager.org",
+    "cricinfo.com",
+    "torrent",
+    "vpn",
+    "movie download",
+    "games"
+  ],
+  "criticalRules": [
+    "ransomware",
+    "hack",
+    "crack",
+    "keygen",
+    "piratebay",
+    "1337x",
+    "darkweb",
+    "bypass firewall",
+    "exploit",
+    "mimikatz",
+    "metasploit",
+    "bet365",
+    "1xbet",
+    "whatismyipaddress.com"
+  ],
+  "updatedAt": "2026-10-31T09:42:03.620Z"
+}

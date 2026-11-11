@@ -131,15 +131,15 @@ export default function TopologyPage({ devices = [], onRefreshDevices, onOpenDet
     let computedLinks = [];
     let computedBanners = [];
 
-    // Spacing: Card width 195px + 35px gap = 230px. Height 95px + 45px gap = 140px.
-    const PITCH_X = 230;
-    const PITCH_Y = 140;
+    // Spacing: Card width 195px + 25px gap = 220px. Height 95px + 40px gap = 135px.
+    const PITCH_X = 220;
+    const PITCH_Y = 135;
 
-    // Widescreen 8-9 column grid (prevents canvas from becoming excessively tall)
-    const cols = Math.min(9, Math.max(5, Math.ceil(Math.sqrt(filteredDevices.length * 1.8))));
+    // Clean 6-7 column table-wise grid so cards stay large and fit comfortably
+    const cols = Math.min(7, Math.max(4, Math.ceil(Math.sqrt(filteredDevices.length * 1.4))));
     const rows = Math.ceil(filteredDevices.length / cols) || 1;
 
-    let canvasWidth = Math.max(1800, (cols + 1) * PITCH_X + 160);
+    let canvasWidth = Math.max(1600, (cols + 1) * PITCH_X + 120);
     const cx = canvasWidth / 2;
 
     let canvasHeight = 1000;
@@ -148,28 +148,30 @@ export default function TopologyPage({ devices = [], onRefreshDevices, onOpenDet
     // LAYOUT MODE 1: MATRIX GRID TREE (Default)
     // ==========================================
     if (layoutMode === 'tree') {
-      const gwY = 95;
-      const startY = 240;
+      const gwY = 85;
+      const startY = 225;
 
-      canvasHeight = Math.max(900, startY + (rows * PITCH_Y) + 120);
+      canvasHeight = Math.max(820, startY + (rows * PITCH_Y) + 110);
 
       // 1. Gateway at top center
       const gwPlaced = { ...gatewayNode, x: cx, y: gwY };
 
-      // 2. Devices placed in centered rows
+      // 2. Devices placed in strict table-wise left-aligned columns
       const placedDevices = [];
+      const activeCols = Math.min(cols, Math.max(1, filteredDevices.length));
+      const fullGridWidth = (activeCols - 1) * PITCH_X;
+      const gridLeftStartX = cx - (fullGridWidth / 2);
+
       for (let r = 0; r < rows; r++) {
         const startIdx = r * cols;
         const endIdx = Math.min(startIdx + cols, filteredDevices.length);
         const countInRow = endIdx - startIdx;
-        const rowWidth = (countInRow - 1) * PITCH_X;
-        const rowStartX = cx - (rowWidth / 2);
 
         for (let c = 0; c < countInRow; c++) {
           const d = filteredDevices[startIdx + c];
           placedDevices.push({
             ...d,
-            x: rowStartX + c * PITCH_X,
+            x: gridLeftStartX + c * PITCH_X,
             y: startY + r * PITCH_Y
           });
         }
@@ -325,26 +327,7 @@ export default function TopologyPage({ devices = [], onRefreshDevices, onOpenDet
     };
   }, [devices, networkInfo, watchdogStatus, layoutMode, showDisconnected, searchTerm]);
 
-  // Initial Placement on Mount: Center the Gateway at comfortable 75% zoom (NOT microscopic 30%!)
-  useEffect(() => {
-    if (!hasInitializedRef.current && allNodes.length > 0) {
-      hasInitializedRef.current = true;
-      const container = containerRef.current;
-      if (container) {
-        const clientWidth = container.clientWidth || 1000;
-        const canvasW = canvasDimensions.width;
-        // Center canvas horizontally, position top with 40px margin
-        const initialPanX = Math.round((clientWidth - canvasW * 0.75) / 2);
-        setViewport({
-          x: initialPanX,
-          y: 40,
-          zoom: 0.75
-        });
-      }
-    }
-  }, [allNodes.length, canvasDimensions.width]);
-
-  // Fit to screen helper - calculates full bounding box fit
+  // Fit to screen helper - calculates full bounding box fit so zero nodes are clipped horizontally
   const fitToScreen = useCallback(() => {
     const container = containerRef.current;
     if (!container || allNodes.length === 0) return;
@@ -354,26 +337,30 @@ export default function TopologyPage({ devices = [], onRefreshDevices, onOpenDet
 
     let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
     allNodes.forEach((n) => {
-      minX = Math.min(minX, n.x - 110);
-      maxX = Math.max(maxX, n.x + 110);
-      minY = Math.min(minY, n.y - 70);
-      maxY = Math.max(maxY, n.y + 70);
+      minX = Math.min(minX, n.x - 108);
+      maxX = Math.max(maxX, n.x + 108);
+      minY = Math.min(minY, n.y - 62);
+      maxY = Math.max(maxY, n.y + 62);
     });
 
     const bboxW = Math.max(400, maxX - minX);
     const bboxH = Math.max(300, maxY - minY);
 
-    const padding = 50;
-    const scaleX = (clientWidth - padding * 2) / bboxW;
-    const scaleY = (clientHeight - padding * 2) / bboxH;
-    // Minimum 45% zoom so cards are always readable
-    const targetZoom = Math.min(1.0, Math.max(0.45, Math.min(scaleX, scaleY)));
+    const padX = 36;
+    const padY = 36;
+    const scaleX = (clientWidth - padX * 2) / bboxW;
+    const scaleY = (clientHeight - padY * 2) / bboxH;
+    // Allow zoom down to 0.38 so 9-column grids fit 100% horizontally without clipping
+    const targetZoom = Math.min(0.95, Math.max(0.38, Math.min(scaleX, Math.max(scaleY, scaleX * 0.92))));
 
     const centerX = (minX + maxX) / 2;
-    const centerY = (minY + maxY) / 2;
-
     const panX = clientWidth / 2 - centerX * targetZoom;
-    const panY = clientHeight / 2 - centerY * targetZoom;
+
+    // Position top of topology cleanly with 32px top margin (or centered vertically if it fits)
+    const scaledHeight = bboxH * targetZoom;
+    const panY = scaledHeight < clientHeight - padY * 2
+      ? clientHeight / 2 - ((minY + maxY) / 2) * targetZoom
+      : Math.round(32 - minY * targetZoom);
 
     setViewport({
       x: Math.round(panX),
@@ -381,6 +368,39 @@ export default function TopologyPage({ devices = [], onRefreshDevices, onOpenDet
       zoom: Number(targetZoom.toFixed(2))
     });
   }, [allNodes]);
+
+  // Initial Placement & Responsive Auto-Fit: Re-fit when devices load (allNodes > 1) so zero columns are clipped
+  useEffect(() => {
+    if (allNodes.length > 1 && hasInitializedRef.current !== allNodes.length) {
+      const prevCount = Number(hasInitializedRef.current || 0);
+      hasInitializedRef.current = allNodes.length;
+      if (prevCount <= 1 || Math.abs(allNodes.length - prevCount) >= 3) {
+        const timer = setTimeout(() => fitToScreen(), 30);
+        return () => clearTimeout(timer);
+      }
+    } else if (allNodes.length === 1 && !hasInitializedRef.current) {
+      hasInitializedRef.current = 1;
+      fitToScreen();
+    }
+  }, [allNodes.length, fitToScreen]);
+
+  // Re-fit automatically when browser window / container width changes significantly
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container || typeof ResizeObserver === 'undefined') return;
+    let lastWidth = container.clientWidth;
+    const observer = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const newWidth = entry.contentRect.width;
+        if (Math.abs(newWidth - lastWidth) > 40) {
+          lastWidth = newWidth;
+          fitToScreen();
+        }
+      }
+    });
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, [fitToScreen]);
 
   // Layout mode switcher
   const handleLayoutChange = (mode) => {
@@ -576,8 +596,9 @@ export default function TopologyPage({ devices = [], onRefreshDevices, onOpenDet
 
       {/* 3. Control Toolbar */}
       <div className="flex flex-wrap items-center justify-between gap-3 bg-white dark:bg-slate-900 p-3 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm text-xs">
-        <div className="flex items-center gap-2 flex-1 max-w-xs">
-          <div className="relative w-full">
+        {/* Left Side: Search Filter + Layout Tabs (Table-wise Left Aligned) */}
+        <div className="flex flex-wrap items-center gap-2.5 flex-1 min-w-0">
+          <div className="relative min-w-[180px] max-w-xs flex-1">
             <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               type="text"
@@ -587,18 +608,15 @@ export default function TopologyPage({ devices = [], onRefreshDevices, onOpenDet
               className="w-full pl-9 pr-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white text-xs placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
             />
           </div>
-        </div>
 
-        {/* Layout Switcher & Visual Zoom Controls */}
-        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-          {/* Layout Mode Toggles */}
-          <div className="flex items-center bg-slate-100 dark:bg-slate-800 p-1 rounded-xl">
+          {/* Layout Mode Toggles on Left */}
+          <div className="flex items-center bg-slate-100 dark:bg-slate-800 p-1 rounded-xl shrink-0">
             <button
               onClick={() => handleLayoutChange('tree')}
-              className={`px-2.5 py-1 rounded-lg font-medium flex items-center gap-1.5 transition-all ${
+              className={`px-2.5 py-1 rounded-lg font-medium flex items-center gap-1.5 transition-all cursor-pointer ${
                 layoutMode === 'tree'
                   ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm'
-                  : 'text-slate-500 dark:text-slate-400'
+                  : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
               }`}
               title="Matrix Grid Tree (Zero Overlap)"
             >
@@ -608,10 +626,10 @@ export default function TopologyPage({ devices = [], onRefreshDevices, onOpenDet
 
             <button
               onClick={() => handleLayoutChange('grouped')}
-              className={`px-2.5 py-1 rounded-lg font-medium flex items-center gap-1.5 transition-all ${
+              className={`px-2.5 py-1 rounded-lg font-medium flex items-center gap-1.5 transition-all cursor-pointer ${
                 layoutMode === 'grouped'
                   ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm'
-                  : 'text-slate-500 dark:text-slate-400'
+                  : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
               }`}
               title="Grouped by Device Type (Workstations, Mobile, Other)"
             >
@@ -621,10 +639,10 @@ export default function TopologyPage({ devices = [], onRefreshDevices, onOpenDet
 
             <button
               onClick={() => handleLayoutChange('radial')}
-              className={`px-2.5 py-1 rounded-lg font-medium flex items-center gap-1.5 transition-all ${
+              className={`px-2.5 py-1 rounded-lg font-medium flex items-center gap-1.5 transition-all cursor-pointer ${
                 layoutMode === 'radial'
                   ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm'
-                  : 'text-slate-500 dark:text-slate-400'
+                  : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
               }`}
               title="Concentric Multi-Ring Orbit"
             >
@@ -632,6 +650,10 @@ export default function TopologyPage({ devices = [], onRefreshDevices, onOpenDet
               <span>Concentric Orbit</span>
             </button>
           </div>
+        </div>
+
+        {/* Right Side: Visual Zoom Controls */}
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3 shrink-0">
 
           {/* Interactive Zoom Controls with Slider */}
           <div className="flex items-center bg-slate-100 dark:bg-slate-800 p-1 rounded-xl gap-2">
@@ -689,8 +711,8 @@ export default function TopologyPage({ devices = [], onRefreshDevices, onOpenDet
         </div>
       </div>
 
-      {/* 4. Main Interactive Canvas & Floating Inspector */}
-      <div className="relative w-full h-[680px] rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-950 overflow-hidden shadow-inner">
+      {/* 4. Main Interactive Canvas & Floating Inspector (Light/Dark Adaptive) */}
+      <div className="relative w-full h-[680px] rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/90 dark:bg-slate-950 overflow-hidden shadow-inner transition-colors">
         <TopologyCanvas
           nodes={allNodes}
           links={links}
@@ -706,9 +728,9 @@ export default function TopologyPage({ devices = [], onRefreshDevices, onOpenDet
           containerRef={containerRef}
         />
 
-        {/* Legend */}
-        <div className="absolute bottom-4 left-4 p-3 rounded-xl bg-slate-900/90 border border-slate-800 backdrop-blur-md text-[11px] space-y-1.5 text-slate-400 pointer-events-auto shadow-xl">
-          <div className="font-semibold text-slate-200 text-xs mb-1">Topology Legend</div>
+        {/* Legend (Light & Dark Adaptive) */}
+        <div className="absolute bottom-4 left-4 p-3 rounded-xl bg-white/95 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 backdrop-blur-md text-[11px] space-y-1.5 text-slate-600 dark:text-slate-400 pointer-events-auto shadow-lg dark:shadow-xl">
+          <div className="font-bold text-slate-800 dark:text-slate-200 text-xs mb-1">Topology Legend</div>
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
             <span>Active Host (Green = Low Latency)</span>
@@ -721,15 +743,15 @@ export default function TopologyPage({ devices = [], onRefreshDevices, onOpenDet
             <span className="w-2.5 h-2.5 rounded-full bg-rose-500" />
             <span>Offline Host (Visible if toggled)</span>
           </div>
-          <div className="flex items-center gap-2 pt-1 border-t border-slate-800/80">
-            <span className="w-3 h-0.5 bg-emerald-400 inline-block" />
+          <div className="flex items-center gap-2 pt-1 border-t border-slate-200 dark:border-slate-800/80">
+            <span className="w-3 h-0.5 bg-emerald-500 dark:bg-emerald-400 inline-block" />
             <span>Laser Pulse = Live traffic flow</span>
           </div>
         </div>
 
-        {/* Top-Left Hint */}
-        <div className="absolute top-4 left-4 px-3 py-1.5 rounded-xl bg-slate-900/90 border border-slate-800 backdrop-blur-md text-slate-400 text-xs flex items-center gap-2 shadow-lg pointer-events-none">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+        {/* Top-Left Hint (Light & Dark Adaptive) */}
+        <div className="absolute top-4 left-4 px-3 py-1.5 rounded-xl bg-white/95 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 backdrop-blur-md text-slate-600 dark:text-slate-400 text-xs flex items-center gap-2 shadow-md dark:shadow-lg pointer-events-none">
+          <span className="w-2 h-2 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse" />
           <span>Hover device for instant specs • Drag canvas to pan • Use zoom slider or wheel</span>
         </div>
 

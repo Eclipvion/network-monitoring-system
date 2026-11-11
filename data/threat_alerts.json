@@ -1,2175 +1,1202 @@
 [
   {
-    "id": "threat-rogue-000c292e935c",
-    "severity": "HIGH",
-    "service": "Zero-Trust Asset Guard",
-    "title": "🚨 Rogue Host Detected on LAN (172.18.1.5)",
-    "description": "Unrecognized MAC [00:0c:29:2e:93:5c] (VMware ESXi / Workstation) connected to subnet. Not found in Approved Assets Whitelist.",
-    "ip": "172.18.1.5",
-    "mac": "00:0c:29:2e:93:5c",
-    "mitigation": "Authorize device in Asset Guard or apply host isolation rule: New-NetFirewallRule -DisplayName \"NetPulse Ban Rogue 172.18.1.5\" -Direction Inbound -RemoteAddress \"172.18.1.5\" -Action Block"
-  },
-  {
-    "id": "threat-rogue-000c29e4dc61",
-    "severity": "HIGH",
-    "service": "Zero-Trust Asset Guard",
-    "title": "🚨 Rogue Host Detected on LAN (172.18.1.10)",
-    "description": "Unrecognized MAC [00:0c:29:e4:dc:61] (VMware ESXi / Workstation) connected to subnet. Not found in Approved Assets Whitelist.",
-    "ip": "172.18.1.10",
-    "mac": "00:0c:29:e4:dc:61",
-    "mitigation": "Authorize device in Asset Guard or apply host isolation rule: New-NetFirewallRule -DisplayName \"NetPulse Ban Rogue 172.18.1.10\" -Direction Inbound -RemoteAddress \"172.18.1.10\" -Action Block"
-  },
-  {
-    "id": "threat-rogue-509a4c057457",
-    "severity": "HIGH",
-    "service": "Zero-Trust Asset Guard",
-    "title": "🚨 Rogue Host Detected on LAN (172.18.1.14)",
-    "description": "Unrecognized MAC [50:9a:4c:05:74:57] (Murata Manufacturing / Wi-Fi) connected to subnet. Not found in Approved Assets Whitelist.",
-    "ip": "172.18.1.14",
-    "mac": "50:9a:4c:05:74:57",
-    "mitigation": "Authorize device in Asset Guard or apply host isolation rule: New-NetFirewallRule -DisplayName \"NetPulse Ban Rogue 172.18.1.14\" -Direction Inbound -RemoteAddress \"172.18.1.14\" -Action Block"
-  },
-  {
-    "id": "threat-rogue-484d7ebcab7c",
-    "severity": "HIGH",
-    "service": "Zero-Trust Asset Guard",
-    "title": "🚨 Rogue Host Detected on LAN (172.18.1.20)",
-    "description": "Unrecognized MAC [48:4d:7e:bc:ab:7c] (Foxconn / Hon Hai / Realtek) connected to subnet. Not found in Approved Assets Whitelist.",
-    "ip": "172.18.1.20",
-    "mac": "48:4d:7e:bc:ab:7c",
-    "mitigation": "Authorize device in Asset Guard or apply host isolation rule: New-NetFirewallRule -DisplayName \"NetPulse Ban Rogue 172.18.1.20\" -Direction Inbound -RemoteAddress \"172.18.1.20\" -Action Block"
-  },
-  {
-    "id": "threat-rogue-484d7eab7699",
-    "severity": "HIGH",
-    "service": "Zero-Trust Asset Guard",
-    "title": "🚨 Rogue Host Detected on LAN (172.18.1.21)",
-    "description": "Unrecognized MAC [48:4d:7e:ab:76:99] (Foxconn / Hon Hai / Realtek) connected to subnet. Not found in Approved Assets Whitelist.",
-    "ip": "172.18.1.21",
-    "mac": "48:4d:7e:ab:76:99",
-    "mitigation": "Authorize device in Asset Guard or apply host isolation rule: New-NetFirewallRule -DisplayName \"NetPulse Ban Rogue 172.18.1.21\" -Direction Inbound -RemoteAddress \"172.18.1.21\" -Action Block"
-  },
-  {
-    "id": "threat-honeypot-1792741132917",
-    "deviceIp": "127.0.0.1",
-    "deviceName": "Intruder Host (127.0.0.1)",
-    "port": 2222,
-    "service": "Decoy Honeypot (SSH)",
-    "severity": "CRITICAL",
-    "title": "🚨 Intruder Probe on Honeypot Port 2222",
-    "description": "Unauthorized host 127.0.0.1:62712 probed decoy honeypot. Probe signature: \"SSH Handshake Reconnaissance\".",
-    "recommendation": "Isolate device 127.0.0.1 and enforce firewall ban rule immediately.",
-    "timestamp": "2026-10-23T07:38:52.916Z"
-  },
-  {
-    "id": "threat-57-445-1792649492778",
-    "deviceId": 57,
-    "deviceName": "LAN Device (172.18.1.252)",
-    "deviceIp": "172.18.1.252",
-    "port": 445,
-    "service": "SMB / CIFS",
-    "severity": "CRITICAL",
-    "protocol": "TCP",
-    "cve": "CVE-2017-0144 (EternalBlue) / MS17-010",
-    "attackType": "Ransomware Lateral Propagation & Remote Code Execution",
-    "title": "Critical Port 445 (SMB / CIFS) Exposed",
-    "description": "Device has SMB / CIFS open. Potential attack vector: WannaCry, NotPetya, EternalBlue, Lateral Ransomware Propagation",
-    "recommendation": "Block port 445 on WAN and internal boundaries. Disable legacy SMBv1 and enforce SMB signing/encryption.",
-    "remediationSteps": [
-      "Immediately block Port 445 on perimeter firewalls and router WAN interfaces.",
-      "Disable legacy SMBv1 in Windows (Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol).",
-      "Enforce SMB signing and SMB encryption for internal file shares.",
-      "Isolate internal file sharing to dedicated private management VLANs."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 445 (SMB/CIFS)\" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 445/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:32.778Z"
-  },
-  {
-    "id": "threat-57-3389-1792649492778",
-    "deviceId": 57,
-    "deviceName": "LAN Device (172.18.1.252)",
-    "deviceIp": "172.18.1.252",
-    "port": 3389,
-    "service": "RDP (Remote Desktop)",
-    "severity": "CRITICAL",
-    "protocol": "TCP",
-    "cve": "CVE-2019-0708 (BlueKeep) & Credential Spraying",
-    "attackType": "Pre-Auth Remote Code Execution & Automated Brute Force",
-    "title": "Critical Port 3389 (RDP (Remote Desktop)) Exposed",
-    "description": "Device has RDP (Remote Desktop) open. Potential attack vector: BlueKeep, Automated credential brute-force, Ransomware deployment",
-    "recommendation": "Never expose RDP directly to network. Restrict access through VPN, require NLA, and enable MFA.",
-    "remediationSteps": [
-      "Never expose RDP (Port 3389) directly to public Internet or untrusted subnets.",
-      "Require secure WireGuard / OpenVPN or SSH Bastion tunnel to access remote desktops.",
-      "Enforce Network Level Authentication (NLA) on Windows System Properties.",
-      "Configure Account Lockout Policies to prevent automated password dictionary attacks."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 3389 (RDP)\" -Direction Inbound -LocalPort 3389 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 3389/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 3389 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:32.778Z"
-  },
-  {
-    "id": "threat-57-135-1792649492778",
-    "deviceId": 57,
-    "deviceName": "LAN Device (172.18.1.252)",
-    "deviceIp": "172.18.1.252",
-    "port": 135,
-    "service": "MS RPC / EPMAP",
-    "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "MS03-026 / MS03-039 (Blaster Worm)",
-    "attackType": "RPC Buffer Overflow & Remote System Enumeration",
-    "title": "High Risk Port 135 (MS RPC / EPMAP) Open",
-    "description": "Exposed MS RPC / EPMAP service is susceptible to: Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
-    "recommendation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
-    "remediationSteps": [
-      "Block Port 135 on perimeter router and host firewall.",
-      "Filter inbound RPC requests and restrict to authorized domain controllers only."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 135/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:32.778Z"
-  },
-  {
-    "id": "threat-56-445-1792649491822",
-    "deviceId": 56,
-    "deviceName": "LAN Device (172.18.1.250)",
-    "deviceIp": "172.18.1.250",
-    "port": 445,
-    "service": "SMB / CIFS",
-    "severity": "CRITICAL",
-    "protocol": "TCP",
-    "cve": "CVE-2017-0144 (EternalBlue) / MS17-010",
-    "attackType": "Ransomware Lateral Propagation & Remote Code Execution",
-    "title": "Critical Port 445 (SMB / CIFS) Exposed",
-    "description": "Device has SMB / CIFS open. Potential attack vector: WannaCry, NotPetya, EternalBlue, Lateral Ransomware Propagation",
-    "recommendation": "Block port 445 on WAN and internal boundaries. Disable legacy SMBv1 and enforce SMB signing/encryption.",
-    "remediationSteps": [
-      "Immediately block Port 445 on perimeter firewalls and router WAN interfaces.",
-      "Disable legacy SMBv1 in Windows (Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol).",
-      "Enforce SMB signing and SMB encryption for internal file shares.",
-      "Isolate internal file sharing to dedicated private management VLANs."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 445 (SMB/CIFS)\" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 445/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:31.822Z"
-  },
-  {
-    "id": "threat-56-135-1792649491822",
-    "deviceId": 56,
-    "deviceName": "LAN Device (172.18.1.250)",
-    "deviceIp": "172.18.1.250",
-    "port": 135,
-    "service": "MS RPC / EPMAP",
-    "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "MS03-026 / MS03-039 (Blaster Worm)",
-    "attackType": "RPC Buffer Overflow & Remote System Enumeration",
-    "title": "High Risk Port 135 (MS RPC / EPMAP) Open",
-    "description": "Exposed MS RPC / EPMAP service is susceptible to: Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
-    "recommendation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
-    "remediationSteps": [
-      "Block Port 135 on perimeter router and host firewall.",
-      "Filter inbound RPC requests and restrict to authorized domain controllers only."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 135/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:31.822Z"
-  },
-  {
-    "id": "threat-56-139-1792649491822",
-    "deviceId": 56,
-    "deviceName": "LAN Device (172.18.1.250)",
-    "deviceIp": "172.18.1.250",
-    "port": 139,
-    "service": "NetBIOS Session",
-    "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "NetBIOS Name Service Poisoning (LLMNR/NBT-NS)",
-    "attackType": "Relay Attacks, NTLM Hash Harvesting & Man-in-the-Middle",
-    "title": "High Risk Port 139 (NetBIOS Session) Open",
-    "description": "Exposed NetBIOS Session service is susceptible to: NetBIOS name enumeration, session hijacking, relay attacks",
-    "recommendation": "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced settings.",
-    "remediationSteps": [
-      "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced WINS settings.",
-      "Block Inbound Port 139 on all external and untrusted interfaces."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 139 (NetBIOS)\" -Direction Inbound -LocalPort 139 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 139/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:31.822Z"
-  },
-  {
-    "id": "threat-55-445-1792649491817",
-    "deviceId": 55,
-    "deviceName": "LAN Device (172.18.1.245)",
-    "deviceIp": "172.18.1.245",
-    "port": 445,
-    "service": "SMB / CIFS",
-    "severity": "CRITICAL",
-    "protocol": "TCP",
-    "cve": "CVE-2017-0144 (EternalBlue) / MS17-010",
-    "attackType": "Ransomware Lateral Propagation & Remote Code Execution",
-    "title": "Critical Port 445 (SMB / CIFS) Exposed",
-    "description": "Device has SMB / CIFS open. Potential attack vector: WannaCry, NotPetya, EternalBlue, Lateral Ransomware Propagation",
-    "recommendation": "Block port 445 on WAN and internal boundaries. Disable legacy SMBv1 and enforce SMB signing/encryption.",
-    "remediationSteps": [
-      "Immediately block Port 445 on perimeter firewalls and router WAN interfaces.",
-      "Disable legacy SMBv1 in Windows (Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol).",
-      "Enforce SMB signing and SMB encryption for internal file shares.",
-      "Isolate internal file sharing to dedicated private management VLANs."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 445 (SMB/CIFS)\" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 445/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:31.817Z"
-  },
-  {
-    "id": "threat-55-3389-1792649491817",
-    "deviceId": 55,
-    "deviceName": "LAN Device (172.18.1.245)",
-    "deviceIp": "172.18.1.245",
-    "port": 3389,
-    "service": "RDP (Remote Desktop)",
-    "severity": "CRITICAL",
-    "protocol": "TCP",
-    "cve": "CVE-2019-0708 (BlueKeep) & Credential Spraying",
-    "attackType": "Pre-Auth Remote Code Execution & Automated Brute Force",
-    "title": "Critical Port 3389 (RDP (Remote Desktop)) Exposed",
-    "description": "Device has RDP (Remote Desktop) open. Potential attack vector: BlueKeep, Automated credential brute-force, Ransomware deployment",
-    "recommendation": "Never expose RDP directly to network. Restrict access through VPN, require NLA, and enable MFA.",
-    "remediationSteps": [
-      "Never expose RDP (Port 3389) directly to public Internet or untrusted subnets.",
-      "Require secure WireGuard / OpenVPN or SSH Bastion tunnel to access remote desktops.",
-      "Enforce Network Level Authentication (NLA) on Windows System Properties.",
-      "Configure Account Lockout Policies to prevent automated password dictionary attacks."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 3389 (RDP)\" -Direction Inbound -LocalPort 3389 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 3389/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 3389 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:31.817Z"
-  },
-  {
-    "id": "threat-55-135-1792649491817",
-    "deviceId": 55,
-    "deviceName": "LAN Device (172.18.1.245)",
-    "deviceIp": "172.18.1.245",
-    "port": 135,
-    "service": "MS RPC / EPMAP",
-    "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "MS03-026 / MS03-039 (Blaster Worm)",
-    "attackType": "RPC Buffer Overflow & Remote System Enumeration",
-    "title": "High Risk Port 135 (MS RPC / EPMAP) Open",
-    "description": "Exposed MS RPC / EPMAP service is susceptible to: Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
-    "recommendation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
-    "remediationSteps": [
-      "Block Port 135 on perimeter router and host firewall.",
-      "Filter inbound RPC requests and restrict to authorized domain controllers only."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 135/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:31.817Z"
-  },
-  {
-    "id": "threat-55-139-1792649491817",
-    "deviceId": 55,
-    "deviceName": "LAN Device (172.18.1.245)",
-    "deviceIp": "172.18.1.245",
-    "port": 139,
-    "service": "NetBIOS Session",
-    "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "NetBIOS Name Service Poisoning (LLMNR/NBT-NS)",
-    "attackType": "Relay Attacks, NTLM Hash Harvesting & Man-in-the-Middle",
-    "title": "High Risk Port 139 (NetBIOS Session) Open",
-    "description": "Exposed NetBIOS Session service is susceptible to: NetBIOS name enumeration, session hijacking, relay attacks",
-    "recommendation": "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced settings.",
-    "remediationSteps": [
-      "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced WINS settings.",
-      "Block Inbound Port 139 on all external and untrusted interfaces."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 139 (NetBIOS)\" -Direction Inbound -LocalPort 139 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 139/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:31.817Z"
-  },
-  {
-    "id": "threat-53-1433-1792649491813",
-    "deviceId": 53,
-    "deviceName": "LAN Device (172.18.1.241)",
-    "deviceIp": "172.18.1.241",
-    "port": 1433,
-    "service": "MS SQL Server",
-    "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "xp_cmdshell Remote Code Execution & SA Dictionary Attacks",
-    "attackType": "Database Takeover & OS Command Execution",
-    "title": "High Risk Port 1433 (MS SQL Server) Open",
-    "description": "Exposed MS SQL Server service is susceptible to: Automated SA user brute-force, xp_cmdshell command execution",
-    "recommendation": "Change default port, disable SA account, bind to internal interfaces only.",
-    "remediationSteps": [
-      "Disable or rename default SA administrator account and enforce complex passwords.",
-      "Disable xp_cmdshell extended stored procedures in SQL Server Management Studio.",
-      "Restrict SQL Server TCP listening to internal application server IP addresses."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 1433 (MS SQL)\" -Direction Inbound -LocalPort 1433 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 1433/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 1433 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:31.813Z"
-  },
-  {
-    "id": "threat-52-23-1792649491808",
-    "deviceId": 52,
-    "deviceName": "LAN Device (172.18.1.230)",
-    "deviceIp": "172.18.1.230",
-    "port": 23,
-    "service": "Telnet",
-    "severity": "CRITICAL",
-    "protocol": "TCP",
-    "cve": "CWE-319 (Cleartext Transmission of Sensitive Information) / Mirai",
-    "attackType": "Cleartext Credential Eavesdropping & IoT Botnet Takeover",
-    "title": "Critical Port 23 (Telnet) Exposed",
-    "description": "Device has Telnet open. Potential attack vector: Cleartext credential eavesdropping, Mirai IoT botnet propagation",
-    "recommendation": "Disable Telnet daemon completely. Migrate to SSH (Port 22) with key authentication.",
-    "remediationSteps": [
-      "Stop and permanently disable the Telnet service daemon.",
-      "Migrate all remote management to SSH (Port 22) with Ed25519 cryptographic keys.",
-      "Change default manufacturer credentials on all network routers and switches."
-    ],
-    "firewallCmd": {
-      "powershell": "Stop-Service -Name \"TlntSvr\" -ErrorAction SilentlyContinue; New-NetFirewallRule -DisplayName \"Block Port 23 (Telnet)\" -Direction Inbound -LocalPort 23 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 23/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 23 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:31.808Z"
-  },
-  {
-    "id": "threat-47-3389-1792649490802",
-    "deviceId": 47,
-    "deviceName": "LAN Device (172.18.1.143)",
-    "deviceIp": "172.18.1.143",
-    "port": 3389,
-    "service": "RDP (Remote Desktop)",
-    "severity": "CRITICAL",
-    "protocol": "TCP",
-    "cve": "CVE-2019-0708 (BlueKeep) & Credential Spraying",
-    "attackType": "Pre-Auth Remote Code Execution & Automated Brute Force",
-    "title": "Critical Port 3389 (RDP (Remote Desktop)) Exposed",
-    "description": "Device has RDP (Remote Desktop) open. Potential attack vector: BlueKeep, Automated credential brute-force, Ransomware deployment",
-    "recommendation": "Never expose RDP directly to network. Restrict access through VPN, require NLA, and enable MFA.",
-    "remediationSteps": [
-      "Never expose RDP (Port 3389) directly to public Internet or untrusted subnets.",
-      "Require secure WireGuard / OpenVPN or SSH Bastion tunnel to access remote desktops.",
-      "Enforce Network Level Authentication (NLA) on Windows System Properties.",
-      "Configure Account Lockout Policies to prevent automated password dictionary attacks."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 3389 (RDP)\" -Direction Inbound -LocalPort 3389 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 3389/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 3389 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:30.802Z"
-  },
-  {
-    "id": "threat-43-135-1792649490026",
-    "deviceId": 43,
-    "deviceName": "LAN Device (172.18.1.110)",
-    "deviceIp": "172.18.1.110",
-    "port": 135,
-    "service": "MS RPC / EPMAP",
-    "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "MS03-026 / MS03-039 (Blaster Worm)",
-    "attackType": "RPC Buffer Overflow & Remote System Enumeration",
-    "title": "High Risk Port 135 (MS RPC / EPMAP) Open",
-    "description": "Exposed MS RPC / EPMAP service is susceptible to: Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
-    "recommendation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
-    "remediationSteps": [
-      "Block Port 135 on perimeter router and host firewall.",
-      "Filter inbound RPC requests and restrict to authorized domain controllers only."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 135/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:30.026Z"
-  },
-  {
-    "id": "threat-42-445-1792649490022",
-    "deviceId": 42,
-    "deviceName": "LAN Device (172.18.1.109)",
-    "deviceIp": "172.18.1.109",
-    "port": 445,
-    "service": "SMB / CIFS",
-    "severity": "CRITICAL",
-    "protocol": "TCP",
-    "cve": "CVE-2017-0144 (EternalBlue) / MS17-010",
-    "attackType": "Ransomware Lateral Propagation & Remote Code Execution",
-    "title": "Critical Port 445 (SMB / CIFS) Exposed",
-    "description": "Device has SMB / CIFS open. Potential attack vector: WannaCry, NotPetya, EternalBlue, Lateral Ransomware Propagation",
-    "recommendation": "Block port 445 on WAN and internal boundaries. Disable legacy SMBv1 and enforce SMB signing/encryption.",
-    "remediationSteps": [
-      "Immediately block Port 445 on perimeter firewalls and router WAN interfaces.",
-      "Disable legacy SMBv1 in Windows (Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol).",
-      "Enforce SMB signing and SMB encryption for internal file shares.",
-      "Isolate internal file sharing to dedicated private management VLANs."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 445 (SMB/CIFS)\" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 445/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:30.022Z"
-  },
-  {
-    "id": "threat-42-135-1792649490022",
-    "deviceId": 42,
-    "deviceName": "LAN Device (172.18.1.109)",
-    "deviceIp": "172.18.1.109",
-    "port": 135,
-    "service": "MS RPC / EPMAP",
-    "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "MS03-026 / MS03-039 (Blaster Worm)",
-    "attackType": "RPC Buffer Overflow & Remote System Enumeration",
-    "title": "High Risk Port 135 (MS RPC / EPMAP) Open",
-    "description": "Exposed MS RPC / EPMAP service is susceptible to: Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
-    "recommendation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
-    "remediationSteps": [
-      "Block Port 135 on perimeter router and host firewall.",
-      "Filter inbound RPC requests and restrict to authorized domain controllers only."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 135/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:30.022Z"
-  },
-  {
-    "id": "threat-42-139-1792649490022",
-    "deviceId": 42,
-    "deviceName": "LAN Device (172.18.1.109)",
-    "deviceIp": "172.18.1.109",
-    "port": 139,
-    "service": "NetBIOS Session",
-    "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "NetBIOS Name Service Poisoning (LLMNR/NBT-NS)",
-    "attackType": "Relay Attacks, NTLM Hash Harvesting & Man-in-the-Middle",
-    "title": "High Risk Port 139 (NetBIOS Session) Open",
-    "description": "Exposed NetBIOS Session service is susceptible to: NetBIOS name enumeration, session hijacking, relay attacks",
-    "recommendation": "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced settings.",
-    "remediationSteps": [
-      "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced WINS settings.",
-      "Block Inbound Port 139 on all external and untrusted interfaces."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 139 (NetBIOS)\" -Direction Inbound -LocalPort 139 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 139/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:30.022Z"
-  },
-  {
-    "id": "threat-41-135-1792649490017",
-    "deviceId": 41,
-    "deviceName": "LAN Device (172.18.1.108)",
-    "deviceIp": "172.18.1.108",
-    "port": 135,
-    "service": "MS RPC / EPMAP",
-    "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "MS03-026 / MS03-039 (Blaster Worm)",
-    "attackType": "RPC Buffer Overflow & Remote System Enumeration",
-    "title": "High Risk Port 135 (MS RPC / EPMAP) Open",
-    "description": "Exposed MS RPC / EPMAP service is susceptible to: Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
-    "recommendation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
-    "remediationSteps": [
-      "Block Port 135 on perimeter router and host firewall.",
-      "Filter inbound RPC requests and restrict to authorized domain controllers only."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 135/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:30.017Z"
-  },
-  {
-    "id": "threat-40-135-1792649489308",
-    "deviceId": 40,
-    "deviceName": "LAN Device (172.18.1.106)",
-    "deviceIp": "172.18.1.106",
-    "port": 135,
-    "service": "MS RPC / EPMAP",
-    "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "MS03-026 / MS03-039 (Blaster Worm)",
-    "attackType": "RPC Buffer Overflow & Remote System Enumeration",
-    "title": "High Risk Port 135 (MS RPC / EPMAP) Open",
-    "description": "Exposed MS RPC / EPMAP service is susceptible to: Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
-    "recommendation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
-    "remediationSteps": [
-      "Block Port 135 on perimeter router and host firewall.",
-      "Filter inbound RPC requests and restrict to authorized domain controllers only."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 135/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:29.308Z"
-  },
-  {
-    "id": "threat-39-23-1792649489301",
-    "deviceId": 39,
-    "deviceName": "LAN Device (172.18.1.91)",
-    "deviceIp": "172.18.1.91",
-    "port": 23,
-    "service": "Telnet",
-    "severity": "CRITICAL",
-    "protocol": "TCP",
-    "cve": "CWE-319 (Cleartext Transmission of Sensitive Information) / Mirai",
-    "attackType": "Cleartext Credential Eavesdropping & IoT Botnet Takeover",
-    "title": "Critical Port 23 (Telnet) Exposed",
-    "description": "Device has Telnet open. Potential attack vector: Cleartext credential eavesdropping, Mirai IoT botnet propagation",
-    "recommendation": "Disable Telnet daemon completely. Migrate to SSH (Port 22) with key authentication.",
-    "remediationSteps": [
-      "Stop and permanently disable the Telnet service daemon.",
-      "Migrate all remote management to SSH (Port 22) with Ed25519 cryptographic keys.",
-      "Change default manufacturer credentials on all network routers and switches."
-    ],
-    "firewallCmd": {
-      "powershell": "Stop-Service -Name \"TlntSvr\" -ErrorAction SilentlyContinue; New-NetFirewallRule -DisplayName \"Block Port 23 (Telnet)\" -Direction Inbound -LocalPort 23 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 23/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 23 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:29.301Z"
-  },
-  {
-    "id": "threat-38-23-1792649489296",
-    "deviceId": 38,
-    "deviceName": "LAN Device (172.18.1.90)",
-    "deviceIp": "172.18.1.90",
-    "port": 23,
-    "service": "Telnet",
-    "severity": "CRITICAL",
-    "protocol": "TCP",
-    "cve": "CWE-319 (Cleartext Transmission of Sensitive Information) / Mirai",
-    "attackType": "Cleartext Credential Eavesdropping & IoT Botnet Takeover",
-    "title": "Critical Port 23 (Telnet) Exposed",
-    "description": "Device has Telnet open. Potential attack vector: Cleartext credential eavesdropping, Mirai IoT botnet propagation",
-    "recommendation": "Disable Telnet daemon completely. Migrate to SSH (Port 22) with key authentication.",
-    "remediationSteps": [
-      "Stop and permanently disable the Telnet service daemon.",
-      "Migrate all remote management to SSH (Port 22) with Ed25519 cryptographic keys.",
-      "Change default manufacturer credentials on all network routers and switches."
-    ],
-    "firewallCmd": {
-      "powershell": "Stop-Service -Name \"TlntSvr\" -ErrorAction SilentlyContinue; New-NetFirewallRule -DisplayName \"Block Port 23 (Telnet)\" -Direction Inbound -LocalPort 23 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 23/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 23 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:29.296Z"
-  },
-  {
-    "id": "threat-34-445-1792649488559",
-    "deviceId": 34,
-    "deviceName": "LAN Device (172.18.1.78)",
-    "deviceIp": "172.18.1.78",
-    "port": 445,
-    "service": "SMB / CIFS",
-    "severity": "CRITICAL",
-    "protocol": "TCP",
-    "cve": "CVE-2017-0144 (EternalBlue) / MS17-010",
-    "attackType": "Ransomware Lateral Propagation & Remote Code Execution",
-    "title": "Critical Port 445 (SMB / CIFS) Exposed",
-    "description": "Device has SMB / CIFS open. Potential attack vector: WannaCry, NotPetya, EternalBlue, Lateral Ransomware Propagation",
-    "recommendation": "Block port 445 on WAN and internal boundaries. Disable legacy SMBv1 and enforce SMB signing/encryption.",
-    "remediationSteps": [
-      "Immediately block Port 445 on perimeter firewalls and router WAN interfaces.",
-      "Disable legacy SMBv1 in Windows (Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol).",
-      "Enforce SMB signing and SMB encryption for internal file shares.",
-      "Isolate internal file sharing to dedicated private management VLANs."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 445 (SMB/CIFS)\" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 445/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:28.559Z"
-  },
-  {
-    "id": "threat-34-135-1792649488559",
-    "deviceId": 34,
-    "deviceName": "LAN Device (172.18.1.78)",
-    "deviceIp": "172.18.1.78",
-    "port": 135,
-    "service": "MS RPC / EPMAP",
-    "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "MS03-026 / MS03-039 (Blaster Worm)",
-    "attackType": "RPC Buffer Overflow & Remote System Enumeration",
-    "title": "High Risk Port 135 (MS RPC / EPMAP) Open",
-    "description": "Exposed MS RPC / EPMAP service is susceptible to: Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
-    "recommendation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
-    "remediationSteps": [
-      "Block Port 135 on perimeter router and host firewall.",
-      "Filter inbound RPC requests and restrict to authorized domain controllers only."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 135/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:28.559Z"
-  },
-  {
-    "id": "threat-34-139-1792649488559",
-    "deviceId": 34,
-    "deviceName": "LAN Device (172.18.1.78)",
-    "deviceIp": "172.18.1.78",
-    "port": 139,
-    "service": "NetBIOS Session",
-    "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "NetBIOS Name Service Poisoning (LLMNR/NBT-NS)",
-    "attackType": "Relay Attacks, NTLM Hash Harvesting & Man-in-the-Middle",
-    "title": "High Risk Port 139 (NetBIOS Session) Open",
-    "description": "Exposed NetBIOS Session service is susceptible to: NetBIOS name enumeration, session hijacking, relay attacks",
-    "recommendation": "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced settings.",
-    "remediationSteps": [
-      "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced WINS settings.",
-      "Block Inbound Port 139 on all external and untrusted interfaces."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 139 (NetBIOS)\" -Direction Inbound -LocalPort 139 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 139/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:28.559Z"
-  },
-  {
-    "id": "threat-33-445-1792649488554",
-    "deviceId": 33,
-    "deviceName": "LAN Device (172.18.1.77)",
-    "deviceIp": "172.18.1.77",
-    "port": 445,
-    "service": "SMB / CIFS",
-    "severity": "CRITICAL",
-    "protocol": "TCP",
-    "cve": "CVE-2017-0144 (EternalBlue) / MS17-010",
-    "attackType": "Ransomware Lateral Propagation & Remote Code Execution",
-    "title": "Critical Port 445 (SMB / CIFS) Exposed",
-    "description": "Device has SMB / CIFS open. Potential attack vector: WannaCry, NotPetya, EternalBlue, Lateral Ransomware Propagation",
-    "recommendation": "Block port 445 on WAN and internal boundaries. Disable legacy SMBv1 and enforce SMB signing/encryption.",
-    "remediationSteps": [
-      "Immediately block Port 445 on perimeter firewalls and router WAN interfaces.",
-      "Disable legacy SMBv1 in Windows (Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol).",
-      "Enforce SMB signing and SMB encryption for internal file shares.",
-      "Isolate internal file sharing to dedicated private management VLANs."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 445 (SMB/CIFS)\" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 445/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:28.554Z"
-  },
-  {
-    "id": "threat-33-135-1792649488554",
-    "deviceId": 33,
-    "deviceName": "LAN Device (172.18.1.77)",
-    "deviceIp": "172.18.1.77",
-    "port": 135,
-    "service": "MS RPC / EPMAP",
-    "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "MS03-026 / MS03-039 (Blaster Worm)",
-    "attackType": "RPC Buffer Overflow & Remote System Enumeration",
-    "title": "High Risk Port 135 (MS RPC / EPMAP) Open",
-    "description": "Exposed MS RPC / EPMAP service is susceptible to: Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
-    "recommendation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
-    "remediationSteps": [
-      "Block Port 135 on perimeter router and host firewall.",
-      "Filter inbound RPC requests and restrict to authorized domain controllers only."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 135/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:28.554Z"
-  },
-  {
-    "id": "threat-33-139-1792649488554",
-    "deviceId": 33,
-    "deviceName": "LAN Device (172.18.1.77)",
-    "deviceIp": "172.18.1.77",
-    "port": 139,
-    "service": "NetBIOS Session",
-    "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "NetBIOS Name Service Poisoning (LLMNR/NBT-NS)",
-    "attackType": "Relay Attacks, NTLM Hash Harvesting & Man-in-the-Middle",
-    "title": "High Risk Port 139 (NetBIOS Session) Open",
-    "description": "Exposed NetBIOS Session service is susceptible to: NetBIOS name enumeration, session hijacking, relay attacks",
-    "recommendation": "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced settings.",
-    "remediationSteps": [
-      "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced WINS settings.",
-      "Block Inbound Port 139 on all external and untrusted interfaces."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 139 (NetBIOS)\" -Direction Inbound -LocalPort 139 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 139/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:28.554Z"
-  },
-  {
-    "id": "threat-32-445-1792649488548",
-    "deviceId": 32,
-    "deviceName": "LAN Device (172.18.1.76)",
-    "deviceIp": "172.18.1.76",
-    "port": 445,
-    "service": "SMB / CIFS",
-    "severity": "CRITICAL",
-    "protocol": "TCP",
-    "cve": "CVE-2017-0144 (EternalBlue) / MS17-010",
-    "attackType": "Ransomware Lateral Propagation & Remote Code Execution",
-    "title": "Critical Port 445 (SMB / CIFS) Exposed",
-    "description": "Device has SMB / CIFS open. Potential attack vector: WannaCry, NotPetya, EternalBlue, Lateral Ransomware Propagation",
-    "recommendation": "Block port 445 on WAN and internal boundaries. Disable legacy SMBv1 and enforce SMB signing/encryption.",
-    "remediationSteps": [
-      "Immediately block Port 445 on perimeter firewalls and router WAN interfaces.",
-      "Disable legacy SMBv1 in Windows (Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol).",
-      "Enforce SMB signing and SMB encryption for internal file shares.",
-      "Isolate internal file sharing to dedicated private management VLANs."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 445 (SMB/CIFS)\" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 445/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:28.548Z"
-  },
-  {
-    "id": "threat-32-135-1792649488548",
-    "deviceId": 32,
-    "deviceName": "LAN Device (172.18.1.76)",
-    "deviceIp": "172.18.1.76",
-    "port": 135,
-    "service": "MS RPC / EPMAP",
-    "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "MS03-026 / MS03-039 (Blaster Worm)",
-    "attackType": "RPC Buffer Overflow & Remote System Enumeration",
-    "title": "High Risk Port 135 (MS RPC / EPMAP) Open",
-    "description": "Exposed MS RPC / EPMAP service is susceptible to: Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
-    "recommendation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
-    "remediationSteps": [
-      "Block Port 135 on perimeter router and host firewall.",
-      "Filter inbound RPC requests and restrict to authorized domain controllers only."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 135/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:28.548Z"
-  },
-  {
-    "id": "threat-32-139-1792649488548",
-    "deviceId": 32,
-    "deviceName": "LAN Device (172.18.1.76)",
-    "deviceIp": "172.18.1.76",
-    "port": 139,
-    "service": "NetBIOS Session",
-    "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "NetBIOS Name Service Poisoning (LLMNR/NBT-NS)",
-    "attackType": "Relay Attacks, NTLM Hash Harvesting & Man-in-the-Middle",
-    "title": "High Risk Port 139 (NetBIOS Session) Open",
-    "description": "Exposed NetBIOS Session service is susceptible to: NetBIOS name enumeration, session hijacking, relay attacks",
-    "recommendation": "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced settings.",
-    "remediationSteps": [
-      "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced WINS settings.",
-      "Block Inbound Port 139 on all external and untrusted interfaces."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 139 (NetBIOS)\" -Direction Inbound -LocalPort 139 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 139/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:28.548Z"
-  },
-  {
-    "id": "threat-31-445-1792649488538",
-    "deviceId": 31,
-    "deviceName": "LAN Device (172.18.1.75)",
-    "deviceIp": "172.18.1.75",
-    "port": 445,
-    "service": "SMB / CIFS",
-    "severity": "CRITICAL",
-    "protocol": "TCP",
-    "cve": "CVE-2017-0144 (EternalBlue) / MS17-010",
-    "attackType": "Ransomware Lateral Propagation & Remote Code Execution",
-    "title": "Critical Port 445 (SMB / CIFS) Exposed",
-    "description": "Device has SMB / CIFS open. Potential attack vector: WannaCry, NotPetya, EternalBlue, Lateral Ransomware Propagation",
-    "recommendation": "Block port 445 on WAN and internal boundaries. Disable legacy SMBv1 and enforce SMB signing/encryption.",
-    "remediationSteps": [
-      "Immediately block Port 445 on perimeter firewalls and router WAN interfaces.",
-      "Disable legacy SMBv1 in Windows (Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol).",
-      "Enforce SMB signing and SMB encryption for internal file shares.",
-      "Isolate internal file sharing to dedicated private management VLANs."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 445 (SMB/CIFS)\" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 445/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:28.538Z"
-  },
-  {
-    "id": "threat-31-135-1792649488538",
-    "deviceId": 31,
-    "deviceName": "LAN Device (172.18.1.75)",
-    "deviceIp": "172.18.1.75",
-    "port": 135,
-    "service": "MS RPC / EPMAP",
-    "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "MS03-026 / MS03-039 (Blaster Worm)",
-    "attackType": "RPC Buffer Overflow & Remote System Enumeration",
-    "title": "High Risk Port 135 (MS RPC / EPMAP) Open",
-    "description": "Exposed MS RPC / EPMAP service is susceptible to: Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
-    "recommendation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
-    "remediationSteps": [
-      "Block Port 135 on perimeter router and host firewall.",
-      "Filter inbound RPC requests and restrict to authorized domain controllers only."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 135/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:28.538Z"
-  },
-  {
-    "id": "threat-31-139-1792649488538",
-    "deviceId": 31,
-    "deviceName": "LAN Device (172.18.1.75)",
-    "deviceIp": "172.18.1.75",
-    "port": 139,
-    "service": "NetBIOS Session",
-    "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "NetBIOS Name Service Poisoning (LLMNR/NBT-NS)",
-    "attackType": "Relay Attacks, NTLM Hash Harvesting & Man-in-the-Middle",
-    "title": "High Risk Port 139 (NetBIOS Session) Open",
-    "description": "Exposed NetBIOS Session service is susceptible to: NetBIOS name enumeration, session hijacking, relay attacks",
-    "recommendation": "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced settings.",
-    "remediationSteps": [
-      "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced WINS settings.",
-      "Block Inbound Port 139 on all external and untrusted interfaces."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 139 (NetBIOS)\" -Direction Inbound -LocalPort 139 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 139/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:28.538Z"
-  },
-  {
-    "id": "threat-30-3389-1792649487823",
-    "deviceId": 30,
-    "deviceName": "LAN Device (172.18.1.74)",
-    "deviceIp": "172.18.1.74",
-    "port": 3389,
-    "service": "RDP (Remote Desktop)",
-    "severity": "CRITICAL",
-    "protocol": "TCP",
-    "cve": "CVE-2019-0708 (BlueKeep) & Credential Spraying",
-    "attackType": "Pre-Auth Remote Code Execution & Automated Brute Force",
-    "title": "Critical Port 3389 (RDP (Remote Desktop)) Exposed",
-    "description": "Device has RDP (Remote Desktop) open. Potential attack vector: BlueKeep, Automated credential brute-force, Ransomware deployment",
-    "recommendation": "Never expose RDP directly to network. Restrict access through VPN, require NLA, and enable MFA.",
-    "remediationSteps": [
-      "Never expose RDP (Port 3389) directly to public Internet or untrusted subnets.",
-      "Require secure WireGuard / OpenVPN or SSH Bastion tunnel to access remote desktops.",
-      "Enforce Network Level Authentication (NLA) on Windows System Properties.",
-      "Configure Account Lockout Policies to prevent automated password dictionary attacks."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 3389 (RDP)\" -Direction Inbound -LocalPort 3389 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 3389/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 3389 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:27.823Z"
-  },
-  {
-    "id": "threat-29-445-1792649487819",
-    "deviceId": 29,
-    "deviceName": "LAN Device (172.18.1.72)",
-    "deviceIp": "172.18.1.72",
-    "port": 445,
-    "service": "SMB / CIFS",
-    "severity": "CRITICAL",
-    "protocol": "TCP",
-    "cve": "CVE-2017-0144 (EternalBlue) / MS17-010",
-    "attackType": "Ransomware Lateral Propagation & Remote Code Execution",
-    "title": "Critical Port 445 (SMB / CIFS) Exposed",
-    "description": "Device has SMB / CIFS open. Potential attack vector: WannaCry, NotPetya, EternalBlue, Lateral Ransomware Propagation",
-    "recommendation": "Block port 445 on WAN and internal boundaries. Disable legacy SMBv1 and enforce SMB signing/encryption.",
-    "remediationSteps": [
-      "Immediately block Port 445 on perimeter firewalls and router WAN interfaces.",
-      "Disable legacy SMBv1 in Windows (Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol).",
-      "Enforce SMB signing and SMB encryption for internal file shares.",
-      "Isolate internal file sharing to dedicated private management VLANs."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 445 (SMB/CIFS)\" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 445/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:27.819Z"
-  },
-  {
-    "id": "threat-29-135-1792649487819",
-    "deviceId": 29,
-    "deviceName": "LAN Device (172.18.1.72)",
-    "deviceIp": "172.18.1.72",
-    "port": 135,
-    "service": "MS RPC / EPMAP",
-    "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "MS03-026 / MS03-039 (Blaster Worm)",
-    "attackType": "RPC Buffer Overflow & Remote System Enumeration",
-    "title": "High Risk Port 135 (MS RPC / EPMAP) Open",
-    "description": "Exposed MS RPC / EPMAP service is susceptible to: Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
-    "recommendation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
-    "remediationSteps": [
-      "Block Port 135 on perimeter router and host firewall.",
-      "Filter inbound RPC requests and restrict to authorized domain controllers only."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 135/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:27.819Z"
-  },
-  {
-    "id": "threat-29-139-1792649487819",
-    "deviceId": 29,
-    "deviceName": "LAN Device (172.18.1.72)",
-    "deviceIp": "172.18.1.72",
-    "port": 139,
-    "service": "NetBIOS Session",
-    "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "NetBIOS Name Service Poisoning (LLMNR/NBT-NS)",
-    "attackType": "Relay Attacks, NTLM Hash Harvesting & Man-in-the-Middle",
-    "title": "High Risk Port 139 (NetBIOS Session) Open",
-    "description": "Exposed NetBIOS Session service is susceptible to: NetBIOS name enumeration, session hijacking, relay attacks",
-    "recommendation": "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced settings.",
-    "remediationSteps": [
-      "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced WINS settings.",
-      "Block Inbound Port 139 on all external and untrusted interfaces."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 139 (NetBIOS)\" -Direction Inbound -LocalPort 139 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 139/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:27.819Z"
-  },
-  {
-    "id": "threat-28-445-1792649487816",
-    "deviceId": 28,
-    "deviceName": "LAN Device (172.18.1.69)",
-    "deviceIp": "172.18.1.69",
-    "port": 445,
-    "service": "SMB / CIFS",
-    "severity": "CRITICAL",
-    "protocol": "TCP",
-    "cve": "CVE-2017-0144 (EternalBlue) / MS17-010",
-    "attackType": "Ransomware Lateral Propagation & Remote Code Execution",
-    "title": "Critical Port 445 (SMB / CIFS) Exposed",
-    "description": "Device has SMB / CIFS open. Potential attack vector: WannaCry, NotPetya, EternalBlue, Lateral Ransomware Propagation",
-    "recommendation": "Block port 445 on WAN and internal boundaries. Disable legacy SMBv1 and enforce SMB signing/encryption.",
-    "remediationSteps": [
-      "Immediately block Port 445 on perimeter firewalls and router WAN interfaces.",
-      "Disable legacy SMBv1 in Windows (Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol).",
-      "Enforce SMB signing and SMB encryption for internal file shares.",
-      "Isolate internal file sharing to dedicated private management VLANs."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 445 (SMB/CIFS)\" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 445/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:27.816Z"
-  },
-  {
-    "id": "threat-28-135-1792649487816",
-    "deviceId": 28,
-    "deviceName": "LAN Device (172.18.1.69)",
-    "deviceIp": "172.18.1.69",
-    "port": 135,
-    "service": "MS RPC / EPMAP",
-    "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "MS03-026 / MS03-039 (Blaster Worm)",
-    "attackType": "RPC Buffer Overflow & Remote System Enumeration",
-    "title": "High Risk Port 135 (MS RPC / EPMAP) Open",
-    "description": "Exposed MS RPC / EPMAP service is susceptible to: Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
-    "recommendation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
-    "remediationSteps": [
-      "Block Port 135 on perimeter router and host firewall.",
-      "Filter inbound RPC requests and restrict to authorized domain controllers only."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 135/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:27.816Z"
-  },
-  {
-    "id": "threat-28-139-1792649487816",
-    "deviceId": 28,
-    "deviceName": "LAN Device (172.18.1.69)",
-    "deviceIp": "172.18.1.69",
-    "port": 139,
-    "service": "NetBIOS Session",
-    "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "NetBIOS Name Service Poisoning (LLMNR/NBT-NS)",
-    "attackType": "Relay Attacks, NTLM Hash Harvesting & Man-in-the-Middle",
-    "title": "High Risk Port 139 (NetBIOS Session) Open",
-    "description": "Exposed NetBIOS Session service is susceptible to: NetBIOS name enumeration, session hijacking, relay attacks",
-    "recommendation": "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced settings.",
-    "remediationSteps": [
-      "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced WINS settings.",
-      "Block Inbound Port 139 on all external and untrusted interfaces."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 139 (NetBIOS)\" -Direction Inbound -LocalPort 139 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 139/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:27.816Z"
-  },
-  {
-    "id": "threat-27-135-1792649487811",
-    "deviceId": 27,
-    "deviceName": "LAN Device (172.18.1.65)",
-    "deviceIp": "172.18.1.65",
-    "port": 135,
-    "service": "MS RPC / EPMAP",
-    "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "MS03-026 / MS03-039 (Blaster Worm)",
-    "attackType": "RPC Buffer Overflow & Remote System Enumeration",
-    "title": "High Risk Port 135 (MS RPC / EPMAP) Open",
-    "description": "Exposed MS RPC / EPMAP service is susceptible to: Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
-    "recommendation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
-    "remediationSteps": [
-      "Block Port 135 on perimeter router and host firewall.",
-      "Filter inbound RPC requests and restrict to authorized domain controllers only."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 135/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:27.811Z"
-  },
-  {
-    "id": "threat-25-445-1792649486839",
-    "deviceId": 25,
-    "deviceName": "LAN Device (172.18.1.54)",
-    "deviceIp": "172.18.1.54",
-    "port": 445,
-    "service": "SMB / CIFS",
-    "severity": "CRITICAL",
-    "protocol": "TCP",
-    "cve": "CVE-2017-0144 (EternalBlue) / MS17-010",
-    "attackType": "Ransomware Lateral Propagation & Remote Code Execution",
-    "title": "Critical Port 445 (SMB / CIFS) Exposed",
-    "description": "Device has SMB / CIFS open. Potential attack vector: WannaCry, NotPetya, EternalBlue, Lateral Ransomware Propagation",
-    "recommendation": "Block port 445 on WAN and internal boundaries. Disable legacy SMBv1 and enforce SMB signing/encryption.",
-    "remediationSteps": [
-      "Immediately block Port 445 on perimeter firewalls and router WAN interfaces.",
-      "Disable legacy SMBv1 in Windows (Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol).",
-      "Enforce SMB signing and SMB encryption for internal file shares.",
-      "Isolate internal file sharing to dedicated private management VLANs."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 445 (SMB/CIFS)\" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 445/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:26.839Z"
-  },
-  {
-    "id": "threat-25-135-1792649486839",
-    "deviceId": 25,
-    "deviceName": "LAN Device (172.18.1.54)",
-    "deviceIp": "172.18.1.54",
-    "port": 135,
-    "service": "MS RPC / EPMAP",
-    "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "MS03-026 / MS03-039 (Blaster Worm)",
-    "attackType": "RPC Buffer Overflow & Remote System Enumeration",
-    "title": "High Risk Port 135 (MS RPC / EPMAP) Open",
-    "description": "Exposed MS RPC / EPMAP service is susceptible to: Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
-    "recommendation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
-    "remediationSteps": [
-      "Block Port 135 on perimeter router and host firewall.",
-      "Filter inbound RPC requests and restrict to authorized domain controllers only."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 135/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:26.839Z"
-  },
-  {
-    "id": "threat-25-139-1792649486839",
-    "deviceId": 25,
-    "deviceName": "LAN Device (172.18.1.54)",
-    "deviceIp": "172.18.1.54",
-    "port": 139,
-    "service": "NetBIOS Session",
-    "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "NetBIOS Name Service Poisoning (LLMNR/NBT-NS)",
-    "attackType": "Relay Attacks, NTLM Hash Harvesting & Man-in-the-Middle",
-    "title": "High Risk Port 139 (NetBIOS Session) Open",
-    "description": "Exposed NetBIOS Session service is susceptible to: NetBIOS name enumeration, session hijacking, relay attacks",
-    "recommendation": "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced settings.",
-    "remediationSteps": [
-      "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced WINS settings.",
-      "Block Inbound Port 139 on all external and untrusted interfaces."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 139 (NetBIOS)\" -Direction Inbound -LocalPort 139 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 139/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:26.839Z"
-  },
-  {
-    "id": "threat-16-445-1792649485800",
-    "deviceId": 16,
-    "deviceName": "LAN Device (172.18.1.36)",
+    "id": "threat-search-1794375128926-zej3",
     "deviceIp": "172.18.1.36",
-    "port": 445,
-    "service": "SMB / CIFS",
-    "severity": "CRITICAL",
-    "protocol": "TCP",
-    "cve": "CVE-2017-0144 (EternalBlue) / MS17-010",
-    "attackType": "Ransomware Lateral Propagation & Remote Code Execution",
-    "title": "Critical Port 445 (SMB / CIFS) Exposed",
-    "description": "Device has SMB / CIFS open. Potential attack vector: WannaCry, NotPetya, EternalBlue, Lateral Ransomware Propagation",
-    "recommendation": "Block port 445 on WAN and internal boundaries. Disable legacy SMBv1 and enforce SMB signing/encryption.",
-    "remediationSteps": [
-      "Immediately block Port 445 on perimeter firewalls and router WAN interfaces.",
-      "Disable legacy SMBv1 in Windows (Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol).",
-      "Enforce SMB signing and SMB encryption for internal file shares.",
-      "Isolate internal file sharing to dedicated private management VLANs."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 445 (SMB/CIFS)\" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 445/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:25.800Z"
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"[Video] Maatrubhumi - Trailer | Salman Khan, Chitrangda Singh | Apoorva Lakhia | 4th December 2026\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-11T05:32:09.2241471Z"
   },
   {
-    "id": "threat-16-135-1792649485800",
-    "deviceId": 16,
-    "deviceName": "LAN Device (172.18.1.36)",
+    "id": "threat-search-1794375129205-2awx",
     "deviceIp": "172.18.1.36",
-    "port": 135,
-    "service": "MS RPC / EPMAP",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
     "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "MS03-026 / MS03-039 (Blaster Worm)",
-    "attackType": "RPC Buffer Overflow & Remote System Enumeration",
-    "title": "High Risk Port 135 (MS RPC / EPMAP) Open",
-    "description": "Exposed MS RPC / EPMAP service is susceptible to: Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
-    "recommendation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
-    "remediationSteps": [
-      "Block Port 135 on perimeter router and host firewall.",
-      "Filter inbound RPC requests and restrict to authorized domain controllers only."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 135/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:25.800Z"
+    "title": "Flagged User Search: \"[Video] Kurulus Osman Season 06 Episode 93 - Urdu Dubbed - Har Pal Geo\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-11T05:32:09.2640257Z"
   },
   {
-    "id": "threat-16-139-1792649485800",
-    "deviceId": 16,
-    "deviceName": "LAN Device (172.18.1.36)",
+    "id": "threat-search-1794375129213-op08",
     "deviceIp": "172.18.1.36",
-    "port": 139,
-    "service": "NetBIOS Session",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
     "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "NetBIOS Name Service Poisoning (LLMNR/NBT-NS)",
-    "attackType": "Relay Attacks, NTLM Hash Harvesting & Man-in-the-Middle",
-    "title": "High Risk Port 139 (NetBIOS Session) Open",
-    "description": "Exposed NetBIOS Session service is susceptible to: NetBIOS name enumeration, session hijacking, relay attacks",
-    "recommendation": "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced settings.",
-    "remediationSteps": [
-      "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced WINS settings.",
-      "Block Inbound Port 139 on all external and untrusted interfaces."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 139 (NetBIOS)\" -Direction Inbound -LocalPort 139 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 139/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:25.800Z"
+    "title": "Flagged User Search: \"[Video] Kurulus Osman Urdu - Season 6 Episode 92\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-11T05:32:09.2680155Z"
   },
   {
-    "id": "threat-11-445-1792649484820",
-    "deviceId": 11,
-    "deviceName": "LAN Device (172.18.1.28)",
-    "deviceIp": "172.18.1.28",
-    "port": 445,
-    "service": "SMB / CIFS",
+    "id": "threat-search-1794375128600-zamx",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"osman season 6 episode 94\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-11T05:32:09.1508496Z"
+  },
+  {
+    "id": "threat-search-1794375128610-9mxg",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"osman season 6 episode 93\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-11T05:32:09.1508496Z"
+  },
+  {
+    "id": "threat-search-1794375128621-dtaq",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"osman season 6 episode 92\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-11T05:32:09.1518141Z"
+  },
+  {
+    "id": "threat-search-1794375128644-zywe",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"osman season 6 episode 91\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-11T05:32:09.1558028Z"
+  },
+  {
+    "id": "threat-search-1794375128657-bxg6",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"osman season 6 episode 90\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-11T05:32:09.1558028Z"
+  },
+  {
+    "id": "threat-search-1794375128697-sp8j",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"osman season 6 episode 89\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-11T05:32:09.1577979Z"
+  },
+  {
+    "id": "threat-search-1794375128706-edxh",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"osman season 6 episode 88\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-11T05:32:09.1577979Z"
+  },
+  {
+    "id": "threat-search-1794375128714-lnoy",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"osman season 6 episode 87\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-11T05:32:09.1577979Z"
+  },
+  {
+    "id": "threat-search-1794375128722-rz29",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"osman season 6 episode 86\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-11T05:32:09.1587953Z"
+  },
+  {
+    "id": "threat-search-1794375128728-lylw",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"osman season 6 episode 85\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-11T05:32:09.1587953Z"
+  },
+  {
+    "id": "threat-search-1794375128736-7vae",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"osman season 6 episode 84\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-11T05:32:09.1587953Z"
+  },
+  {
+    "id": "threat-search-1794375128742-my3b",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"osman season 6 episode 83\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-11T05:32:09.1597925Z"
+  },
+  {
+    "id": "threat-search-1794375128749-ey2p",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"osman season 6 episode 82\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-11T05:32:09.1597925Z"
+  },
+  {
+    "id": "threat-search-1794375128756-bca0",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"osman season 6 episode 81\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-11T05:32:09.1597925Z"
+  },
+  {
+    "id": "threat-search-1794375128761-zep4",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"[Video] Bigg Boss 20 | Full Episode - 66 | Arishfa Throws Away Love's Food in Anger | Colors TV\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-11T05:32:09.2196328Z"
+  },
+  {
+    "id": "threat-search-1794373328494-6m5f",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"[Video] Kurulus Osman Season 06 Episode 120 - Urdu Dubbed - Har Pal Geo\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-11T05:02:09.0429334Z"
+  },
+  {
+    "id": "threat-search-1794373328499-d1cd",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"[Video] Kurulus Osman Season 06 Episode 119 - Urdu Dubbed - Har Pal Geo\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-11T05:02:09.0439339Z"
+  },
+  {
+    "id": "threat-search-1794373328503-2cwl",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"[Video] Kurulus Osman Season 06 Episode 118 - Urdu Dubbed - Har Pal Geo\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-11T05:02:09.0439339Z"
+  },
+  {
+    "id": "threat-search-1794373328509-fefn",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"[Video] Kurulus Osman Season 06 Episode 117 - Urdu Dubbed - Har Pal Geo\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-11T05:02:09.0449276Z"
+  },
+  {
+    "id": "threat-search-1794373328123-zdus",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"osman season 6 episode 121\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-11T05:02:08.9450658Z"
+  },
+  {
+    "id": "threat-search-1794373328130-qw22",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"osman season 6 episode 120\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-11T05:02:08.9633932Z"
+  },
+  {
+    "id": "threat-search-1794373328137-evy5",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"osman season 6 episode 119\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-11T05:02:08.9633932Z"
+  },
+  {
+    "id": "threat-search-1794373328142-jvq5",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"osman season 6 episode 118\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-11T05:02:08.9643890Z"
+  },
+  {
+    "id": "threat-search-1794373328148-zu1n",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"osman season 6 episode 117\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-11T05:02:08.9643890Z"
+  },
+  {
+    "id": "threat-search-1794373328153-0kb5",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"osman season 6 episode 1167\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-11T05:02:08.9653856Z"
+  },
+  {
+    "id": "threat-search-1794373328383-iou3",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"[Video] Kurulus Osman Season 06 Episode 121 - Urdu Dubbed - Har Pal Geo\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-11T05:02:09.0379463Z"
+  },
+  {
+    "id": "threat-search-1794315728995-ckpr",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"osman season 6 episode 116\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T13:02:09.1401109Z"
+  },
+  {
+    "id": "threat-search-1794315729003-vb69",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"osman season 6 episode 115\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T13:02:09.1590917Z"
+  },
+  {
+    "id": "threat-search-1794315729303-kguh",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"osman season 6 episode 78\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T13:02:09.1839933Z"
+  },
+  {
+    "id": "threat-search-1794315729309-7d1d",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"osman season 6 episode 77\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T13:02:09.1839933Z"
+  },
+  {
+    "id": "threat-search-1794315729329-hm03",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"[Video] Kurulus Osman Season 06 Episode 116 - Urdu Dubbed - Har Pal Geo\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T13:02:09.2448331Z"
+  },
+  {
+    "id": "threat-search-1794313928799-jrtl",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"[Video] Kurulus Osman Urdu - Season 6 Episode 113\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T12:32:08.5792246Z"
+  },
+  {
+    "id": "threat-search-1794313928806-x9h5",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"[Video] Kurulus Osman Season 06 Episode 115 - Urdu Dubbed - Har Pal Geo\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T12:32:08.5802180Z"
+  },
+  {
+    "id": "threat-search-1794313928346-2pt6",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"osman season 6 episode 114\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T12:32:08.4675160Z"
+  },
+  {
+    "id": "threat-search-1794313928354-mf3z",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"osman season 6 episode 113\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T12:32:08.4844707Z"
+  },
+  {
+    "id": "threat-search-1794313928652-eygu",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"[Video] Kurulus Osman Season 06 Episode 114 - Urdu Dubbed - Har Pal Geo\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T12:32:08.5742336Z"
+  },
+  {
+    "id": "threat-search-1794312128805-jysy",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"[Video] Kurulus Osman Season 06 Episode 111 - Urdu Dubbed - Har Pal Geo\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T12:02:08.5575932Z"
+  },
+  {
+    "id": "threat-search-1794312128856-40mu",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"[Video] Kurulus Osman Season 06 Episode 104 - Urdu Dubbed - Har Pal Geo\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T12:02:08.5645759Z"
+  },
+  {
+    "id": "threat-search-1794312128338-x7ko",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"osman season 6 episode 112\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T12:02:08.4568624Z"
+  },
+  {
+    "id": "threat-search-1794312128347-fm7j",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"osman season 6 episode 111\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T12:02:08.4738172Z"
+  },
+  {
+    "id": "threat-search-1794312128710-0u0s",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"[Video] Kurulus Osman Season 06 Episode 112 - Urdu Dubbed - Har Pal Geo\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T12:02:08.5536043Z"
+  },
+  {
+    "id": "threat-search-1794311530029-pml4",
+    "deviceIp": "172.18.1.11",
+    "deviceName": "DESKTOP-8D1GBAG (172.18.1.11)",
+    "port": 443,
+    "service": "Browser Search (Chrome)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"pixel 8 vs 9a\"",
+    "description": "User \"Rafay Sheikh (rafay98766@gmail.com)\" on DESKTOP-8D1GBAG (172.18.1.11) via Chrome: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.11 (DESKTOP-8D1GBAG) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T11:52:09.3492209Z"
+  },
+  {
+    "id": "threat-search-1794311530286-aivl",
+    "deviceIp": "172.18.1.11",
+    "deviceName": "DESKTOP-8D1GBAG (172.18.1.11)",
+    "port": 443,
+    "service": "Browser Search (Chrome)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"[Video] Pixel 9a vs. 9 vs. 8: Camera, Battery, Performance!\"",
+    "description": "User \"Rafay Sheikh (rafay98766@gmail.com)\" on DESKTOP-8D1GBAG (172.18.1.11) via Chrome: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.11 (DESKTOP-8D1GBAG) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T11:52:09.4038342Z"
+  },
+  {
+    "id": "threat-search-1794310329277-n0gb",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"[Video] Kurulus Osman Season 06 Episode 109 - Urdu Dubbed - Har Pal Geo\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T11:32:09.0055618Z"
+  },
+  {
+    "id": "threat-search-1794310328844-m9qm",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"osman season 6 episode 110\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T11:32:08.9056475Z"
+  },
+  {
+    "id": "threat-search-1794310328858-e65n",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"osman season 6 episode 109\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T11:32:08.9255931Z"
+  },
+  {
+    "id": "threat-search-1794310329184-1559",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"[Video] Kurulus Osman Season 06 Episode 110 - Urdu Dubbed - Har Pal Geo\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T11:32:08.9545181Z"
+  },
+  {
+    "id": "threat-search-1794309732761-uxk3",
+    "deviceIp": "172.18.1.11",
+    "deviceName": "DESKTOP-8D1GBAG (172.18.1.11)",
+    "port": 443,
+    "service": "Web/DNS Access",
     "severity": "CRITICAL",
-    "protocol": "TCP",
-    "cve": "CVE-2017-0144 (EternalBlue) / MS17-010",
-    "attackType": "Ransomware Lateral Propagation & Remote Code Execution",
-    "title": "Critical Port 445 (SMB / CIFS) Exposed",
-    "description": "Device has SMB / CIFS open. Potential attack vector: WannaCry, NotPetya, EternalBlue, Lateral Ransomware Propagation",
-    "recommendation": "Block port 445 on WAN and internal boundaries. Disable legacy SMBv1 and enforce SMB signing/encryption.",
-    "remediationSteps": [
-      "Immediately block Port 445 on perimeter firewalls and router WAN interfaces.",
-      "Disable legacy SMBv1 in Windows (Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol).",
-      "Enforce SMB signing and SMB encryption for internal file shares.",
-      "Isolate internal file sharing to dedicated private management VLANs."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 445 (SMB/CIFS)\" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 445/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:24.820Z"
+    "title": "Suspicious Domain Access: whatismyipaddress.com",
+    "description": "User \"sheikh abdul rafay (Incognito / DNS)\" on DESKTOP-8D1GBAG (172.18.1.11) via Chrome (Incognito / Network Cache): Matched Critical Rule: \"whatismyipaddress.com\"",
+    "recommendation": "Review endpoint 172.18.1.11 (DESKTOP-8D1GBAG) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T11:22:10.1732884Z"
   },
   {
-    "id": "threat-11-135-1792649484820",
-    "deviceId": 11,
-    "deviceName": "LAN Device (172.18.1.28)",
-    "deviceIp": "172.18.1.28",
-    "port": 135,
-    "service": "MS RPC / EPMAP",
+    "id": "threat-search-1794309732904-h6hl",
+    "deviceIp": "172.18.1.11",
+    "deviceName": "DESKTOP-8D1GBAG (172.18.1.11)",
+    "port": 443,
+    "service": "Browser Search (Chrome (Eclipvion))",
     "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "MS03-026 / MS03-039 (Blaster Worm)",
-    "attackType": "RPC Buffer Overflow & Remote System Enumeration",
-    "title": "High Risk Port 135 (MS RPC / EPMAP) Open",
-    "description": "Exposed MS RPC / EPMAP service is susceptible to: Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
-    "recommendation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
-    "remediationSteps": [
-      "Block Port 135 on perimeter router and host firewall.",
-      "Filter inbound RPC requests and restrict to authorized domain controllers only."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 135/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:24.820Z"
+    "title": "Flagged User Search: \"this vehicle can be used as a getaway after phoning farakline and taver\"",
+    "description": "User \"Eclipvion (eclipvion@gmail.com)\" on DESKTOP-8D1GBAG (172.18.1.11) via Chrome (Eclipvion): Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.11 (DESKTOP-8D1GBAG) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T11:22:10.1915750Z"
   },
   {
-    "id": "threat-11-139-1792649484820",
-    "deviceId": 11,
-    "deviceName": "LAN Device (172.18.1.28)",
-    "deviceIp": "172.18.1.28",
-    "port": 139,
-    "service": "NetBIOS Session",
+    "id": "threat-search-1794308528899-mlbh",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
     "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "NetBIOS Name Service Poisoning (LLMNR/NBT-NS)",
-    "attackType": "Relay Attacks, NTLM Hash Harvesting & Man-in-the-Middle",
-    "title": "High Risk Port 139 (NetBIOS Session) Open",
-    "description": "Exposed NetBIOS Session service is susceptible to: NetBIOS name enumeration, session hijacking, relay attacks",
-    "recommendation": "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced settings.",
-    "remediationSteps": [
-      "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced WINS settings.",
-      "Block Inbound Port 139 on all external and untrusted interfaces."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 139 (NetBIOS)\" -Direction Inbound -LocalPort 139 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 139/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:24.820Z"
+    "title": "Flagged User Search: \"[Video] Kurulus Osman Season 06 Episode 107 - Urdu Dubbed - Har Pal Geo\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T11:02:08.7168735Z"
   },
   {
-    "id": "threat-10-445-1792649483735",
-    "deviceId": 10,
-    "deviceName": "LAN Device (172.18.1.27)",
-    "deviceIp": "172.18.1.27",
-    "port": 445,
-    "service": "SMB / CIFS",
-    "severity": "CRITICAL",
-    "protocol": "TCP",
-    "cve": "CVE-2017-0144 (EternalBlue) / MS17-010",
-    "attackType": "Ransomware Lateral Propagation & Remote Code Execution",
-    "title": "Critical Port 445 (SMB / CIFS) Exposed",
-    "description": "Device has SMB / CIFS open. Potential attack vector: WannaCry, NotPetya, EternalBlue, Lateral Ransomware Propagation",
-    "recommendation": "Block port 445 on WAN and internal boundaries. Disable legacy SMBv1 and enforce SMB signing/encryption.",
-    "remediationSteps": [
-      "Immediately block Port 445 on perimeter firewalls and router WAN interfaces.",
-      "Disable legacy SMBv1 in Windows (Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol).",
-      "Enforce SMB signing and SMB encryption for internal file shares.",
-      "Isolate internal file sharing to dedicated private management VLANs."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 445 (SMB/CIFS)\" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 445/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:23.735Z"
-  },
-  {
-    "id": "threat-10-135-1792649483735",
-    "deviceId": 10,
-    "deviceName": "LAN Device (172.18.1.27)",
-    "deviceIp": "172.18.1.27",
-    "port": 135,
-    "service": "MS RPC / EPMAP",
+    "id": "threat-search-1794308528517-k0df",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
     "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "MS03-026 / MS03-039 (Blaster Worm)",
-    "attackType": "RPC Buffer Overflow & Remote System Enumeration",
-    "title": "High Risk Port 135 (MS RPC / EPMAP) Open",
-    "description": "Exposed MS RPC / EPMAP service is susceptible to: Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
-    "recommendation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
-    "remediationSteps": [
-      "Block Port 135 on perimeter router and host firewall.",
-      "Filter inbound RPC requests and restrict to authorized domain controllers only."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 135/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:23.735Z"
+    "title": "Flagged User Search: \"osman season 6 episode 108\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T11:02:08.6105817Z"
   },
   {
-    "id": "threat-10-139-1792649483735",
-    "deviceId": 10,
-    "deviceName": "LAN Device (172.18.1.27)",
-    "deviceIp": "172.18.1.27",
-    "port": 139,
-    "service": "NetBIOS Session",
+    "id": "threat-search-1794308528523-gbb7",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
     "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "NetBIOS Name Service Poisoning (LLMNR/NBT-NS)",
-    "attackType": "Relay Attacks, NTLM Hash Harvesting & Man-in-the-Middle",
-    "title": "High Risk Port 139 (NetBIOS Session) Open",
-    "description": "Exposed NetBIOS Session service is susceptible to: NetBIOS name enumeration, session hijacking, relay attacks",
-    "recommendation": "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced settings.",
-    "remediationSteps": [
-      "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced WINS settings.",
-      "Block Inbound Port 139 on all external and untrusted interfaces."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 139 (NetBIOS)\" -Direction Inbound -LocalPort 139 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 139/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:23.735Z"
+    "title": "Flagged User Search: \"osman season 6 episode 107\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T11:02:08.6301404Z"
   },
   {
-    "id": "threat-9-445-1792649483732",
-    "deviceId": 9,
-    "deviceName": "LAN Device (172.18.1.26)",
-    "deviceIp": "172.18.1.26",
-    "port": 445,
-    "service": "SMB / CIFS",
-    "severity": "CRITICAL",
-    "protocol": "TCP",
-    "cve": "CVE-2017-0144 (EternalBlue) / MS17-010",
-    "attackType": "Ransomware Lateral Propagation & Remote Code Execution",
-    "title": "Critical Port 445 (SMB / CIFS) Exposed",
-    "description": "Device has SMB / CIFS open. Potential attack vector: WannaCry, NotPetya, EternalBlue, Lateral Ransomware Propagation",
-    "recommendation": "Block port 445 on WAN and internal boundaries. Disable legacy SMBv1 and enforce SMB signing/encryption.",
-    "remediationSteps": [
-      "Immediately block Port 445 on perimeter firewalls and router WAN interfaces.",
-      "Disable legacy SMBv1 in Windows (Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol).",
-      "Enforce SMB signing and SMB encryption for internal file shares.",
-      "Isolate internal file sharing to dedicated private management VLANs."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 445 (SMB/CIFS)\" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 445/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:23.732Z"
-  },
-  {
-    "id": "threat-9-135-1792649483732",
-    "deviceId": 9,
-    "deviceName": "LAN Device (172.18.1.26)",
-    "deviceIp": "172.18.1.26",
-    "port": 135,
-    "service": "MS RPC / EPMAP",
+    "id": "threat-search-1794308528789-qebl",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
     "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "MS03-026 / MS03-039 (Blaster Worm)",
-    "attackType": "RPC Buffer Overflow & Remote System Enumeration",
-    "title": "High Risk Port 135 (MS RPC / EPMAP) Open",
-    "description": "Exposed MS RPC / EPMAP service is susceptible to: Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
-    "recommendation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
-    "remediationSteps": [
-      "Block Port 135 on perimeter router and host firewall.",
-      "Filter inbound RPC requests and restrict to authorized domain controllers only."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 135/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:23.732Z"
+    "title": "Flagged User Search: \"[Video] Kurulus Osman Season 06 Episode 108 - Urdu Dubbed - Har Pal Geo\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T11:02:08.7118864Z"
   },
   {
-    "id": "threat-9-139-1792649483732",
-    "deviceId": 9,
-    "deviceName": "LAN Device (172.18.1.26)",
-    "deviceIp": "172.18.1.26",
-    "port": 139,
-    "service": "NetBIOS Session",
-    "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "NetBIOS Name Service Poisoning (LLMNR/NBT-NS)",
-    "attackType": "Relay Attacks, NTLM Hash Harvesting & Man-in-the-Middle",
-    "title": "High Risk Port 139 (NetBIOS Session) Open",
-    "description": "Exposed NetBIOS Session service is susceptible to: NetBIOS name enumeration, session hijacking, relay attacks",
-    "recommendation": "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced settings.",
-    "remediationSteps": [
-      "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced WINS settings.",
-      "Block Inbound Port 139 on all external and untrusted interfaces."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 139 (NetBIOS)\" -Direction Inbound -LocalPort 139 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 139/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:23.732Z"
-  },
-  {
-    "id": "threat-7-135-1792649483721",
-    "deviceId": 7,
-    "deviceName": "LAN Device (172.18.1.22)",
-    "deviceIp": "172.18.1.22",
-    "port": 135,
-    "service": "MS RPC / EPMAP",
-    "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "MS03-026 / MS03-039 (Blaster Worm)",
-    "attackType": "RPC Buffer Overflow & Remote System Enumeration",
-    "title": "High Risk Port 135 (MS RPC / EPMAP) Open",
-    "description": "Exposed MS RPC / EPMAP service is susceptible to: Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
-    "recommendation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
-    "remediationSteps": [
-      "Block Port 135 on perimeter router and host firewall.",
-      "Filter inbound RPC requests and restrict to authorized domain controllers only."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 135/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:23.721Z"
-  },
-  {
-    "id": "threat-4-445-1792649482973",
-    "deviceId": 4,
-    "deviceName": "LAN Device (172.18.1.14)",
+    "id": "threat-search-1794306848715-8sku",
     "deviceIp": "172.18.1.14",
-    "port": 445,
-    "service": "SMB / CIFS",
+    "deviceName": "DESK-DATACENTRE (172.18.1.14)",
+    "port": 443,
+    "service": "Web/DNS Access",
     "severity": "CRITICAL",
-    "protocol": "TCP",
-    "cve": "CVE-2017-0144 (EternalBlue) / MS17-010",
-    "attackType": "Ransomware Lateral Propagation & Remote Code Execution",
-    "title": "Critical Port 445 (SMB / CIFS) Exposed",
-    "description": "Device has SMB / CIFS open. Potential attack vector: WannaCry, NotPetya, EternalBlue, Lateral Ransomware Propagation",
-    "recommendation": "Block port 445 on WAN and internal boundaries. Disable legacy SMBv1 and enforce SMB signing/encryption.",
-    "remediationSteps": [
-      "Immediately block Port 445 on perimeter firewalls and router WAN interfaces.",
-      "Disable legacy SMBv1 in Windows (Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol).",
-      "Enforce SMB signing and SMB encryption for internal file shares.",
-      "Isolate internal file sharing to dedicated private management VLANs."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 445 (SMB/CIFS)\" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 445/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:22.973Z"
+    "title": "Suspicious Domain Access: whatismyipaddress.com",
+    "description": "User \"Person 1 (Incognito / DNS)\" on DESK-DATACENTRE (172.18.1.14) via Edge (Incognito / Network Cache): Matched Critical Rule: \"whatismyipaddress.com\"",
+    "recommendation": "Review endpoint 172.18.1.14 (DESK-DATACENTRE) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T10:34:08.5499356Z"
   },
   {
-    "id": "threat-4-135-1792649482973",
-    "deviceId": 4,
-    "deviceName": "LAN Device (172.18.1.14)",
+    "id": "threat-search-1794306729976-5742",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"[Video] Kurulus Osman Season 06 Episode 105 - Urdu Dubbed - Har Pal Geo\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T10:32:09.7475928Z"
+  },
+  {
+    "id": "threat-search-1794306729566-8q8p",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"osman season 6 episode 106\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T10:32:09.6487689Z"
+  },
+  {
+    "id": "threat-search-1794306729574-kpe6",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"osman season 6 episode 105\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T10:32:09.6686903Z"
+  },
+  {
+    "id": "threat-search-1794306729893-sgdc",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"[Video] Kurulus Osman Season 06 Episode 106 - Urdu Dubbed - Har Pal Geo\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T10:32:09.7436036Z"
+  },
+  {
+    "id": "threat-search-1794306134937-s7rb",
+    "deviceIp": "172.18.1.11",
+    "deviceName": "DESKTOP-8D1GBAG (172.18.1.11)",
+    "port": 443,
+    "service": "Browser Search (Chrome (sheikh abdul rafay))",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"hp color laser mfp 178nw toner refill\"",
+    "description": "User \"sheikh abdul rafay (sheikhabdulrafay673@gmail.com)\" on DESKTOP-8D1GBAG (172.18.1.11) via Chrome (sheikh abdul rafay): Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.11 (DESKTOP-8D1GBAG) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T10:22:12.1059610Z"
+  },
+  {
+    "id": "threat-search-1794306134977-qe3p",
+    "deviceIp": "172.18.1.11",
+    "deviceName": "DESKTOP-8D1GBAG (172.18.1.11)",
+    "port": 443,
+    "service": "Browser Search (Chrome (sheikh abdul rafay))",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"16gb ddr5 ram price in karachi\"",
+    "description": "User \"sheikh abdul rafay (sheikhabdulrafay673@gmail.com)\" on DESKTOP-8D1GBAG (172.18.1.11) via Chrome (sheikh abdul rafay): Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.11 (DESKTOP-8D1GBAG) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T10:22:12.1081555Z"
+  },
+  {
+    "id": "threat-search-1794306135167-9lgn",
+    "deviceIp": "172.18.1.11",
+    "deviceName": "DESKTOP-8D1GBAG (172.18.1.11)",
+    "port": 443,
+    "service": "Browser Search (Chrome (sheikh abdul rafay))",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"[Video] Stop Stressing… Allah Knows What Your Heart Needs | Tuaha Ibn Jalil\"",
+    "description": "User \"sheikh abdul rafay (sheikhabdulrafay673@gmail.com)\" on DESKTOP-8D1GBAG (172.18.1.11) via Chrome (sheikh abdul rafay): Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.11 (DESKTOP-8D1GBAG) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T10:22:12.1393383Z"
+  },
+  {
+    "id": "threat-search-1794306134476-e4qm",
+    "deviceIp": "172.18.1.11",
+    "deviceName": "DESKTOP-8D1GBAG (172.18.1.11)",
+    "port": 443,
+    "service": "Browser Search (Chrome (sheikh abdul rafay))",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"Pakistan versus England\"",
+    "description": "User \"sheikh abdul rafay (sheikhabdulrafay673@gmail.com)\" on DESKTOP-8D1GBAG (172.18.1.11) via Chrome (sheikh abdul rafay): Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.11 (DESKTOP-8D1GBAG) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T10:22:12.0959293Z"
+  },
+  {
+    "id": "threat-search-1794306134487-8om3",
+    "deviceIp": "172.18.1.11",
+    "deviceName": "DESKTOP-8D1GBAG (172.18.1.11)",
+    "port": 443,
+    "service": "Browser Search (Chrome (sheikh abdul rafay))",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"hello\"",
+    "description": "User \"sheikh abdul rafay (sheikhabdulrafay673@gmail.com)\" on DESKTOP-8D1GBAG (172.18.1.11) via Chrome (sheikh abdul rafay): Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.11 (DESKTOP-8D1GBAG) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T10:22:12.0959293Z"
+  },
+  {
+    "id": "threat-search-1794306133454-zi6b",
+    "deviceIp": "172.18.1.11",
+    "deviceName": "DESKTOP-8D1GBAG (172.18.1.11)",
+    "port": 443,
+    "service": "Browser Search (Chrome)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"[Video] PAK vs SL 1st Test: Unbelievable Performance by Pakistani Youngsters! | Sports Floor | Geo News\"",
+    "description": "User \"Rafay Sheikh (rafay98766@gmail.com)\" on DESKTOP-8D1GBAG (172.18.1.11) via Chrome: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.11 (DESKTOP-8D1GBAG) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T10:22:11.8205281Z"
+  },
+  {
+    "id": "threat-search-1794306133038-8t8l",
+    "deviceIp": "172.18.1.11",
+    "deviceName": "DESKTOP-8D1GBAG (172.18.1.11)",
+    "port": 443,
+    "service": "Browser Search (Chrome)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"Mafia: Definitive Edition\"",
+    "description": "User \"Rafay Sheikh (rafay98766@gmail.com)\" on DESKTOP-8D1GBAG (172.18.1.11) via Chrome: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.11 (DESKTOP-8D1GBAG) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T10:22:11.7345041Z"
+  },
+  {
+    "id": "threat-search-1794306133071-rgur",
+    "deviceIp": "172.18.1.11",
+    "deviceName": "DESKTOP-8D1GBAG (172.18.1.11)",
+    "port": 443,
+    "service": "Browser Search (Chrome)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"Microsoft teams Chat backup and transfer to new teant\"",
+    "description": "User \"Rafay Sheikh (rafay98766@gmail.com)\" on DESKTOP-8D1GBAG (172.18.1.11) via Chrome: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.11 (DESKTOP-8D1GBAG) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T10:22:11.7380750Z"
+  },
+  {
+    "id": "threat-search-1794306133088-rxeh",
+    "deviceIp": "172.18.1.11",
+    "deviceName": "DESKTOP-8D1GBAG (172.18.1.11)",
+    "port": 443,
+    "service": "Browser Search (Chrome)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"xiaomi 12x vs pixel 8 pro\"",
+    "description": "User \"Rafay Sheikh (rafay98766@gmail.com)\" on DESKTOP-8D1GBAG (172.18.1.11) via Chrome: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.11 (DESKTOP-8D1GBAG) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T10:22:11.7395439Z"
+  },
+  {
+    "id": "threat-search-1794306133095-85gb",
+    "deviceIp": "172.18.1.11",
+    "deviceName": "DESKTOP-8D1GBAG (172.18.1.11)",
+    "port": 443,
+    "service": "Browser Search (Chrome)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"xiaomi 12x\"",
+    "description": "User \"Rafay Sheikh (rafay98766@gmail.com)\" on DESKTOP-8D1GBAG (172.18.1.11) via Chrome: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.11 (DESKTOP-8D1GBAG) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T10:22:11.7405441Z"
+  },
+  {
+    "id": "threat-search-1794306133123-c76w",
+    "deviceIp": "172.18.1.11",
+    "deviceName": "DESKTOP-8D1GBAG (172.18.1.11)",
+    "port": 443,
+    "service": "Browser Search (Chrome)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"asian games live\"",
+    "description": "User \"Rafay Sheikh (rafay98766@gmail.com)\" on DESKTOP-8D1GBAG (172.18.1.11) via Chrome: Matched Restricted Rule: \"games\"",
+    "recommendation": "Review endpoint 172.18.1.11 (DESKTOP-8D1GBAG) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T10:22:11.7435457Z"
+  },
+  {
+    "id": "threat-search-1794306133138-5flp",
+    "deviceIp": "172.18.1.11",
+    "deviceName": "DESKTOP-8D1GBAG (172.18.1.11)",
+    "port": 443,
+    "service": "Browser Search (Chrome)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"yahama junoon yd100\"",
+    "description": "User \"Rafay Sheikh (rafay98766@gmail.com)\" on DESKTOP-8D1GBAG (172.18.1.11) via Chrome: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.11 (DESKTOP-8D1GBAG) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T10:22:11.7465845Z"
+  },
+  {
+    "id": "threat-search-1794306133172-86fu",
+    "deviceIp": "172.18.1.11",
+    "deviceName": "DESKTOP-8D1GBAG (172.18.1.11)",
+    "port": 443,
+    "service": "Browser Search (Chrome)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"quran with urdu translation full\"",
+    "description": "User \"Rafay Sheikh (rafay98766@gmail.com)\" on DESKTOP-8D1GBAG (172.18.1.11) via Chrome: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.11 (DESKTOP-8D1GBAG) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T10:22:11.7541284Z"
+  },
+  {
+    "id": "threat-search-1794306133179-5btg",
+    "deviceIp": "172.18.1.11",
+    "deviceName": "DESKTOP-8D1GBAG (172.18.1.11)",
+    "port": 443,
+    "service": "Browser Search (Chrome)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"knsi file kisi flat ko buy krty wqt vericfication may use hoti hai\"",
+    "description": "User \"Rafay Sheikh (rafay98766@gmail.com)\" on DESKTOP-8D1GBAG (172.18.1.11) via Chrome: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.11 (DESKTOP-8D1GBAG) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T10:22:11.7551349Z"
+  },
+  {
+    "id": "threat-search-1794306133216-eawz",
+    "deviceIp": "172.18.1.11",
+    "deviceName": "DESKTOP-8D1GBAG (172.18.1.11)",
+    "port": 443,
+    "service": "Browser Search (Chrome)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"Bike paint Prince in karachi\"",
+    "description": "User \"Rafay Sheikh (rafay98766@gmail.com)\" on DESKTOP-8D1GBAG (172.18.1.11) via Chrome: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.11 (DESKTOP-8D1GBAG) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T10:22:11.7622954Z"
+  },
+  {
+    "id": "threat-search-1794306133223-puxt",
+    "deviceIp": "172.18.1.11",
+    "deviceName": "DESKTOP-8D1GBAG (172.18.1.11)",
+    "port": 443,
+    "service": "Browser Search (Chrome)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"fuel tank restoration karachi\"",
+    "description": "User \"Rafay Sheikh (rafay98766@gmail.com)\" on DESKTOP-8D1GBAG (172.18.1.11) via Chrome: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.11 (DESKTOP-8D1GBAG) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T10:22:11.7632933Z"
+  },
+  {
+    "id": "threat-search-1794306133231-ny8r",
+    "deviceIp": "172.18.1.11",
+    "deviceName": "DESKTOP-8D1GBAG (172.18.1.11)",
+    "port": 443,
+    "service": "Browser Search (Chrome)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"yamaha junoon yd 100\"",
+    "description": "User \"Rafay Sheikh (rafay98766@gmail.com)\" on DESKTOP-8D1GBAG (172.18.1.11) via Chrome: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.11 (DESKTOP-8D1GBAG) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T10:22:11.7642960Z"
+  },
+  {
+    "id": "threat-search-1794306133238-9sud",
+    "deviceIp": "172.18.1.11",
+    "deviceName": "DESKTOP-8D1GBAG (172.18.1.11)",
+    "port": 443,
+    "service": "Browser Search (Chrome)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"yamaha junoon yd 100 vs honda 125\"",
+    "description": "User \"Rafay Sheikh (rafay98766@gmail.com)\" on DESKTOP-8D1GBAG (172.18.1.11) via Chrome: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.11 (DESKTOP-8D1GBAG) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T10:22:11.7658080Z"
+  },
+  {
+    "id": "threat-search-1794306133245-pb81",
+    "deviceIp": "172.18.1.11",
+    "deviceName": "DESKTOP-8D1GBAG (172.18.1.11)",
+    "port": 443,
+    "service": "Browser Search (Chrome)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"yamaha junoon vs honda 125\"",
+    "description": "User \"Rafay Sheikh (rafay98766@gmail.com)\" on DESKTOP-8D1GBAG (172.18.1.11) via Chrome: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.11 (DESKTOP-8D1GBAG) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T10:22:11.7673234Z"
+  },
+  {
+    "id": "threat-search-1794305762693-kuw0",
+    "deviceIp": "192.168.56.1",
+    "deviceName": "DESKTOP-55 (192.168.56.1)",
+    "port": 443,
+    "service": "Browser Search (Chrome)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"[Video] How I Combine Liquidity Sweeps, Order Blocks and FVGs For SNIPER Entries\"",
+    "description": "User \"Your Chrome\" on DESKTOP-55 (192.168.56.1) via Chrome: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 192.168.56.1 (DESKTOP-55) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T10:16:01.9828617Z"
+  },
+  {
+    "id": "threat-search-1794305762701-yxm5",
+    "deviceIp": "192.168.56.1",
+    "deviceName": "DESKTOP-55 (192.168.56.1)",
+    "port": 443,
+    "service": "Browser Search (Chrome)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"[Video] Learn Trading from Zero in 90 Minutes | Full Step-by-Step Course\"",
+    "description": "User \"Your Chrome\" on DESKTOP-55 (192.168.56.1) via Chrome: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 192.168.56.1 (DESKTOP-55) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T10:16:01.9828617Z"
+  },
+  {
+    "id": "threat-search-1794305762756-g4et",
+    "deviceIp": "192.168.56.1",
+    "deviceName": "DESKTOP-55 (192.168.56.1)",
+    "port": 443,
+    "service": "Browser Search (Chrome)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"[Video] How to Read Trading Charts for Beginners in 2026 (Full Course)\"",
+    "description": "User \"Your Chrome\" on DESKTOP-55 (192.168.56.1) via Chrome: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 192.168.56.1 (DESKTOP-55) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T10:16:02.0588505Z"
+  },
+  {
+    "id": "threat-search-1794305762763-p79s",
+    "deviceIp": "192.168.56.1",
+    "deviceName": "DESKTOP-55 (192.168.56.1)",
+    "port": 443,
+    "service": "Browser Search (Chrome)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"[Video] The Weeknd, Playboi Carti - Timeless\"",
+    "description": "User \"Your Chrome\" on DESKTOP-55 (192.168.56.1) via Chrome: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 192.168.56.1 (DESKTOP-55) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T10:16:02.0588505Z"
+  },
+  {
+    "id": "threat-search-1794305762770-emkr",
+    "deviceIp": "192.168.56.1",
+    "deviceName": "DESKTOP-55 (192.168.56.1)",
+    "port": 443,
+    "service": "Browser Search (Chrome)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"[Video] Ariana Grande - bye [Altare Remix]\"",
+    "description": "User \"Your Chrome\" on DESKTOP-55 (192.168.56.1) via Chrome: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 192.168.56.1 (DESKTOP-55) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T10:16:02.0588505Z"
+  },
+  {
+    "id": "threat-search-1794305762450-p0ov",
+    "deviceIp": "192.168.56.1",
+    "deviceName": "DESKTOP-55 (192.168.56.1)",
+    "port": 443,
+    "service": "Browser Search (Chrome)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"har baar lyrics\"",
+    "description": "User \"Your Chrome\" on DESKTOP-55 (192.168.56.1) via Chrome: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 192.168.56.1 (DESKTOP-55) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T10:16:01.9359708Z"
+  },
+  {
+    "id": "threat-search-1794305762457-863q",
+    "deviceIp": "192.168.56.1",
+    "deviceName": "DESKTOP-55 (192.168.56.1)",
+    "port": 443,
+    "service": "Browser Search (Chrome)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"har bar\"",
+    "description": "User \"Your Chrome\" on DESKTOP-55 (192.168.56.1) via Chrome: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 192.168.56.1 (DESKTOP-55) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T10:16:01.9359708Z"
+  },
+  {
+    "id": "threat-search-1794305762490-vrss",
+    "deviceIp": "192.168.56.1",
+    "deviceName": "DESKTOP-55 (192.168.56.1)",
+    "port": 443,
+    "service": "Browser Search (Chrome)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"saima elite villas 160\"",
+    "description": "User \"Your Chrome\" on DESKTOP-55 (192.168.56.1) via Chrome: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 192.168.56.1 (DESKTOP-55) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T10:16:01.9359708Z"
+  },
+  {
+    "id": "threat-search-1794305762497-zvqs",
+    "deviceIp": "192.168.56.1",
+    "deviceName": "DESKTOP-55 (192.168.56.1)",
+    "port": 443,
+    "service": "Browser Search (Chrome)",
+    "severity": "HIGH",
+    "title": "Flagged User Search: \"saima elite villas\"",
+    "description": "User \"Your Chrome\" on DESKTOP-55 (192.168.56.1) via Chrome: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 192.168.56.1 (DESKTOP-55) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T10:16:01.9359708Z"
+  },
+  {
+    "id": "threat-search-1794305048185-vrov",
     "deviceIp": "172.18.1.14",
-    "port": 135,
-    "service": "MS RPC / EPMAP",
+    "deviceName": "DESK-DATACENTRE (172.18.1.14)",
+    "port": 443,
+    "service": "Browser Search (Chrome)",
     "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "MS03-026 / MS03-039 (Blaster Worm)",
-    "attackType": "RPC Buffer Overflow & Remote System Enumeration",
-    "title": "High Risk Port 135 (MS RPC / EPMAP) Open",
-    "description": "Exposed MS RPC / EPMAP service is susceptible to: Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
-    "recommendation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
-    "remediationSteps": [
-      "Block Port 135 on perimeter router and host firewall.",
-      "Filter inbound RPC requests and restrict to authorized domain controllers only."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 135/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:22.973Z"
+    "title": "Flagged User Search: \"[Video] How to Bypass Windows 11 Minimum Requirements Using the Registry Editor\"",
+    "description": "User \"Person 1\" on DESK-DATACENTRE (172.18.1.14) via Chrome: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.14 (DESK-DATACENTRE) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T10:04:08.3983475Z"
   },
   {
-    "id": "threat-4-139-1792649482973",
-    "deviceId": 4,
-    "deviceName": "LAN Device (172.18.1.14)",
+    "id": "threat-search-1794305048203-0t3t",
     "deviceIp": "172.18.1.14",
-    "port": 139,
-    "service": "NetBIOS Session",
+    "deviceName": "DESK-DATACENTRE (172.18.1.14)",
+    "port": 443,
+    "service": "Browser Search (Chrome)",
     "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "NetBIOS Name Service Poisoning (LLMNR/NBT-NS)",
-    "attackType": "Relay Attacks, NTLM Hash Harvesting & Man-in-the-Middle",
-    "title": "High Risk Port 139 (NetBIOS Session) Open",
-    "description": "Exposed NetBIOS Session service is susceptible to: NetBIOS name enumeration, session hijacking, relay attacks",
-    "recommendation": "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced settings.",
-    "remediationSteps": [
-      "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced WINS settings.",
-      "Block Inbound Port 139 on all external and untrusted interfaces."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 139 (NetBIOS)\" -Direction Inbound -LocalPort 139 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 139/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:22.973Z"
+    "title": "Flagged User Search: \"[Video] Surah Rahman Urdu Tarjuma k Sath | Qari Al Sheikh Abdul Basit Abdul Samad\"",
+    "description": "User \"Person 1\" on DESK-DATACENTRE (172.18.1.14) via Chrome: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.14 (DESK-DATACENTRE) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T10:04:08.4033881Z"
   },
   {
-    "id": "threat-2-445-1792649482969",
-    "deviceId": 2,
-    "deviceName": "LAN Device (172.18.1.5)",
-    "deviceIp": "172.18.1.5",
-    "port": 445,
-    "service": "SMB / CIFS",
-    "severity": "CRITICAL",
-    "protocol": "TCP",
-    "cve": "CVE-2017-0144 (EternalBlue) / MS17-010",
-    "attackType": "Ransomware Lateral Propagation & Remote Code Execution",
-    "title": "Critical Port 445 (SMB / CIFS) Exposed",
-    "description": "Device has SMB / CIFS open. Potential attack vector: WannaCry, NotPetya, EternalBlue, Lateral Ransomware Propagation",
-    "recommendation": "Block port 445 on WAN and internal boundaries. Disable legacy SMBv1 and enforce SMB signing/encryption.",
-    "remediationSteps": [
-      "Immediately block Port 445 on perimeter firewalls and router WAN interfaces.",
-      "Disable legacy SMBv1 in Windows (Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol).",
-      "Enforce SMB signing and SMB encryption for internal file shares.",
-      "Isolate internal file sharing to dedicated private management VLANs."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 445 (SMB/CIFS)\" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 445/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:22.969Z"
-  },
-  {
-    "id": "threat-2-3389-1792649482969",
-    "deviceId": 2,
-    "deviceName": "LAN Device (172.18.1.5)",
-    "deviceIp": "172.18.1.5",
-    "port": 3389,
-    "service": "RDP (Remote Desktop)",
-    "severity": "CRITICAL",
-    "protocol": "TCP",
-    "cve": "CVE-2019-0708 (BlueKeep) & Credential Spraying",
-    "attackType": "Pre-Auth Remote Code Execution & Automated Brute Force",
-    "title": "Critical Port 3389 (RDP (Remote Desktop)) Exposed",
-    "description": "Device has RDP (Remote Desktop) open. Potential attack vector: BlueKeep, Automated credential brute-force, Ransomware deployment",
-    "recommendation": "Never expose RDP directly to network. Restrict access through VPN, require NLA, and enable MFA.",
-    "remediationSteps": [
-      "Never expose RDP (Port 3389) directly to public Internet or untrusted subnets.",
-      "Require secure WireGuard / OpenVPN or SSH Bastion tunnel to access remote desktops.",
-      "Enforce Network Level Authentication (NLA) on Windows System Properties.",
-      "Configure Account Lockout Policies to prevent automated password dictionary attacks."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 3389 (RDP)\" -Direction Inbound -LocalPort 3389 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 3389/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 3389 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:22.969Z"
-  },
-  {
-    "id": "threat-2-135-1792649482969",
-    "deviceId": 2,
-    "deviceName": "LAN Device (172.18.1.5)",
-    "deviceIp": "172.18.1.5",
-    "port": 135,
-    "service": "MS RPC / EPMAP",
+    "id": "threat-search-1794305048260-b6as",
+    "deviceIp": "172.18.1.14",
+    "deviceName": "DESK-DATACENTRE (172.18.1.14)",
+    "port": 443,
+    "service": "Browser Search (Chrome)",
     "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "MS03-026 / MS03-039 (Blaster Worm)",
-    "attackType": "RPC Buffer Overflow & Remote System Enumeration",
-    "title": "High Risk Port 135 (MS RPC / EPMAP) Open",
-    "description": "Exposed MS RPC / EPMAP service is susceptible to: Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
-    "recommendation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
-    "remediationSteps": [
-      "Block Port 135 on perimeter router and host firewall.",
-      "Filter inbound RPC requests and restrict to authorized domain controllers only."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 135/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:22.969Z"
+    "title": "Flagged User Search: \"bypass reddit during install windows 11\"",
+    "description": "User \"Person 1\" on DESK-DATACENTRE (172.18.1.14) via Chrome: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.14 (DESK-DATACENTRE) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T10:04:08.4093823Z"
   },
   {
-    "id": "threat-2-139-1792649482969",
-    "deviceId": 2,
-    "deviceName": "LAN Device (172.18.1.5)",
-    "deviceIp": "172.18.1.5",
-    "port": 139,
-    "service": "NetBIOS Session",
+    "id": "threat-search-1794305048266-7kh0",
+    "deviceIp": "172.18.1.14",
+    "deviceName": "DESK-DATACENTRE (172.18.1.14)",
+    "port": 443,
+    "service": "Browser Search (Chrome)",
     "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "NetBIOS Name Service Poisoning (LLMNR/NBT-NS)",
-    "attackType": "Relay Attacks, NTLM Hash Harvesting & Man-in-the-Middle",
-    "title": "High Risk Port 139 (NetBIOS Session) Open",
-    "description": "Exposed NetBIOS Session service is susceptible to: NetBIOS name enumeration, session hijacking, relay attacks",
-    "recommendation": "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced settings.",
-    "remediationSteps": [
-      "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced WINS settings.",
-      "Block Inbound Port 139 on all external and untrusted interfaces."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 139 (NetBIOS)\" -Direction Inbound -LocalPort 139 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 139/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
-    },
-    "timestamp": "2026-10-22T06:11:22.969Z"
+    "title": "Flagged User Search: \"[Video] The Windows Setup problem nobody talks about\"",
+    "description": "User \"Person 1\" on DESK-DATACENTRE (172.18.1.14) via Chrome: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.14 (DESK-DATACENTRE) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T10:04:08.4103851Z"
   },
   {
-    "id": "threat-34-445-1792388330830",
-    "deviceId": 34,
-    "deviceName": "Ahsan-HR",
-    "deviceIp": "192.168.46.244",
-    "port": 445,
-    "service": "SMB / CIFS",
-    "severity": "CRITICAL",
-    "protocol": "TCP",
-    "cve": "CVE-2017-0144 (EternalBlue) / MS17-010",
-    "attackType": "Ransomware Lateral Propagation & Remote Code Execution",
-    "title": "Critical Port 445 (SMB / CIFS) Exposed",
-    "description": "Device has SMB / CIFS open. Potential attack vector: WannaCry, NotPetya, EternalBlue, Lateral Ransomware Propagation",
-    "recommendation": "Block port 445 on WAN and internal boundaries. Disable legacy SMBv1 and enforce SMB signing/encryption.",
-    "remediationSteps": [
-      "Immediately block Port 445 on perimeter firewalls and router WAN interfaces.",
-      "Disable legacy SMBv1 in Windows (Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol).",
-      "Enforce SMB signing and SMB encryption for internal file shares.",
-      "Isolate internal file sharing to dedicated private management VLANs."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 445 (SMB/CIFS)\" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 445/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
-    },
-    "timestamp": "2026-10-19T05:38:50.830Z"
-  },
-  {
-    "id": "threat-34-135-1792388330830",
-    "deviceId": 34,
-    "deviceName": "Ahsan-HR",
-    "deviceIp": "192.168.46.244",
-    "port": 135,
-    "service": "MS RPC / EPMAP",
+    "id": "threat-search-1794304942518-ll4p",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
     "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "MS03-026 / MS03-039 (Blaster Worm)",
-    "attackType": "RPC Buffer Overflow & Remote System Enumeration",
-    "title": "High Risk Port 135 (MS RPC / EPMAP) Open",
-    "description": "Exposed MS RPC / EPMAP service is susceptible to: Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
-    "recommendation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
-    "remediationSteps": [
-      "Block Port 135 on perimeter router and host firewall.",
-      "Filter inbound RPC requests and restrict to authorized domain controllers only."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 135/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
-    },
-    "timestamp": "2026-10-19T05:38:50.830Z"
+    "title": "Flagged User Search: \"[Video] Kurulus Osman Season 06 Episode 103 - Urdu Dubbed - Har Pal Geo\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T10:02:16.1573420Z"
   },
   {
-    "id": "threat-34-139-1792388330830",
-    "deviceId": 34,
-    "deviceName": "Ahsan-HR",
-    "deviceIp": "192.168.46.244",
-    "port": 139,
-    "service": "NetBIOS Session",
+    "id": "threat-search-1794304942525-axi9",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
     "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "NetBIOS Name Service Poisoning (LLMNR/NBT-NS)",
-    "attackType": "Relay Attacks, NTLM Hash Harvesting & Man-in-the-Middle",
-    "title": "High Risk Port 139 (NetBIOS Session) Open",
-    "description": "Exposed NetBIOS Session service is susceptible to: NetBIOS name enumeration, session hijacking, relay attacks",
-    "recommendation": "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced settings.",
-    "remediationSteps": [
-      "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced WINS settings.",
-      "Block Inbound Port 139 on all external and untrusted interfaces."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 139 (NetBIOS)\" -Direction Inbound -LocalPort 139 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 139/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
-    },
-    "timestamp": "2026-10-19T05:38:50.830Z"
+    "title": "Flagged User Search: \"[Video] osman season 6 episode 102\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T10:02:16.1623281Z"
   },
   {
-    "id": "threat-33-445-1792388330827",
-    "deviceId": 33,
-    "deviceName": "Erfan-Laptop-01",
-    "deviceIp": "192.168.46.243",
-    "port": 445,
-    "service": "SMB / CIFS",
-    "severity": "CRITICAL",
-    "protocol": "TCP",
-    "cve": "CVE-2017-0144 (EternalBlue) / MS17-010",
-    "attackType": "Ransomware Lateral Propagation & Remote Code Execution",
-    "title": "Critical Port 445 (SMB / CIFS) Exposed",
-    "description": "Device has SMB / CIFS open. Potential attack vector: WannaCry, NotPetya, EternalBlue, Lateral Ransomware Propagation",
-    "recommendation": "Block port 445 on WAN and internal boundaries. Disable legacy SMBv1 and enforce SMB signing/encryption.",
-    "remediationSteps": [
-      "Immediately block Port 445 on perimeter firewalls and router WAN interfaces.",
-      "Disable legacy SMBv1 in Windows (Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol).",
-      "Enforce SMB signing and SMB encryption for internal file shares.",
-      "Isolate internal file sharing to dedicated private management VLANs."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 445 (SMB/CIFS)\" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 445/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
-    },
-    "timestamp": "2026-10-19T05:38:50.827Z"
-  },
-  {
-    "id": "threat-33-135-1792388330827",
-    "deviceId": 33,
-    "deviceName": "Erfan-Laptop-01",
-    "deviceIp": "192.168.46.243",
-    "port": 135,
-    "service": "MS RPC / EPMAP",
+    "id": "threat-search-1794304942532-fq00",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
     "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "MS03-026 / MS03-039 (Blaster Worm)",
-    "attackType": "RPC Buffer Overflow & Remote System Enumeration",
-    "title": "High Risk Port 135 (MS RPC / EPMAP) Open",
-    "description": "Exposed MS RPC / EPMAP service is susceptible to: Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
-    "recommendation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
-    "remediationSteps": [
-      "Block Port 135 on perimeter router and host firewall.",
-      "Filter inbound RPC requests and restrict to authorized domain controllers only."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 135/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
-    },
-    "timestamp": "2026-10-19T05:38:50.827Z"
+    "title": "Flagged User Search: \"[Video] Kurulus Osman Season 06 Episode 101 - Urdu Dubbed - Har Pal Geo\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T10:02:16.1643241Z"
   },
   {
-    "id": "threat-33-139-1792388330827",
-    "deviceId": 33,
-    "deviceName": "Erfan-Laptop-01",
-    "deviceIp": "192.168.46.243",
-    "port": 139,
-    "service": "NetBIOS Session",
+    "id": "threat-search-1794304942539-fwrr",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
     "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "NetBIOS Name Service Poisoning (LLMNR/NBT-NS)",
-    "attackType": "Relay Attacks, NTLM Hash Harvesting & Man-in-the-Middle",
-    "title": "High Risk Port 139 (NetBIOS Session) Open",
-    "description": "Exposed NetBIOS Session service is susceptible to: NetBIOS name enumeration, session hijacking, relay attacks",
-    "recommendation": "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced settings.",
-    "remediationSteps": [
-      "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced WINS settings.",
-      "Block Inbound Port 139 on all external and untrusted interfaces."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 139 (NetBIOS)\" -Direction Inbound -LocalPort 139 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 139/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
-    },
-    "timestamp": "2026-10-19T05:38:50.827Z"
+    "title": "Flagged User Search: \"[Video] Kurulus Osman Season 06 Episode 100 - Urdu Dubbed - Har Pal Geo\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T10:02:16.1663177Z"
   },
   {
-    "id": "threat-32-445-1792388330825",
-    "deviceId": 32,
-    "deviceName": "ERFANALI",
-    "deviceIp": "192.168.46.242",
-    "port": 445,
-    "service": "SMB / CIFS",
-    "severity": "CRITICAL",
-    "protocol": "TCP",
-    "cve": "CVE-2017-0144 (EternalBlue) / MS17-010",
-    "attackType": "Ransomware Lateral Propagation & Remote Code Execution",
-    "title": "Critical Port 445 (SMB / CIFS) Exposed",
-    "description": "Device has SMB / CIFS open. Potential attack vector: WannaCry, NotPetya, EternalBlue, Lateral Ransomware Propagation",
-    "recommendation": "Block port 445 on WAN and internal boundaries. Disable legacy SMBv1 and enforce SMB signing/encryption.",
-    "remediationSteps": [
-      "Immediately block Port 445 on perimeter firewalls and router WAN interfaces.",
-      "Disable legacy SMBv1 in Windows (Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol).",
-      "Enforce SMB signing and SMB encryption for internal file shares.",
-      "Isolate internal file sharing to dedicated private management VLANs."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 445 (SMB/CIFS)\" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 445/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
-    },
-    "timestamp": "2026-10-19T05:38:50.825Z"
-  },
-  {
-    "id": "threat-32-135-1792388330825",
-    "deviceId": 32,
-    "deviceName": "ERFANALI",
-    "deviceIp": "192.168.46.242",
-    "port": 135,
-    "service": "MS RPC / EPMAP",
+    "id": "threat-search-1794304942559-xiz8",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
     "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "MS03-026 / MS03-039 (Blaster Worm)",
-    "attackType": "RPC Buffer Overflow & Remote System Enumeration",
-    "title": "High Risk Port 135 (MS RPC / EPMAP) Open",
-    "description": "Exposed MS RPC / EPMAP service is susceptible to: Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
-    "recommendation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
-    "remediationSteps": [
-      "Block Port 135 on perimeter router and host firewall.",
-      "Filter inbound RPC requests and restrict to authorized domain controllers only."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 135/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
-    },
-    "timestamp": "2026-10-19T05:38:50.825Z"
+    "title": "Flagged User Search: \"[Video] Bigg Boss 20 | Full Episode - 65 | Manish Takes Offence at Qazi's Remark | Colors TV\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T10:02:16.1693099Z"
   },
   {
-    "id": "threat-32-139-1792388330825",
-    "deviceId": 32,
-    "deviceName": "ERFANALI",
-    "deviceIp": "192.168.46.242",
-    "port": 139,
-    "service": "NetBIOS Session",
+    "id": "threat-search-1794304942576-taxd",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
     "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "NetBIOS Name Service Poisoning (LLMNR/NBT-NS)",
-    "attackType": "Relay Attacks, NTLM Hash Harvesting & Man-in-the-Middle",
-    "title": "High Risk Port 139 (NetBIOS Session) Open",
-    "description": "Exposed NetBIOS Session service is susceptible to: NetBIOS name enumeration, session hijacking, relay attacks",
-    "recommendation": "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced settings.",
-    "remediationSteps": [
-      "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced WINS settings.",
-      "Block Inbound Port 139 on all external and untrusted interfaces."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 139 (NetBIOS)\" -Direction Inbound -LocalPort 139 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 139/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
-    },
-    "timestamp": "2026-10-19T05:38:50.825Z"
+    "title": "Flagged User Search: \"[Video] Kurulus Osman Season 06 Episode 99 - Urdu Dubbed - Har Pal Geo\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T10:02:16.1703067Z"
   },
   {
-    "id": "threat-30-445-1792388329890",
-    "deviceId": 30,
-    "deviceName": "DESKTOP-8D1GBAG",
-    "deviceIp": "192.168.46.235",
-    "port": 445,
-    "service": "SMB / CIFS",
-    "severity": "CRITICAL",
-    "protocol": "TCP",
-    "cve": "CVE-2017-0144 (EternalBlue) / MS17-010",
-    "attackType": "Ransomware Lateral Propagation & Remote Code Execution",
-    "title": "Critical Port 445 (SMB / CIFS) Exposed",
-    "description": "Device has SMB / CIFS open. Potential attack vector: WannaCry, NotPetya, EternalBlue, Lateral Ransomware Propagation",
-    "recommendation": "Block port 445 on WAN and internal boundaries. Disable legacy SMBv1 and enforce SMB signing/encryption.",
-    "remediationSteps": [
-      "Immediately block Port 445 on perimeter firewalls and router WAN interfaces.",
-      "Disable legacy SMBv1 in Windows (Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol).",
-      "Enforce SMB signing and SMB encryption for internal file shares.",
-      "Isolate internal file sharing to dedicated private management VLANs."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 445 (SMB/CIFS)\" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 445/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
-    },
-    "timestamp": "2026-10-19T05:38:49.890Z"
-  },
-  {
-    "id": "threat-30-135-1792388329890",
-    "deviceId": 30,
-    "deviceName": "DESKTOP-8D1GBAG",
-    "deviceIp": "192.168.46.235",
-    "port": 135,
-    "service": "MS RPC / EPMAP",
+    "id": "threat-search-1794304942585-wn02",
+    "deviceIp": "172.18.1.36",
+    "deviceName": "ABILITY-PC-10 (172.18.1.36)",
+    "port": 443,
+    "service": "Browser Search (Edge)",
     "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "MS03-026 / MS03-039 (Blaster Worm)",
-    "attackType": "RPC Buffer Overflow & Remote System Enumeration",
-    "title": "High Risk Port 135 (MS RPC / EPMAP) Open",
-    "description": "Exposed MS RPC / EPMAP service is susceptible to: Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
-    "recommendation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
-    "remediationSteps": [
-      "Block Port 135 on perimeter router and host firewall.",
-      "Filter inbound RPC requests and restrict to authorized domain controllers only."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 135/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
-    },
-    "timestamp": "2026-10-19T05:38:49.890Z"
-  },
-  {
-    "id": "threat-30-139-1792388329890",
-    "deviceId": 30,
-    "deviceName": "DESKTOP-8D1GBAG",
-    "deviceIp": "192.168.46.235",
-    "port": 139,
-    "service": "NetBIOS Session",
-    "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "NetBIOS Name Service Poisoning (LLMNR/NBT-NS)",
-    "attackType": "Relay Attacks, NTLM Hash Harvesting & Man-in-the-Middle",
-    "title": "High Risk Port 139 (NetBIOS Session) Open",
-    "description": "Exposed NetBIOS Session service is susceptible to: NetBIOS name enumeration, session hijacking, relay attacks",
-    "recommendation": "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced settings.",
-    "remediationSteps": [
-      "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced WINS settings.",
-      "Block Inbound Port 139 on all external and untrusted interfaces."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 139 (NetBIOS)\" -Direction Inbound -LocalPort 139 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 139/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
-    },
-    "timestamp": "2026-10-19T05:38:49.890Z"
-  },
-  {
-    "id": "threat-4-445-1792388327013",
-    "deviceId": 4,
-    "deviceName": "FRIDAY",
-    "deviceIp": "192.168.46.114",
-    "port": 445,
-    "service": "SMB / CIFS",
-    "severity": "CRITICAL",
-    "protocol": "TCP",
-    "cve": "CVE-2017-0144 (EternalBlue) / MS17-010",
-    "attackType": "Ransomware Lateral Propagation & Remote Code Execution",
-    "title": "Critical Port 445 (SMB / CIFS) Exposed",
-    "description": "Device has SMB / CIFS open. Potential attack vector: WannaCry, NotPetya, EternalBlue, Lateral Ransomware Propagation",
-    "recommendation": "Block port 445 on WAN and internal boundaries. Disable legacy SMBv1 and enforce SMB signing/encryption.",
-    "remediationSteps": [
-      "Immediately block Port 445 on perimeter firewalls and router WAN interfaces.",
-      "Disable legacy SMBv1 in Windows (Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol).",
-      "Enforce SMB signing and SMB encryption for internal file shares.",
-      "Isolate internal file sharing to dedicated private management VLANs."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 445 (SMB/CIFS)\" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 445/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
-    },
-    "timestamp": "2026-10-19T05:38:47.013Z"
-  },
-  {
-    "id": "threat-4-135-1792388327013",
-    "deviceId": 4,
-    "deviceName": "FRIDAY",
-    "deviceIp": "192.168.46.114",
-    "port": 135,
-    "service": "MS RPC / EPMAP",
-    "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "MS03-026 / MS03-039 (Blaster Worm)",
-    "attackType": "RPC Buffer Overflow & Remote System Enumeration",
-    "title": "High Risk Port 135 (MS RPC / EPMAP) Open",
-    "description": "Exposed MS RPC / EPMAP service is susceptible to: Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
-    "recommendation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
-    "remediationSteps": [
-      "Block Port 135 on perimeter router and host firewall.",
-      "Filter inbound RPC requests and restrict to authorized domain controllers only."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 135/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
-    },
-    "timestamp": "2026-10-19T05:38:47.013Z"
-  },
-  {
-    "id": "threat-4-139-1792388327013",
-    "deviceId": 4,
-    "deviceName": "FRIDAY",
-    "deviceIp": "192.168.46.114",
-    "port": 139,
-    "service": "NetBIOS Session",
-    "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "NetBIOS Name Service Poisoning (LLMNR/NBT-NS)",
-    "attackType": "Relay Attacks, NTLM Hash Harvesting & Man-in-the-Middle",
-    "title": "High Risk Port 139 (NetBIOS Session) Open",
-    "description": "Exposed NetBIOS Session service is susceptible to: NetBIOS name enumeration, session hijacking, relay attacks",
-    "recommendation": "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced settings.",
-    "remediationSteps": [
-      "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced WINS settings.",
-      "Block Inbound Port 139 on all external and untrusted interfaces."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 139 (NetBIOS)\" -Direction Inbound -LocalPort 139 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 139/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
-    },
-    "timestamp": "2026-10-19T05:38:47.013Z"
-  },
-  {
-    "id": "threat-47-445-1792182057314",
-    "deviceId": 47,
-    "deviceName": "DESKTOP-8D1GBAG",
-    "deviceIp": "192.168.1.9",
-    "port": 445,
-    "service": "SMB / CIFS",
-    "severity": "CRITICAL",
-    "protocol": "TCP",
-    "cve": "CVE-2017-0144 (EternalBlue) / MS17-010",
-    "attackType": "Ransomware Lateral Propagation & Remote Code Execution",
-    "title": "Critical Port 445 (SMB / CIFS) Exposed",
-    "description": "Device has SMB / CIFS open. Potential attack vector: WannaCry, NotPetya, EternalBlue, Lateral Ransomware Propagation",
-    "recommendation": "Block port 445 on WAN and internal boundaries. Disable legacy SMBv1 and enforce SMB signing/encryption.",
-    "remediationSteps": [
-      "Immediately block Port 445 on perimeter firewalls and router WAN interfaces.",
-      "Disable legacy SMBv1 in Windows (Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol).",
-      "Enforce SMB signing and SMB encryption for internal file shares.",
-      "Isolate internal file sharing to dedicated private management VLANs."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 445 (SMB/CIFS)\" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 445/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
-    },
-    "timestamp": "2026-10-16T20:20:57.314Z"
-  },
-  {
-    "id": "threat-47-135-1792182057314",
-    "deviceId": 47,
-    "deviceName": "DESKTOP-8D1GBAG",
-    "deviceIp": "192.168.1.9",
-    "port": 135,
-    "service": "MS RPC / EPMAP",
-    "severity": "HIGH",
-    "protocol": "TCP",
-    "cve": "MS03-026 / MS03-039 (Blaster Worm)",
-    "attackType": "RPC Buffer Overflow & Remote System Enumeration",
-    "title": "High Risk Port 135 (MS RPC / EPMAP) Open",
-    "description": "Exposed MS RPC / EPMAP service is susceptible to: Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
-    "recommendation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
-    "remediationSteps": [
-      "Block Port 135 on perimeter router and host firewall.",
-      "Filter inbound RPC requests and restrict to authorized domain controllers only."
-    ],
-    "firewallCmd": {
-      "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
-      "linuxUfw": "sudo ufw deny 135/tcp",
-      "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
-    },
-    "timestamp": "2026-10-16T20:20:57.314Z"
-  },
-  {
-    "id": "threat-47-139-1792179817750",
-    "deviceId": 47,
-    "deviceName": "DESKTOP-8D1GBAG",
-    "deviceIp": "192.168.1.9",
-    "port": 139,
-    "service": "NetBIOS Session",
-    "severity": "HIGH",
-    "title": "High Risk Port 139 (NetBIOS Session) Open",
-    "description": "Exposed NetBIOS Session service is susceptible to: NetBIOS name enumeration, session hijacking, relay attacks",
-    "recommendation": "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced settings.",
-    "timestamp": "2026-10-16T19:43:37.750Z"
-  },
-  {
-    "id": "threat-41-23-1792179816933",
-    "deviceId": 41,
-    "deviceName": "Router / Gateway (192.168.1.1)",
-    "deviceIp": "192.168.1.1",
-    "port": 23,
-    "service": "Telnet",
-    "severity": "CRITICAL",
-    "title": "Critical Port 23 (Telnet) Exposed",
-    "description": "Device has Telnet open. Potential attack vector: Cleartext credential eavesdropping, Mirai IoT botnet propagation",
-    "recommendation": "Disable Telnet daemon completely. Migrate to SSH (Port 22) with key authentication.",
-    "timestamp": "2026-10-16T19:43:36.933Z"
+    "title": "Flagged User Search: \"[Video] Kurulus Osman Urdu - Season 6 Episode 97\"",
+    "description": "User \"Mohib Ahmed (mohib.ahmed@abilitybpo.com)\" on ABILITY-PC-10 (172.18.1.36) via Edge: Matched Restricted Rule: \"youtube.com\"",
+    "recommendation": "Review endpoint 172.18.1.36 (ABILITY-PC-10) browsing session and verify compliance with security policy.",
+    "timestamp": "2026-11-10T10:02:16.1713066Z"
   }
 ]

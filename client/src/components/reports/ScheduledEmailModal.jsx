@@ -99,7 +99,8 @@ export default function ScheduledEmailModal({ isOpen, onClose }) {
     try {
       const res = await api.sendEmailReportNow({
         recipients: config.recipients,
-        days: config.frequency === 'weekly' ? 7 : 1
+        days: config.frequency === 'weekly' ? 7 : 1,
+        config
       });
       setSendResult({ success: true, message: `Report sent to ${res.sentTo}!` });
       setConfig((prev) => ({ ...prev, lastSentAt: res.sentAt, lastStatus: 'SUCCESS' }));
@@ -143,28 +144,41 @@ export default function ScheduledEmailModal({ isOpen, onClose }) {
         {/* Modal Body */}
         <div className="p-4 sm:p-6 overflow-y-auto space-y-4 text-xs">
           {/* Automation Switch */}
-          <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3">
+          <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
               <span className="font-bold text-slate-900 dark:text-white block">
                 Enable Automated Report Dispatch
               </span>
-              <span className="text-[11px] text-slate-400">
+              <span className="text-[11px] text-slate-500 dark:text-slate-400">
                 When enabled, the server automatically emails the executive report at the scheduled hour.
               </span>
             </div>
 
-            <button
-              onClick={() => setConfig((p) => ({ ...p, enabled: !p.enabled }))}
-              className={`w-12 h-6 rounded-full transition-colors relative cursor-pointer ${
-                config.enabled ? 'bg-emerald-500' : 'bg-slate-300 dark:bg-slate-700'
-              }`}
-            >
-              <div
-                className={`w-5 h-5 rounded-full bg-white shadow-sm absolute top-0.5 transition-transform ${
-                  config.enabled ? 'left-6.5' : 'left-0.5'
+            <div className="inline-flex items-center rounded-xl p-1 bg-slate-200/90 dark:bg-slate-800 border border-slate-300/80 dark:border-slate-700 shrink-0 self-start sm:self-auto">
+              <button
+                type="button"
+                onClick={() => setConfig((p) => ({ ...p, enabled: true }))}
+                className={`px-3 py-1.5 rounded-lg text-[11px] font-extrabold flex items-center gap-1.5 transition-all cursor-pointer ${
+                  config.enabled
+                    ? 'bg-emerald-500 text-white shadow-md shadow-emerald-500/25'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
-              />
-            </button>
+              >
+                <span className={`w-2 h-2 rounded-full ${config.enabled ? 'bg-white animate-pulse' : 'bg-slate-400'}`} />
+                <span>AUTO ON</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setConfig((p) => ({ ...p, enabled: false }))}
+                className={`px-3 py-1.5 rounded-lg text-[11px] font-extrabold transition-all cursor-pointer ${
+                  !config.enabled
+                    ? 'bg-rose-500 text-white shadow-md shadow-rose-500/25'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                }`}
+              >
+                OFF
+              </button>
+            </div>
           </div>
 
           {/* Schedule Settings */}

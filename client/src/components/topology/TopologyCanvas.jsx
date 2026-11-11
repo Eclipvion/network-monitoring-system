@@ -70,7 +70,7 @@ export default function TopologyCanvas({
         isDragging ? 'cursor-grabbing' : 'cursor-grab'
       }`}
       style={{
-        backgroundImage: `radial-gradient(circle, rgba(16, 185, 129, 0.1) 1.2px, transparent 1.2px), radial-gradient(circle, rgba(255, 255, 255, 0.03) 1px, transparent 1px)`,
+        backgroundImage: `radial-gradient(circle, rgba(16, 185, 129, 0.16) 1.2px, transparent 1.2px), radial-gradient(circle, rgba(100, 116, 139, 0.12) 1px, transparent 1px)`,
         backgroundSize: '28px 28px, 14px 14px'
       }}
     >
@@ -92,14 +92,14 @@ export default function TopologyCanvas({
             className="absolute left-8 right-8 flex items-center gap-3 pointer-events-none select-none"
             style={{ top: `${tier.y}px` }}
           >
-            <div className="flex items-center gap-2 px-3 py-1 rounded-lg bg-slate-900/95 border border-slate-800 text-xs font-bold text-slate-300 backdrop-blur-md shadow-md">
+            <div className="flex items-center gap-2 px-3 py-1 rounded-lg bg-white/95 dark:bg-slate-900/95 border border-slate-200 dark:border-slate-800 text-xs font-bold text-slate-700 dark:text-slate-300 backdrop-blur-md shadow-sm dark:shadow-md">
               <span>{tier.icon}</span>
               <span>{tier.label}</span>
-              <span className="px-1.5 py-0.2 rounded-full bg-slate-800 text-[10px] text-emerald-400 font-mono">
+              <span className="px-1.5 py-0.2 rounded-full bg-emerald-500/10 dark:bg-slate-800 text-[10px] text-emerald-600 dark:text-emerald-400 font-mono">
                 {tier.count}
               </span>
             </div>
-            <div className="h-px flex-1 bg-gradient-to-r from-slate-800/80 via-slate-800/40 to-transparent" />
+            <div className="h-px flex-1 bg-gradient-to-r from-slate-300 dark:from-slate-800/80 via-slate-200 dark:via-slate-800/40 to-transparent" />
           </div>
         ))}
 

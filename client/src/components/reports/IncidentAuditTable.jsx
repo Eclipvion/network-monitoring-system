@@ -1,7 +1,22 @@
 import React, { useState, useMemo } from 'react';
-import { AlertTriangle, Search, CheckCircle2, Clock } from 'lucide-react';
+import { AlertTriangle, Search, CheckCircle2, Trash2, X, RotateCcw } from 'lucide-react';
 
-export default function IncidentAuditTable({ incidents = [] }) {
+function safeFormatDateTime(val) {
+  if (!val) return '—';
+  try {
+    const d = new Date(val);
+    if (isNaN(d.getTime())) return '—';
+    return d.toLocaleString();
+  } catch (_) {
+    return '—';
+  }
+}
+
+export default function IncidentAuditTable({
+  incidents = [],
+  onClearIncidents = null,
+  isClearing = false
+}) {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('ALL'); // 'ALL' | 'RESOLVED' | 'ACTIVE'
 
@@ -21,22 +36,24 @@ export default function IncidentAuditTable({ incidents = [] }) {
     });
   }, [incidents, statusFilter, searchTerm]);
 
+  const hasFilters = Boolean(searchTerm.trim() || statusFilter !== 'ALL');
+
   return (
     <div className="glass-panel p-5 sm:p-6 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-4">
       {/* Header & Controls */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
         <div>
           <h3 className="font-bold text-base text-slate-900 dark:text-white flex items-center gap-2">
             <AlertTriangle className="w-4 h-4 text-rose-500" />
-            Outage & Incident History (Failure Cause Analysis)
+            Outage &amp; Incident History (Failure Cause Analysis)
           </h3>
           <p className="text-xs text-slate-500 dark:text-slate-400">
             Audit logs of when device went DOWN, recovery timestamp, outage duration, and root cause error.
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2.5">
-          {/* Search */}
+        <div className="flex flex-wrap items-center gap-2">
+          {/* Search with Clear X button */}
           <div className="relative">
             <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
             <input
@@ -44,20 +61,60 @@ export default function IncidentAuditTable({ incidents = [] }) {
               placeholder="Search incidents / cause..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-8 pr-3 py-1.5 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
+              className="pl-8 pr-7 py-1.5 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
             />
+            {searchTerm && (
+              <button
+                onClick={() => setSearchTerm('')}
+                className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-white cursor-pointer"
+                title="Clear search"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            )}
           </div>
 
           {/* Status Filter */}
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="px-2.5 py-1.5 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 font-medium"
+            className="px-2.5 py-1.5 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 font-medium cursor-pointer"
           >
             <option value="ALL">All Incidents ({incidents.length})</option>
-            <option value="RESOLVED">Resolved Only</option>
-            <option value="ACTIVE">Active Outages Only</option>
+            <option value="RESOLVED">
+              Resolved Only ({incidents.filter((i) => i.isResolved).length})
+            </option>
+            <option value="ACTIVE">
+              Active Outages Only ({incidents.filter((i) => !i.isResolved).length})
+            </option>
           </select>
+
+          {hasFilters && (
+            <button
+              onClick={() => {
+                setSearchTerm('');
+                setStatusFilter('ALL');
+              }}
+              className="px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 flex items-center gap-1 transition-colors cursor-pointer"
+              title="Reset search and status filters"
+            >
+              <RotateCcw className="w-3 h-3" />
+              <span>Reset</span>
+            </button>
+          )}
+
+          {/* Clear Incidents Button */}
+          {incidents.length > 0 && onClearIncidents && (
+            <button
+              onClick={onClearIncidents}
+              disabled={isClearing}
+              className="px-3 py-1.5 rounded-xl text-xs font-semibold text-rose-500 hover:bg-rose-500/10 border border-rose-500/20 flex items-center gap-1.5 transition-colors cursor-pointer disabled:opacity-50"
+              title="Clear recorded outage incidents for current scope"
+            >
+              <Trash2 className="w-3.5 h-3.5" />
+              <span>{isClearing ? 'Clearing...' : 'Clear Incidents'}</span>
+            </button>
+          )}
         </div>
       </div>
 
@@ -66,7 +123,7 @@ export default function IncidentAuditTable({ incidents = [] }) {
         <table className="w-full text-left border-collapse text-xs">
           <thead>
             <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/40 text-[11px] font-semibold uppercase text-slate-400">
-              <th className="py-3 px-4">Device & Host</th>
+              <th className="py-3 px-4">Device &amp; Host</th>
               <th className="py-3 px-4">Went DOWN (Timestamp)</th>
               <th className="py-3 px-4">Recovered UP (Timestamp)</th>
               <th className="py-3 px-4">Outage Duration</th>
@@ -94,14 +151,14 @@ export default function IncidentAuditTable({ incidents = [] }) {
                       </div>
                     </td>
 
-                    <td className="py-3 px-4 font-mono text-rose-500 font-medium">
-                      {new Date(inc.downAt).toLocaleString()}
+                    <td className="py-3 px-4 font-mono text-rose-500 font-medium whitespace-nowrap">
+                      {safeFormatDateTime(inc.downAt)}
                     </td>
 
-                    <td className="py-3 px-4 font-mono font-medium">
+                    <td className="py-3 px-4 font-mono font-medium whitespace-nowrap">
                       {inc.upAt ? (
                         <span className="text-emerald-500">
-                          {new Date(inc.upAt).toLocaleString()}
+                          {safeFormatDateTime(inc.upAt)}
                         </span>
                       ) : (
                         <span className="text-rose-500 font-bold animate-pulse">
@@ -110,7 +167,7 @@ export default function IncidentAuditTable({ incidents = [] }) {
                       )}
                     </td>
 
-                    <td className="py-3 px-4 font-mono font-semibold text-slate-700 dark:text-slate-300">
+                    <td className="py-3 px-4 font-mono font-semibold text-slate-700 dark:text-slate-300 whitespace-nowrap">
                       {inc.durationFormatted}
                     </td>
 
@@ -118,7 +175,7 @@ export default function IncidentAuditTable({ incidents = [] }) {
                       {inc.reason}
                     </td>
 
-                    <td className="py-3 px-4 text-center">
+                    <td className="py-3 px-4 text-center whitespace-nowrap">
                       <span
                         className={`inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
                           isOngoing
@@ -135,9 +192,14 @@ export default function IncidentAuditTable({ incidents = [] }) {
             ) : (
               <tr>
                 <td colSpan="6" className="py-8 text-center text-xs text-slate-400">
-                  {incidents.length === 0
-                    ? '✓ 100% Stable: Zero downtime incidents recorded in this time period! All devices operating normally.'
-                    : 'No incidents match the search filter.'}
+                  {incidents.length === 0 ? (
+                    <span className="inline-flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 font-semibold">
+                      <CheckCircle2 className="w-4 h-4" />
+                      100% Stable: Zero downtime incidents recorded in this time period! All devices operating normally.
+                    </span>
+                  ) : (
+                    'No incidents match the search filter.'
+                  )}
                 </td>
               </tr>
             )}

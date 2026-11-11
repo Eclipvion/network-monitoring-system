@@ -49,7 +49,7 @@ app.use(cors({
   credentials: true
 }));
 
-app.use(express.json());
+app.use(express.json({ limit: '10mb' }));
 
 // Setup Socket.IO
 const io = new SocketIOServer(server, {
@@ -110,7 +110,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-server.listen(PORT, () => {
+server.listen(PORT, '0.0.0.0', () => {
   console.log(`===============================================`);
   console.log(`🚀 Network Monitoring Server running on port ${PORT}`);
   console.log(`📡 WebSocket ready`);

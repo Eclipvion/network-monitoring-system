@@ -197,71 +197,75 @@ export default function DnsPerformancePage() {
 
   return (
     <div className="space-y-6 animate-in fade-in duration-200">
-      {/* Hero Header */}
-      <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-800 bg-gradient-to-br from-slate-900/90 via-slate-900/95 to-emerald-950/40 text-white relative overflow-hidden shadow-xl">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20"></div>
-
-        <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-          <div className="space-y-2 max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
-              <Globe className="w-3.5 h-3.5 animate-spin-slow" />
-              <span>Global 40+ Resolvers Benchmark Suite</span>
+      {/* Hero Header (Compact Unified Bar) */}
+      <div className="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-sm space-y-3.5">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3.5">
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center text-white shadow-md shadow-emerald-500/20 shrink-0">
+              <Globe className="w-5 h-5 stroke-[2.2]" />
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
-              DNS Speed Test & Nearest Server Finder
-            </h1>
-            <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
-              Real-time multi-threaded DNS speed benchmark inspired by dnsspeedtest.online. We test 40+ major global, privacy, and ad-blocking DNS providers simultaneously from your network to identify the fastest and closest nameservers for lowest latency.
-            </p>
+            <div className="min-w-0">
+              <div className="flex items-center gap-2 flex-wrap">
+                <h1 className="text-base sm:text-lg font-bold tracking-tight text-slate-900 dark:text-white">
+                  DNS Speed Test &amp; Nearest Server Finder
+                </h1>
+                <span className="text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                  40+ Global Resolvers
+                </span>
+              </div>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                Multi-threaded DNS speed benchmark testing 40+ global, privacy &amp; ad-blocking providers simultaneously for lowest latency
+              </p>
+            </div>
           </div>
 
           {/* Action Triggers */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          <div className="flex flex-wrap items-center gap-2 shrink-0">
             <button
               onClick={() => runBenchmark()}
               disabled={loading}
-              className="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-bold text-sm shadow-lg shadow-emerald-500/30 transition-all flex items-center justify-center gap-2.5 disabled:opacity-50 active:scale-95"
+              className="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-semibold text-xs shadow-sm shadow-emerald-500/20 transition-all flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer whitespace-nowrap"
             >
               {loading ? (
                 <>
-                  <RefreshCw className="w-4 h-4 animate-spin" />
+                  <RefreshCw className="w-3.5 h-3.5 animate-spin" />
                   <span>Racing 40+ Resolvers...</span>
                 </>
               ) : (
                 <>
-                  <Zap className="w-4 h-4 fill-slate-950" />
+                  <Zap className="w-3.5 h-3.5" />
                   <span>Start Speed Benchmark</span>
                 </>
               )}
             </button>
 
             {benchmarkData && (
-              <div className="flex items-center gap-2">
+              <>
                 <button
                   onClick={handleExportCsv}
-                  className="px-3.5 py-3 rounded-2xl bg-white/10 hover:bg-white/15 text-white text-xs font-semibold border border-white/10 transition-colors flex items-center justify-center gap-1.5"
+                  className="px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold border border-slate-200 dark:border-slate-700 transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
                   title="Download CSV benchmark report"
                 >
-                  <FileSpreadsheet className="w-4 h-4" />
+                  <FileSpreadsheet className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
                   <span>CSV</span>
                 </button>
                 <button
                   onClick={handleExportJson}
-                  className="px-3.5 py-3 rounded-2xl bg-white/10 hover:bg-white/15 text-white text-xs font-semibold border border-white/10 transition-colors flex items-center justify-center gap-1.5"
+                  className="px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold border border-slate-200 dark:border-slate-700 transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
                   title="Download JSON benchmark report"
                 >
-                  <FileJson className="w-4 h-4" />
+                  <FileJson className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
                   <span>JSON</span>
                 </button>
-              </div>
+              </>
             )}
           </div>
         </div>
 
         {/* Target Domain Input & Quick Pills */}
-        <div className="mt-6 pt-6 border-t border-white/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs text-slate-400 font-medium">Test Query Domain:</span>
+        <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+          <div className="flex flex-wrap items-center gap-1.5">
+            <span className="text-xs text-slate-500 dark:text-slate-400 font-semibold mr-1">Test Query Domain:</span>
             {popularDomains.map((dom) => (
               <button
                 key={dom}
@@ -269,10 +273,10 @@ export default function DnsPerformancePage() {
                   setDomainInput(dom);
                   runBenchmark(dom);
                 }}
-                className={`px-3 py-1 rounded-xl text-xs font-mono font-medium transition-all ${
+                className={`px-2.5 py-1 rounded-lg text-xs font-mono font-medium transition-all cursor-pointer ${
                   domainInput === dom
-                    ? 'bg-emerald-500 text-slate-950 font-bold shadow-sm'
-                    : 'bg-white/5 text-slate-300 hover:bg-white/10 hover:text-white border border-white/10'
+                    ? 'bg-emerald-500 text-white font-bold shadow-xs'
+                    : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700'
                 }`}
               >
                 {dom}
@@ -286,12 +290,12 @@ export default function DnsPerformancePage() {
               value={domainInput}
               onChange={(e) => setDomainInput(e.target.value)}
               placeholder="custom domain (e.g. reddit.com)..."
-              className="px-3.5 py-1.5 rounded-xl bg-slate-950/60 border border-white/10 text-white text-xs font-mono placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 w-full md:w-56"
+              className="px-3 py-1.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-xs font-mono placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 w-full md:w-52"
             />
             <button
               onClick={() => runBenchmark(domainInput)}
               disabled={loading || !domainInput.trim()}
-              className="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs text-white font-medium disabled:opacity-50"
+              className="px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-slate-700 dark:hover:bg-slate-600 text-xs text-white font-semibold disabled:opacity-50 cursor-pointer"
             >
               Test
             </button>

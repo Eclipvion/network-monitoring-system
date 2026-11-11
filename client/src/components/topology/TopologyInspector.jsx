@@ -11,7 +11,9 @@ import {
   Wifi,
   Laptop,
   Smartphone,
-  Cpu
+  Cpu,
+  User,
+  Globe
 } from 'lucide-react';
 import api from '../../services/api';
 
@@ -91,25 +93,25 @@ export default function TopologyInspector({
     : (selectedNode.status === 'DOWN' ? 'Timeout' : `${selectedNode.latestResult?.latency || selectedNode.latency || 12} ms`);
 
   return (
-    <div className="absolute top-4 right-4 w-80 sm:w-96 rounded-2xl bg-slate-900/98 border border-slate-700/80 shadow-2xl backdrop-blur-xl p-5 text-slate-200 z-40 animate-in fade-in slide-in-from-right-4 duration-200 cursor-default pointer-events-auto select-auto">
+    <div className="absolute top-4 right-4 w-80 sm:w-96 rounded-2xl bg-white/98 dark:bg-slate-900/98 border border-slate-200 dark:border-slate-700/80 shadow-2xl backdrop-blur-xl p-5 text-slate-800 dark:text-slate-200 z-40 animate-in fade-in slide-in-from-right-4 duration-200 cursor-default pointer-events-auto select-auto">
       {/* Header */}
-      <div className="flex items-start justify-between pb-3 border-b border-slate-800">
+      <div className="flex items-start justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
         <div className="flex items-center gap-3">
           <div className="w-11 h-11 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-600 flex items-center justify-center text-white shadow-md shadow-emerald-500/20">
             <Icon className="w-5 h-5 stroke-[2.2]" />
           </div>
           <div>
-            <h3 className="font-bold text-sm text-white truncate max-w-[170px]" title={selectedNode.name}>
+            <h3 className="font-bold text-sm text-slate-900 dark:text-white truncate max-w-[170px]" title={selectedNode.name}>
               {selectedNode.name}
             </h3>
             <div className="flex items-center gap-1.5 mt-0.5">
-              <span className="font-mono text-xs text-slate-400">{selectedNode.ip}</span>
+              <span className="font-mono text-xs text-slate-500 dark:text-slate-400">{selectedNode.ip}</span>
               <button
                 onClick={handleCopyIp}
-                className="p-1 hover:bg-slate-800 rounded text-slate-400 hover:text-white"
+                className="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded text-slate-400 hover:text-slate-700 dark:hover:text-white"
                 title="Copy IP"
               >
-                {copied ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
+                {copied ? <Check className="w-3 h-3 text-emerald-500 dark:text-emerald-400" /> : <Copy className="w-3 h-3" />}
               </button>
             </div>
           </div>
@@ -117,7 +119,7 @@ export default function TopologyInspector({
 
         <button
           onClick={onClose}
-          className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+          className="p-1 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
         >
           <X className="w-4 h-4" />
         </button>
@@ -125,9 +127,9 @@ export default function TopologyInspector({
 
       {/* Metrics Grid */}
       <div className="grid grid-cols-2 gap-2 mt-4 text-xs">
-        <div className="p-2.5 rounded-xl bg-slate-800/60 border border-slate-700/50">
-          <span className="text-[11px] text-slate-400">Node Status</span>
-          <p className="font-bold font-mono mt-0.5 text-white flex items-center gap-1.5">
+        <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/50">
+          <span className="text-[11px] text-slate-500 dark:text-slate-400">Node Status</span>
+          <p className="font-bold font-mono mt-0.5 text-slate-900 dark:text-white flex items-center gap-1.5">
             <span
               className={`w-2 h-2 rounded-full ${
                 currentStatus === 'DOWN'
@@ -141,46 +143,94 @@ export default function TopologyInspector({
           </p>
         </div>
 
-        <div className="p-2.5 rounded-xl bg-slate-800/60 border border-slate-700/50">
-          <span className="text-[11px] text-slate-400">Response Latency</span>
-          <p className="font-bold font-mono mt-0.5 text-white">
+        <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/50">
+          <span className="text-[11px] text-slate-500 dark:text-slate-400">Response Latency</span>
+          <p className="font-bold font-mono mt-0.5 text-slate-900 dark:text-white">
             {currentLatency}
           </p>
         </div>
 
-        <div className="p-2.5 rounded-xl bg-slate-800/60 border border-slate-700/50">
-          <span className="text-[11px] text-slate-400">Device Role</span>
-          <p className="font-bold mt-0.5 text-white">
+        <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/50">
+          <span className="text-[11px] text-slate-500 dark:text-slate-400">Device Role</span>
+          <p className="font-bold mt-0.5 text-slate-900 dark:text-white">
             {selectedNode.isGateway ? '⚡ Core Router' : '📱 Connected Host'}
           </p>
         </div>
 
-        <div className="p-2.5 rounded-xl bg-slate-800/60 border border-slate-700/50">
-          <span className="text-[11px] text-slate-400">Device Category</span>
-          <p className="font-bold capitalize mt-0.5 text-white">
+        <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/50">
+          <span className="text-[11px] text-slate-500 dark:text-slate-400">Device Category</span>
+          <p className="font-bold capitalize mt-0.5 text-slate-900 dark:text-white">
             {selectedNode.type || 'Host'}
           </p>
         </div>
       </div>
+
+      {/* Active Windows Account & Continuous Ping Telemetry (8.8.8.8 / 1.1.1.1) */}
+      {(selectedNode.activeUser || selectedNode.endpointPing) && (
+        <div className="mt-3 p-3 rounded-xl bg-cyan-500/5 dark:bg-cyan-500/10 border border-cyan-500/25 space-y-2">
+          <div className="flex items-center justify-between border-b border-cyan-500/20 pb-1.5">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-cyan-700 dark:text-cyan-300 flex items-center gap-1.5">
+              <User className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
+              Active Endpoint Telemetry
+            </span>
+            <span className="text-[10px] px-2 py-0.5 rounded-full font-bold uppercase bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30 flex items-center gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              {selectedNode.sessionState || 'Active'}
+            </span>
+          </div>
+
+          <div className="grid grid-cols-2 gap-2 text-xs">
+            <div>
+              <span className="text-[10px] text-slate-500 dark:text-slate-400">Logged-in User</span>
+              <p className="font-bold text-slate-900 dark:text-white truncate" title={selectedNode.activeUser}>
+                {selectedNode.userDomain ? `${selectedNode.userDomain}\\` : ''}{selectedNode.activeUser || 'Local User'}
+              </p>
+            </div>
+            <div>
+              <span className="text-[10px] text-slate-500 dark:text-slate-400">Host Computer</span>
+              <p className="font-bold font-mono text-slate-900 dark:text-white truncate">
+                {selectedNode.name}
+              </p>
+            </div>
+          </div>
+
+          {selectedNode.endpointPing && (
+            <div className="pt-1.5 border-t border-cyan-500/15 flex items-center justify-between text-[11px] font-mono">
+              <span className="text-slate-600 dark:text-slate-400 flex items-center gap-1">
+                <Globe className="w-3.5 h-3.5 text-emerald-500" />
+                WAN Ping:
+              </span>
+              <div className="flex items-center gap-2">
+                <span className="text-emerald-600 dark:text-emerald-400 font-bold">
+                  8.8.8.8: {selectedNode.endpointPing.google?.latency ?? '—'}ms
+                </span>
+                <span className="text-teal-600 dark:text-teal-400 font-bold">
+                  1.1.1.1: {selectedNode.endpointPing.cloudflare?.latency ?? '—'}ms
+                </span>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Live Ping Verification Result */}
       {pingResult && (
         <div
           className={`mt-3 p-3 rounded-xl border text-xs flex items-center gap-2.5 ${
             pingResult.success
-              ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300'
-              : 'bg-rose-500/10 border-rose-500/30 text-rose-400'
+              ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-700 dark:text-emerald-300'
+              : 'bg-rose-500/10 border-rose-500/30 text-rose-600 dark:text-rose-400'
           }`}
         >
           {pingResult.success ? (
-            <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-400" />
+            <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-500 dark:text-emerald-400" />
           ) : (
-            <XCircle className="w-4 h-4 shrink-0 text-rose-400" />
+            <XCircle className="w-4 h-4 shrink-0 text-rose-500 dark:text-rose-400" />
           )}
           <div className="flex-1">
             <p className="font-semibold">{pingResult.message}</p>
             {pingResult.method && (
-              <span className="text-[10px] text-slate-400 font-mono">Verified via: {pingResult.method}</span>
+              <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">Verified via: {pingResult.method}</span>
             )}
           </div>
         </div>
@@ -191,7 +241,7 @@ export default function TopologyInspector({
         <button
           onClick={handleInstantPing}
           disabled={pinging}
-          className="w-full py-2.5 px-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-xs flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20 transition-all disabled:opacity-50"
+          className="w-full py-2.5 px-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-xs flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20 transition-all disabled:opacity-50 cursor-pointer"
         >
           <Zap className={`w-3.5 h-3.5 ${pinging ? 'animate-spin' : ''}`} />
           <span>{pinging ? 'Testing Live Connection...' : '⚡ Test Live Connection Now'}</span>
@@ -206,9 +256,9 @@ export default function TopologyInspector({
                 onOpenDetails(targetId);
               }
             }}
-            className="w-full py-2.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-100 font-semibold text-xs flex items-center justify-center gap-2 border border-slate-700 hover:border-slate-600 transition-all shadow-sm"
+            className="w-full py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-100 font-semibold text-xs flex items-center justify-center gap-2 border border-slate-200 dark:border-slate-700 transition-all shadow-xs cursor-pointer"
           >
-            <Eye className="w-3.5 h-3.5 text-emerald-400" />
+            <Eye className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
             <span>View Historical Diagnostics</span>
           </button>
         )}

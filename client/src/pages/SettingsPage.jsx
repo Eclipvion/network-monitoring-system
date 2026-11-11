@@ -6,13 +6,14 @@ import SettingsTabsNav from '../components/settings/SettingsTabsNav';
 import EngineThresholdsTab from '../components/settings/EngineThresholdsTab';
 import IspWanTab from '../components/settings/IspWanTab';
 import AlertsIntegrationsTab from '../components/settings/AlertsIntegrationsTab';
+import EmailCenterTab from '../components/settings/EmailCenterTab';
 import BrandingSlaTab from '../components/settings/BrandingSlaTab';
 import SslDnsTab from '../components/settings/SslDnsTab';
 import SystemMaintenanceTab from '../components/settings/SystemMaintenanceTab';
 import ResetConfirmModal from '../components/settings/ResetConfirmModal';
 
 export default function SettingsPage({ onSettingsUpdated }) {
-  const [activeTab, setActiveTab] = useState('engine');
+  const [activeTab, setActiveTab] = useState('email');
   const [loading, setLoading] = useState(false);
   const [initialLoading, setInitialLoading] = useState(true);
   const [savedSuccess, setSavedSuccess] = useState(false);
@@ -127,7 +128,7 @@ export default function SettingsPage({ onSettingsUpdated }) {
   }
 
   return (
-    <div className="max-w-5xl space-y-6">
+    <div className="w-full max-w-7xl space-y-5 sm:space-y-6">
       {/* Top Header Card */}
       <SettingsHeader
         maintenanceMode={settings.maintenanceMode}
@@ -148,6 +149,10 @@ export default function SettingsPage({ onSettingsUpdated }) {
 
       {/* Main Settings Form */}
       <form onSubmit={handleSave} className="space-y-6">
+        {activeTab === 'email' && (
+          <EmailCenterTab />
+        )}
+
         {activeTab === 'engine' && (
           <EngineThresholdsTab settings={settings} onChange={handleChange} />
         )}

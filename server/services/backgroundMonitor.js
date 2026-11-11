@@ -2,6 +2,7 @@ import { execFile } from 'child_process';
 import net from 'net';
 import dataStore from './dataStore.js';
 import telemetryService from './telemetryService.js';
+import emailReportService from './emailReportService.js';
 import { probeHostLive } from '../routes/deviceRoutes.js';
 import {
   broadcastDeviceStatus,
@@ -215,12 +216,32 @@ export async function runMonitoringSweep() {
 
             if (newAlert) {
               broadcastNewAlert(newAlert);
+              emailReportService
+                .notifyDeviceOutageOrRecovery({
+                  deviceName: device.name,
+                  deviceIp: device.ip,
+                  status: 'DOWN',
+                  message: result.message,
+                  latency: result.latency,
+                  timestamp: result.timestamp
+                })
+                .catch(() => {});
             }
 
             if (resolvedAlerts && resolvedAlerts.length > 0) {
               for (const resolved of resolvedAlerts) {
                 broadcastAlertResolved(resolved);
               }
+              emailReportService
+                .notifyDeviceOutageOrRecovery({
+                  deviceName: device.name,
+                  deviceIp: device.ip,
+                  status: 'UP',
+                  message: result.message,
+                  latency: result.latency,
+                  timestamp: result.timestamp
+                })
+                .catch(() => {});
             }
           } catch (devErr) {
             console.error(`[BackgroundMonitor] Error probing device ${device.id} (${device.ip}):`, devErr.message);

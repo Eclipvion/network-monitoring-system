@@ -676,6 +676,10 @@ export class ReportService {
 
     return lines.join('\r\n');
   }
+
+  async clearReportAuditHistory(options = {}) {
+    return dataStore.clearReportAuditHistory(options);
+  }
 }
 
 export const reportService = new ReportService();

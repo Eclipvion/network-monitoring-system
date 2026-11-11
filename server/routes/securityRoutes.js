@@ -8,13 +8,24 @@ import {
   getThreatAlerts,
   resolveThreatAlert,
   logDnsTrafficRecord,
+  logDnsTrafficBatch,
   getDnsTrafficRecords,
   clearDnsTrafficLog,
   harvestLiveDnsCache,
+  generateClientSearchAgentScript,
+  getSearchPolicyRules,
+  saveSearchPolicyRules,
   getSecurityOverview,
   getArpGuardAnalysis,
-  generateRemediationScript
+  generateRemediationScript,
+  recordEndpointTelemetry,
+  getEndpointTelemetry,
+  getEndpointPingReport,
+  generateEndpointPingPdfHtml,
+  getEndpointData,
+  listEndpointsData
 } from '../services/securityService.js';
+import emailReportService from '../services/emailReportService.js';
 import honeypotManager from '../services/honeypotService.js';
 import assetGuardRoutes from './assetGuardRoutes.js';
 
@@ -174,7 +185,7 @@ router.post('/scan-all', async (req, res) => {
 // GET /api/security/dns-traffic - User web search & DNS queries feed
 router.get('/dns-traffic', (req, res) => {
   try {
-    const limit = parseInt(req.query.limit, 10) || 100;
+    const limit = parseInt(req.query.limit, 10) || 250;
     const filterLevel = req.query.threatLevel || 'ALL';
 
     let traffic = getDnsTrafficRecords(limit);
@@ -191,14 +202,15 @@ router.get('/dns-traffic', (req, res) => {
   }
 });
 
-// POST /api/security/dns-harvest - Ingest current local Windows DNS cache
+// POST /api/security/dns-harvest - Ingest live Browser Searches (Chrome/Edge/Brave/Firefox) + Windows DNS cache
 router.post('/dns-harvest', async (req, res) => {
   try {
     const harvested = await harvestLiveDnsCache();
-    const traffic = getDnsTrafficRecords(100);
+    const traffic = getDnsTrafficRecords(250);
     res.json({
-      message: `Harvested ${harvested.length} fresh DNS cache entries`,
+      message: `Harvested ${harvested.length} fresh browser search & DNS entries`,
       harvestedCount: harvested.length,
+      traffic,
       recent: traffic
     });
   } catch (err) {
@@ -206,16 +218,163 @@ router.post('/dns-harvest', async (req, res) => {
   }
 });
 
-// POST /api/security/log-dns - Push DNS request from external python/sniffer
+// POST /api/security/log-dns - Push single search/DNS record from external agent
 router.post('/log-dns', (req, res) => {
   try {
-    const { domain, clientIp, queryType } = req.body;
+    const { domain, clientIp, hostname, username, browser, url, pageTitle, searchQuery, searchEngine, queryType, timestamp } = req.body;
     if (!domain) {
       return res.status(400).json({ error: 'Domain is required' });
     }
 
-    const logged = logDnsTrafficRecord({ domain, clientIp, queryType });
+    const logged = logDnsTrafficRecord({
+      domain,
+      clientIp,
+      hostname,
+      username,
+      browser,
+      url,
+      pageTitle,
+      searchQuery,
+      searchEngine,
+      queryType,
+      timestamp
+    });
     res.status(201).json(logged);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// POST /api/security/log-dns-batch - Push batch of user search & web activity records from Layer-2 Endpoint Agent
+router.post('/log-dns-batch', async (req, res) => {
+  try {
+    const { records = [], clientInfo = null } = req.body;
+    let endpointResult = null;
+    if (clientInfo) {
+      endpointResult = await recordEndpointTelemetry(clientInfo);
+      if (endpointResult) {
+        emailReportService.notifyAgentPingTelemetry(endpointResult).catch(() => {});
+      }
+    }
+    const result = logDnsTrafficBatch(Array.isArray(records) ? records : []);
+    res.status(201).json({ ...result, endpointResult });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// GET /api/security/endpoint-telemetry - Get active Windows accounts and 8.8.8.8 / 1.1.1.1 ping metrics across endpoints
+router.get('/endpoint-telemetry', (req, res) => {
+  try {
+    const data = getEndpointTelemetry();
+    res.json(data);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// GET /api/security/endpoint-ping-report - Full Ping & Outage Telemetry Report (PDF / HTML / CSV / JSON)
+router.get('/endpoint-ping-report', (req, res) => {
+  try {
+    const { ip = '', format = 'json' } = req.query;
+
+    if (format === 'pdf' || format === 'html') {
+      const pdfHtml = generateEndpointPingPdfHtml(ip);
+      res.setHeader('Content-Type', 'text/html; charset=utf-8');
+      return res.send(pdfHtml);
+    }
+
+    const report = getEndpointPingReport(ip);
+
+    if (format === 'csv') {
+      const rows = [
+        `# NetPulse Continuous WAN Ping & Internet Outage Audit Report`,
+        `# Hostname: ${report.hostname} | IP: ${report.ip} | Active User: ${report.activeUser}`,
+        `# WAN Uptime Percentage: ${report.uptimePercentage} | Outages / Downtimes: ${report.outageCount} | Degraded Probes: ${report.degradedCount}`,
+        `# Total Probes Recorded: ${report.totalProbes} | Local Log File: ${report.logFile}`,
+        `# Report Generated At: ${new Date().toISOString()}`,
+        ``,
+        `Probe ID,Timestamp,User Session,Google DNS 8.8.8.8,Cloudflare 1.1.1.1,Jitter (ms),Packet Loss (%),Internet Status,Outage Detected?,Quality Grade`
+      ];
+
+      report.entries.forEach((e) => {
+        rows.push(
+          `${e.id},"${e.timestamp}","${e.user}","${e.googlePing}","${e.cloudflarePing}","${e.jitter}","${e.packetLoss}","${e.status}","${e.isOutage ? 'YES - INTERNET DOWN' : 'NO - INTERNET CONNECTED'}","${e.quality}"`
+        );
+      });
+
+      res.setHeader('Content-Type', 'text/csv');
+      res.setHeader('Content-Disposition', `attachment; filename="Internet_Ping_Outage_Report_${report.hostname || 'PC'}.csv"`);
+      return res.send(rows.join('\r\n'));
+    }
+
+    if (format === 'raw' && report.rawLog) {
+      res.setHeader('Content-Type', 'text/plain');
+      res.setHeader('Content-Disposition', `attachment; filename="endpoint_ping_telemetry_${report.hostname || 'PC'}.log"`);
+      return res.send(report.rawLog);
+    }
+
+    res.json(report);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// GET /api/security/endpoint-data/:ip - Dedicated isolated JSON file for a specific user / workstation
+router.get('/endpoint-data/:ip', (req, res) => {
+  try {
+    const data = getEndpointData(req.params.ip);
+    if (!data) {
+      return res.status(404).json({ error: `Endpoint JSON not found for "${req.params.ip}"` });
+    }
+    res.json(data);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// GET /api/security/endpoints-list - List of all isolated user/workstation JSON records
+router.get('/endpoints-list', (req, res) => {
+  try {
+    const list = listEndpointsData();
+    res.json({ count: list.length, endpoints: list });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// GET /api/security/search-policy - Get Restricted & Critical Website/Keyword Policy Rules
+router.get('/search-policy', (req, res) => {
+  try {
+    const policy = getSearchPolicyRules();
+    res.json(policy);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// POST /api/security/search-policy - Update Restricted & Critical Website/Keyword Policy Rules
+router.post('/search-policy', (req, res) => {
+  try {
+    const { restrictedRules, criticalRules } = req.body;
+    const result = saveSearchPolicyRules({ restrictedRules, criticalRules });
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// GET /api/security/download-search-agent - Download standalone Layer-2 Client Agent (.bat) for Office PCs
+router.get('/download-search-agent', (req, res) => {
+  try {
+    const serverHost = req.query.server || `${req.protocol}://${req.get('host')}`;
+    const result = generateClientSearchAgentScript(serverHost);
+    if (req.query.download === 'true') {
+      res.setHeader('Content-Disposition', `attachment; filename="${result.filename}"`);
+      res.setHeader('Content-Type', 'application/x-bat; charset=utf-8');
+      return res.send(result.script);
+    }
+    res.json(result);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

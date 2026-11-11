@@ -13,6 +13,7 @@ import {
   Route,
   Globe,
   Network,
+  Search,
   X,
   ChevronLeft,
   ChevronRight
@@ -32,6 +33,7 @@ export default function Sidebar({
     { id: 'devices', label: 'Devices', icon: Server },
     { id: 'topology', label: 'Topology Map', icon: Network },
     { id: 'monitoring', label: 'Live Monitoring', icon: Activity },
+    { id: 'user-activity', label: 'User Searches', icon: Search },
     { id: 'reports', label: 'Reports & Audits', icon: FileSpreadsheet },
     { id: 'diagnostics', label: 'Diagnostics', icon: Route },
     { id: 'dns', label: 'DNS Performance', icon: Globe },

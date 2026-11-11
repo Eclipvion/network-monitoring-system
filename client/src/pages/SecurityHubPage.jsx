@@ -14,7 +14,9 @@ import {
   Crosshair,
   UserCheck,
   Globe,
-  Network
+  Network,
+  Mail,
+  CheckCircle2
 } from 'lucide-react';
 import api from '../services/api';
 
@@ -31,6 +33,7 @@ import PortCatalogTab from '../components/security/PortCatalogTab';
 import VulnerabilityModal from '../components/security/VulnerabilityModal';
 import RemediationModal from '../components/security/RemediationModal';
 import AttackerBanModal from '../components/security/AttackerBanModal';
+import CustomEmailReportModal from '../components/reports/CustomEmailReportModal';
 
 export const isLocalIp = (ipStr) => {
   if (!ipStr) return false;
@@ -144,6 +147,22 @@ export default function SecurityHubPage({ devices = [] }) {
   const [dnsSearch, setDnsSearch] = useState('');
   const [dnsCategoryFilter, setDnsCategoryFilter] = useState('ALL');
   const [dnsThreatFilter, setDnsThreatFilter] = useState('ALL');
+  const [emailingSecurityReport, setEmailingSecurityReport] = useState(false);
+  const [showCustomEmailModal, setShowCustomEmailModal] = useState(false);
+  const [securityToast, setSecurityToast] = useState(null);
+
+  const handleSendSecurityEmailReport = async () => {
+    setEmailingSecurityReport(true);
+    try {
+      const res = await api.sendSecurityEmailReport();
+      setSecurityToast(res.message || 'Cybersecurity Report emailed to saved recipient list!');
+      setTimeout(() => setSecurityToast(null), 4000);
+    } catch (err) {
+      alert(`Email dispatch failed: ${err.message}`);
+    } finally {
+      setEmailingSecurityReport(false);
+    }
+  };
 
   // Copy helper
   const handleCopyText = (text, callback) => {
@@ -351,7 +370,7 @@ export default function SecurityHubPage({ devices = [] }) {
       const [overRes, auditsRes, trafficRes, threatsRes, catRes, arpRes, honeyRes] = await Promise.all([
         api.getSecurityOverview().catch(() => null),
         api.getSecurityAudits().catch(() => ({})),
-        api.getDnsTraffic({ limit: 150 }).catch(() => ({ traffic: [] })),
+        api.getDnsTraffic({ limit: 250 }).catch(() => ({ traffic: [] })),
         api.getThreatAlerts().catch(() => []),
         api.getPortsCatalog().catch(() => ({ ports: [] })),
         api.getArpGuardAnalysis().catch(() => null),
@@ -427,18 +446,22 @@ export default function SecurityHubPage({ devices = [] }) {
     }
   };
 
-  // Action: Harvest DNS
+  // Action: Harvest Browser Searches & DNS
   const handleHarvestDns = async () => {
     setIsHarvestingDns(true);
     try {
       const res = await api.harvestDnsCache();
-      if (res.traffic) {
-        setDnsTraffic(res.traffic);
+      const updated = res?.traffic || res?.recent;
+      if (updated) {
+        setDnsTraffic(updated);
+      } else {
+        const fresh = await api.getDnsTraffic({ limit: 250 });
+        if (fresh?.traffic) setDnsTraffic(fresh.traffic);
       }
       const threats = await api.getThreatAlerts();
       setThreatAlerts(threats);
     } catch (err) {
-      alert(`Error harvesting DNS: ${err.message}`);
+      alert(`Error harvesting searches & DNS: ${err.message}`);
     } finally {
       setIsHarvestingDns(false);
     }
@@ -479,62 +502,77 @@ export default function SecurityHubPage({ devices = [] }) {
 
   return (
     <div className="space-y-4 sm:space-y-6 max-w-full overflow-hidden">
-      {/* TOP HEADER: SOC CYBER DEFENSE BANNER */}
-      <div className="p-4 sm:p-6 rounded-3xl glass-panel border border-slate-200 dark:border-slate-800 bg-gradient-to-r from-slate-900/90 via-slate-900/95 to-slate-950 text-white relative overflow-hidden shadow-xl">
-        <div className="absolute inset-0 bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:24px_24px] opacity-10 pointer-events-none" />
-        <div className="absolute -right-20 -top-20 w-80 h-80 rounded-full bg-rose-500/10 blur-3xl pointer-events-none" />
-        <div className="absolute -left-20 -bottom-20 w-80 h-80 rounded-full bg-cyan-500/10 blur-3xl pointer-events-none" />
-
-        <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-          <div className="space-y-1.5 min-w-0">
-            <div className="flex items-center gap-2 flex-wrap">
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-rose-500/20 text-rose-400 border border-rose-500/30 font-mono flex items-center gap-1.5">
-                <Radio className="w-3 h-3 text-rose-400 animate-pulse" />
-                Autonomous Cyber SOC Active
-              </span>
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 font-mono">
-                Port Probing • DNS Telemetry • ARP Guard • Zero-Trust
-              </span>
+      {securityToast && (
+        <div className="fixed top-5 right-5 z-50 px-4 py-2.5 rounded-2xl bg-slate-900 text-white border border-emerald-500/40 shadow-2xl flex items-center gap-2.5 text-xs font-semibold animate-in fade-in slide-in-from-top-4 duration-200">
+          <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+          <span>{securityToast}</span>
+        </div>
+      )}
+      {/* TOP HEADER: SOC CYBER DEFENSE BANNER (TABLE-WISE LEFT-ALIGNED TOOLBAR) */}
+      <div className="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+        {/* Row 1: Title & Subtitle on Left, Status Badge on Right */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-rose-500 to-amber-500 flex items-center justify-center text-white shadow-md shadow-rose-500/20 shrink-0">
+              <Shield className="w-5 h-5 stroke-[2.2]" />
             </div>
-            <h1 className="text-xl sm:text-2xl font-black tracking-tight flex items-center gap-2.5">
-              <Shield className="w-6 h-6 text-cyan-400 shrink-0" />
-              <span>Cyber Threat & Attack Surface Security Hub</span>
-            </h1>
-            <p className="text-xs text-slate-400 max-w-2xl leading-relaxed">
-              Real-time Layer-2 ARP spoofing detection, active TCP/UDP exploit port auditing, decoy honeypot traps, and 1-click firewall remediation.
-            </p>
+            <div className="min-w-0">
+              <h1 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white tracking-tight truncate">
+                Cyber Threat &amp; Attack Surface Security Hub
+              </h1>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                Real-time Layer-2 ARP spoofing detection • Active TCP/UDP exploit port auditing • Honeypot traps • 1-Click firewall remediation
+              </p>
+            </div>
           </div>
 
-          {/* Quick Action Buttons (Responsive flex-wrap) */}
-          <div className="flex items-center gap-2 flex-wrap self-stretch sm:self-auto">
-            <button
-              onClick={() => handleOpenRemediationModal('powershell')}
-              className="flex-1 sm:flex-initial px-3.5 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20 transition-all cursor-pointer"
-              title="Generate and download unified firewall remediation script"
-            >
-              <Zap className="w-3.5 h-3.5 text-amber-300" />
-              <span>1-Click Remediation</span>
-            </button>
-
-            <button
-              onClick={handleScanAll}
-              disabled={isScanningAll}
-              className="flex-1 sm:flex-initial px-3.5 py-2 rounded-xl bg-gradient-to-r from-rose-500 to-amber-600 hover:from-rose-600 hover:to-amber-700 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-lg shadow-rose-500/20 transition-all disabled:opacity-50 cursor-pointer"
-              title="Audit open exploit ports across all active online devices"
-            >
-              <Radar className={`w-3.5 h-3.5 ${isScanningAll ? 'animate-spin' : ''}`} />
-              <span>{isScanningAll ? 'Auditing Hosts...' : 'Scan Online Hosts'}</span>
-            </button>
-
-            <button
-              onClick={() => fetchAllSecurityData()}
-              disabled={loading}
-              className="p-2 rounded-xl bg-white/10 hover:bg-white/15 text-slate-200 border border-white/10 transition-colors cursor-pointer"
-              title="Refresh security telemetry"
-            >
-              <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
-            </button>
+          <div className="flex items-center gap-2 shrink-0 self-start sm:self-center">
+            <span className="text-[10px] px-2.5 py-1 rounded-full font-bold uppercase tracking-wider bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20 flex items-center gap-1.5">
+              <Radio className="w-3 h-3 animate-pulse" />
+              Autonomous Cyber SOC
+            </span>
           </div>
+        </div>
+
+        {/* Row 2: Table-Wise Left-Aligned Action Buttons */}
+        <div className="pt-2.5 border-t border-slate-100 dark:border-slate-800/80 flex flex-wrap items-center justify-start gap-2">
+          <button
+            onClick={() => setShowCustomEmailModal(true)}
+            className="px-3 py-1.5 rounded-xl bg-gradient-to-r from-indigo-500 to-cyan-600 hover:from-indigo-600 hover:to-cyan-700 text-white font-semibold text-xs flex items-center justify-center gap-1.5 shadow-sm shadow-indigo-500/20 transition-all cursor-pointer whitespace-nowrap"
+            title="Send Cybersecurity & Vulnerability Audit Report to Custom or Saved Email Recipients"
+          >
+            <Mail className="w-3.5 h-3.5 shrink-0" />
+            <span>Email Security Report</span>
+          </button>
+
+          <button
+            onClick={() => handleOpenRemediationModal('powershell')}
+            className="px-3 py-1.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-semibold text-xs flex items-center justify-center gap-1.5 shadow-sm shadow-emerald-500/20 transition-all cursor-pointer whitespace-nowrap"
+            title="Generate and download unified firewall remediation script"
+          >
+            <Zap className="w-3.5 h-3.5 text-amber-300 shrink-0" />
+            <span>1-Click Remediation</span>
+          </button>
+
+          <button
+            onClick={handleScanAll}
+            disabled={isScanningAll}
+            className="px-3 py-1.5 rounded-xl bg-gradient-to-r from-rose-500 to-amber-600 hover:from-rose-600 hover:to-amber-700 text-white font-semibold text-xs flex items-center justify-center gap-1.5 shadow-sm shadow-rose-500/20 transition-all disabled:opacity-50 cursor-pointer whitespace-nowrap"
+            title="Audit open exploit ports across all active online devices"
+          >
+            <Radar className={`w-3.5 h-3.5 shrink-0 ${isScanningAll ? 'animate-spin' : ''}`} />
+            <span>{isScanningAll ? 'Auditing...' : 'Scan Online Hosts'}</span>
+          </button>
+
+          <button
+            onClick={() => fetchAllSecurityData()}
+            disabled={loading}
+            className="px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 hover:bg-slate-100 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer shrink-0"
+            title="Refresh security telemetry"
+          >
+            <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
+            <span>Refresh</span>
+          </button>
         </div>
       </div>
 
@@ -713,7 +751,12 @@ export default function SecurityHubPage({ devices = [] }) {
             }`}
           >
             <Globe className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-            <span>DNS & Web Stream</span>
+            <span>User Searches & Web Stream</span>
+            {dnsTraffic.length > 0 && (
+              <span className="px-1.5 py-0.2 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 text-[10px] font-mono font-bold">
+                {dnsTraffic.length}
+              </span>
+            )}
           </button>
 
           <button
@@ -803,6 +846,7 @@ export default function SecurityHubPage({ devices = [] }) {
 
       {activeSubTab === 'dns-traffic' && (
         <DnsTrafficTab
+          devices={devices}
           dnsTraffic={dnsTraffic}
           dnsSearch={dnsSearch}
           setDnsSearch={setDnsSearch}
@@ -868,6 +912,24 @@ export default function SecurityHubPage({ devices = [] }) {
         copiedBanCmd={copiedBanCmd}
         handleCopyText={handleCopyText}
         setCopiedBanCmd={setCopiedBanCmd}
+      />
+
+      {/* Universal Custom Recipient Cybersecurity Email Modal */}
+      <CustomEmailReportModal
+        isOpen={showCustomEmailModal}
+        onClose={() => setShowCustomEmailModal(false)}
+        reportTitle="Email Cybersecurity & Threat Audit Report"
+        reportSubtitle="Direct & exclusive delivery to custom recipient"
+        reportScope="Cyber Threat Surface, ARP Spoofing & Port Vulnerabilities • All Online Hosts"
+        scopeBadge="Autonomous SOC"
+        gradient="from-indigo-500 to-cyan-600"
+        onSend={async (recipients) => {
+          return await api.sendSecurityEmailReport({ recipients });
+        }}
+        onSuccess={(res, rec) => {
+          setSecurityToast(res?.message || `Cybersecurity Report emailed to ${rec}!`);
+          setTimeout(() => setSecurityToast(null), 4000);
+        }}
       />
     </div>
   );

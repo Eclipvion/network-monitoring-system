@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import {
-  FileText,
   Printer,
   Download,
   Calendar,
@@ -11,10 +10,14 @@ import {
   CalendarRange,
   Hash,
   Mail,
+  Send,
   Server,
   FileSpreadsheet,
   ShieldCheck,
-  Award
+  Trash2,
+  RotateCcw,
+  CheckCircle2,
+  X
 } from 'lucide-react';
 import {
   AreaChart,
@@ -32,6 +35,7 @@ import IncidentAuditTable from '../components/reports/IncidentAuditTable';
 import DeviceSlaMatrixTable from '../components/reports/DeviceSlaMatrixTable';
 import ComplianceAuditTab from '../components/reports/ComplianceAuditTab';
 import ScheduledEmailModal from '../components/reports/ScheduledEmailModal';
+import CustomEmailReportModal from '../components/reports/CustomEmailReportModal';
 import OutageTrackerWidget from '../components/OutageTrackerWidget';
 import api from '../services/api';
 
@@ -57,36 +61,50 @@ export default function ReportsPage({ devices = [], initialDeviceId = 'all' }) {
   const [customDaysCount, setCustomDaysCount] = useState(45);
 
   const [showEmailModal, setShowEmailModal] = useState(false);
+  const [showCustomEmailModal, setShowCustomEmailModal] = useState(false);
+  const [showClearModal, setShowClearModal] = useState(false);
+  const [isClearing, setIsClearing] = useState(false);
+  const [sendingEmailNow, setSendingEmailNow] = useState(false);
+  const [reportToast, setReportToast] = useState(null);
+
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [reportData, setReportData] = useState(null);
   const [error, setError] = useState(null);
 
-  // Helper function to build API query parameters for both fetch and export
-  const buildReportParams = useCallback((format = null) => {
-    const params = {
-      deviceId: selectedDeviceId
-    };
-    if (format) params.format = format;
+  const showToast = (msg) => {
+    setReportToast(msg);
+    setTimeout(() => setReportToast(null), 3500);
+  };
 
-    if (rangeMode === 'custom_dates') {
-      params.from = new Date(customFrom).toISOString();
-      params.to = new Date(customTo).toISOString();
-    } else if (rangeMode === 'custom_days') {
-      params.days = Math.max(0.1, Number(customDaysCount) || 7);
-    } else {
-      const daysMap = {
-        '24h': 1,
-        '3d': 3,
-        '7d': 7,
-        '14d': 14,
-        '30d': 30,
-        '90d': 90
+  // Helper function to build API query parameters for both fetch and export
+  const buildReportParams = useCallback(
+    (format = null) => {
+      const params = {
+        deviceId: selectedDeviceId
       };
-      params.days = daysMap[rangePreset] || 7;
-    }
-    return params;
-  }, [selectedDeviceId, rangeMode, rangePreset, customFrom, customTo, customDaysCount]);
+      if (format) params.format = format;
+
+      if (rangeMode === 'custom_dates') {
+        params.from = new Date(customFrom).toISOString();
+        params.to = new Date(customTo).toISOString();
+      } else if (rangeMode === 'custom_days') {
+        params.days = Math.max(0.1, Number(customDaysCount) || 7);
+      } else {
+        const daysMap = {
+          '24h': 1,
+          '3d': 3,
+          '7d': 7,
+          '14d': 14,
+          '30d': 30,
+          '90d': 90
+        };
+        params.days = daysMap[rangePreset] || 7;
+      }
+      return params;
+    },
+    [selectedDeviceId, rangeMode, rangePreset, customFrom, customTo, customDaysCount]
+  );
 
   // Fetch report analytics from backend
   const fetchReport = useCallback(async () => {
@@ -108,6 +126,50 @@ export default function ReportsPage({ devices = [], initialDeviceId = 'all' }) {
   useEffect(() => {
     fetchReport();
   }, [fetchReport]);
+
+  // Clear Report & Audit History handler
+  const handleClearReportHistory = async (scope = 'all') => {
+    try {
+      setIsClearing(true);
+      await api.clearReportHistory({ deviceId: selectedDeviceId, scope });
+      setShowClearModal(false);
+      await fetchReport();
+      showToast(
+        scope === 'incidents'
+          ? 'Outage & incident audit history cleared successfully!'
+          : 'Complete report & SLA audit history cleared successfully!'
+      );
+    } catch (err) {
+      showToast(`Failed to clear history: ${err.message}`);
+    } finally {
+      setIsClearing(false);
+    }
+  };
+
+  // Instant 1-Click Email Report Dispatch
+  const handleSendEmailNow = async () => {
+    try {
+      setSendingEmailNow(true);
+      const params = buildReportParams();
+      await api.sendEmailReportNow({ days: params.days || 7, deviceId: selectedDeviceId });
+      showToast('Executive SLA & Audit Report sent to configured email recipients!');
+    } catch (err) {
+      showToast(err.message || 'Failed to send email report. CheckAutomated Email Schedule settings.');
+    } finally {
+      setSendingEmailNow(false);
+    }
+  };
+
+  // Reset all filters to default
+  const handleResetFilters = () => {
+    setSelectedDeviceId('all');
+    setRangeMode('preset');
+    setRangePreset('7d');
+    showToast('Report filters reset to All Devices (Last 7 Days)');
+  };
+
+  const isFilteredFromDefault =
+    selectedDeviceId !== 'all' || rangeMode !== 'preset' || rangePreset !== '7d';
 
   // Open PDF printable report in new tab with the exact custom date range
   const handleOpenPdfReport = () => {
@@ -158,7 +220,9 @@ export default function ReportsPage({ devices = [], initialDeviceId = 'all' }) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[420px] text-slate-400 space-y-3">
         <RefreshCw className="w-8 h-8 animate-spin text-emerald-500" />
-        <p className="text-sm font-medium">Synthesizing network telemetry & calculating SLA audit metrics...</p>
+        <p className="text-sm font-medium">
+          Synthesizing network telemetry &amp; calculating SLA audit metrics...
+        </p>
       </div>
     );
   }
@@ -176,16 +240,24 @@ export default function ReportsPage({ devices = [], initialDeviceId = 'all' }) {
 
   return (
     <div className="space-y-6 animate-in fade-in duration-200">
+      {/* Toast Notification */}
+      {reportToast && (
+        <div className="fixed top-5 right-5 z-50 px-4 py-2.5 rounded-2xl bg-slate-900 text-white border border-emerald-500/40 shadow-2xl flex items-center gap-2.5 text-xs font-semibold animate-in fade-in slide-in-from-top-4 duration-200">
+          <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+          <span>{reportToast}</span>
+        </div>
+      )}
+
       {/* Header & Controls Bar */}
       <div className="glass-panel p-5 sm:p-6 rounded-3xl border border-slate-200 dark:border-slate-800 space-y-5">
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+        <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-600 text-white flex items-center justify-center font-bold shadow-md shadow-emerald-500/20">
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-600 text-white flex items-center justify-center font-bold shadow-md shadow-emerald-500/20 shrink-0">
                 <FileSpreadsheet className="w-5 h-5 stroke-[2.2]" />
               </div>
               <h2 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">
-                Reports & Audits Suite
+                Reports &amp; Audits Suite
               </h2>
             </div>
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
@@ -193,56 +265,95 @@ export default function ReportsPage({ devices = [], initialDeviceId = 'all' }) {
             </p>
           </div>
 
-          {/* Export Action Buttons */}
+          {/* Export & Management Action Buttons */}
           <div className="flex flex-wrap items-center gap-2">
             <button
               onClick={fetchReport}
               disabled={refreshing}
-              className="px-3 py-2 text-xs font-semibold rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700/60 text-slate-700 dark:text-slate-200 flex items-center gap-1.5 transition-colors shadow-sm"
+              className="px-3 py-2 text-xs font-semibold rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700/60 text-slate-700 dark:text-slate-200 flex items-center gap-1.5 transition-colors shadow-sm cursor-pointer"
             >
               <RefreshCw className={`w-3.5 h-3.5 ${refreshing ? 'animate-spin text-emerald-500' : ''}`} />
-              Refresh
+              <span>Refresh</span>
+            </button>
+
+            <button
+              onClick={() => setShowClearModal(true)}
+              className="px-3 py-2 text-xs font-semibold rounded-xl border border-rose-500/30 bg-rose-500/10 hover:bg-rose-500/20 text-rose-600 dark:text-rose-400 flex items-center gap-1.5 transition-colors shadow-sm cursor-pointer"
+              title="Clear recorded outage incidents or reset historical SLA audit probes"
+            >
+              <Trash2 className="w-3.5 h-3.5" />
+              <span>Clear History</span>
             </button>
 
             <button
               onClick={handleDownloadCsv}
-              className="px-3 py-2 text-xs font-semibold rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700/60 text-slate-700 dark:text-slate-200 flex items-center gap-1.5 transition-colors shadow-sm"
+              className="px-3 py-2 text-xs font-semibold rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700/60 text-slate-700 dark:text-slate-200 flex items-center gap-1.5 transition-colors shadow-sm cursor-pointer"
             >
               <Download className="w-3.5 h-3.5 text-blue-500" />
-              Export CSV
+              <span>Export CSV</span>
+            </button>
+
+            <button
+              onClick={() => setShowCustomEmailModal(true)}
+              disabled={sendingEmailNow}
+              className="px-3.5 py-2 text-xs font-semibold rounded-xl border border-cyan-500/30 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-700 dark:text-cyan-300 flex items-center gap-1.5 transition-colors shadow-sm cursor-pointer disabled:opacity-50"
+              title="Immediately dispatch custom recipient email for this SLA & Audit Report"
+            >
+              <Send className={`w-3.5 h-3.5 text-cyan-500 ${sendingEmailNow ? 'animate-bounce' : ''}`} />
+              <span>{sendingEmailNow ? 'Sending...' : 'Email Report Now'}</span>
             </button>
 
             <button
               onClick={() => setShowEmailModal(true)}
-              className="px-3.5 py-2 text-xs font-semibold rounded-xl border border-indigo-200 dark:border-indigo-800/60 bg-indigo-50/70 dark:bg-indigo-950/40 hover:bg-indigo-100/80 dark:hover:bg-indigo-900/60 text-indigo-700 dark:text-indigo-300 flex items-center gap-1.5 transition-colors shadow-sm"
+              className="px-3.5 py-2 text-xs font-semibold rounded-xl border border-indigo-200 dark:border-indigo-800/60 bg-indigo-50/70 dark:bg-indigo-950/40 hover:bg-indigo-100/80 dark:hover:bg-indigo-900/60 text-indigo-700 dark:text-indigo-300 flex items-center gap-1.5 transition-colors shadow-sm cursor-pointer"
               title="Configure automated scheduled daily/weekly report emails"
             >
               <Mail className="w-3.5 h-3.5 text-indigo-500" />
-              Automated Email Schedule
+              <span>Email Schedule</span>
             </button>
 
             <button
               onClick={handleOpenPdfReport}
-              className="px-4 py-2 text-xs font-bold text-white bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 rounded-xl shadow-md shadow-emerald-500/20 flex items-center gap-2 transition-all hover:scale-[1.02] active:scale-[0.98]"
+              className="px-4 py-2 text-xs font-bold text-white bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 rounded-xl shadow-md shadow-emerald-500/20 flex items-center gap-2 transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
             >
               <Printer className="w-4 h-4" />
-              Generate PDF Report
+              <span>Generate PDF Report</span>
             </button>
           </div>
         </div>
+
+        {/* Error Banner if API failed */}
+        {error && (
+          <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-600 dark:text-rose-400 text-xs flex items-center justify-between">
+            <span>{error}</span>
+            <button onClick={fetchReport} className="underline font-bold cursor-pointer">
+              Retry
+            </button>
+          </div>
+        )}
 
         {/* Filters Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 pt-4 border-t border-slate-200/60 dark:border-slate-800/80">
           {/* Device Selector */}
           <div>
-            <label className="block text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-1.5">
-              Select Device Scope
-            </label>
+            <div className="flex items-center justify-between mb-1.5">
+              <label className="block text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+                Select Device Scope
+              </label>
+              {selectedDeviceId !== 'all' && (
+                <button
+                  onClick={() => setSelectedDeviceId('all')}
+                  className="text-[10px] font-bold text-emerald-500 hover:underline cursor-pointer"
+                >
+                  Show All ({devices.length})
+                </button>
+              )}
+            </div>
             <div className="relative">
               <select
                 value={selectedDeviceId}
                 onChange={(e) => setSelectedDeviceId(e.target.value)}
-                className="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 appearance-none font-medium"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 appearance-none font-medium cursor-pointer"
               >
                 <option value="all">All Monitored Devices ({devices.length})</option>
                 {devices.map((d) => (
@@ -263,54 +374,77 @@ export default function ReportsPage({ devices = [], initialDeviceId = 'all' }) {
             <div className="flex items-center gap-1.5 bg-slate-100 dark:bg-slate-800/70 p-1 rounded-xl">
               <button
                 onClick={() => setRangeMode('preset')}
-                className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer ${
                   rangeMode === 'preset'
                     ? 'bg-white dark:bg-slate-700 text-emerald-600 dark:text-emerald-400 shadow-sm font-semibold'
                     : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
                 <Calendar className="w-3.5 h-3.5" />
-                Quick Presets
+                <span>Quick Presets</span>
               </button>
 
               <button
                 onClick={() => setRangeMode('custom_dates')}
-                className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer ${
                   rangeMode === 'custom_dates'
                     ? 'bg-white dark:bg-slate-700 text-emerald-600 dark:text-emerald-400 shadow-sm font-semibold'
                     : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
                 <CalendarRange className="w-3.5 h-3.5" />
-                Custom Range
+                <span>Custom Range</span>
               </button>
 
               <button
                 onClick={() => setRangeMode('custom_days')}
-                className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer ${
                   rangeMode === 'custom_days'
                     ? 'bg-white dark:bg-slate-700 text-emerald-600 dark:text-emerald-400 shadow-sm font-semibold'
                     : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
                 <Hash className="w-3.5 h-3.5" />
-                Custom Days
+                <span>Custom Days</span>
               </button>
             </div>
           </div>
 
-          {/* Active Range Summary Info */}
+          {/* Active Range Summary Info + Reset Filter Button */}
           <div>
-            <label className="block text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-1.5">
-              Active Scope & Range
-            </label>
-            <div className="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400">
-              <div className="font-semibold text-slate-700 dark:text-slate-200 truncate">
-                {filter.deviceName || 'All Devices'}
+            <div className="flex items-center justify-between mb-1.5">
+              <label className="block text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+                Active Scope &amp; Range
+              </label>
+              {isFilteredFromDefault && (
+                <button
+                  onClick={handleResetFilters}
+                  className="text-[10px] font-bold text-amber-500 hover:underline inline-flex items-center gap-1 cursor-pointer"
+                  title="Reset device scope and date range to default"
+                >
+                  <RotateCcw className="w-2.5 h-2.5" />
+                  <span>Reset Filters</span>
+                </button>
+              )}
+            </div>
+            <div className="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400 flex items-center justify-between gap-2">
+              <div className="min-w-0">
+                <div className="font-semibold text-slate-700 dark:text-slate-200 truncate">
+                  {filter.deviceName || 'All Devices'}
+                </div>
+                <div className="text-[11px] text-emerald-600 dark:text-emerald-400 font-mono mt-0.5">
+                  {filter.isCustomRange ? `Custom Range (${filter.days}d)` : `${filter.days || 7} Days Window`}
+                </div>
               </div>
-              <div className="text-[11px] text-emerald-600 dark:text-emerald-400 font-mono mt-0.5">
-                {filter.isCustomRange ? `Custom Range (${filter.days}d)` : `${filter.days || 7} Days Window`}
-              </div>
+              {selectedDeviceId !== 'all' && (
+                <button
+                  onClick={() => setSelectedDeviceId('all')}
+                  className="p-1 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-400 hover:text-slate-700 dark:hover:text-white shrink-0 cursor-pointer"
+                  title="Clear single-device filter"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              )}
             </div>
           </div>
         </div>
@@ -330,7 +464,7 @@ export default function ReportsPage({ devices = [], initialDeviceId = 'all' }) {
               <button
                 key={p.id}
                 onClick={() => setRangePreset(p.id)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer ${
                   rangePreset === p.id
                     ? 'bg-emerald-500 text-white font-semibold shadow-sm shadow-emerald-500/20'
                     : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
@@ -348,7 +482,7 @@ export default function ReportsPage({ devices = [], initialDeviceId = 'all' }) {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <span className="text-xs font-bold text-slate-700 dark:text-slate-200 flex items-center gap-1.5">
                 <CalendarRange className="w-4 h-4 text-emerald-500" />
-                Select Custom Date & Time Boundaries
+                Select Custom Date &amp; Time Boundaries
               </span>
               <div className="flex flex-wrap items-center gap-1.5 text-[11px]">
                 <span className="text-slate-400">Shortcuts:</span>
@@ -357,7 +491,7 @@ export default function ReportsPage({ devices = [], initialDeviceId = 'all' }) {
                     key={s}
                     type="button"
                     onClick={() => applyDateShortcut(s)}
-                    className="px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 hover:bg-emerald-500 hover:text-white transition-colors capitalize text-[10px] font-semibold"
+                    className="px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 hover:bg-emerald-500 hover:text-white transition-colors capitalize text-[10px] font-semibold cursor-pointer"
                   >
                     {s}
                   </button>
@@ -389,7 +523,7 @@ export default function ReportsPage({ devices = [], initialDeviceId = 'all' }) {
               <button
                 type="button"
                 onClick={fetchReport}
-                className="px-4 py-1.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg font-semibold text-xs transition-colors shadow-sm"
+                className="px-4 py-1.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg font-semibold text-xs transition-colors shadow-sm cursor-pointer"
               >
                 Apply Range
               </button>
@@ -419,13 +553,13 @@ export default function ReportsPage({ devices = [], initialDeviceId = 'all' }) {
                 <span className="text-slate-400">days ago until now</span>
               </div>
 
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-1.5 flex-wrap">
                 {[15, 45, 60, 100, 180, 365].map((d) => (
                   <button
                     key={d}
                     type="button"
                     onClick={() => setCustomDaysCount(d)}
-                    className={`px-2.5 py-1 rounded-lg text-xs font-mono font-semibold transition-all ${
+                    className={`px-2.5 py-1 rounded-lg text-xs font-mono font-semibold transition-all cursor-pointer ${
                       Number(customDaysCount) === d
                         ? 'bg-emerald-500 text-white'
                         : 'bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-600'
@@ -439,7 +573,7 @@ export default function ReportsPage({ devices = [], initialDeviceId = 'all' }) {
               <button
                 type="button"
                 onClick={fetchReport}
-                className="px-4 py-1.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg font-semibold text-xs transition-colors shadow-sm ml-auto"
+                className="px-4 py-1.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg font-semibold text-xs transition-colors shadow-sm ml-auto cursor-pointer"
               >
                 Apply Days
               </button>
@@ -463,7 +597,7 @@ export default function ReportsPage({ devices = [], initialDeviceId = 'all' }) {
             <button
               key={tab.id}
               onClick={() => setActiveReportTab(tab.id)}
-              className={`flex items-center gap-2 px-3.5 py-2 rounded-xl transition-all whitespace-nowrap ${
+              className={`flex items-center gap-2 px-3.5 py-2 rounded-xl transition-all whitespace-nowrap cursor-pointer ${
                 isActive
                   ? 'bg-white dark:bg-slate-700 text-emerald-600 dark:text-emerald-400 shadow-sm font-extrabold'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
@@ -476,15 +610,15 @@ export default function ReportsPage({ devices = [], initialDeviceId = 'all' }) {
         })}
       </div>
 
-      {/* Organization Branding & SLA Status Banner (shown on all or overview or compliance) */}
+      {/* Organization Branding & SLA Status Banner */}
       {(activeReportTab === 'all' || activeReportTab === 'overview' || activeReportTab === 'compliance') && (
         <div className="glass-panel p-4 px-5 rounded-2xl border border-slate-200 dark:border-slate-800 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white font-bold text-sm flex items-center justify-center shadow-md shadow-emerald-500/20">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white font-bold text-sm flex items-center justify-center shadow-md shadow-emerald-500/20 shrink-0">
               {branding.organizationName ? branding.organizationName.slice(0, 2).toUpperCase() : 'NP'}
             </div>
             <div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 flex-wrap">
                 <h3 className="font-bold text-sm text-slate-900 dark:text-white">
                   {branding.organizationName || 'NetPulse Enterprise'}
                 </h3>
@@ -510,11 +644,13 @@ export default function ReportsPage({ devices = [], initialDeviceId = 'all' }) {
               </span>
             </div>
 
-            <div className={`px-3.5 py-1.5 rounded-xl border flex items-center gap-2 ${
-              compliance.slaStatus === 'SLA_MET'
-                ? 'border-emerald-200 dark:border-emerald-800/60 bg-emerald-50/50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400'
-                : 'border-rose-200 dark:border-rose-800/60 bg-rose-50/50 dark:bg-rose-950/30 text-rose-600 dark:text-rose-400'
-            }`}>
+            <div
+              className={`px-3.5 py-1.5 rounded-xl border flex items-center gap-2 ${
+                compliance.slaStatus === 'SLA_MET'
+                  ? 'border-emerald-200 dark:border-emerald-800/60 bg-emerald-50/50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400'
+                  : 'border-rose-200 dark:border-rose-800/60 bg-rose-50/50 dark:bg-rose-950/30 text-rose-600 dark:text-rose-400'
+              }`}
+            >
               <span className="text-[11px] font-semibold">SLA Commitment:</span>
               <span className="text-xs font-bold">
                 {compliance.slaStatus === 'SLA_MET' ? '✓ TARGET MET' : '⚠ SLA BREACHED'}
@@ -527,7 +663,7 @@ export default function ReportsPage({ devices = [], initialDeviceId = 'all' }) {
         </div>
       )}
 
-      {/* SECTION 1: OVERVIEW (KPIs + Latency Waves Chart + OutageTracker) */}
+      {/* SECTION 1: OVERVIEW (KPIs + Latency Waves Chart + OutageTracker when in overview tab) */}
       {(activeReportTab === 'all' || activeReportTab === 'overview') && (
         <div className="space-y-6">
           {/* KPI Cards Grid */}
@@ -543,7 +679,8 @@ export default function ReportsPage({ devices = [], initialDeviceId = 'all' }) {
               <div>
                 <h3 className="font-bold text-base text-slate-900 dark:text-white flex items-center gap-2">
                   <Activity className="w-4 h-4 text-emerald-500" />
-                  Latency & Packet Loss Timeline ({filter.isCustomRange ? `Custom Range (${filter.days}d)` : `${filter.days || 7} Days`})
+                  Latency &amp; Packet Loss Timeline (
+                  {filter.isCustomRange ? `Custom Range (${filter.days}d)` : `${filter.days || 7} Days`})
                 </h3>
                 <p className="text-xs text-slate-500 dark:text-slate-400">
                   Historical response time curve with packet loss spikes across the selected date range.
@@ -640,14 +777,25 @@ export default function ReportsPage({ devices = [], initialDeviceId = 'all' }) {
             </div>
           </div>
 
-          {/* Outage Tracker Live Engine */}
-          <OutageTrackerWidget />
+          {/* Outage Tracker Live Engine (Shown in dedicated SLA & Latency Waves sub-tab so it doesn't duplicate IncidentAuditTable in 'all') */}
+          {activeReportTab === 'overview' && (
+            <OutageTrackerWidget
+              reportIncidents={incidents}
+              reportMetrics={metrics}
+              selectedDeviceId={selectedDeviceId}
+              onClearHistory={handleClearReportHistory}
+            />
+          )}
         </div>
       )}
 
       {/* SECTION 2: OUTAGE INCIDENT AUDITS */}
       {(activeReportTab === 'all' || activeReportTab === 'incidents') && (
-        <IncidentAuditTable incidents={incidents} />
+        <IncidentAuditTable
+          incidents={incidents}
+          onClearIncidents={() => handleClearReportHistory('incidents')}
+          isClearing={isClearing}
+        />
       )}
 
       {/* SECTION 3: COMPLIANCE & NOC AUDIT CHECKLIST */}
@@ -661,13 +809,118 @@ export default function ReportsPage({ devices = [], initialDeviceId = 'all' }) {
       )}
 
       {/* SECTION 4: DEVICE INVENTORY & SLA MATRIX */}
-      {(activeReportTab === 'all' || activeReportTab === 'devices') && selectedDeviceId === 'all' && deviceSummaries.length > 0 && (
+      {(activeReportTab === 'all' || activeReportTab === 'devices') && deviceSummaries.length > 0 && (
         <DeviceSlaMatrixTable
           deviceSummaries={deviceSummaries}
-          onSelectDevice={setSelectedDeviceId}
+          onSelectDevice={(devId) => {
+            setSelectedDeviceId(devId);
+            if (devId !== 'all' && activeReportTab === 'devices') {
+              setActiveReportTab('all');
+            }
+          }}
+          selectedDeviceId={selectedDeviceId}
           filterDays={filter.days}
         />
       )}
+
+      {/* Clear Audit & Report History Confirmation Modal */}
+      {showClearModal && (
+        <div className="fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-150">
+          <div className="bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden">
+            <div className="p-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+              <div className="flex items-center gap-2.5">
+                <div className="p-2 rounded-xl bg-rose-500/15 text-rose-500">
+                  <Trash2 className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="text-sm font-black text-slate-900 dark:text-white">
+                    Clear Reports &amp; Audit History
+                  </h3>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400">
+                    Scope: <strong className="text-slate-800 dark:text-slate-200">{filter.deviceName || 'All Monitored Devices'}</strong>
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={() => setShowClearModal(false)}
+                className="p-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-900 dark:hover:text-white cursor-pointer"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <div className="p-5 space-y-3 text-xs">
+              <p className="text-slate-600 dark:text-slate-400">
+                Choose what historical telemetry you want to clear for{' '}
+                <strong>{filter.deviceName || 'All Devices'}</strong>:
+              </p>
+
+              <button
+                onClick={() => handleClearReportHistory('incidents')}
+                disabled={isClearing}
+                className="w-full p-3.5 rounded-2xl border border-amber-500/30 bg-amber-500/5 hover:bg-amber-500/15 text-left transition-all cursor-pointer flex items-start justify-between gap-3"
+              >
+                <div>
+                  <div className="font-bold text-amber-600 dark:text-amber-400">
+                    1. Clear Outage &amp; Incident Logs Only
+                  </div>
+                  <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
+                    Removes historical DOWN outage incidents and resets SLA penalty counters while keeping UP latency probe history.
+                  </div>
+                </div>
+                <Trash2 className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
+              </button>
+
+              <button
+                onClick={() => handleClearReportHistory('all')}
+                disabled={isClearing}
+                className="w-full p-3.5 rounded-2xl border border-rose-500/30 bg-rose-500/5 hover:bg-rose-500/15 text-left transition-all cursor-pointer flex items-start justify-between gap-3"
+              >
+                <div>
+                  <div className="font-bold text-rose-600 dark:text-rose-400">
+                    2. Clear Complete Audit &amp; Probe History
+                  </div>
+                  <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
+                    Resets all historical probe checks, outage logs, and SLA timelines (keeps current live online status intact).
+                  </div>
+                </div>
+                <Trash2 className="w-4 h-4 text-rose-500 shrink-0 mt-0.5" />
+              </button>
+            </div>
+
+            <div className="p-4 bg-slate-50 dark:bg-slate-800/40 border-t border-slate-200 dark:border-slate-800 flex justify-end">
+              <button
+                onClick={() => setShowClearModal(false)}
+                className="px-4 py-1.5 rounded-xl bg-slate-200 dark:bg-slate-800 text-xs font-bold text-slate-700 dark:text-slate-300 cursor-pointer"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Universal Custom Recipient Email Dispatch Modal */}
+      <CustomEmailReportModal
+        isOpen={showCustomEmailModal}
+        onClose={() => setShowCustomEmailModal(false)}
+        reportTitle="Email Executive SLA & Audit Report"
+        reportSubtitle="Direct & exclusive delivery to custom recipient"
+        reportScope={`Period: ${rangeMode === 'custom_dates' ? `${customFrom} to ${customTo}` : `Last ${buildReportParams().days || 7} Days`} • ${selectedDeviceId === 'all' ? 'Entire Monitored Fleet' : `Device ID: ${selectedDeviceId}`}`}
+        scopeBadge="Executive SLA"
+        gradient="from-cyan-500 to-indigo-600"
+        onSend={async (recipients) => {
+          const params = buildReportParams();
+          return await api.sendEmailReportNow({
+            days: params.days || 7,
+            deviceId: selectedDeviceId,
+            recipients
+          });
+        }}
+        onSuccess={(res, rec) => {
+          showToast(res?.message || `Executive SLA & Audit Report emailed to ${rec}!`);
+        }}
+      />
 
       {/* Scheduled Automated Email Configuration Modal */}
       <ScheduledEmailModal

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, Component } from 'react';
 import Sidebar from './components/Sidebar';
 import Navbar from './components/Navbar';
 import OverviewPage from './pages/OverviewPage';
@@ -13,12 +13,59 @@ import DnsPerformancePage from './pages/DnsPerformancePage';
 import DomainHealthPage from './pages/DomainHealthPage';
 import SecurityHubPage from './pages/SecurityHubPage';
 import TopologyPage from './pages/TopologyPage';
+import UserSearchesPage from './pages/UserSearchesPage';
 import DeviceModal from './components/DeviceModal';
 import DeviceDetailsModal from './components/DeviceDetailsModal';
 import api from './services/api';
 import { getSocket } from './services/socket';
-import { Trash2, AlertTriangle } from 'lucide-react';
+import { Trash2, AlertTriangle, RefreshCw, ShieldAlert } from 'lucide-react';
 import { playAlertChime, sendDesktopNotification } from './utils/soundNotifications';
+
+// High-reliability Error Boundary to prevent live data updates from ever blanking the screen
+class TabErrorBoundary extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
+  static getDerivedStateFromError(error) {
+    return { hasError: true, error };
+  }
+  componentDidCatch(error, errorInfo) {
+    console.error(`TabErrorBoundary [${this.props.tabName || 'Tab'}]:`, error, errorInfo);
+  }
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-rose-500/30 text-center space-y-4 shadow-xl my-4 animate-in fade-in">
+          <div className="w-12 h-12 rounded-2xl bg-rose-500/15 text-rose-500 mx-auto flex items-center justify-center border border-rose-500/25">
+            <ShieldAlert className="w-6 h-6" />
+          </div>
+          <div>
+            <h2 className="text-base sm:text-lg font-black text-slate-900 dark:text-white">
+              {this.props.tabName || 'Tab View'} Recovery Shield
+            </h2>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-md mx-auto">
+              An unexpected data format arrived during real-time telemetry polling. The view was safely intercepted to prevent a blank screen.
+            </p>
+          </div>
+          {this.state.error && (
+            <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono text-[11px] text-rose-600 dark:text-rose-400 max-w-xl mx-auto break-words text-left">
+              {String(this.state.error.message || this.state.error)}
+            </div>
+          )}
+          <button
+            onClick={() => this.setState({ hasError: false, error: null })}
+            className="px-5 py-2.5 bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-600 hover:to-indigo-700 text-white rounded-xl text-xs font-bold shadow-md cursor-pointer transition-all inline-flex items-center gap-2"
+          >
+            <RefreshCw className="w-4 h-4" />
+            <span>Reload & Re-render {this.props.tabName || 'Tab'}</span>
+          </button>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('overview');
@@ -338,7 +385,7 @@ export default function App() {
   const activeAlertCount = alerts.filter((a) => !a.resolved).length;
 
   return (
-    <div className="flex h-screen bg-slate-50 dark:bg-[#080c14] text-slate-900 dark:text-slate-100 overflow-hidden font-sans">
+    <div className="flex h-screen bg-[#f1f5f9] dark:bg-[#080c14] text-slate-900 dark:text-slate-100 overflow-hidden font-sans">
       {/* Sidebar Navigation (Desktop Persistent + Mobile Drawer) */}
       <Sidebar
         activeTab={activeTab}
@@ -368,8 +415,8 @@ export default function App() {
         />
 
         {/* Dynamic Page Content (Responsive auto-sized padding) */}
-        <main className="flex-1 overflow-y-auto p-3.5 sm:p-5 lg:p-6">
-          <div className="max-w-7xl mx-auto w-full">
+        <main className="flex-1 overflow-y-auto overflow-x-hidden p-2.5 sm:p-4 lg:p-6">
+          <div className="max-w-7xl mx-auto w-full min-w-0">
             {/* Global Maintenance Mode Notification Banner */}
             {appSettings?.maintenanceMode && (
               <div className="mb-5 p-4 rounded-2xl bg-amber-500/15 border border-amber-500/30 text-amber-700 dark:text-amber-300 text-xs font-semibold flex items-center justify-between shadow-sm animate-in fade-in duration-200">
@@ -433,11 +480,21 @@ export default function App() {
               />
             )}
 
+            {activeTab === 'user-activity' && (
+              <TabErrorBoundary tabName="User Searches & Web Activity">
+                <UserSearchesPage
+                  devices={devices}
+                />
+              </TabErrorBoundary>
+            )}
+
             {activeTab === 'reports' && (
-              <ReportsPage
-                devices={devices}
-                initialDeviceId="all"
-              />
+              <TabErrorBoundary tabName="Reports & Audits">
+                <ReportsPage
+                  devices={devices}
+                  initialDeviceId="all"
+                />
+              </TabErrorBoundary>
             )}
 
             {activeTab === 'diagnostics' && (

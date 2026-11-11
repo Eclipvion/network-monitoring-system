@@ -326,7 +326,7 @@ export default function MonitoringPage({
       </div>
 
       {/* Main Responsive Layout: Sensor Grid + Toggleable Feed Drawer */}
-      <div className="flex gap-6 items-start">
+      <div className="flex flex-col xl:flex-row gap-6 items-stretch xl:items-start relative">
         {/* Left Area: Main Sensors Display */}
         <div className="flex-1 min-w-0 space-y-4">
           {/* Mode 1: Expanded Cards Grid (Fully Responsive across all screen sizes) */}
@@ -622,9 +622,9 @@ export default function MonitoringPage({
           )}
         </div>
 
-        {/* Right Drawer: Live Telemetry Event Stream (Smoothly Toggleable) */}
+        {/* Right Drawer: Live Telemetry Event Stream (Smoothly Toggleable & Responsive) */}
         {isFeedOpen && (
-          <aside className="w-80 shrink-0 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden flex flex-col h-[75vh] sticky top-6 animate-in slide-in-from-right duration-200">
+          <aside className="w-full xl:w-80 shrink-0 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden flex flex-col max-h-[60vh] xl:h-[75vh] xl:sticky xl:top-6 animate-in slide-in-from-right duration-200">
             <div className="p-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between shrink-0">
               <div className="flex items-center gap-2">
                 <Zap className="w-4 h-4 text-amber-500" />

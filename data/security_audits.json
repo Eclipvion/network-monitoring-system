@@ -1,9 +1,9 @@
 {
   "1": {
     "deviceId": 1,
-    "deviceName": "LAN Device (172.18.1.1)",
+    "deviceName": "Router / Gateway (172.18.1.1)",
     "ip": "172.18.1.1",
-    "scannedAt": "2026-10-22T10:45:46.881Z",
+    "scannedAt": "2026-11-10T08:18:00.123Z",
     "isOnline": true,
     "riskScore": 98,
     "overallLevel": "SAFE",
@@ -55,9 +55,9 @@
   },
   "2": {
     "deviceId": 2,
-    "deviceName": "LAN Device (172.18.1.5)",
+    "deviceName": "SRV-AD-ABILITY",
     "ip": "172.18.1.5",
-    "scannedAt": "2026-10-22T10:45:46.884Z",
+    "scannedAt": "2026-11-10T08:18:00.127Z",
     "isOnline": true,
     "riskScore": 12,
     "overallLevel": "CRITICAL",
@@ -166,9 +166,9 @@
     ],
     "threats": [
       {
-        "id": "threat-2-445-1792665946884",
+        "id": "threat-2-445-1794298680127",
         "deviceId": 2,
-        "deviceName": "LAN Device (172.18.1.5)",
+        "deviceName": "SRV-AD-ABILITY",
         "deviceIp": "172.18.1.5",
         "port": 445,
         "service": "SMB / CIFS",
@@ -190,12 +190,12 @@
           "linuxUfw": "sudo ufw deny 445/tcp",
           "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
         },
-        "timestamp": "2026-10-22T10:45:46.884Z"
+        "timestamp": "2026-11-10T08:18:00.127Z"
       },
       {
-        "id": "threat-2-3389-1792665946884",
+        "id": "threat-2-3389-1794298680127",
         "deviceId": 2,
-        "deviceName": "LAN Device (172.18.1.5)",
+        "deviceName": "SRV-AD-ABILITY",
         "deviceIp": "172.18.1.5",
         "port": 3389,
         "service": "RDP (Remote Desktop)",
@@ -217,12 +217,12 @@
           "linuxUfw": "sudo ufw deny 3389/tcp",
           "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 3389 -j DROP"
         },
-        "timestamp": "2026-10-22T10:45:46.884Z"
+        "timestamp": "2026-11-10T08:18:00.127Z"
       },
       {
-        "id": "threat-2-135-1792665946884",
+        "id": "threat-2-135-1794298680127",
         "deviceId": 2,
-        "deviceName": "LAN Device (172.18.1.5)",
+        "deviceName": "SRV-AD-ABILITY",
         "deviceIp": "172.18.1.5",
         "port": 135,
         "service": "MS RPC / EPMAP",
@@ -242,12 +242,12 @@
           "linuxUfw": "sudo ufw deny 135/tcp",
           "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
         },
-        "timestamp": "2026-10-22T10:45:46.884Z"
+        "timestamp": "2026-11-10T08:18:00.127Z"
       },
       {
-        "id": "threat-2-139-1792665946884",
+        "id": "threat-2-139-1794298680127",
         "deviceId": 2,
-        "deviceName": "LAN Device (172.18.1.5)",
+        "deviceName": "SRV-AD-ABILITY",
         "deviceIp": "172.18.1.5",
         "port": 139,
         "service": "NetBIOS Session",
@@ -267,16 +267,16 @@
           "linuxUfw": "sudo ufw deny 139/tcp",
           "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
         },
-        "timestamp": "2026-10-22T10:45:46.884Z"
+        "timestamp": "2026-11-10T08:18:00.127Z"
       }
     ],
     "statusNote": "5 open service port(s) detected."
   },
   "3": {
     "deviceId": 3,
-    "deviceName": "LAN Device (172.18.1.10)",
+    "deviceName": "VMware Virtual (172.18.1.10)",
     "ip": "172.18.1.10",
-    "scannedAt": "2026-10-22T10:45:46.888Z",
+    "scannedAt": "2026-11-10T08:18:00.133Z",
     "isOnline": true,
     "riskScore": 94,
     "overallLevel": "SAFE",
@@ -347,57 +347,36 @@
   },
   "4": {
     "deviceId": 4,
-    "deviceName": "LAN Device (172.18.1.14)",
-    "ip": "172.18.1.14",
-    "scannedAt": "2026-10-22T10:45:46.080Z",
-    "isOnline": false,
-    "riskScore": null,
-    "overallLevel": "OFFLINE",
-    "totalScanned": 0,
-    "openPortsCount": 0,
-    "openPorts": [],
-    "threats": [],
-    "statusNote": "Device is currently DOWN / Offline. Port vulnerability audit cannot be performed on an unreachable host."
-  },
-  "5": {
-    "deviceId": 5,
-    "deviceName": "LAN Device (172.18.1.20)",
-    "ip": "172.18.1.20",
-    "scannedAt": "2026-10-22T10:45:46.909Z",
+    "deviceName": "DESKTOP-8D1GBAG",
+    "ip": "172.18.1.11",
+    "scannedAt": "2026-11-10T08:18:00.135Z",
     "isOnline": true,
-    "riskScore": 100,
-    "overallLevel": "SAFE",
+    "riskScore": 38,
+    "overallLevel": "CRITICAL",
     "totalScanned": 16,
-    "openPortsCount": 0,
-    "openPorts": [],
-    "threats": [],
-    "statusNote": "Device is online and all audited ports are closed/shielded."
-  },
-  "6": {
-    "deviceId": 6,
-    "deviceName": "LAN Device (172.18.1.21)",
-    "ip": "172.18.1.21",
-    "scannedAt": "2026-10-22T10:45:47.094Z",
-    "isOnline": false,
-    "riskScore": null,
-    "overallLevel": "OFFLINE",
-    "totalScanned": 16,
-    "openPortsCount": 0,
-    "openPorts": [],
-    "threats": [],
-    "statusNote": "Device is offline / unreachable. Bring device online to audit ports."
-  },
-  "7": {
-    "deviceId": 7,
-    "deviceName": "LAN Device (172.18.1.22)",
-    "ip": "172.18.1.22",
-    "scannedAt": "2026-10-22T10:45:47.812Z",
-    "isOnline": true,
-    "riskScore": 84,
-    "overallLevel": "HIGH",
-    "totalScanned": 16,
-    "openPortsCount": 1,
+    "openPortsCount": 4,
     "openPorts": [
+      {
+        "port": 445,
+        "service": "SMB / CIFS",
+        "risk": "CRITICAL",
+        "protocol": "TCP",
+        "cve": "CVE-2017-0144 (EternalBlue) / MS17-010",
+        "attackType": "Ransomware Lateral Propagation & Remote Code Execution",
+        "exploitTarget": "WannaCry, NotPetya, EternalBlue, Lateral Ransomware Propagation",
+        "mitigation": "Block port 445 on WAN and internal boundaries. Disable legacy SMBv1 and enforce SMB signing/encryption.",
+        "remediationSteps": [
+          "Immediately block Port 445 on perimeter firewalls and router WAN interfaces.",
+          "Disable legacy SMBv1 in Windows (Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol).",
+          "Enforce SMB signing and SMB encryption for internal file shares.",
+          "Isolate internal file sharing to dedicated private management VLANs."
+        ],
+        "firewallCmd": {
+          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 445 (SMB/CIFS)\" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Block",
+          "linuxUfw": "sudo ufw deny 445/tcp",
+          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
+        }
+      },
       {
         "port": 135,
         "service": "MS RPC / EPMAP",
@@ -416,14 +395,79 @@
           "linuxUfw": "sudo ufw deny 135/tcp",
           "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
         }
+      },
+      {
+        "port": 139,
+        "service": "NetBIOS Session",
+        "risk": "HIGH",
+        "protocol": "TCP",
+        "cve": "NetBIOS Name Service Poisoning (LLMNR/NBT-NS)",
+        "attackType": "Relay Attacks, NTLM Hash Harvesting & Man-in-the-Middle",
+        "exploitTarget": "NetBIOS name enumeration, session hijacking, relay attacks",
+        "mitigation": "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced settings.",
+        "remediationSteps": [
+          "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced WINS settings.",
+          "Block Inbound Port 139 on all external and untrusted interfaces."
+        ],
+        "firewallCmd": {
+          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 139 (NetBIOS)\" -Direction Inbound -LocalPort 139 -Protocol TCP -Action Block",
+          "linuxUfw": "sudo ufw deny 139/tcp",
+          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
+        }
+      },
+      {
+        "port": 80,
+        "service": "HTTP",
+        "risk": "LOW",
+        "protocol": "TCP",
+        "cve": "CWE-319 (Unencrypted Web Communications)",
+        "attackType": "Man-in-the-Middle Credential Interception",
+        "exploitTarget": "Man-in-the-Middle credential interception, cookie hijacking",
+        "mitigation": "Redirect all HTTP traffic to HTTPS (Port 443) and implement HTTP Strict Transport Security (HSTS).",
+        "remediationSteps": [
+          "Configure web server to redirect 100% of HTTP traffic to HTTPS.",
+          "Deploy HSTS (Strict-Transport-Security) header with max-age=31536000."
+        ],
+        "firewallCmd": {
+          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 80 (HTTP)\" -Direction Inbound -LocalPort 80 -Protocol TCP -Action Block",
+          "linuxUfw": "sudo ufw deny 80/tcp",
+          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 80 -j DROP"
+        }
       }
     ],
     "threats": [
       {
-        "id": "threat-7-135-1792665947812",
-        "deviceId": 7,
-        "deviceName": "LAN Device (172.18.1.22)",
-        "deviceIp": "172.18.1.22",
+        "id": "threat-4-445-1794298680135",
+        "deviceId": 4,
+        "deviceName": "DESKTOP-8D1GBAG",
+        "deviceIp": "172.18.1.11",
+        "port": 445,
+        "service": "SMB / CIFS",
+        "severity": "CRITICAL",
+        "protocol": "TCP",
+        "cve": "CVE-2017-0144 (EternalBlue) / MS17-010",
+        "attackType": "Ransomware Lateral Propagation & Remote Code Execution",
+        "title": "Critical Port 445 (SMB / CIFS) Exposed",
+        "description": "Device has SMB / CIFS open. Potential attack vector: WannaCry, NotPetya, EternalBlue, Lateral Ransomware Propagation",
+        "recommendation": "Block port 445 on WAN and internal boundaries. Disable legacy SMBv1 and enforce SMB signing/encryption.",
+        "remediationSteps": [
+          "Immediately block Port 445 on perimeter firewalls and router WAN interfaces.",
+          "Disable legacy SMBv1 in Windows (Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol).",
+          "Enforce SMB signing and SMB encryption for internal file shares.",
+          "Isolate internal file sharing to dedicated private management VLANs."
+        ],
+        "firewallCmd": {
+          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 445 (SMB/CIFS)\" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Block",
+          "linuxUfw": "sudo ufw deny 445/tcp",
+          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
+        },
+        "timestamp": "2026-11-10T08:18:00.135Z"
+      },
+      {
+        "id": "threat-4-135-1794298680135",
+        "deviceId": 4,
+        "deviceName": "DESKTOP-8D1GBAG",
+        "deviceIp": "172.18.1.11",
         "port": 135,
         "service": "MS RPC / EPMAP",
         "severity": "HIGH",
@@ -442,16 +486,240 @@
           "linuxUfw": "sudo ufw deny 135/tcp",
           "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
         },
-        "timestamp": "2026-10-22T10:45:47.812Z"
+        "timestamp": "2026-11-10T08:18:00.135Z"
+      },
+      {
+        "id": "threat-4-139-1794298680135",
+        "deviceId": 4,
+        "deviceName": "DESKTOP-8D1GBAG",
+        "deviceIp": "172.18.1.11",
+        "port": 139,
+        "service": "NetBIOS Session",
+        "severity": "HIGH",
+        "protocol": "TCP",
+        "cve": "NetBIOS Name Service Poisoning (LLMNR/NBT-NS)",
+        "attackType": "Relay Attacks, NTLM Hash Harvesting & Man-in-the-Middle",
+        "title": "High Risk Port 139 (NetBIOS Session) Open",
+        "description": "Exposed NetBIOS Session service is susceptible to: NetBIOS name enumeration, session hijacking, relay attacks",
+        "recommendation": "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced settings.",
+        "remediationSteps": [
+          "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced WINS settings.",
+          "Block Inbound Port 139 on all external and untrusted interfaces."
+        ],
+        "firewallCmd": {
+          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 139 (NetBIOS)\" -Direction Inbound -LocalPort 139 -Protocol TCP -Action Block",
+          "linuxUfw": "sudo ufw deny 139/tcp",
+          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
+        },
+        "timestamp": "2026-11-10T08:18:00.135Z"
       }
     ],
-    "statusNote": "1 open service port(s) detected."
+    "statusNote": "4 open service port(s) detected."
+  },
+  "5": {
+    "deviceId": 5,
+    "deviceName": "Desk-Datacentre",
+    "ip": "172.18.1.14",
+    "scannedAt": "2026-11-10T08:18:00.140Z",
+    "isOnline": true,
+    "riskScore": 40,
+    "overallLevel": "CRITICAL",
+    "totalScanned": 16,
+    "openPortsCount": 4,
+    "openPorts": [
+      {
+        "port": 445,
+        "service": "SMB / CIFS",
+        "risk": "CRITICAL",
+        "protocol": "TCP",
+        "cve": "CVE-2017-0144 (EternalBlue) / MS17-010",
+        "attackType": "Ransomware Lateral Propagation & Remote Code Execution",
+        "exploitTarget": "WannaCry, NotPetya, EternalBlue, Lateral Ransomware Propagation",
+        "mitigation": "Block port 445 on WAN and internal boundaries. Disable legacy SMBv1 and enforce SMB signing/encryption.",
+        "remediationSteps": [
+          "Immediately block Port 445 on perimeter firewalls and router WAN interfaces.",
+          "Disable legacy SMBv1 in Windows (Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol).",
+          "Enforce SMB signing and SMB encryption for internal file shares.",
+          "Isolate internal file sharing to dedicated private management VLANs."
+        ],
+        "firewallCmd": {
+          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 445 (SMB/CIFS)\" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Block",
+          "linuxUfw": "sudo ufw deny 445/tcp",
+          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
+        }
+      },
+      {
+        "port": 135,
+        "service": "MS RPC / EPMAP",
+        "risk": "HIGH",
+        "protocol": "TCP",
+        "cve": "MS03-026 / MS03-039 (Blaster Worm)",
+        "attackType": "RPC Buffer Overflow & Remote System Enumeration",
+        "exploitTarget": "Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
+        "mitigation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
+        "remediationSteps": [
+          "Block Port 135 on perimeter router and host firewall.",
+          "Filter inbound RPC requests and restrict to authorized domain controllers only."
+        ],
+        "firewallCmd": {
+          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
+          "linuxUfw": "sudo ufw deny 135/tcp",
+          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
+        }
+      },
+      {
+        "port": 139,
+        "service": "NetBIOS Session",
+        "risk": "HIGH",
+        "protocol": "TCP",
+        "cve": "NetBIOS Name Service Poisoning (LLMNR/NBT-NS)",
+        "attackType": "Relay Attacks, NTLM Hash Harvesting & Man-in-the-Middle",
+        "exploitTarget": "NetBIOS name enumeration, session hijacking, relay attacks",
+        "mitigation": "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced settings.",
+        "remediationSteps": [
+          "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced WINS settings.",
+          "Block Inbound Port 139 on all external and untrusted interfaces."
+        ],
+        "firewallCmd": {
+          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 139 (NetBIOS)\" -Direction Inbound -LocalPort 139 -Protocol TCP -Action Block",
+          "linuxUfw": "sudo ufw deny 139/tcp",
+          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
+        }
+      },
+      {
+        "port": 443,
+        "service": "HTTPS",
+        "risk": "SAFE",
+        "protocol": "TCP",
+        "cve": "Standard Encrypted Web Channel",
+        "attackType": "Encrypted Web Communications (Monitor Web App Layer)",
+        "exploitTarget": "Web application vulnerabilities (SQLi, XSS) - Port itself is secure",
+        "mitigation": "Keep web application libraries patched and enforce TLS 1.2+ with modern cipher suites.",
+        "remediationSteps": [
+          "Ensure TLS 1.2 and TLS 1.3 are enabled while deprecating SSLv3, TLS 1.0, and TLS 1.1.",
+          "Maintain automated renewal of valid SSL/TLS certificates."
+        ],
+        "firewallCmd": {
+          "powershell": "# Port 443 is typically required for encrypted web traffic",
+          "linuxUfw": "sudo ufw allow 443/tcp",
+          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 443 -j ACCEPT"
+        }
+      }
+    ],
+    "threats": [
+      {
+        "id": "threat-5-445-1794298680140",
+        "deviceId": 5,
+        "deviceName": "Desk-Datacentre",
+        "deviceIp": "172.18.1.14",
+        "port": 445,
+        "service": "SMB / CIFS",
+        "severity": "CRITICAL",
+        "protocol": "TCP",
+        "cve": "CVE-2017-0144 (EternalBlue) / MS17-010",
+        "attackType": "Ransomware Lateral Propagation & Remote Code Execution",
+        "title": "Critical Port 445 (SMB / CIFS) Exposed",
+        "description": "Device has SMB / CIFS open. Potential attack vector: WannaCry, NotPetya, EternalBlue, Lateral Ransomware Propagation",
+        "recommendation": "Block port 445 on WAN and internal boundaries. Disable legacy SMBv1 and enforce SMB signing/encryption.",
+        "remediationSteps": [
+          "Immediately block Port 445 on perimeter firewalls and router WAN interfaces.",
+          "Disable legacy SMBv1 in Windows (Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol).",
+          "Enforce SMB signing and SMB encryption for internal file shares.",
+          "Isolate internal file sharing to dedicated private management VLANs."
+        ],
+        "firewallCmd": {
+          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 445 (SMB/CIFS)\" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Block",
+          "linuxUfw": "sudo ufw deny 445/tcp",
+          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
+        },
+        "timestamp": "2026-11-10T08:18:00.140Z"
+      },
+      {
+        "id": "threat-5-135-1794298680140",
+        "deviceId": 5,
+        "deviceName": "Desk-Datacentre",
+        "deviceIp": "172.18.1.14",
+        "port": 135,
+        "service": "MS RPC / EPMAP",
+        "severity": "HIGH",
+        "protocol": "TCP",
+        "cve": "MS03-026 / MS03-039 (Blaster Worm)",
+        "attackType": "RPC Buffer Overflow & Remote System Enumeration",
+        "title": "High Risk Port 135 (MS RPC / EPMAP) Open",
+        "description": "Exposed MS RPC / EPMAP service is susceptible to: Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
+        "recommendation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
+        "remediationSteps": [
+          "Block Port 135 on perimeter router and host firewall.",
+          "Filter inbound RPC requests and restrict to authorized domain controllers only."
+        ],
+        "firewallCmd": {
+          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
+          "linuxUfw": "sudo ufw deny 135/tcp",
+          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
+        },
+        "timestamp": "2026-11-10T08:18:00.140Z"
+      },
+      {
+        "id": "threat-5-139-1794298680140",
+        "deviceId": 5,
+        "deviceName": "Desk-Datacentre",
+        "deviceIp": "172.18.1.14",
+        "port": 139,
+        "service": "NetBIOS Session",
+        "severity": "HIGH",
+        "protocol": "TCP",
+        "cve": "NetBIOS Name Service Poisoning (LLMNR/NBT-NS)",
+        "attackType": "Relay Attacks, NTLM Hash Harvesting & Man-in-the-Middle",
+        "title": "High Risk Port 139 (NetBIOS Session) Open",
+        "description": "Exposed NetBIOS Session service is susceptible to: NetBIOS name enumeration, session hijacking, relay attacks",
+        "recommendation": "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced settings.",
+        "remediationSteps": [
+          "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced WINS settings.",
+          "Block Inbound Port 139 on all external and untrusted interfaces."
+        ],
+        "firewallCmd": {
+          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 139 (NetBIOS)\" -Direction Inbound -LocalPort 139 -Protocol TCP -Action Block",
+          "linuxUfw": "sudo ufw deny 139/tcp",
+          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
+        },
+        "timestamp": "2026-11-10T08:18:00.140Z"
+      }
+    ],
+    "statusNote": "4 open service port(s) detected."
+  },
+  "6": {
+    "deviceId": 6,
+    "deviceName": "DESKTOP-0001",
+    "ip": "172.18.1.20",
+    "scannedAt": "2026-11-10T08:18:00.895Z",
+    "isOnline": true,
+    "riskScore": 100,
+    "overallLevel": "SAFE",
+    "totalScanned": 16,
+    "openPortsCount": 0,
+    "openPorts": [],
+    "threats": [],
+    "statusNote": "Device is online and all audited ports are closed/shielded."
+  },
+  "7": {
+    "deviceId": 7,
+    "deviceName": "Ability-PC-002",
+    "ip": "172.18.1.21",
+    "scannedAt": "2026-11-10T08:18:00.972Z",
+    "isOnline": false,
+    "riskScore": null,
+    "overallLevel": "OFFLINE",
+    "totalScanned": 16,
+    "openPortsCount": 0,
+    "openPorts": [],
+    "threats": [],
+    "statusNote": "Device is offline / unreachable. Bring device online to audit ports."
   },
   "8": {
     "deviceId": 8,
-    "deviceName": "LAN Device (172.18.1.23)",
-    "ip": "172.18.1.23",
-    "scannedAt": "2026-10-22T10:45:48.079Z",
+    "deviceName": "Device (172.18.1.22)",
+    "ip": "172.18.1.22",
+    "scannedAt": "2026-11-10T08:18:00.969Z",
     "isOnline": false,
     "riskScore": null,
     "overallLevel": "OFFLINE",
@@ -463,9 +731,9 @@
   },
   "9": {
     "deviceId": 9,
-    "deviceName": "LAN Device (172.18.1.26)",
+    "deviceName": "DSK-027",
     "ip": "172.18.1.26",
-    "scannedAt": "2026-10-22T10:45:47.822Z",
+    "scannedAt": "2026-11-10T08:18:00.880Z",
     "isOnline": true,
     "riskScore": 40,
     "overallLevel": "CRITICAL",
@@ -534,9 +802,9 @@
     ],
     "threats": [
       {
-        "id": "threat-9-445-1792665947822",
+        "id": "threat-9-445-1794298680880",
         "deviceId": 9,
-        "deviceName": "LAN Device (172.18.1.26)",
+        "deviceName": "DSK-027",
         "deviceIp": "172.18.1.26",
         "port": 445,
         "service": "SMB / CIFS",
@@ -558,12 +826,12 @@
           "linuxUfw": "sudo ufw deny 445/tcp",
           "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
         },
-        "timestamp": "2026-10-22T10:45:47.822Z"
+        "timestamp": "2026-11-10T08:18:00.880Z"
       },
       {
-        "id": "threat-9-135-1792665947822",
+        "id": "threat-9-135-1794298680880",
         "deviceId": 9,
-        "deviceName": "LAN Device (172.18.1.26)",
+        "deviceName": "DSK-027",
         "deviceIp": "172.18.1.26",
         "port": 135,
         "service": "MS RPC / EPMAP",
@@ -583,12 +851,12 @@
           "linuxUfw": "sudo ufw deny 135/tcp",
           "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
         },
-        "timestamp": "2026-10-22T10:45:47.822Z"
+        "timestamp": "2026-11-10T08:18:00.880Z"
       },
       {
-        "id": "threat-9-139-1792665947822",
+        "id": "threat-9-139-1794298680880",
         "deviceId": 9,
-        "deviceName": "LAN Device (172.18.1.26)",
+        "deviceName": "DSK-027",
         "deviceIp": "172.18.1.26",
         "port": 139,
         "service": "NetBIOS Session",
@@ -608,168 +876,30 @@
           "linuxUfw": "sudo ufw deny 139/tcp",
           "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
         },
-        "timestamp": "2026-10-22T10:45:47.822Z"
+        "timestamp": "2026-11-10T08:18:00.880Z"
       }
     ],
     "statusNote": "3 open service port(s) detected."
   },
   "10": {
     "deviceId": 10,
-    "deviceName": "LAN Device (172.18.1.27)",
+    "deviceName": "DESKTOP-08",
     "ip": "172.18.1.27",
-    "scannedAt": "2026-10-22T10:45:47.827Z",
-    "isOnline": true,
-    "riskScore": 40,
-    "overallLevel": "CRITICAL",
-    "totalScanned": 16,
-    "openPortsCount": 3,
-    "openPorts": [
-      {
-        "port": 445,
-        "service": "SMB / CIFS",
-        "risk": "CRITICAL",
-        "protocol": "TCP",
-        "cve": "CVE-2017-0144 (EternalBlue) / MS17-010",
-        "attackType": "Ransomware Lateral Propagation & Remote Code Execution",
-        "exploitTarget": "WannaCry, NotPetya, EternalBlue, Lateral Ransomware Propagation",
-        "mitigation": "Block port 445 on WAN and internal boundaries. Disable legacy SMBv1 and enforce SMB signing/encryption.",
-        "remediationSteps": [
-          "Immediately block Port 445 on perimeter firewalls and router WAN interfaces.",
-          "Disable legacy SMBv1 in Windows (Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol).",
-          "Enforce SMB signing and SMB encryption for internal file shares.",
-          "Isolate internal file sharing to dedicated private management VLANs."
-        ],
-        "firewallCmd": {
-          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 445 (SMB/CIFS)\" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Block",
-          "linuxUfw": "sudo ufw deny 445/tcp",
-          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
-        }
-      },
-      {
-        "port": 135,
-        "service": "MS RPC / EPMAP",
-        "risk": "HIGH",
-        "protocol": "TCP",
-        "cve": "MS03-026 / MS03-039 (Blaster Worm)",
-        "attackType": "RPC Buffer Overflow & Remote System Enumeration",
-        "exploitTarget": "Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
-        "mitigation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
-        "remediationSteps": [
-          "Block Port 135 on perimeter router and host firewall.",
-          "Filter inbound RPC requests and restrict to authorized domain controllers only."
-        ],
-        "firewallCmd": {
-          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
-          "linuxUfw": "sudo ufw deny 135/tcp",
-          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
-        }
-      },
-      {
-        "port": 139,
-        "service": "NetBIOS Session",
-        "risk": "HIGH",
-        "protocol": "TCP",
-        "cve": "NetBIOS Name Service Poisoning (LLMNR/NBT-NS)",
-        "attackType": "Relay Attacks, NTLM Hash Harvesting & Man-in-the-Middle",
-        "exploitTarget": "NetBIOS name enumeration, session hijacking, relay attacks",
-        "mitigation": "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced settings.",
-        "remediationSteps": [
-          "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced WINS settings.",
-          "Block Inbound Port 139 on all external and untrusted interfaces."
-        ],
-        "firewallCmd": {
-          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 139 (NetBIOS)\" -Direction Inbound -LocalPort 139 -Protocol TCP -Action Block",
-          "linuxUfw": "sudo ufw deny 139/tcp",
-          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
-        }
-      }
-    ],
-    "threats": [
-      {
-        "id": "threat-10-445-1792665947827",
-        "deviceId": 10,
-        "deviceName": "LAN Device (172.18.1.27)",
-        "deviceIp": "172.18.1.27",
-        "port": 445,
-        "service": "SMB / CIFS",
-        "severity": "CRITICAL",
-        "protocol": "TCP",
-        "cve": "CVE-2017-0144 (EternalBlue) / MS17-010",
-        "attackType": "Ransomware Lateral Propagation & Remote Code Execution",
-        "title": "Critical Port 445 (SMB / CIFS) Exposed",
-        "description": "Device has SMB / CIFS open. Potential attack vector: WannaCry, NotPetya, EternalBlue, Lateral Ransomware Propagation",
-        "recommendation": "Block port 445 on WAN and internal boundaries. Disable legacy SMBv1 and enforce SMB signing/encryption.",
-        "remediationSteps": [
-          "Immediately block Port 445 on perimeter firewalls and router WAN interfaces.",
-          "Disable legacy SMBv1 in Windows (Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol).",
-          "Enforce SMB signing and SMB encryption for internal file shares.",
-          "Isolate internal file sharing to dedicated private management VLANs."
-        ],
-        "firewallCmd": {
-          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 445 (SMB/CIFS)\" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Block",
-          "linuxUfw": "sudo ufw deny 445/tcp",
-          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
-        },
-        "timestamp": "2026-10-22T10:45:47.827Z"
-      },
-      {
-        "id": "threat-10-135-1792665947827",
-        "deviceId": 10,
-        "deviceName": "LAN Device (172.18.1.27)",
-        "deviceIp": "172.18.1.27",
-        "port": 135,
-        "service": "MS RPC / EPMAP",
-        "severity": "HIGH",
-        "protocol": "TCP",
-        "cve": "MS03-026 / MS03-039 (Blaster Worm)",
-        "attackType": "RPC Buffer Overflow & Remote System Enumeration",
-        "title": "High Risk Port 135 (MS RPC / EPMAP) Open",
-        "description": "Exposed MS RPC / EPMAP service is susceptible to: Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
-        "recommendation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
-        "remediationSteps": [
-          "Block Port 135 on perimeter router and host firewall.",
-          "Filter inbound RPC requests and restrict to authorized domain controllers only."
-        ],
-        "firewallCmd": {
-          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
-          "linuxUfw": "sudo ufw deny 135/tcp",
-          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
-        },
-        "timestamp": "2026-10-22T10:45:47.827Z"
-      },
-      {
-        "id": "threat-10-139-1792665947827",
-        "deviceId": 10,
-        "deviceName": "LAN Device (172.18.1.27)",
-        "deviceIp": "172.18.1.27",
-        "port": 139,
-        "service": "NetBIOS Session",
-        "severity": "HIGH",
-        "protocol": "TCP",
-        "cve": "NetBIOS Name Service Poisoning (LLMNR/NBT-NS)",
-        "attackType": "Relay Attacks, NTLM Hash Harvesting & Man-in-the-Middle",
-        "title": "High Risk Port 139 (NetBIOS Session) Open",
-        "description": "Exposed NetBIOS Session service is susceptible to: NetBIOS name enumeration, session hijacking, relay attacks",
-        "recommendation": "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced settings.",
-        "remediationSteps": [
-          "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced WINS settings.",
-          "Block Inbound Port 139 on all external and untrusted interfaces."
-        ],
-        "firewallCmd": {
-          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 139 (NetBIOS)\" -Direction Inbound -LocalPort 139 -Protocol TCP -Action Block",
-          "linuxUfw": "sudo ufw deny 139/tcp",
-          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
-        },
-        "timestamp": "2026-10-22T10:45:47.827Z"
-      }
-    ],
-    "statusNote": "3 open service port(s) detected."
+    "scannedAt": "2026-11-10T08:17:59.413Z",
+    "isOnline": false,
+    "riskScore": null,
+    "overallLevel": "OFFLINE",
+    "totalScanned": 0,
+    "openPortsCount": 0,
+    "openPorts": [],
+    "threats": [],
+    "statusNote": "Device is currently DOWN / Offline. Port vulnerability audit cannot be performed on an unreachable host."
   },
   "11": {
     "deviceId": 11,
-    "deviceName": "LAN Device (172.18.1.28)",
+    "deviceName": "DESKTOP-0902",
     "ip": "172.18.1.28",
-    "scannedAt": "2026-10-22T10:45:47.832Z",
+    "scannedAt": "2026-11-10T08:18:00.886Z",
     "isOnline": true,
     "riskScore": 40,
     "overallLevel": "CRITICAL",
@@ -838,9 +968,9 @@
     ],
     "threats": [
       {
-        "id": "threat-11-445-1792665947832",
+        "id": "threat-11-445-1794298680886",
         "deviceId": 11,
-        "deviceName": "LAN Device (172.18.1.28)",
+        "deviceName": "DESKTOP-0902",
         "deviceIp": "172.18.1.28",
         "port": 445,
         "service": "SMB / CIFS",
@@ -862,12 +992,12 @@
           "linuxUfw": "sudo ufw deny 445/tcp",
           "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
         },
-        "timestamp": "2026-10-22T10:45:47.832Z"
+        "timestamp": "2026-11-10T08:18:00.886Z"
       },
       {
-        "id": "threat-11-135-1792665947832",
+        "id": "threat-11-135-1794298680886",
         "deviceId": 11,
-        "deviceName": "LAN Device (172.18.1.28)",
+        "deviceName": "DESKTOP-0902",
         "deviceIp": "172.18.1.28",
         "port": 135,
         "service": "MS RPC / EPMAP",
@@ -887,12 +1017,12 @@
           "linuxUfw": "sudo ufw deny 135/tcp",
           "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
         },
-        "timestamp": "2026-10-22T10:45:47.832Z"
+        "timestamp": "2026-11-10T08:18:00.886Z"
       },
       {
-        "id": "threat-11-139-1792665947832",
+        "id": "threat-11-139-1794298680886",
         "deviceId": 11,
-        "deviceName": "LAN Device (172.18.1.28)",
+        "deviceName": "DESKTOP-0902",
         "deviceIp": "172.18.1.28",
         "port": 139,
         "service": "NetBIOS Session",
@@ -912,16 +1042,16 @@
           "linuxUfw": "sudo ufw deny 139/tcp",
           "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
         },
-        "timestamp": "2026-10-22T10:45:47.832Z"
+        "timestamp": "2026-11-10T08:18:00.886Z"
       }
     ],
     "statusNote": "3 open service port(s) detected."
   },
   "12": {
     "deviceId": 12,
-    "deviceName": "LAN Device (172.18.1.30)",
+    "deviceName": "DESKTOP-11",
     "ip": "172.18.1.30",
-    "scannedAt": "2026-10-22T10:45:49.077Z",
+    "scannedAt": "2026-11-10T08:18:01.972Z",
     "isOnline": false,
     "riskScore": null,
     "overallLevel": "OFFLINE",
@@ -933,9 +1063,9 @@
   },
   "13": {
     "deviceId": 13,
-    "deviceName": "LAN Device (172.18.1.31)",
+    "deviceName": "DESKTOp-12",
     "ip": "172.18.1.31",
-    "scannedAt": "2026-10-22T10:45:49.079Z",
+    "scannedAt": "2026-11-10T08:18:01.975Z",
     "isOnline": false,
     "riskScore": null,
     "overallLevel": "OFFLINE",
@@ -947,9 +1077,9 @@
   },
   "14": {
     "deviceId": 14,
-    "deviceName": "LAN Device (172.18.1.33)",
+    "deviceName": "DESKTOP-14",
     "ip": "172.18.1.33",
-    "scannedAt": "2026-10-22T10:45:49.084Z",
+    "scannedAt": "2026-11-10T08:18:01.978Z",
     "isOnline": false,
     "riskScore": null,
     "overallLevel": "OFFLINE",
@@ -961,9 +1091,9 @@
   },
   "15": {
     "deviceId": 15,
-    "deviceName": "LAN Device (172.18.1.34)",
+    "deviceName": "DESKTOP-15",
     "ip": "172.18.1.34",
-    "scannedAt": "2026-10-22T10:45:49.082Z",
+    "scannedAt": "2026-11-10T08:18:01.983Z",
     "isOnline": false,
     "riskScore": null,
     "overallLevel": "OFFLINE",
@@ -975,161 +1105,23 @@
   },
   "16": {
     "deviceId": 16,
-    "deviceName": "LAN Device (172.18.1.36)",
+    "deviceName": "ABILITY-PC-10",
     "ip": "172.18.1.36",
-    "scannedAt": "2026-10-22T10:45:48.824Z",
-    "isOnline": true,
-    "riskScore": 40,
-    "overallLevel": "CRITICAL",
+    "scannedAt": "2026-11-10T08:18:01.980Z",
+    "isOnline": false,
+    "riskScore": null,
+    "overallLevel": "OFFLINE",
     "totalScanned": 16,
-    "openPortsCount": 3,
-    "openPorts": [
-      {
-        "port": 445,
-        "service": "SMB / CIFS",
-        "risk": "CRITICAL",
-        "protocol": "TCP",
-        "cve": "CVE-2017-0144 (EternalBlue) / MS17-010",
-        "attackType": "Ransomware Lateral Propagation & Remote Code Execution",
-        "exploitTarget": "WannaCry, NotPetya, EternalBlue, Lateral Ransomware Propagation",
-        "mitigation": "Block port 445 on WAN and internal boundaries. Disable legacy SMBv1 and enforce SMB signing/encryption.",
-        "remediationSteps": [
-          "Immediately block Port 445 on perimeter firewalls and router WAN interfaces.",
-          "Disable legacy SMBv1 in Windows (Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol).",
-          "Enforce SMB signing and SMB encryption for internal file shares.",
-          "Isolate internal file sharing to dedicated private management VLANs."
-        ],
-        "firewallCmd": {
-          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 445 (SMB/CIFS)\" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Block",
-          "linuxUfw": "sudo ufw deny 445/tcp",
-          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
-        }
-      },
-      {
-        "port": 135,
-        "service": "MS RPC / EPMAP",
-        "risk": "HIGH",
-        "protocol": "TCP",
-        "cve": "MS03-026 / MS03-039 (Blaster Worm)",
-        "attackType": "RPC Buffer Overflow & Remote System Enumeration",
-        "exploitTarget": "Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
-        "mitigation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
-        "remediationSteps": [
-          "Block Port 135 on perimeter router and host firewall.",
-          "Filter inbound RPC requests and restrict to authorized domain controllers only."
-        ],
-        "firewallCmd": {
-          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
-          "linuxUfw": "sudo ufw deny 135/tcp",
-          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
-        }
-      },
-      {
-        "port": 139,
-        "service": "NetBIOS Session",
-        "risk": "HIGH",
-        "protocol": "TCP",
-        "cve": "NetBIOS Name Service Poisoning (LLMNR/NBT-NS)",
-        "attackType": "Relay Attacks, NTLM Hash Harvesting & Man-in-the-Middle",
-        "exploitTarget": "NetBIOS name enumeration, session hijacking, relay attacks",
-        "mitigation": "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced settings.",
-        "remediationSteps": [
-          "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced WINS settings.",
-          "Block Inbound Port 139 on all external and untrusted interfaces."
-        ],
-        "firewallCmd": {
-          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 139 (NetBIOS)\" -Direction Inbound -LocalPort 139 -Protocol TCP -Action Block",
-          "linuxUfw": "sudo ufw deny 139/tcp",
-          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
-        }
-      }
-    ],
-    "threats": [
-      {
-        "id": "threat-16-445-1792665948824",
-        "deviceId": 16,
-        "deviceName": "LAN Device (172.18.1.36)",
-        "deviceIp": "172.18.1.36",
-        "port": 445,
-        "service": "SMB / CIFS",
-        "severity": "CRITICAL",
-        "protocol": "TCP",
-        "cve": "CVE-2017-0144 (EternalBlue) / MS17-010",
-        "attackType": "Ransomware Lateral Propagation & Remote Code Execution",
-        "title": "Critical Port 445 (SMB / CIFS) Exposed",
-        "description": "Device has SMB / CIFS open. Potential attack vector: WannaCry, NotPetya, EternalBlue, Lateral Ransomware Propagation",
-        "recommendation": "Block port 445 on WAN and internal boundaries. Disable legacy SMBv1 and enforce SMB signing/encryption.",
-        "remediationSteps": [
-          "Immediately block Port 445 on perimeter firewalls and router WAN interfaces.",
-          "Disable legacy SMBv1 in Windows (Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol).",
-          "Enforce SMB signing and SMB encryption for internal file shares.",
-          "Isolate internal file sharing to dedicated private management VLANs."
-        ],
-        "firewallCmd": {
-          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 445 (SMB/CIFS)\" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Block",
-          "linuxUfw": "sudo ufw deny 445/tcp",
-          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
-        },
-        "timestamp": "2026-10-22T10:45:48.824Z"
-      },
-      {
-        "id": "threat-16-135-1792665948824",
-        "deviceId": 16,
-        "deviceName": "LAN Device (172.18.1.36)",
-        "deviceIp": "172.18.1.36",
-        "port": 135,
-        "service": "MS RPC / EPMAP",
-        "severity": "HIGH",
-        "protocol": "TCP",
-        "cve": "MS03-026 / MS03-039 (Blaster Worm)",
-        "attackType": "RPC Buffer Overflow & Remote System Enumeration",
-        "title": "High Risk Port 135 (MS RPC / EPMAP) Open",
-        "description": "Exposed MS RPC / EPMAP service is susceptible to: Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
-        "recommendation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
-        "remediationSteps": [
-          "Block Port 135 on perimeter router and host firewall.",
-          "Filter inbound RPC requests and restrict to authorized domain controllers only."
-        ],
-        "firewallCmd": {
-          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
-          "linuxUfw": "sudo ufw deny 135/tcp",
-          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
-        },
-        "timestamp": "2026-10-22T10:45:48.824Z"
-      },
-      {
-        "id": "threat-16-139-1792665948824",
-        "deviceId": 16,
-        "deviceName": "LAN Device (172.18.1.36)",
-        "deviceIp": "172.18.1.36",
-        "port": 139,
-        "service": "NetBIOS Session",
-        "severity": "HIGH",
-        "protocol": "TCP",
-        "cve": "NetBIOS Name Service Poisoning (LLMNR/NBT-NS)",
-        "attackType": "Relay Attacks, NTLM Hash Harvesting & Man-in-the-Middle",
-        "title": "High Risk Port 139 (NetBIOS Session) Open",
-        "description": "Exposed NetBIOS Session service is susceptible to: NetBIOS name enumeration, session hijacking, relay attacks",
-        "recommendation": "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced settings.",
-        "remediationSteps": [
-          "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced WINS settings.",
-          "Block Inbound Port 139 on all external and untrusted interfaces."
-        ],
-        "firewallCmd": {
-          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 139 (NetBIOS)\" -Direction Inbound -LocalPort 139 -Protocol TCP -Action Block",
-          "linuxUfw": "sudo ufw deny 139/tcp",
-          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
-        },
-        "timestamp": "2026-10-22T10:45:48.824Z"
-      }
-    ],
-    "statusNote": "3 open service port(s) detected."
+    "openPortsCount": 0,
+    "openPorts": [],
+    "threats": [],
+    "statusNote": "Device is offline / unreachable. Bring device online to audit ports."
   },
   "17": {
     "deviceId": 17,
-    "deviceName": "LAN Device (172.18.1.39)",
+    "deviceName": "AbbadLaptop",
     "ip": "172.18.1.39",
-    "scannedAt": "2026-10-22T10:45:50.097Z",
+    "scannedAt": "2026-11-10T08:18:02.961Z",
     "isOnline": false,
     "riskScore": null,
     "overallLevel": "OFFLINE",
@@ -1141,9 +1133,9 @@
   },
   "18": {
     "deviceId": 18,
-    "deviceName": "LAN Device (172.18.1.42)",
+    "deviceName": "DESKTOP-23",
     "ip": "172.18.1.42",
-    "scannedAt": "2026-10-22T10:45:50.099Z",
+    "scannedAt": "2026-11-10T08:18:02.968Z",
     "isOnline": false,
     "riskScore": null,
     "overallLevel": "OFFLINE",
@@ -1155,9 +1147,9 @@
   },
   "19": {
     "deviceId": 19,
-    "deviceName": "LAN Device (172.18.1.44)",
+    "deviceName": "DESKTOP-120",
     "ip": "172.18.1.44",
-    "scannedAt": "2026-10-22T10:45:50.092Z",
+    "scannedAt": "2026-11-10T08:18:02.965Z",
     "isOnline": false,
     "riskScore": null,
     "overallLevel": "OFFLINE",
@@ -1169,9 +1161,9 @@
   },
   "20": {
     "deviceId": 20,
-    "deviceName": "LAN Device (172.18.1.46)",
+    "deviceName": "AbilityPC_01",
     "ip": "172.18.1.46",
-    "scannedAt": "2026-10-22T10:45:50.094Z",
+    "scannedAt": "2026-11-10T08:18:02.972Z",
     "isOnline": false,
     "riskScore": null,
     "overallLevel": "OFFLINE",
@@ -1183,9 +1175,9 @@
   },
   "21": {
     "deviceId": 21,
-    "deviceName": "LAN Device (172.18.1.47)",
+    "deviceName": "ABIKLITY-PC021",
     "ip": "172.18.1.47",
-    "scannedAt": "2026-10-22T10:45:50.090Z",
+    "scannedAt": "2026-11-10T08:18:02.976Z",
     "isOnline": false,
     "riskScore": null,
     "overallLevel": "OFFLINE",
@@ -1197,9 +1189,9 @@
   },
   "22": {
     "deviceId": 22,
-    "deviceName": "LAN Device (172.18.1.49)",
+    "deviceName": "DESKTOP-30",
     "ip": "172.18.1.49",
-    "scannedAt": "2026-10-22T10:45:51.080Z",
+    "scannedAt": "2026-11-10T08:18:03.973Z",
     "isOnline": false,
     "riskScore": null,
     "overallLevel": "OFFLINE",
@@ -1211,9 +1203,9 @@
   },
   "23": {
     "deviceId": 23,
-    "deviceName": "LAN Device (172.18.1.51)",
+    "deviceName": "DESKTOP-32",
     "ip": "172.18.1.51",
-    "scannedAt": "2026-10-22T10:45:51.082Z",
+    "scannedAt": "2026-11-10T08:18:03.968Z",
     "isOnline": false,
     "riskScore": null,
     "overallLevel": "OFFLINE",
@@ -1225,9 +1217,9 @@
   },
   "24": {
     "deviceId": 24,
-    "deviceName": "LAN Device (172.18.1.52)",
+    "deviceName": "DESKTOP-38D",
     "ip": "172.18.1.52",
-    "scannedAt": "2026-10-22T10:45:51.078Z",
+    "scannedAt": "2026-11-10T08:18:03.976Z",
     "isOnline": false,
     "riskScore": null,
     "overallLevel": "OFFLINE",
@@ -1239,9 +1231,9 @@
   },
   "25": {
     "deviceId": 25,
-    "deviceName": "LAN Device (172.18.1.54)",
+    "deviceName": "Ability-35",
     "ip": "172.18.1.54",
-    "scannedAt": "2026-10-22T10:45:50.830Z",
+    "scannedAt": "2026-11-10T08:18:03.703Z",
     "isOnline": true,
     "riskScore": 40,
     "overallLevel": "CRITICAL",
@@ -1310,9 +1302,9 @@
     ],
     "threats": [
       {
-        "id": "threat-25-445-1792665950830",
+        "id": "threat-25-445-1794298683703",
         "deviceId": 25,
-        "deviceName": "LAN Device (172.18.1.54)",
+        "deviceName": "Ability-35",
         "deviceIp": "172.18.1.54",
         "port": 445,
         "service": "SMB / CIFS",
@@ -1334,12 +1326,12 @@
           "linuxUfw": "sudo ufw deny 445/tcp",
           "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
         },
-        "timestamp": "2026-10-22T10:45:50.830Z"
+        "timestamp": "2026-11-10T08:18:03.703Z"
       },
       {
-        "id": "threat-25-135-1792665950830",
+        "id": "threat-25-135-1794298683703",
         "deviceId": 25,
-        "deviceName": "LAN Device (172.18.1.54)",
+        "deviceName": "Ability-35",
         "deviceIp": "172.18.1.54",
         "port": 135,
         "service": "MS RPC / EPMAP",
@@ -1359,12 +1351,12 @@
           "linuxUfw": "sudo ufw deny 135/tcp",
           "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
         },
-        "timestamp": "2026-10-22T10:45:50.830Z"
+        "timestamp": "2026-11-10T08:18:03.703Z"
       },
       {
-        "id": "threat-25-139-1792665950830",
+        "id": "threat-25-139-1794298683703",
         "deviceId": 25,
-        "deviceName": "LAN Device (172.18.1.54)",
+        "deviceName": "Ability-35",
         "deviceIp": "172.18.1.54",
         "port": 139,
         "service": "NetBIOS Session",
@@ -1384,30 +1376,168 @@
           "linuxUfw": "sudo ufw deny 139/tcp",
           "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
         },
-        "timestamp": "2026-10-22T10:45:50.830Z"
+        "timestamp": "2026-11-10T08:18:03.703Z"
       }
     ],
     "statusNote": "3 open service port(s) detected."
   },
   "26": {
     "deviceId": 26,
-    "deviceName": "LAN Device (172.18.1.56)",
+    "deviceName": "DESKTOP-37",
     "ip": "172.18.1.56",
-    "scannedAt": "2026-10-22T10:45:50.852Z",
+    "scannedAt": "2026-11-10T08:18:03.710Z",
     "isOnline": true,
-    "riskScore": 100,
-    "overallLevel": "SAFE",
+    "riskScore": 40,
+    "overallLevel": "CRITICAL",
     "totalScanned": 16,
-    "openPortsCount": 0,
-    "openPorts": [],
-    "threats": [],
-    "statusNote": "Device is online and all audited ports are closed/shielded."
+    "openPortsCount": 3,
+    "openPorts": [
+      {
+        "port": 445,
+        "service": "SMB / CIFS",
+        "risk": "CRITICAL",
+        "protocol": "TCP",
+        "cve": "CVE-2017-0144 (EternalBlue) / MS17-010",
+        "attackType": "Ransomware Lateral Propagation & Remote Code Execution",
+        "exploitTarget": "WannaCry, NotPetya, EternalBlue, Lateral Ransomware Propagation",
+        "mitigation": "Block port 445 on WAN and internal boundaries. Disable legacy SMBv1 and enforce SMB signing/encryption.",
+        "remediationSteps": [
+          "Immediately block Port 445 on perimeter firewalls and router WAN interfaces.",
+          "Disable legacy SMBv1 in Windows (Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol).",
+          "Enforce SMB signing and SMB encryption for internal file shares.",
+          "Isolate internal file sharing to dedicated private management VLANs."
+        ],
+        "firewallCmd": {
+          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 445 (SMB/CIFS)\" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Block",
+          "linuxUfw": "sudo ufw deny 445/tcp",
+          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
+        }
+      },
+      {
+        "port": 135,
+        "service": "MS RPC / EPMAP",
+        "risk": "HIGH",
+        "protocol": "TCP",
+        "cve": "MS03-026 / MS03-039 (Blaster Worm)",
+        "attackType": "RPC Buffer Overflow & Remote System Enumeration",
+        "exploitTarget": "Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
+        "mitigation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
+        "remediationSteps": [
+          "Block Port 135 on perimeter router and host firewall.",
+          "Filter inbound RPC requests and restrict to authorized domain controllers only."
+        ],
+        "firewallCmd": {
+          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
+          "linuxUfw": "sudo ufw deny 135/tcp",
+          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
+        }
+      },
+      {
+        "port": 139,
+        "service": "NetBIOS Session",
+        "risk": "HIGH",
+        "protocol": "TCP",
+        "cve": "NetBIOS Name Service Poisoning (LLMNR/NBT-NS)",
+        "attackType": "Relay Attacks, NTLM Hash Harvesting & Man-in-the-Middle",
+        "exploitTarget": "NetBIOS name enumeration, session hijacking, relay attacks",
+        "mitigation": "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced settings.",
+        "remediationSteps": [
+          "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced WINS settings.",
+          "Block Inbound Port 139 on all external and untrusted interfaces."
+        ],
+        "firewallCmd": {
+          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 139 (NetBIOS)\" -Direction Inbound -LocalPort 139 -Protocol TCP -Action Block",
+          "linuxUfw": "sudo ufw deny 139/tcp",
+          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
+        }
+      }
+    ],
+    "threats": [
+      {
+        "id": "threat-26-445-1794298683710",
+        "deviceId": 26,
+        "deviceName": "DESKTOP-37",
+        "deviceIp": "172.18.1.56",
+        "port": 445,
+        "service": "SMB / CIFS",
+        "severity": "CRITICAL",
+        "protocol": "TCP",
+        "cve": "CVE-2017-0144 (EternalBlue) / MS17-010",
+        "attackType": "Ransomware Lateral Propagation & Remote Code Execution",
+        "title": "Critical Port 445 (SMB / CIFS) Exposed",
+        "description": "Device has SMB / CIFS open. Potential attack vector: WannaCry, NotPetya, EternalBlue, Lateral Ransomware Propagation",
+        "recommendation": "Block port 445 on WAN and internal boundaries. Disable legacy SMBv1 and enforce SMB signing/encryption.",
+        "remediationSteps": [
+          "Immediately block Port 445 on perimeter firewalls and router WAN interfaces.",
+          "Disable legacy SMBv1 in Windows (Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol).",
+          "Enforce SMB signing and SMB encryption for internal file shares.",
+          "Isolate internal file sharing to dedicated private management VLANs."
+        ],
+        "firewallCmd": {
+          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 445 (SMB/CIFS)\" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Block",
+          "linuxUfw": "sudo ufw deny 445/tcp",
+          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
+        },
+        "timestamp": "2026-11-10T08:18:03.710Z"
+      },
+      {
+        "id": "threat-26-135-1794298683710",
+        "deviceId": 26,
+        "deviceName": "DESKTOP-37",
+        "deviceIp": "172.18.1.56",
+        "port": 135,
+        "service": "MS RPC / EPMAP",
+        "severity": "HIGH",
+        "protocol": "TCP",
+        "cve": "MS03-026 / MS03-039 (Blaster Worm)",
+        "attackType": "RPC Buffer Overflow & Remote System Enumeration",
+        "title": "High Risk Port 135 (MS RPC / EPMAP) Open",
+        "description": "Exposed MS RPC / EPMAP service is susceptible to: Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
+        "recommendation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
+        "remediationSteps": [
+          "Block Port 135 on perimeter router and host firewall.",
+          "Filter inbound RPC requests and restrict to authorized domain controllers only."
+        ],
+        "firewallCmd": {
+          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
+          "linuxUfw": "sudo ufw deny 135/tcp",
+          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
+        },
+        "timestamp": "2026-11-10T08:18:03.710Z"
+      },
+      {
+        "id": "threat-26-139-1794298683710",
+        "deviceId": 26,
+        "deviceName": "DESKTOP-37",
+        "deviceIp": "172.18.1.56",
+        "port": 139,
+        "service": "NetBIOS Session",
+        "severity": "HIGH",
+        "protocol": "TCP",
+        "cve": "NetBIOS Name Service Poisoning (LLMNR/NBT-NS)",
+        "attackType": "Relay Attacks, NTLM Hash Harvesting & Man-in-the-Middle",
+        "title": "High Risk Port 139 (NetBIOS Session) Open",
+        "description": "Exposed NetBIOS Session service is susceptible to: NetBIOS name enumeration, session hijacking, relay attacks",
+        "recommendation": "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced settings.",
+        "remediationSteps": [
+          "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced WINS settings.",
+          "Block Inbound Port 139 on all external and untrusted interfaces."
+        ],
+        "firewallCmd": {
+          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 139 (NetBIOS)\" -Direction Inbound -LocalPort 139 -Protocol TCP -Action Block",
+          "linuxUfw": "sudo ufw deny 139/tcp",
+          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
+        },
+        "timestamp": "2026-11-10T08:18:03.710Z"
+      }
+    ],
+    "statusNote": "3 open service port(s) detected."
   },
   "27": {
     "deviceId": 27,
-    "deviceName": "LAN Device (172.18.1.65)",
+    "deviceName": "Device (172.18.1.65)",
     "ip": "172.18.1.65",
-    "scannedAt": "2026-10-22T10:45:51.792Z",
+    "scannedAt": "2026-11-10T08:18:04.679Z",
     "isOnline": true,
     "riskScore": 84,
     "overallLevel": "HIGH",
@@ -1436,9 +1566,9 @@
     ],
     "threats": [
       {
-        "id": "threat-27-135-1792665951792",
+        "id": "threat-27-135-1794298684679",
         "deviceId": 27,
-        "deviceName": "LAN Device (172.18.1.65)",
+        "deviceName": "Device (172.18.1.65)",
         "deviceIp": "172.18.1.65",
         "port": 135,
         "service": "MS RPC / EPMAP",
@@ -1458,16 +1588,16 @@
           "linuxUfw": "sudo ufw deny 135/tcp",
           "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
         },
-        "timestamp": "2026-10-22T10:45:51.792Z"
+        "timestamp": "2026-11-10T08:18:04.679Z"
       }
     ],
     "statusNote": "1 open service port(s) detected."
   },
   "28": {
     "deviceId": 28,
-    "deviceName": "LAN Device (172.18.1.69)",
+    "deviceName": "DESKTOP-50",
     "ip": "172.18.1.69",
-    "scannedAt": "2026-10-22T10:45:51.796Z",
+    "scannedAt": "2026-11-10T08:18:04.684Z",
     "isOnline": true,
     "riskScore": 40,
     "overallLevel": "CRITICAL",
@@ -1536,9 +1666,9 @@
     ],
     "threats": [
       {
-        "id": "threat-28-445-1792665951796",
+        "id": "threat-28-445-1794298684684",
         "deviceId": 28,
-        "deviceName": "LAN Device (172.18.1.69)",
+        "deviceName": "DESKTOP-50",
         "deviceIp": "172.18.1.69",
         "port": 445,
         "service": "SMB / CIFS",
@@ -1560,12 +1690,12 @@
           "linuxUfw": "sudo ufw deny 445/tcp",
           "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
         },
-        "timestamp": "2026-10-22T10:45:51.796Z"
+        "timestamp": "2026-11-10T08:18:04.684Z"
       },
       {
-        "id": "threat-28-135-1792665951796",
+        "id": "threat-28-135-1794298684684",
         "deviceId": 28,
-        "deviceName": "LAN Device (172.18.1.69)",
+        "deviceName": "DESKTOP-50",
         "deviceIp": "172.18.1.69",
         "port": 135,
         "service": "MS RPC / EPMAP",
@@ -1585,12 +1715,12 @@
           "linuxUfw": "sudo ufw deny 135/tcp",
           "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
         },
-        "timestamp": "2026-10-22T10:45:51.796Z"
+        "timestamp": "2026-11-10T08:18:04.684Z"
       },
       {
-        "id": "threat-28-139-1792665951796",
+        "id": "threat-28-139-1794298684684",
         "deviceId": 28,
-        "deviceName": "LAN Device (172.18.1.69)",
+        "deviceName": "DESKTOP-50",
         "deviceIp": "172.18.1.69",
         "port": 139,
         "service": "NetBIOS Session",
@@ -1610,16 +1740,16 @@
           "linuxUfw": "sudo ufw deny 139/tcp",
           "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
         },
-        "timestamp": "2026-10-22T10:45:51.796Z"
+        "timestamp": "2026-11-10T08:18:04.684Z"
       }
     ],
     "statusNote": "3 open service port(s) detected."
   },
   "29": {
     "deviceId": 29,
-    "deviceName": "LAN Device (172.18.1.72)",
+    "deviceName": "Inbound1",
     "ip": "172.18.1.72",
-    "scannedAt": "2026-10-22T10:45:51.799Z",
+    "scannedAt": "2026-11-10T08:18:04.690Z",
     "isOnline": true,
     "riskScore": 40,
     "overallLevel": "CRITICAL",
@@ -1688,9 +1818,9 @@
     ],
     "threats": [
       {
-        "id": "threat-29-445-1792665951799",
+        "id": "threat-29-445-1794298684690",
         "deviceId": 29,
-        "deviceName": "LAN Device (172.18.1.72)",
+        "deviceName": "Inbound1",
         "deviceIp": "172.18.1.72",
         "port": 445,
         "service": "SMB / CIFS",
@@ -1712,12 +1842,12 @@
           "linuxUfw": "sudo ufw deny 445/tcp",
           "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
         },
-        "timestamp": "2026-10-22T10:45:51.799Z"
+        "timestamp": "2026-11-10T08:18:04.690Z"
       },
       {
-        "id": "threat-29-135-1792665951799",
+        "id": "threat-29-135-1794298684690",
         "deviceId": 29,
-        "deviceName": "LAN Device (172.18.1.72)",
+        "deviceName": "Inbound1",
         "deviceIp": "172.18.1.72",
         "port": 135,
         "service": "MS RPC / EPMAP",
@@ -1737,12 +1867,12 @@
           "linuxUfw": "sudo ufw deny 135/tcp",
           "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
         },
-        "timestamp": "2026-10-22T10:45:51.799Z"
+        "timestamp": "2026-11-10T08:18:04.690Z"
       },
       {
-        "id": "threat-29-139-1792665951799",
+        "id": "threat-29-139-1794298684690",
         "deviceId": 29,
-        "deviceName": "LAN Device (172.18.1.72)",
+        "deviceName": "Inbound1",
         "deviceIp": "172.18.1.72",
         "port": 139,
         "service": "NetBIOS Session",
@@ -1762,80 +1892,16 @@
           "linuxUfw": "sudo ufw deny 139/tcp",
           "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
         },
-        "timestamp": "2026-10-22T10:45:51.799Z"
+        "timestamp": "2026-11-10T08:18:04.690Z"
       }
     ],
     "statusNote": "3 open service port(s) detected."
   },
   "30": {
     "deviceId": 30,
-    "deviceName": "LAN Device (172.18.1.74)",
-    "ip": "172.18.1.74",
-    "scannedAt": "2026-10-22T10:45:51.804Z",
-    "isOnline": true,
-    "riskScore": 72,
-    "overallLevel": "CRITICAL",
-    "totalScanned": 16,
-    "openPortsCount": 1,
-    "openPorts": [
-      {
-        "port": 3389,
-        "service": "RDP (Remote Desktop)",
-        "risk": "CRITICAL",
-        "protocol": "TCP",
-        "cve": "CVE-2019-0708 (BlueKeep) & Credential Spraying",
-        "attackType": "Pre-Auth Remote Code Execution & Automated Brute Force",
-        "exploitTarget": "BlueKeep, Automated credential brute-force, Ransomware deployment",
-        "mitigation": "Never expose RDP directly to network. Restrict access through VPN, require NLA, and enable MFA.",
-        "remediationSteps": [
-          "Never expose RDP (Port 3389) directly to public Internet or untrusted subnets.",
-          "Require secure WireGuard / OpenVPN or SSH Bastion tunnel to access remote desktops.",
-          "Enforce Network Level Authentication (NLA) on Windows System Properties.",
-          "Configure Account Lockout Policies to prevent automated password dictionary attacks."
-        ],
-        "firewallCmd": {
-          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 3389 (RDP)\" -Direction Inbound -LocalPort 3389 -Protocol TCP -Action Block",
-          "linuxUfw": "sudo ufw deny 3389/tcp",
-          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 3389 -j DROP"
-        }
-      }
-    ],
-    "threats": [
-      {
-        "id": "threat-30-3389-1792665951804",
-        "deviceId": 30,
-        "deviceName": "LAN Device (172.18.1.74)",
-        "deviceIp": "172.18.1.74",
-        "port": 3389,
-        "service": "RDP (Remote Desktop)",
-        "severity": "CRITICAL",
-        "protocol": "TCP",
-        "cve": "CVE-2019-0708 (BlueKeep) & Credential Spraying",
-        "attackType": "Pre-Auth Remote Code Execution & Automated Brute Force",
-        "title": "Critical Port 3389 (RDP (Remote Desktop)) Exposed",
-        "description": "Device has RDP (Remote Desktop) open. Potential attack vector: BlueKeep, Automated credential brute-force, Ransomware deployment",
-        "recommendation": "Never expose RDP directly to network. Restrict access through VPN, require NLA, and enable MFA.",
-        "remediationSteps": [
-          "Never expose RDP (Port 3389) directly to public Internet or untrusted subnets.",
-          "Require secure WireGuard / OpenVPN or SSH Bastion tunnel to access remote desktops.",
-          "Enforce Network Level Authentication (NLA) on Windows System Properties.",
-          "Configure Account Lockout Policies to prevent automated password dictionary attacks."
-        ],
-        "firewallCmd": {
-          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 3389 (RDP)\" -Direction Inbound -LocalPort 3389 -Protocol TCP -Action Block",
-          "linuxUfw": "sudo ufw deny 3389/tcp",
-          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 3389 -j DROP"
-        },
-        "timestamp": "2026-10-22T10:45:51.804Z"
-      }
-    ],
-    "statusNote": "1 open service port(s) detected."
-  },
-  "31": {
-    "deviceId": 31,
-    "deviceName": "LAN Device (172.18.1.75)",
+    "deviceName": "DESKTOP-56",
     "ip": "172.18.1.75",
-    "scannedAt": "2026-10-22T10:45:51.808Z",
+    "scannedAt": "2026-11-10T08:18:04.696Z",
     "isOnline": true,
     "riskScore": 40,
     "overallLevel": "CRITICAL",
@@ -1904,9 +1970,9 @@
     ],
     "threats": [
       {
-        "id": "threat-31-445-1792665951808",
-        "deviceId": 31,
-        "deviceName": "LAN Device (172.18.1.75)",
+        "id": "threat-30-445-1794298684696",
+        "deviceId": 30,
+        "deviceName": "DESKTOP-56",
         "deviceIp": "172.18.1.75",
         "port": 445,
         "service": "SMB / CIFS",
@@ -1928,12 +1994,12 @@
           "linuxUfw": "sudo ufw deny 445/tcp",
           "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
         },
-        "timestamp": "2026-10-22T10:45:51.808Z"
+        "timestamp": "2026-11-10T08:18:04.696Z"
       },
       {
-        "id": "threat-31-135-1792665951808",
-        "deviceId": 31,
-        "deviceName": "LAN Device (172.18.1.75)",
+        "id": "threat-30-135-1794298684696",
+        "deviceId": 30,
+        "deviceName": "DESKTOP-56",
         "deviceIp": "172.18.1.75",
         "port": 135,
         "service": "MS RPC / EPMAP",
@@ -1953,12 +2019,12 @@
           "linuxUfw": "sudo ufw deny 135/tcp",
           "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
         },
-        "timestamp": "2026-10-22T10:45:51.808Z"
+        "timestamp": "2026-11-10T08:18:04.696Z"
       },
       {
-        "id": "threat-31-139-1792665951808",
-        "deviceId": 31,
-        "deviceName": "LAN Device (172.18.1.75)",
+        "id": "threat-30-139-1794298684696",
+        "deviceId": 30,
+        "deviceName": "DESKTOP-56",
         "deviceIp": "172.18.1.75",
         "port": 139,
         "service": "NetBIOS Session",
@@ -1978,168 +2044,182 @@
           "linuxUfw": "sudo ufw deny 139/tcp",
           "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
         },
-        "timestamp": "2026-10-22T10:45:51.808Z"
+        "timestamp": "2026-11-10T08:18:04.696Z"
+      }
+    ],
+    "statusNote": "3 open service port(s) detected."
+  },
+  "31": {
+    "deviceId": 31,
+    "deviceName": "DESKTOP-5723323",
+    "ip": "172.18.1.76",
+    "scannedAt": "2026-11-10T08:18:04.701Z",
+    "isOnline": true,
+    "riskScore": 40,
+    "overallLevel": "CRITICAL",
+    "totalScanned": 16,
+    "openPortsCount": 3,
+    "openPorts": [
+      {
+        "port": 445,
+        "service": "SMB / CIFS",
+        "risk": "CRITICAL",
+        "protocol": "TCP",
+        "cve": "CVE-2017-0144 (EternalBlue) / MS17-010",
+        "attackType": "Ransomware Lateral Propagation & Remote Code Execution",
+        "exploitTarget": "WannaCry, NotPetya, EternalBlue, Lateral Ransomware Propagation",
+        "mitigation": "Block port 445 on WAN and internal boundaries. Disable legacy SMBv1 and enforce SMB signing/encryption.",
+        "remediationSteps": [
+          "Immediately block Port 445 on perimeter firewalls and router WAN interfaces.",
+          "Disable legacy SMBv1 in Windows (Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol).",
+          "Enforce SMB signing and SMB encryption for internal file shares.",
+          "Isolate internal file sharing to dedicated private management VLANs."
+        ],
+        "firewallCmd": {
+          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 445 (SMB/CIFS)\" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Block",
+          "linuxUfw": "sudo ufw deny 445/tcp",
+          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
+        }
+      },
+      {
+        "port": 135,
+        "service": "MS RPC / EPMAP",
+        "risk": "HIGH",
+        "protocol": "TCP",
+        "cve": "MS03-026 / MS03-039 (Blaster Worm)",
+        "attackType": "RPC Buffer Overflow & Remote System Enumeration",
+        "exploitTarget": "Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
+        "mitigation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
+        "remediationSteps": [
+          "Block Port 135 on perimeter router and host firewall.",
+          "Filter inbound RPC requests and restrict to authorized domain controllers only."
+        ],
+        "firewallCmd": {
+          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
+          "linuxUfw": "sudo ufw deny 135/tcp",
+          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
+        }
+      },
+      {
+        "port": 139,
+        "service": "NetBIOS Session",
+        "risk": "HIGH",
+        "protocol": "TCP",
+        "cve": "NetBIOS Name Service Poisoning (LLMNR/NBT-NS)",
+        "attackType": "Relay Attacks, NTLM Hash Harvesting & Man-in-the-Middle",
+        "exploitTarget": "NetBIOS name enumeration, session hijacking, relay attacks",
+        "mitigation": "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced settings.",
+        "remediationSteps": [
+          "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced WINS settings.",
+          "Block Inbound Port 139 on all external and untrusted interfaces."
+        ],
+        "firewallCmd": {
+          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 139 (NetBIOS)\" -Direction Inbound -LocalPort 139 -Protocol TCP -Action Block",
+          "linuxUfw": "sudo ufw deny 139/tcp",
+          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
+        }
+      }
+    ],
+    "threats": [
+      {
+        "id": "threat-31-445-1794298684701",
+        "deviceId": 31,
+        "deviceName": "DESKTOP-5723323",
+        "deviceIp": "172.18.1.76",
+        "port": 445,
+        "service": "SMB / CIFS",
+        "severity": "CRITICAL",
+        "protocol": "TCP",
+        "cve": "CVE-2017-0144 (EternalBlue) / MS17-010",
+        "attackType": "Ransomware Lateral Propagation & Remote Code Execution",
+        "title": "Critical Port 445 (SMB / CIFS) Exposed",
+        "description": "Device has SMB / CIFS open. Potential attack vector: WannaCry, NotPetya, EternalBlue, Lateral Ransomware Propagation",
+        "recommendation": "Block port 445 on WAN and internal boundaries. Disable legacy SMBv1 and enforce SMB signing/encryption.",
+        "remediationSteps": [
+          "Immediately block Port 445 on perimeter firewalls and router WAN interfaces.",
+          "Disable legacy SMBv1 in Windows (Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol).",
+          "Enforce SMB signing and SMB encryption for internal file shares.",
+          "Isolate internal file sharing to dedicated private management VLANs."
+        ],
+        "firewallCmd": {
+          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 445 (SMB/CIFS)\" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Block",
+          "linuxUfw": "sudo ufw deny 445/tcp",
+          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
+        },
+        "timestamp": "2026-11-10T08:18:04.701Z"
+      },
+      {
+        "id": "threat-31-135-1794298684701",
+        "deviceId": 31,
+        "deviceName": "DESKTOP-5723323",
+        "deviceIp": "172.18.1.76",
+        "port": 135,
+        "service": "MS RPC / EPMAP",
+        "severity": "HIGH",
+        "protocol": "TCP",
+        "cve": "MS03-026 / MS03-039 (Blaster Worm)",
+        "attackType": "RPC Buffer Overflow & Remote System Enumeration",
+        "title": "High Risk Port 135 (MS RPC / EPMAP) Open",
+        "description": "Exposed MS RPC / EPMAP service is susceptible to: Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
+        "recommendation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
+        "remediationSteps": [
+          "Block Port 135 on perimeter router and host firewall.",
+          "Filter inbound RPC requests and restrict to authorized domain controllers only."
+        ],
+        "firewallCmd": {
+          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
+          "linuxUfw": "sudo ufw deny 135/tcp",
+          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
+        },
+        "timestamp": "2026-11-10T08:18:04.701Z"
+      },
+      {
+        "id": "threat-31-139-1794298684701",
+        "deviceId": 31,
+        "deviceName": "DESKTOP-5723323",
+        "deviceIp": "172.18.1.76",
+        "port": 139,
+        "service": "NetBIOS Session",
+        "severity": "HIGH",
+        "protocol": "TCP",
+        "cve": "NetBIOS Name Service Poisoning (LLMNR/NBT-NS)",
+        "attackType": "Relay Attacks, NTLM Hash Harvesting & Man-in-the-Middle",
+        "title": "High Risk Port 139 (NetBIOS Session) Open",
+        "description": "Exposed NetBIOS Session service is susceptible to: NetBIOS name enumeration, session hijacking, relay attacks",
+        "recommendation": "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced settings.",
+        "remediationSteps": [
+          "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced WINS settings.",
+          "Block Inbound Port 139 on all external and untrusted interfaces."
+        ],
+        "firewallCmd": {
+          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 139 (NetBIOS)\" -Direction Inbound -LocalPort 139 -Protocol TCP -Action Block",
+          "linuxUfw": "sudo ufw deny 139/tcp",
+          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
+        },
+        "timestamp": "2026-11-10T08:18:04.701Z"
       }
     ],
     "statusNote": "3 open service port(s) detected."
   },
   "32": {
     "deviceId": 32,
-    "deviceName": "LAN Device (172.18.1.76)",
-    "ip": "172.18.1.76",
-    "scannedAt": "2026-10-22T10:45:52.521Z",
+    "deviceName": "DESKTOP-58",
+    "ip": "172.18.1.77",
+    "scannedAt": "2026-11-10T08:18:05.485Z",
     "isOnline": true,
-    "riskScore": 40,
-    "overallLevel": "CRITICAL",
+    "riskScore": 100,
+    "overallLevel": "SAFE",
     "totalScanned": 16,
-    "openPortsCount": 3,
-    "openPorts": [
-      {
-        "port": 445,
-        "service": "SMB / CIFS",
-        "risk": "CRITICAL",
-        "protocol": "TCP",
-        "cve": "CVE-2017-0144 (EternalBlue) / MS17-010",
-        "attackType": "Ransomware Lateral Propagation & Remote Code Execution",
-        "exploitTarget": "WannaCry, NotPetya, EternalBlue, Lateral Ransomware Propagation",
-        "mitigation": "Block port 445 on WAN and internal boundaries. Disable legacy SMBv1 and enforce SMB signing/encryption.",
-        "remediationSteps": [
-          "Immediately block Port 445 on perimeter firewalls and router WAN interfaces.",
-          "Disable legacy SMBv1 in Windows (Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol).",
-          "Enforce SMB signing and SMB encryption for internal file shares.",
-          "Isolate internal file sharing to dedicated private management VLANs."
-        ],
-        "firewallCmd": {
-          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 445 (SMB/CIFS)\" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Block",
-          "linuxUfw": "sudo ufw deny 445/tcp",
-          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
-        }
-      },
-      {
-        "port": 135,
-        "service": "MS RPC / EPMAP",
-        "risk": "HIGH",
-        "protocol": "TCP",
-        "cve": "MS03-026 / MS03-039 (Blaster Worm)",
-        "attackType": "RPC Buffer Overflow & Remote System Enumeration",
-        "exploitTarget": "Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
-        "mitigation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
-        "remediationSteps": [
-          "Block Port 135 on perimeter router and host firewall.",
-          "Filter inbound RPC requests and restrict to authorized domain controllers only."
-        ],
-        "firewallCmd": {
-          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
-          "linuxUfw": "sudo ufw deny 135/tcp",
-          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
-        }
-      },
-      {
-        "port": 139,
-        "service": "NetBIOS Session",
-        "risk": "HIGH",
-        "protocol": "TCP",
-        "cve": "NetBIOS Name Service Poisoning (LLMNR/NBT-NS)",
-        "attackType": "Relay Attacks, NTLM Hash Harvesting & Man-in-the-Middle",
-        "exploitTarget": "NetBIOS name enumeration, session hijacking, relay attacks",
-        "mitigation": "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced settings.",
-        "remediationSteps": [
-          "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced WINS settings.",
-          "Block Inbound Port 139 on all external and untrusted interfaces."
-        ],
-        "firewallCmd": {
-          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 139 (NetBIOS)\" -Direction Inbound -LocalPort 139 -Protocol TCP -Action Block",
-          "linuxUfw": "sudo ufw deny 139/tcp",
-          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
-        }
-      }
-    ],
-    "threats": [
-      {
-        "id": "threat-32-445-1792665952521",
-        "deviceId": 32,
-        "deviceName": "LAN Device (172.18.1.76)",
-        "deviceIp": "172.18.1.76",
-        "port": 445,
-        "service": "SMB / CIFS",
-        "severity": "CRITICAL",
-        "protocol": "TCP",
-        "cve": "CVE-2017-0144 (EternalBlue) / MS17-010",
-        "attackType": "Ransomware Lateral Propagation & Remote Code Execution",
-        "title": "Critical Port 445 (SMB / CIFS) Exposed",
-        "description": "Device has SMB / CIFS open. Potential attack vector: WannaCry, NotPetya, EternalBlue, Lateral Ransomware Propagation",
-        "recommendation": "Block port 445 on WAN and internal boundaries. Disable legacy SMBv1 and enforce SMB signing/encryption.",
-        "remediationSteps": [
-          "Immediately block Port 445 on perimeter firewalls and router WAN interfaces.",
-          "Disable legacy SMBv1 in Windows (Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol).",
-          "Enforce SMB signing and SMB encryption for internal file shares.",
-          "Isolate internal file sharing to dedicated private management VLANs."
-        ],
-        "firewallCmd": {
-          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 445 (SMB/CIFS)\" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Block",
-          "linuxUfw": "sudo ufw deny 445/tcp",
-          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
-        },
-        "timestamp": "2026-10-22T10:45:52.521Z"
-      },
-      {
-        "id": "threat-32-135-1792665952521",
-        "deviceId": 32,
-        "deviceName": "LAN Device (172.18.1.76)",
-        "deviceIp": "172.18.1.76",
-        "port": 135,
-        "service": "MS RPC / EPMAP",
-        "severity": "HIGH",
-        "protocol": "TCP",
-        "cve": "MS03-026 / MS03-039 (Blaster Worm)",
-        "attackType": "RPC Buffer Overflow & Remote System Enumeration",
-        "title": "High Risk Port 135 (MS RPC / EPMAP) Open",
-        "description": "Exposed MS RPC / EPMAP service is susceptible to: Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
-        "recommendation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
-        "remediationSteps": [
-          "Block Port 135 on perimeter router and host firewall.",
-          "Filter inbound RPC requests and restrict to authorized domain controllers only."
-        ],
-        "firewallCmd": {
-          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
-          "linuxUfw": "sudo ufw deny 135/tcp",
-          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
-        },
-        "timestamp": "2026-10-22T10:45:52.521Z"
-      },
-      {
-        "id": "threat-32-139-1792665952521",
-        "deviceId": 32,
-        "deviceName": "LAN Device (172.18.1.76)",
-        "deviceIp": "172.18.1.76",
-        "port": 139,
-        "service": "NetBIOS Session",
-        "severity": "HIGH",
-        "protocol": "TCP",
-        "cve": "NetBIOS Name Service Poisoning (LLMNR/NBT-NS)",
-        "attackType": "Relay Attacks, NTLM Hash Harvesting & Man-in-the-Middle",
-        "title": "High Risk Port 139 (NetBIOS Session) Open",
-        "description": "Exposed NetBIOS Session service is susceptible to: NetBIOS name enumeration, session hijacking, relay attacks",
-        "recommendation": "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced settings.",
-        "remediationSteps": [
-          "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced WINS settings.",
-          "Block Inbound Port 139 on all external and untrusted interfaces."
-        ],
-        "firewallCmd": {
-          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 139 (NetBIOS)\" -Direction Inbound -LocalPort 139 -Protocol TCP -Action Block",
-          "linuxUfw": "sudo ufw deny 139/tcp",
-          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
-        },
-        "timestamp": "2026-10-22T10:45:52.521Z"
-      }
-    ],
-    "statusNote": "3 open service port(s) detected."
+    "openPortsCount": 0,
+    "openPorts": [],
+    "threats": [],
+    "statusNote": "Device is online and all audited ports are closed/shielded."
   },
   "33": {
     "deviceId": 33,
-    "deviceName": "LAN Device (172.18.1.77)",
-    "ip": "172.18.1.77",
-    "scannedAt": "2026-10-22T10:45:52.526Z",
+    "deviceName": "DESKTOP-59",
+    "ip": "172.18.1.78",
+    "scannedAt": "2026-11-10T08:18:05.444Z",
     "isOnline": true,
     "riskScore": 40,
     "overallLevel": "CRITICAL",
@@ -2208,10 +2288,10 @@
     ],
     "threats": [
       {
-        "id": "threat-33-445-1792665952526",
+        "id": "threat-33-445-1794298685444",
         "deviceId": 33,
-        "deviceName": "LAN Device (172.18.1.77)",
-        "deviceIp": "172.18.1.77",
+        "deviceName": "DESKTOP-59",
+        "deviceIp": "172.18.1.78",
         "port": 445,
         "service": "SMB / CIFS",
         "severity": "CRITICAL",
@@ -2232,13 +2312,13 @@
           "linuxUfw": "sudo ufw deny 445/tcp",
           "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
         },
-        "timestamp": "2026-10-22T10:45:52.526Z"
+        "timestamp": "2026-11-10T08:18:05.444Z"
       },
       {
-        "id": "threat-33-135-1792665952526",
+        "id": "threat-33-135-1794298685444",
         "deviceId": 33,
-        "deviceName": "LAN Device (172.18.1.77)",
-        "deviceIp": "172.18.1.77",
+        "deviceName": "DESKTOP-59",
+        "deviceIp": "172.18.1.78",
         "port": 135,
         "service": "MS RPC / EPMAP",
         "severity": "HIGH",
@@ -2257,13 +2337,13 @@
           "linuxUfw": "sudo ufw deny 135/tcp",
           "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
         },
-        "timestamp": "2026-10-22T10:45:52.526Z"
+        "timestamp": "2026-11-10T08:18:05.444Z"
       },
       {
-        "id": "threat-33-139-1792665952526",
+        "id": "threat-33-139-1794298685444",
         "deviceId": 33,
-        "deviceName": "LAN Device (172.18.1.77)",
-        "deviceIp": "172.18.1.77",
+        "deviceName": "DESKTOP-59",
+        "deviceIp": "172.18.1.78",
         "port": 139,
         "service": "NetBIOS Session",
         "severity": "HIGH",
@@ -2282,210 +2362,30 @@
           "linuxUfw": "sudo ufw deny 139/tcp",
           "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
         },
-        "timestamp": "2026-10-22T10:45:52.526Z"
+        "timestamp": "2026-11-10T08:18:05.444Z"
       }
     ],
     "statusNote": "3 open service port(s) detected."
   },
   "34": {
     "deviceId": 34,
-    "deviceName": "LAN Device (172.18.1.78)",
-    "ip": "172.18.1.78",
-    "scannedAt": "2026-10-22T10:45:52.530Z",
+    "deviceName": "DESKTOP-70",
+    "ip": "172.18.1.89",
+    "scannedAt": "2026-11-10T08:18:05.494Z",
     "isOnline": true,
-    "riskScore": 40,
-    "overallLevel": "CRITICAL",
+    "riskScore": 100,
+    "overallLevel": "SAFE",
     "totalScanned": 16,
-    "openPortsCount": 3,
-    "openPorts": [
-      {
-        "port": 445,
-        "service": "SMB / CIFS",
-        "risk": "CRITICAL",
-        "protocol": "TCP",
-        "cve": "CVE-2017-0144 (EternalBlue) / MS17-010",
-        "attackType": "Ransomware Lateral Propagation & Remote Code Execution",
-        "exploitTarget": "WannaCry, NotPetya, EternalBlue, Lateral Ransomware Propagation",
-        "mitigation": "Block port 445 on WAN and internal boundaries. Disable legacy SMBv1 and enforce SMB signing/encryption.",
-        "remediationSteps": [
-          "Immediately block Port 445 on perimeter firewalls and router WAN interfaces.",
-          "Disable legacy SMBv1 in Windows (Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol).",
-          "Enforce SMB signing and SMB encryption for internal file shares.",
-          "Isolate internal file sharing to dedicated private management VLANs."
-        ],
-        "firewallCmd": {
-          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 445 (SMB/CIFS)\" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Block",
-          "linuxUfw": "sudo ufw deny 445/tcp",
-          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
-        }
-      },
-      {
-        "port": 135,
-        "service": "MS RPC / EPMAP",
-        "risk": "HIGH",
-        "protocol": "TCP",
-        "cve": "MS03-026 / MS03-039 (Blaster Worm)",
-        "attackType": "RPC Buffer Overflow & Remote System Enumeration",
-        "exploitTarget": "Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
-        "mitigation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
-        "remediationSteps": [
-          "Block Port 135 on perimeter router and host firewall.",
-          "Filter inbound RPC requests and restrict to authorized domain controllers only."
-        ],
-        "firewallCmd": {
-          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
-          "linuxUfw": "sudo ufw deny 135/tcp",
-          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
-        }
-      },
-      {
-        "port": 139,
-        "service": "NetBIOS Session",
-        "risk": "HIGH",
-        "protocol": "TCP",
-        "cve": "NetBIOS Name Service Poisoning (LLMNR/NBT-NS)",
-        "attackType": "Relay Attacks, NTLM Hash Harvesting & Man-in-the-Middle",
-        "exploitTarget": "NetBIOS name enumeration, session hijacking, relay attacks",
-        "mitigation": "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced settings.",
-        "remediationSteps": [
-          "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced WINS settings.",
-          "Block Inbound Port 139 on all external and untrusted interfaces."
-        ],
-        "firewallCmd": {
-          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 139 (NetBIOS)\" -Direction Inbound -LocalPort 139 -Protocol TCP -Action Block",
-          "linuxUfw": "sudo ufw deny 139/tcp",
-          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
-        }
-      }
-    ],
-    "threats": [
-      {
-        "id": "threat-34-445-1792665952530",
-        "deviceId": 34,
-        "deviceName": "LAN Device (172.18.1.78)",
-        "deviceIp": "172.18.1.78",
-        "port": 445,
-        "service": "SMB / CIFS",
-        "severity": "CRITICAL",
-        "protocol": "TCP",
-        "cve": "CVE-2017-0144 (EternalBlue) / MS17-010",
-        "attackType": "Ransomware Lateral Propagation & Remote Code Execution",
-        "title": "Critical Port 445 (SMB / CIFS) Exposed",
-        "description": "Device has SMB / CIFS open. Potential attack vector: WannaCry, NotPetya, EternalBlue, Lateral Ransomware Propagation",
-        "recommendation": "Block port 445 on WAN and internal boundaries. Disable legacy SMBv1 and enforce SMB signing/encryption.",
-        "remediationSteps": [
-          "Immediately block Port 445 on perimeter firewalls and router WAN interfaces.",
-          "Disable legacy SMBv1 in Windows (Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol).",
-          "Enforce SMB signing and SMB encryption for internal file shares.",
-          "Isolate internal file sharing to dedicated private management VLANs."
-        ],
-        "firewallCmd": {
-          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 445 (SMB/CIFS)\" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Block",
-          "linuxUfw": "sudo ufw deny 445/tcp",
-          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
-        },
-        "timestamp": "2026-10-22T10:45:52.530Z"
-      },
-      {
-        "id": "threat-34-135-1792665952530",
-        "deviceId": 34,
-        "deviceName": "LAN Device (172.18.1.78)",
-        "deviceIp": "172.18.1.78",
-        "port": 135,
-        "service": "MS RPC / EPMAP",
-        "severity": "HIGH",
-        "protocol": "TCP",
-        "cve": "MS03-026 / MS03-039 (Blaster Worm)",
-        "attackType": "RPC Buffer Overflow & Remote System Enumeration",
-        "title": "High Risk Port 135 (MS RPC / EPMAP) Open",
-        "description": "Exposed MS RPC / EPMAP service is susceptible to: Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
-        "recommendation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
-        "remediationSteps": [
-          "Block Port 135 on perimeter router and host firewall.",
-          "Filter inbound RPC requests and restrict to authorized domain controllers only."
-        ],
-        "firewallCmd": {
-          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
-          "linuxUfw": "sudo ufw deny 135/tcp",
-          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
-        },
-        "timestamp": "2026-10-22T10:45:52.530Z"
-      },
-      {
-        "id": "threat-34-139-1792665952530",
-        "deviceId": 34,
-        "deviceName": "LAN Device (172.18.1.78)",
-        "deviceIp": "172.18.1.78",
-        "port": 139,
-        "service": "NetBIOS Session",
-        "severity": "HIGH",
-        "protocol": "TCP",
-        "cve": "NetBIOS Name Service Poisoning (LLMNR/NBT-NS)",
-        "attackType": "Relay Attacks, NTLM Hash Harvesting & Man-in-the-Middle",
-        "title": "High Risk Port 139 (NetBIOS Session) Open",
-        "description": "Exposed NetBIOS Session service is susceptible to: NetBIOS name enumeration, session hijacking, relay attacks",
-        "recommendation": "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced settings.",
-        "remediationSteps": [
-          "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced WINS settings.",
-          "Block Inbound Port 139 on all external and untrusted interfaces."
-        ],
-        "firewallCmd": {
-          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 139 (NetBIOS)\" -Direction Inbound -LocalPort 139 -Protocol TCP -Action Block",
-          "linuxUfw": "sudo ufw deny 139/tcp",
-          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
-        },
-        "timestamp": "2026-10-22T10:45:52.530Z"
-      }
-    ],
-    "statusNote": "3 open service port(s) detected."
+    "openPortsCount": 0,
+    "openPorts": [],
+    "threats": [],
+    "statusNote": "Device is online and all audited ports are closed/shielded."
   },
   "35": {
     "deviceId": 35,
-    "deviceName": "LAN Device (172.18.1.85)",
-    "ip": "172.18.1.85",
-    "scannedAt": "2026-10-22T10:45:52.554Z",
-    "isOnline": true,
-    "riskScore": 100,
-    "overallLevel": "SAFE",
-    "totalScanned": 16,
-    "openPortsCount": 0,
-    "openPorts": [],
-    "threats": [],
-    "statusNote": "Device is online and all audited ports are closed/shielded."
-  },
-  "36": {
-    "deviceId": 36,
-    "deviceName": "LAN Device (172.18.1.88)",
-    "ip": "172.18.1.88",
-    "scannedAt": "2026-10-22T10:45:52.560Z",
-    "isOnline": true,
-    "riskScore": 100,
-    "overallLevel": "SAFE",
-    "totalScanned": 16,
-    "openPortsCount": 0,
-    "openPorts": [],
-    "threats": [],
-    "statusNote": "Device is online and all audited ports are closed/shielded."
-  },
-  "37": {
-    "deviceId": 37,
-    "deviceName": "LAN Device (172.18.1.89)",
-    "ip": "172.18.1.89",
-    "scannedAt": "2026-10-22T10:45:53.289Z",
-    "isOnline": true,
-    "riskScore": 100,
-    "overallLevel": "SAFE",
-    "totalScanned": 16,
-    "openPortsCount": 0,
-    "openPorts": [],
-    "threats": [],
-    "statusNote": "Device is online and all audited ports are closed/shielded."
-  },
-  "38": {
-    "deviceId": 38,
-    "deviceName": "LAN Device (172.18.1.90)",
+    "deviceName": "Device (172.18.1.90)",
     "ip": "172.18.1.90",
-    "scannedAt": "2026-10-22T10:45:53.272Z",
+    "scannedAt": "2026-11-10T08:18:05.464Z",
     "isOnline": true,
     "riskScore": 68,
     "overallLevel": "CRITICAL",
@@ -2573,9 +2473,9 @@
     ],
     "threats": [
       {
-        "id": "threat-38-23-1792665953272",
-        "deviceId": 38,
-        "deviceName": "LAN Device (172.18.1.90)",
+        "id": "threat-35-23-1794298685464",
+        "deviceId": 35,
+        "deviceName": "Device (172.18.1.90)",
         "deviceIp": "172.18.1.90",
         "port": 23,
         "service": "Telnet",
@@ -2596,16 +2496,16 @@
           "linuxUfw": "sudo ufw deny 23/tcp",
           "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 23 -j DROP"
         },
-        "timestamp": "2026-10-22T10:45:53.272Z"
+        "timestamp": "2026-11-10T08:18:05.464Z"
       }
     ],
     "statusNote": "4 open service port(s) detected."
   },
-  "39": {
-    "deviceId": 39,
-    "deviceName": "LAN Device (172.18.1.91)",
+  "36": {
+    "deviceId": 36,
+    "deviceName": "Device (172.18.1.91)",
     "ip": "172.18.1.91",
-    "scannedAt": "2026-10-22T10:45:53.276Z",
+    "scannedAt": "2026-11-10T08:18:05.474Z",
     "isOnline": true,
     "riskScore": 68,
     "overallLevel": "CRITICAL",
@@ -2693,9 +2593,9 @@
     ],
     "threats": [
       {
-        "id": "threat-39-23-1792665953276",
-        "deviceId": 39,
-        "deviceName": "LAN Device (172.18.1.91)",
+        "id": "threat-36-23-1794298685474",
+        "deviceId": 36,
+        "deviceName": "Device (172.18.1.91)",
         "deviceIp": "172.18.1.91",
         "port": 23,
         "service": "Telnet",
@@ -2716,16 +2616,16 @@
           "linuxUfw": "sudo ufw deny 23/tcp",
           "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 23 -j DROP"
         },
-        "timestamp": "2026-10-22T10:45:53.276Z"
+        "timestamp": "2026-11-10T08:18:05.474Z"
       }
     ],
     "statusNote": "4 open service port(s) detected."
   },
-  "40": {
-    "deviceId": 40,
-    "deviceName": "LAN Device (172.18.1.106)",
+  "37": {
+    "deviceId": 37,
+    "deviceName": "Device (172.18.1.106)",
     "ip": "172.18.1.106",
-    "scannedAt": "2026-10-22T10:45:53.280Z",
+    "scannedAt": "2026-11-10T08:18:06.198Z",
     "isOnline": true,
     "riskScore": 84,
     "overallLevel": "HIGH",
@@ -2754,9 +2654,9 @@
     ],
     "threats": [
       {
-        "id": "threat-40-135-1792665953280",
-        "deviceId": 40,
-        "deviceName": "LAN Device (172.18.1.106)",
+        "id": "threat-37-135-1794298686198",
+        "deviceId": 37,
+        "deviceName": "Device (172.18.1.106)",
         "deviceIp": "172.18.1.106",
         "port": 135,
         "service": "MS RPC / EPMAP",
@@ -2776,16 +2676,16 @@
           "linuxUfw": "sudo ufw deny 135/tcp",
           "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
         },
-        "timestamp": "2026-10-22T10:45:53.280Z"
+        "timestamp": "2026-11-10T08:18:06.198Z"
       }
     ],
     "statusNote": "1 open service port(s) detected."
   },
-  "41": {
-    "deviceId": 41,
-    "deviceName": "LAN Device (172.18.1.108)",
+  "38": {
+    "deviceId": 38,
+    "deviceName": "Device (172.18.1.108)",
     "ip": "172.18.1.108",
-    "scannedAt": "2026-10-22T10:45:53.285Z",
+    "scannedAt": "2026-11-10T08:18:06.205Z",
     "isOnline": true,
     "riskScore": 84,
     "overallLevel": "HIGH",
@@ -2814,9 +2714,9 @@
     ],
     "threats": [
       {
-        "id": "threat-41-135-1792665953285",
-        "deviceId": 41,
-        "deviceName": "LAN Device (172.18.1.108)",
+        "id": "threat-38-135-1794298686205",
+        "deviceId": 38,
+        "deviceName": "Device (172.18.1.108)",
         "deviceIp": "172.18.1.108",
         "port": 135,
         "service": "MS RPC / EPMAP",
@@ -2836,16 +2736,16 @@
           "linuxUfw": "sudo ufw deny 135/tcp",
           "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
         },
-        "timestamp": "2026-10-22T10:45:53.285Z"
+        "timestamp": "2026-11-10T08:18:06.205Z"
       }
     ],
     "statusNote": "1 open service port(s) detected."
   },
-  "42": {
-    "deviceId": 42,
-    "deviceName": "LAN Device (172.18.1.109)",
+  "39": {
+    "deviceId": 39,
+    "deviceName": "DESKTOP-67",
     "ip": "172.18.1.109",
-    "scannedAt": "2026-10-22T10:45:53.999Z",
+    "scannedAt": "2026-11-10T08:18:06.212Z",
     "isOnline": true,
     "riskScore": 40,
     "overallLevel": "CRITICAL",
@@ -2914,9 +2814,9 @@
     ],
     "threats": [
       {
-        "id": "threat-42-445-1792665953999",
-        "deviceId": 42,
-        "deviceName": "LAN Device (172.18.1.109)",
+        "id": "threat-39-445-1794298686212",
+        "deviceId": 39,
+        "deviceName": "DESKTOP-67",
         "deviceIp": "172.18.1.109",
         "port": 445,
         "service": "SMB / CIFS",
@@ -2938,12 +2838,12 @@
           "linuxUfw": "sudo ufw deny 445/tcp",
           "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
         },
-        "timestamp": "2026-10-22T10:45:53.999Z"
+        "timestamp": "2026-11-10T08:18:06.212Z"
       },
       {
-        "id": "threat-42-135-1792665953999",
-        "deviceId": 42,
-        "deviceName": "LAN Device (172.18.1.109)",
+        "id": "threat-39-135-1794298686212",
+        "deviceId": 39,
+        "deviceName": "DESKTOP-67",
         "deviceIp": "172.18.1.109",
         "port": 135,
         "service": "MS RPC / EPMAP",
@@ -2963,12 +2863,12 @@
           "linuxUfw": "sudo ufw deny 135/tcp",
           "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
         },
-        "timestamp": "2026-10-22T10:45:53.999Z"
+        "timestamp": "2026-11-10T08:18:06.212Z"
       },
       {
-        "id": "threat-42-139-1792665953999",
-        "deviceId": 42,
-        "deviceName": "LAN Device (172.18.1.109)",
+        "id": "threat-39-139-1794298686212",
+        "deviceId": 39,
+        "deviceName": "DESKTOP-67",
         "deviceIp": "172.18.1.109",
         "port": 139,
         "service": "NetBIOS Session",
@@ -2988,16 +2888,16 @@
           "linuxUfw": "sudo ufw deny 139/tcp",
           "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
         },
-        "timestamp": "2026-10-22T10:45:53.999Z"
+        "timestamp": "2026-11-10T08:18:06.212Z"
       }
     ],
     "statusNote": "3 open service port(s) detected."
   },
-  "43": {
-    "deviceId": 43,
-    "deviceName": "LAN Device (172.18.1.110)",
-    "ip": "172.18.1.110",
-    "scannedAt": "2026-10-22T10:45:54.004Z",
+  "40": {
+    "deviceId": 40,
+    "deviceName": "DESKTOP-LRFV6P8",
+    "ip": "172.18.1.113",
+    "scannedAt": "2026-11-10T08:18:06.217Z",
     "isOnline": true,
     "riskScore": 84,
     "overallLevel": "HIGH",
@@ -3026,10 +2926,10 @@
     ],
     "threats": [
       {
-        "id": "threat-43-135-1792665954004",
-        "deviceId": 43,
-        "deviceName": "LAN Device (172.18.1.110)",
-        "deviceIp": "172.18.1.110",
+        "id": "threat-40-135-1794298686217",
+        "deviceId": 40,
+        "deviceName": "DESKTOP-LRFV6P8",
+        "deviceIp": "172.18.1.113",
         "port": 135,
         "service": "MS RPC / EPMAP",
         "severity": "HIGH",
@@ -3048,58 +2948,244 @@
           "linuxUfw": "sudo ufw deny 135/tcp",
           "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
         },
-        "timestamp": "2026-10-22T10:45:54.004Z"
+        "timestamp": "2026-11-10T08:18:06.217Z"
       }
     ],
     "statusNote": "1 open service port(s) detected."
   },
+  "41": {
+    "deviceId": 41,
+    "deviceName": "DESKTOP-TNA36D0",
+    "ip": "172.18.1.123",
+    "scannedAt": "2026-11-10T08:18:06.458Z",
+    "isOnline": false,
+    "riskScore": null,
+    "overallLevel": "OFFLINE",
+    "totalScanned": 16,
+    "openPortsCount": 0,
+    "openPorts": [],
+    "threats": [],
+    "statusNote": "Device is offline / unreachable. Bring device online to audit ports."
+  },
+  "42": {
+    "deviceId": 42,
+    "deviceName": "DESKTOP-55",
+    "ip": "172.18.1.124",
+    "scannedAt": "2026-11-10T08:18:07.177Z",
+    "isOnline": true,
+    "riskScore": 12,
+    "overallLevel": "CRITICAL",
+    "totalScanned": 16,
+    "openPortsCount": 4,
+    "openPorts": [
+      {
+        "port": 445,
+        "service": "SMB / CIFS",
+        "risk": "CRITICAL",
+        "protocol": "TCP",
+        "cve": "CVE-2017-0144 (EternalBlue) / MS17-010",
+        "attackType": "Ransomware Lateral Propagation & Remote Code Execution",
+        "exploitTarget": "WannaCry, NotPetya, EternalBlue, Lateral Ransomware Propagation",
+        "mitigation": "Block port 445 on WAN and internal boundaries. Disable legacy SMBv1 and enforce SMB signing/encryption.",
+        "remediationSteps": [
+          "Immediately block Port 445 on perimeter firewalls and router WAN interfaces.",
+          "Disable legacy SMBv1 in Windows (Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol).",
+          "Enforce SMB signing and SMB encryption for internal file shares.",
+          "Isolate internal file sharing to dedicated private management VLANs."
+        ],
+        "firewallCmd": {
+          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 445 (SMB/CIFS)\" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Block",
+          "linuxUfw": "sudo ufw deny 445/tcp",
+          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
+        }
+      },
+      {
+        "port": 3389,
+        "service": "RDP (Remote Desktop)",
+        "risk": "CRITICAL",
+        "protocol": "TCP",
+        "cve": "CVE-2019-0708 (BlueKeep) & Credential Spraying",
+        "attackType": "Pre-Auth Remote Code Execution & Automated Brute Force",
+        "exploitTarget": "BlueKeep, Automated credential brute-force, Ransomware deployment",
+        "mitigation": "Never expose RDP directly to network. Restrict access through VPN, require NLA, and enable MFA.",
+        "remediationSteps": [
+          "Never expose RDP (Port 3389) directly to public Internet or untrusted subnets.",
+          "Require secure WireGuard / OpenVPN or SSH Bastion tunnel to access remote desktops.",
+          "Enforce Network Level Authentication (NLA) on Windows System Properties.",
+          "Configure Account Lockout Policies to prevent automated password dictionary attacks."
+        ],
+        "firewallCmd": {
+          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 3389 (RDP)\" -Direction Inbound -LocalPort 3389 -Protocol TCP -Action Block",
+          "linuxUfw": "sudo ufw deny 3389/tcp",
+          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 3389 -j DROP"
+        }
+      },
+      {
+        "port": 135,
+        "service": "MS RPC / EPMAP",
+        "risk": "HIGH",
+        "protocol": "TCP",
+        "cve": "MS03-026 / MS03-039 (Blaster Worm)",
+        "attackType": "RPC Buffer Overflow & Remote System Enumeration",
+        "exploitTarget": "Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
+        "mitigation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
+        "remediationSteps": [
+          "Block Port 135 on perimeter router and host firewall.",
+          "Filter inbound RPC requests and restrict to authorized domain controllers only."
+        ],
+        "firewallCmd": {
+          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
+          "linuxUfw": "sudo ufw deny 135/tcp",
+          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
+        }
+      },
+      {
+        "port": 139,
+        "service": "NetBIOS Session",
+        "risk": "HIGH",
+        "protocol": "TCP",
+        "cve": "NetBIOS Name Service Poisoning (LLMNR/NBT-NS)",
+        "attackType": "Relay Attacks, NTLM Hash Harvesting & Man-in-the-Middle",
+        "exploitTarget": "NetBIOS name enumeration, session hijacking, relay attacks",
+        "mitigation": "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced settings.",
+        "remediationSteps": [
+          "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced WINS settings.",
+          "Block Inbound Port 139 on all external and untrusted interfaces."
+        ],
+        "firewallCmd": {
+          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 139 (NetBIOS)\" -Direction Inbound -LocalPort 139 -Protocol TCP -Action Block",
+          "linuxUfw": "sudo ufw deny 139/tcp",
+          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
+        }
+      }
+    ],
+    "threats": [
+      {
+        "id": "threat-42-445-1794298687177",
+        "deviceId": 42,
+        "deviceName": "DESKTOP-55",
+        "deviceIp": "172.18.1.124",
+        "port": 445,
+        "service": "SMB / CIFS",
+        "severity": "CRITICAL",
+        "protocol": "TCP",
+        "cve": "CVE-2017-0144 (EternalBlue) / MS17-010",
+        "attackType": "Ransomware Lateral Propagation & Remote Code Execution",
+        "title": "Critical Port 445 (SMB / CIFS) Exposed",
+        "description": "Device has SMB / CIFS open. Potential attack vector: WannaCry, NotPetya, EternalBlue, Lateral Ransomware Propagation",
+        "recommendation": "Block port 445 on WAN and internal boundaries. Disable legacy SMBv1 and enforce SMB signing/encryption.",
+        "remediationSteps": [
+          "Immediately block Port 445 on perimeter firewalls and router WAN interfaces.",
+          "Disable legacy SMBv1 in Windows (Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol).",
+          "Enforce SMB signing and SMB encryption for internal file shares.",
+          "Isolate internal file sharing to dedicated private management VLANs."
+        ],
+        "firewallCmd": {
+          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 445 (SMB/CIFS)\" -Direction Inbound -LocalPort 445 -Protocol TCP -Action Block",
+          "linuxUfw": "sudo ufw deny 445/tcp",
+          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
+        },
+        "timestamp": "2026-11-10T08:18:07.177Z"
+      },
+      {
+        "id": "threat-42-3389-1794298687177",
+        "deviceId": 42,
+        "deviceName": "DESKTOP-55",
+        "deviceIp": "172.18.1.124",
+        "port": 3389,
+        "service": "RDP (Remote Desktop)",
+        "severity": "CRITICAL",
+        "protocol": "TCP",
+        "cve": "CVE-2019-0708 (BlueKeep) & Credential Spraying",
+        "attackType": "Pre-Auth Remote Code Execution & Automated Brute Force",
+        "title": "Critical Port 3389 (RDP (Remote Desktop)) Exposed",
+        "description": "Device has RDP (Remote Desktop) open. Potential attack vector: BlueKeep, Automated credential brute-force, Ransomware deployment",
+        "recommendation": "Never expose RDP directly to network. Restrict access through VPN, require NLA, and enable MFA.",
+        "remediationSteps": [
+          "Never expose RDP (Port 3389) directly to public Internet or untrusted subnets.",
+          "Require secure WireGuard / OpenVPN or SSH Bastion tunnel to access remote desktops.",
+          "Enforce Network Level Authentication (NLA) on Windows System Properties.",
+          "Configure Account Lockout Policies to prevent automated password dictionary attacks."
+        ],
+        "firewallCmd": {
+          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 3389 (RDP)\" -Direction Inbound -LocalPort 3389 -Protocol TCP -Action Block",
+          "linuxUfw": "sudo ufw deny 3389/tcp",
+          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 3389 -j DROP"
+        },
+        "timestamp": "2026-11-10T08:18:07.177Z"
+      },
+      {
+        "id": "threat-42-135-1794298687177",
+        "deviceId": 42,
+        "deviceName": "DESKTOP-55",
+        "deviceIp": "172.18.1.124",
+        "port": 135,
+        "service": "MS RPC / EPMAP",
+        "severity": "HIGH",
+        "protocol": "TCP",
+        "cve": "MS03-026 / MS03-039 (Blaster Worm)",
+        "attackType": "RPC Buffer Overflow & Remote System Enumeration",
+        "title": "High Risk Port 135 (MS RPC / EPMAP) Open",
+        "description": "Exposed MS RPC / EPMAP service is susceptible to: Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
+        "recommendation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
+        "remediationSteps": [
+          "Block Port 135 on perimeter router and host firewall.",
+          "Filter inbound RPC requests and restrict to authorized domain controllers only."
+        ],
+        "firewallCmd": {
+          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
+          "linuxUfw": "sudo ufw deny 135/tcp",
+          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
+        },
+        "timestamp": "2026-11-10T08:18:07.177Z"
+      },
+      {
+        "id": "threat-42-139-1794298687177",
+        "deviceId": 42,
+        "deviceName": "DESKTOP-55",
+        "deviceIp": "172.18.1.124",
+        "port": 139,
+        "service": "NetBIOS Session",
+        "severity": "HIGH",
+        "protocol": "TCP",
+        "cve": "NetBIOS Name Service Poisoning (LLMNR/NBT-NS)",
+        "attackType": "Relay Attacks, NTLM Hash Harvesting & Man-in-the-Middle",
+        "title": "High Risk Port 139 (NetBIOS Session) Open",
+        "description": "Exposed NetBIOS Session service is susceptible to: NetBIOS name enumeration, session hijacking, relay attacks",
+        "recommendation": "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced settings.",
+        "remediationSteps": [
+          "Disable NetBIOS over TCP/IP in Network Adapter IPv4 Advanced WINS settings.",
+          "Block Inbound Port 139 on all external and untrusted interfaces."
+        ],
+        "firewallCmd": {
+          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 139 (NetBIOS)\" -Direction Inbound -LocalPort 139 -Protocol TCP -Action Block",
+          "linuxUfw": "sudo ufw deny 139/tcp",
+          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
+        },
+        "timestamp": "2026-11-10T08:18:07.177Z"
+      }
+    ],
+    "statusNote": "4 open service port(s) detected."
+  },
+  "43": {
+    "deviceId": 43,
+    "deviceName": "Device (172.18.1.126)",
+    "ip": "172.18.1.126",
+    "scannedAt": "2026-11-10T08:18:07.461Z",
+    "isOnline": false,
+    "riskScore": null,
+    "overallLevel": "OFFLINE",
+    "totalScanned": 16,
+    "openPortsCount": 0,
+    "openPorts": [],
+    "threats": [],
+    "statusNote": "Device is offline / unreachable. Bring device online to audit ports."
+  },
   "44": {
     "deviceId": 44,
-    "deviceName": "LAN Device (172.18.1.113)",
-    "ip": "172.18.1.113",
-    "scannedAt": "2026-10-22T10:45:54.085Z",
-    "isOnline": false,
-    "riskScore": null,
-    "overallLevel": "OFFLINE",
-    "totalScanned": 16,
-    "openPortsCount": 0,
-    "openPorts": [],
-    "threats": [],
-    "statusNote": "Device is offline / unreachable. Bring device online to audit ports."
-  },
-  "45": {
-    "deviceId": 45,
-    "deviceName": "LAN Device (172.18.1.123)",
-    "ip": "172.18.1.123",
-    "scannedAt": "2026-10-22T10:45:54.079Z",
-    "isOnline": false,
-    "riskScore": null,
-    "overallLevel": "OFFLINE",
-    "totalScanned": 16,
-    "openPortsCount": 0,
-    "openPorts": [],
-    "threats": [],
-    "statusNote": "Device is offline / unreachable. Bring device online to audit ports."
-  },
-  "46": {
-    "deviceId": 46,
-    "deviceName": "LAN Device (172.18.1.126)",
-    "ip": "172.18.1.126",
-    "scannedAt": "2026-10-22T10:45:54.081Z",
-    "isOnline": false,
-    "riskScore": null,
-    "overallLevel": "OFFLINE",
-    "totalScanned": 16,
-    "openPortsCount": 0,
-    "openPorts": [],
-    "threats": [],
-    "statusNote": "Device is offline / unreachable. Bring device online to audit ports."
-  },
-  "47": {
-    "deviceId": 47,
-    "deviceName": "LAN Device (172.18.1.143)",
+    "deviceName": "DESKTOP-29",
     "ip": "172.18.1.143",
-    "scannedAt": "2026-10-22T10:45:54.791Z",
+    "scannedAt": "2026-11-10T08:18:07.189Z",
     "isOnline": true,
     "riskScore": 72,
     "overallLevel": "CRITICAL",
@@ -3130,9 +3216,9 @@
     ],
     "threats": [
       {
-        "id": "threat-47-3389-1792665954791",
-        "deviceId": 47,
-        "deviceName": "LAN Device (172.18.1.143)",
+        "id": "threat-44-3389-1794298687189",
+        "deviceId": 44,
+        "deviceName": "DESKTOP-29",
         "deviceIp": "172.18.1.143",
         "port": 3389,
         "service": "RDP (Remote Desktop)",
@@ -3154,16 +3240,16 @@
           "linuxUfw": "sudo ufw deny 3389/tcp",
           "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 3389 -j DROP"
         },
-        "timestamp": "2026-10-22T10:45:54.791Z"
+        "timestamp": "2026-11-10T08:18:07.189Z"
       }
     ],
     "statusNote": "1 open service port(s) detected."
   },
-  "48": {
-    "deviceId": 48,
-    "deviceName": "LAN Device (172.18.1.154)",
+  "45": {
+    "deviceId": 45,
+    "deviceName": "Device (172.18.1.154)",
     "ip": "172.18.1.154",
-    "scannedAt": "2026-10-22T10:45:55.081Z",
+    "scannedAt": "2026-11-10T08:18:07.464Z",
     "isOnline": false,
     "riskScore": null,
     "overallLevel": "OFFLINE",
@@ -3173,25 +3259,11 @@
     "threats": [],
     "statusNote": "Device is offline / unreachable. Bring device online to audit ports."
   },
-  "49": {
-    "deviceId": 49,
-    "deviceName": "LAN Device (172.18.1.195)",
-    "ip": "172.18.1.195",
-    "scannedAt": "2026-10-22T10:45:55.079Z",
-    "isOnline": false,
-    "riskScore": null,
-    "overallLevel": "OFFLINE",
-    "totalScanned": 16,
-    "openPortsCount": 0,
-    "openPorts": [],
-    "threats": [],
-    "statusNote": "Device is offline / unreachable. Bring device online to audit ports."
-  },
-  "50": {
-    "deviceId": 50,
-    "deviceName": "LAN Device (172.18.1.201)",
+  "46": {
+    "deviceId": 46,
+    "deviceName": "Device (172.18.1.201)",
     "ip": "172.18.1.201",
-    "scannedAt": "2026-10-22T10:45:54.811Z",
+    "scannedAt": "2026-11-10T08:18:07.200Z",
     "isOnline": true,
     "riskScore": 98,
     "overallLevel": "SAFE",
@@ -3240,11 +3312,11 @@
     "threats": [],
     "statusNote": "2 open service port(s) detected."
   },
-  "51": {
-    "deviceId": 51,
-    "deviceName": "LAN Device (172.18.1.226)",
+  "47": {
+    "deviceId": 47,
+    "deviceName": "Device (172.18.1.226)",
     "ip": "172.18.1.226",
-    "scannedAt": "2026-10-22T10:45:55.084Z",
+    "scannedAt": "2026-11-10T08:18:08.459Z",
     "isOnline": false,
     "riskScore": null,
     "overallLevel": "OFFLINE",
@@ -3254,11 +3326,11 @@
     "threats": [],
     "statusNote": "Device is offline / unreachable. Bring device online to audit ports."
   },
-  "52": {
-    "deviceId": 52,
-    "deviceName": "LAN Device (172.18.1.230)",
+  "48": {
+    "deviceId": 48,
+    "deviceName": "Device (172.18.1.230)",
     "ip": "172.18.1.230",
-    "scannedAt": "2026-10-22T10:45:55.787Z",
+    "scannedAt": "2026-11-10T08:18:08.181Z",
     "isOnline": true,
     "riskScore": 68,
     "overallLevel": "CRITICAL",
@@ -3326,9 +3398,9 @@
     ],
     "threats": [
       {
-        "id": "threat-52-23-1792665955787",
-        "deviceId": 52,
-        "deviceName": "LAN Device (172.18.1.230)",
+        "id": "threat-48-23-1794298688181",
+        "deviceId": 48,
+        "deviceName": "Device (172.18.1.230)",
         "deviceIp": "172.18.1.230",
         "port": 23,
         "service": "Telnet",
@@ -3349,16 +3421,16 @@
           "linuxUfw": "sudo ufw deny 23/tcp",
           "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 23 -j DROP"
         },
-        "timestamp": "2026-10-22T10:45:55.787Z"
+        "timestamp": "2026-11-10T08:18:08.181Z"
       }
     ],
     "statusNote": "3 open service port(s) detected."
   },
-  "53": {
-    "deviceId": 53,
-    "deviceName": "LAN Device (172.18.1.241)",
+  "49": {
+    "deviceId": 49,
+    "deviceName": "VMware Virtual (172.18.1.241)",
     "ip": "172.18.1.241",
-    "scannedAt": "2026-10-22T10:45:55.794Z",
+    "scannedAt": "2026-11-10T08:18:08.188Z",
     "isOnline": true,
     "riskScore": 80,
     "overallLevel": "HIGH",
@@ -3427,9 +3499,9 @@
     ],
     "threats": [
       {
-        "id": "threat-53-1433-1792665955794",
-        "deviceId": 53,
-        "deviceName": "LAN Device (172.18.1.241)",
+        "id": "threat-49-1433-1794298688188",
+        "deviceId": 49,
+        "deviceName": "VMware Virtual (172.18.1.241)",
         "deviceIp": "172.18.1.241",
         "port": 1433,
         "service": "MS SQL Server",
@@ -3450,30 +3522,16 @@
           "linuxUfw": "sudo ufw deny 1433/tcp",
           "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 1433 -j DROP"
         },
-        "timestamp": "2026-10-22T10:45:55.794Z"
+        "timestamp": "2026-11-10T08:18:08.188Z"
       }
     ],
     "statusNote": "3 open service port(s) detected."
   },
-  "54": {
-    "deviceId": 54,
-    "deviceName": "LAN Device (172.18.1.242)",
-    "ip": "172.18.1.242",
-    "scannedAt": "2026-10-22T10:45:46.083Z",
-    "isOnline": false,
-    "riskScore": null,
-    "overallLevel": "OFFLINE",
-    "totalScanned": 0,
-    "openPortsCount": 0,
-    "openPorts": [],
-    "threats": [],
-    "statusNote": "Device is currently DOWN / Offline. Port vulnerability audit cannot be performed on an unreachable host."
-  },
-  "55": {
-    "deviceId": 55,
-    "deviceName": "LAN Device (172.18.1.245)",
+  "50": {
+    "deviceId": 50,
+    "deviceName": "ZKTECO-PC",
     "ip": "172.18.1.245",
-    "scannedAt": "2026-10-22T10:45:55.801Z",
+    "scannedAt": "2026-11-10T08:18:08.194Z",
     "isOnline": true,
     "riskScore": 68,
     "overallLevel": "HIGH",
@@ -3521,9 +3579,9 @@
     ],
     "threats": [
       {
-        "id": "threat-55-135-1792665955801",
-        "deviceId": 55,
-        "deviceName": "LAN Device (172.18.1.245)",
+        "id": "threat-50-135-1794298688194",
+        "deviceId": 50,
+        "deviceName": "ZKTECO-PC",
         "deviceIp": "172.18.1.245",
         "port": 135,
         "service": "MS RPC / EPMAP",
@@ -3543,12 +3601,12 @@
           "linuxUfw": "sudo ufw deny 135/tcp",
           "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
         },
-        "timestamp": "2026-10-22T10:45:55.801Z"
+        "timestamp": "2026-11-10T08:18:08.194Z"
       },
       {
-        "id": "threat-55-139-1792665955801",
-        "deviceId": 55,
-        "deviceName": "LAN Device (172.18.1.245)",
+        "id": "threat-50-139-1794298688194",
+        "deviceId": 50,
+        "deviceName": "ZKTECO-PC",
         "deviceIp": "172.18.1.245",
         "port": 139,
         "service": "NetBIOS Session",
@@ -3568,16 +3626,132 @@
           "linuxUfw": "sudo ufw deny 139/tcp",
           "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
         },
-        "timestamp": "2026-10-22T10:45:55.801Z"
+        "timestamp": "2026-11-10T08:18:08.194Z"
       }
     ],
     "statusNote": "2 open service port(s) detected."
   },
+  "51": {
+    "deviceId": 51,
+    "deviceName": "DESKTOP-31",
+    "ip": "172.18.1.250",
+    "scannedAt": "2026-11-10T08:18:08.462Z",
+    "isOnline": false,
+    "riskScore": null,
+    "overallLevel": "OFFLINE",
+    "totalScanned": 16,
+    "openPortsCount": 0,
+    "openPorts": [],
+    "threats": [],
+    "statusNote": "Device is offline / unreachable. Bring device online to audit ports."
+  },
+  "52": {
+    "deviceId": 52,
+    "deviceName": "SKIF-PC",
+    "ip": "172.18.1.252",
+    "scannedAt": "2026-11-10T08:18:09.175Z",
+    "isOnline": true,
+    "riskScore": 84,
+    "overallLevel": "HIGH",
+    "totalScanned": 16,
+    "openPortsCount": 1,
+    "openPorts": [
+      {
+        "port": 135,
+        "service": "MS RPC / EPMAP",
+        "risk": "HIGH",
+        "protocol": "TCP",
+        "cve": "MS03-026 / MS03-039 (Blaster Worm)",
+        "attackType": "RPC Buffer Overflow & Remote System Enumeration",
+        "exploitTarget": "Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
+        "mitigation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
+        "remediationSteps": [
+          "Block Port 135 on perimeter router and host firewall.",
+          "Filter inbound RPC requests and restrict to authorized domain controllers only."
+        ],
+        "firewallCmd": {
+          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
+          "linuxUfw": "sudo ufw deny 135/tcp",
+          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
+        }
+      }
+    ],
+    "threats": [
+      {
+        "id": "threat-52-135-1794298689175",
+        "deviceId": 52,
+        "deviceName": "SKIF-PC",
+        "deviceIp": "172.18.1.252",
+        "port": 135,
+        "service": "MS RPC / EPMAP",
+        "severity": "HIGH",
+        "protocol": "TCP",
+        "cve": "MS03-026 / MS03-039 (Blaster Worm)",
+        "attackType": "RPC Buffer Overflow & Remote System Enumeration",
+        "title": "High Risk Port 135 (MS RPC / EPMAP) Open",
+        "description": "Exposed MS RPC / EPMAP service is susceptible to: Blaster worm, unauthenticated RPC buffer overflows, system reconnaissance",
+        "recommendation": "Block port 135 at firewall. Filter inbound RPC from untrusted network segments.",
+        "remediationSteps": [
+          "Block Port 135 on perimeter router and host firewall.",
+          "Filter inbound RPC requests and restrict to authorized domain controllers only."
+        ],
+        "firewallCmd": {
+          "powershell": "New-NetFirewallRule -DisplayName \"Block Port 135 (MS RPC)\" -Direction Inbound -LocalPort 135 -Protocol TCP -Action Block",
+          "linuxUfw": "sudo ufw deny 135/tcp",
+          "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
+        },
+        "timestamp": "2026-11-10T08:18:09.175Z"
+      }
+    ],
+    "statusNote": "1 open service port(s) detected."
+  },
+  "53": {
+    "deviceId": 53,
+    "deviceName": "LAN Device (172.18.1.8)",
+    "ip": "172.18.1.8",
+    "scannedAt": "2026-11-10T08:17:59.416Z",
+    "isOnline": false,
+    "riskScore": null,
+    "overallLevel": "OFFLINE",
+    "totalScanned": 0,
+    "openPortsCount": 0,
+    "openPorts": [],
+    "threats": [],
+    "statusNote": "Device is currently DOWN / Offline. Port vulnerability audit cannot be performed on an unreachable host."
+  },
+  "54": {
+    "deviceId": 54,
+    "deviceName": "DESKTOP-PM49AGD",
+    "ip": "172.18.1.242",
+    "scannedAt": "2026-11-10T08:18:09.459Z",
+    "isOnline": false,
+    "riskScore": null,
+    "overallLevel": "OFFLINE",
+    "totalScanned": 16,
+    "openPortsCount": 0,
+    "openPorts": [],
+    "threats": [],
+    "statusNote": "Device is offline / unreachable. Bring device online to audit ports."
+  },
+  "55": {
+    "deviceId": 55,
+    "deviceName": "DESKTOP-69",
+    "ip": "172.18.1.88",
+    "scannedAt": "2026-11-10T08:18:09.213Z",
+    "isOnline": true,
+    "riskScore": 100,
+    "overallLevel": "SAFE",
+    "totalScanned": 16,
+    "openPortsCount": 0,
+    "openPorts": [],
+    "threats": [],
+    "statusNote": "Device is online and all audited ports are closed/shielded."
+  },
   "56": {
     "deviceId": 56,
-    "deviceName": "LAN Device (172.18.1.250)",
-    "ip": "172.18.1.250",
-    "scannedAt": "2026-10-22T10:45:55.806Z",
+    "deviceName": "DESKTOP-04",
+    "ip": "172.18.1.23",
+    "scannedAt": "2026-11-10T08:18:09.198Z",
     "isOnline": true,
     "riskScore": 40,
     "overallLevel": "CRITICAL",
@@ -3646,10 +3820,10 @@
     ],
     "threats": [
       {
-        "id": "threat-56-445-1792665955806",
+        "id": "threat-56-445-1794298689198",
         "deviceId": 56,
-        "deviceName": "LAN Device (172.18.1.250)",
-        "deviceIp": "172.18.1.250",
+        "deviceName": "DESKTOP-04",
+        "deviceIp": "172.18.1.23",
         "port": 445,
         "service": "SMB / CIFS",
         "severity": "CRITICAL",
@@ -3670,13 +3844,13 @@
           "linuxUfw": "sudo ufw deny 445/tcp",
           "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 445 -j DROP"
         },
-        "timestamp": "2026-10-22T10:45:55.806Z"
+        "timestamp": "2026-11-10T08:18:09.198Z"
       },
       {
-        "id": "threat-56-135-1792665955806",
+        "id": "threat-56-135-1794298689198",
         "deviceId": 56,
-        "deviceName": "LAN Device (172.18.1.250)",
-        "deviceIp": "172.18.1.250",
+        "deviceName": "DESKTOP-04",
+        "deviceIp": "172.18.1.23",
         "port": 135,
         "service": "MS RPC / EPMAP",
         "severity": "HIGH",
@@ -3695,13 +3869,13 @@
           "linuxUfw": "sudo ufw deny 135/tcp",
           "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 135 -j DROP"
         },
-        "timestamp": "2026-10-22T10:45:55.806Z"
+        "timestamp": "2026-11-10T08:18:09.198Z"
       },
       {
-        "id": "threat-56-139-1792665955806",
+        "id": "threat-56-139-1794298689198",
         "deviceId": 56,
-        "deviceName": "LAN Device (172.18.1.250)",
-        "deviceIp": "172.18.1.250",
+        "deviceName": "DESKTOP-04",
+        "deviceIp": "172.18.1.23",
         "port": 139,
         "service": "NetBIOS Session",
         "severity": "HIGH",
@@ -3720,7 +3894,7 @@
           "linuxUfw": "sudo ufw deny 139/tcp",
           "linuxIptables": "sudo iptables -A INPUT -p tcp --dport 139 -j DROP"
         },
-        "timestamp": "2026-10-22T10:45:55.806Z"
+        "timestamp": "2026-11-10T08:18:09.198Z"
       }
     ],
     "statusNote": "3 open service port(s) detected."

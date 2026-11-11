@@ -271,7 +271,12 @@ export class JSONDataStore extends BaseDataStore {
         ip: ip,
         type: deviceData.type || 'server',
         monitoring: deviceData.monitoring !== undefined ? Boolean(deviceData.monitoring) : true,
-        interval: Number(deviceData.interval) || settings.defaultInterval || 30
+        interval: Number(deviceData.interval) || settings.defaultInterval || 30,
+        activeUser: deviceData.activeUser || null,
+        userDomain: deviceData.userDomain || null,
+        sessionState: deviceData.sessionState || null,
+        endpointPing: deviceData.endpointPing || null,
+        lastAgentSync: deviceData.lastAgentSync || null
       };
 
       devices.push(newDevice);
@@ -357,6 +362,11 @@ export class JSONDataStore extends BaseDataStore {
       if (data.type !== undefined) target.type = data.type;
       if (data.interval !== undefined) target.interval = Math.max(5, Number(data.interval) || 30);
       if (data.monitoring !== undefined) target.monitoring = Boolean(data.monitoring);
+      if (data.activeUser !== undefined) target.activeUser = data.activeUser;
+      if (data.userDomain !== undefined) target.userDomain = data.userDomain;
+      if (data.sessionState !== undefined) target.sessionState = data.sessionState;
+      if (data.endpointPing !== undefined) target.endpointPing = data.endpointPing;
+      if (data.lastAgentSync !== undefined) target.lastAgentSync = data.lastAgentSync;
 
       devices[index] = target;
       await this._writeJson(this.devicesFile, devices);
@@ -2076,6 +2086,80 @@ export class JSONDataStore extends BaseDataStore {
         incidents,
         timeSeries,
         deviceSummaries
+      };
+    });
+  }
+
+  /**
+   * Clears historical report & audit data (outage incidents, alerts, and/or historical probe checks)
+   * while preserving the latest live status check per device so devices remain online.
+   */
+  async clearReportAuditHistory({ deviceId = 'all', scope = 'all' } = {}) {
+    return this.mutex.runExclusive(async () => {
+      const isSpecificDevice = deviceId && deviceId !== 'all';
+      const targetId = isSpecificDevice ? Number(deviceId) : null;
+
+      // 1. Clean Alerts (Incident Audit records)
+      const alerts = await this._readJson(this.alertsFile, []);
+      let nextAlerts;
+      if (isSpecificDevice) {
+        nextAlerts = alerts.filter((a) => Number(a.deviceId) !== targetId);
+      } else {
+        nextAlerts = [];
+      }
+      await this._writeJson(this.alertsFile, nextAlerts);
+
+      // 2. Clean Monitoring Results (in-memory cache + disk)
+      const currentResults = await this._getResultsInMemory();
+      let nextResults = [];
+
+      if (scope === 'incidents') {
+        // Keep UP/WARNING checks, remove DOWN checks that generate transition outage incidents
+        nextResults = currentResults.filter((r) => {
+          if (isSpecificDevice && Number(r.deviceId) !== targetId) return true;
+          return r.status !== 'DOWN';
+        });
+      } else {
+        // 'all' scope: keep only the latest 1 non-DOWN check per device so current device status stays intact
+        const latestByDevice = new Map();
+        for (const r of currentResults) {
+          const devId = Number(r.deviceId);
+          if (isSpecificDevice && devId !== targetId) continue;
+          const prev = latestByDevice.get(devId);
+          if (!prev || new Date(r.timestamp) > new Date(prev.timestamp)) {
+            latestByDevice.set(devId, {
+              ...r,
+              status: r.status === 'DOWN' ? 'UP' : r.status,
+              packetLoss: 0,
+              timestamp: new Date().toISOString()
+            });
+          }
+        }
+
+        if (isSpecificDevice) {
+          nextResults = currentResults.filter((r) => Number(r.deviceId) !== targetId);
+          const kept = latestByDevice.get(targetId);
+          if (kept) nextResults.push(kept);
+        } else {
+          nextResults = Array.from(latestByDevice.values());
+        }
+      }
+
+      this._resultsCache = nextResults;
+      await this._writeJson(this.resultsFile, nextResults);
+
+      await this._appendLogInternal({
+        deviceId: targetId,
+        device: isSpecificDevice ? `Device #${targetId}` : 'All Devices',
+        event: 'REPORT_HISTORY_CLEARED',
+        status: 'INFO',
+        message: `Report & SLA Audit history cleared (scope: ${scope}, target: ${isSpecificDevice ? `Device #${targetId}` : 'All Devices'})`
+      });
+
+      return {
+        success: true,
+        clearedAlerts: alerts.length - nextAlerts.length,
+        clearedProbes: Math.max(0, currentResults.length - nextResults.length)
       };
     });
   }

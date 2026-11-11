@@ -60,25 +60,35 @@ function logEvent(type, device, note) {
 /**
  * Core Sweep Execution
  */
-export async function runWatchdogSweep() {
+export async function runWatchdogSweep(options = {}) {
+  const { forceFullScan = false } = options;
   if (isScanning) return;
   isScanning = true;
 
   try {
-    const scanData = await arpScanner.scanLocalNeighbors();
+    let scanData;
+    if (forceFullScan) {
+      console.log('[NetworkWatchdog] ⚡ Executing FULL active subnet discovery sweep with hostname resolution...');
+      scanData = await arpScanner.runFullSubnetScan();
+    } else {
+      scanData = await arpScanner.scanLocalNeighbors();
+    }
+
     const discovered = scanData.devices || [];
     const discoveredIps = new Set(discovered.map((d) => d.ip));
 
     const existingDevices = await dataStore.getDevices();
     const existingIpMap = new Map(existingDevices.map((d) => [d.ip.toLowerCase(), d]));
 
-    // 1. Detect and Auto-Add New Devices
+    // 1. Detect and Auto-Add New Devices or Update Names
     for (const dev of discovered) {
       const isAlreadyAdded = existingIpMap.has(dev.ip.toLowerCase());
 
       if (!isAlreadyAdded && autoAddEnabled) {
         const deviceName = dev.hostname 
           ? dev.hostname 
+          : dev.name && !dev.name.includes('(')
+          ? dev.name
           : `${dev.vendor || 'LAN Device'} (${dev.ip})`;
 
         const newDeviceData = {
@@ -96,6 +106,25 @@ export async function runWatchdogSweep() {
 
         logEvent('JOINED', added, 'Auto-detected & added to Monitoring and Topology');
         console.log(`[NetworkWatchdog] 🟢 NEW DEVICE AUTO-ADDED: ${deviceName} [${dev.ip}]`);
+      } else if (isAlreadyAdded) {
+        // Upgrade generic placeholder names (e.g., "LAN Device (172.18.1.11)" -> "DESKTOP-8D1GBAG", "Device (172.18.1.26)" -> "DSK-027", "VMware Virtual (172.18.1.10)")
+        const existing = existingIpMap.get(dev.ip.toLowerCase());
+        const realName = dev.hostname || (dev.name && !dev.name.includes('(') ? dev.name : null);
+        if (
+          existing &&
+          realName &&
+          realName !== existing.name &&
+          (existing.name.startsWith('LAN Device') ||
+            existing.name.startsWith('Device (') ||
+            existing.name.startsWith('VMware Virtual (') ||
+            existing.name.includes('('))
+        ) {
+          existing.name = realName;
+          try {
+            await dataStore.updateDevice(existing.id, { name: realName });
+            console.log(`[NetworkWatchdog] 🏷️ DEVICE NAME ENRICHED: ${dev.ip} -> ${realName}`);
+          } catch (_) {}
+        }
       }
     }
 
@@ -113,6 +142,14 @@ export async function runWatchdogSweep() {
     // 3. Update the live active Topology IP set
     activeTopologyIps = discoveredIps;
     lastScanTime = new Date().toISOString();
+
+    // Broadcast updated device statuses via WebSocket to Topology and Devices views
+    try {
+      broadcastDeviceStatus({
+        activeIps: Array.from(activeTopologyIps),
+        timestamp: lastScanTime
+      });
+    } catch (_) {}
 
   } catch (err) {
     console.error('[NetworkWatchdog] Sweep error:', err.message);
@@ -132,10 +169,10 @@ export function startNetworkWatchdog(intervalSec = 60) {
   scanIntervalSeconds = intervalSec;
   console.log(`[NetworkWatchdog] 🚀 Background Device Watchdog active (Every ${scanIntervalSeconds}s)`);
 
-  // First run after 2 seconds
-  setTimeout(runWatchdogSweep, 2000);
+  // First run after 2 seconds - full active discovery sweep so real PC names and active hosts are loaded immediately
+  setTimeout(() => runWatchdogSweep({ forceFullScan: true }), 2000);
 
-  // Then recurring
+  // Then recurring background sweep
   watchdogTimer = setInterval(runWatchdogSweep, scanIntervalSeconds * 1000);
 }
 

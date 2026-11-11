@@ -58,26 +58,26 @@ export default function WatchdogStatusBar({
   };
 
   return (
-    <div className="bg-slate-900 border border-slate-800 rounded-2xl p-3.5 text-xs shadow-md space-y-3">
+    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-3.5 text-xs shadow-sm space-y-2.5">
       {/* Main Bar */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
         {/* Watchdog Status Indicator */}
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-xl bg-teal-500/10 text-teal-400 border border-teal-500/20 flex items-center justify-center shrink-0">
-            <Radio className="w-4 h-4 animate-pulse text-teal-400" />
+        <div className="flex items-center gap-3 min-w-0">
+          <div className="w-9 h-9 rounded-xl bg-teal-500/10 text-teal-600 dark:text-teal-400 border border-teal-500/20 flex items-center justify-center shrink-0">
+            <Radio className="w-4 h-4 animate-pulse text-teal-600 dark:text-teal-400" />
           </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="font-bold text-slate-100">Live Network Watchdog</span>
-              <span className="text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+          <div className="min-w-0">
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="font-bold text-slate-900 dark:text-slate-100 text-sm">Live Network Watchdog</span>
+              <span className="text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
                 {isRunning ? `Every ${intervalSec}s` : 'Paused'}
               </span>
-              <span className="text-slate-400 text-[11px] hidden sm:inline">
+              <span className="text-slate-500 dark:text-slate-400 text-[11px] font-medium hidden sm:inline">
                 • {activeCount} Live Hosts on Wi-Fi
               </span>
             </div>
-            <p className="text-[11px] text-slate-400 mt-0.5">
-              Auto-adds new devices to Topology & Monitoring • Auto-removes disconnected hosts from map
+            <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 truncate">
+              Auto-adds new devices to Topology &amp; Monitoring • Auto-removes disconnected hosts from map
             </p>
           </div>
         </div>
@@ -88,10 +88,10 @@ export default function WatchdogStatusBar({
           <button
             onClick={handleToggleAutoAdd}
             disabled={togglingAutoAdd}
-            className={`px-3 py-1.5 rounded-xl text-[11px] font-semibold flex items-center gap-1.5 border transition-all ${
+            className={`px-3 py-1.5 rounded-xl text-[11px] font-semibold flex items-center gap-1.5 border transition-all cursor-pointer ${
               autoAddEnabled
-                ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400'
-                : 'bg-slate-800 border-slate-700 text-slate-400 hover:text-slate-200'
+                ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-700 dark:text-emerald-400'
+                : 'bg-slate-100 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
             }`}
             title="When active, new devices joining your Wi-Fi are automatically added"
           >
@@ -103,7 +103,7 @@ export default function WatchdogStatusBar({
           <button
             onClick={handleManualSweep}
             disabled={triggering}
-            className="px-3 py-1.5 rounded-xl bg-teal-500 hover:bg-teal-600 text-white font-semibold text-[11px] flex items-center gap-1.5 shadow-md shadow-teal-500/20 transition-all disabled:opacity-50"
+            className="px-3 py-1.5 rounded-xl bg-teal-500 hover:bg-teal-600 text-white font-semibold text-[11px] flex items-center gap-1.5 shadow-sm shadow-teal-500/20 transition-all disabled:opacity-50 cursor-pointer"
             title="Scan Wi-Fi for newly joined or disconnected devices right now"
           >
             <Zap className={`w-3.5 h-3.5 ${triggering ? 'animate-spin' : ''}`} />
@@ -114,7 +114,7 @@ export default function WatchdogStatusBar({
           {recentEvents.length > 0 && (
             <button
               onClick={() => setShowEventLog(!showEventLog)}
-              className="p-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 transition-colors"
+              className="p-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 transition-colors cursor-pointer"
               title="Toggle Live Event Log"
             >
               {showEventLog ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
@@ -125,24 +125,24 @@ export default function WatchdogStatusBar({
 
       {/* Latest Live Event Ticker */}
       {latestEvent && (
-        <div className="flex items-center justify-between px-3 py-1.5 rounded-xl bg-slate-950/70 border border-slate-800 text-[11px]">
+        <div className="flex items-center justify-between px-3 py-1.5 rounded-xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200/80 dark:border-slate-800 text-[11px]">
           <div className="flex items-center gap-2 truncate mr-2">
             {latestEvent.type === 'JOINED' ? (
-              <span className="flex items-center gap-1 font-bold text-emerald-400 shrink-0">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="flex items-center gap-1 font-bold text-emerald-600 dark:text-emerald-400 shrink-0">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse" />
                 Joined Network:
               </span>
             ) : (
-              <span className="flex items-center gap-1 font-bold text-slate-400 shrink-0">
-                <span className="w-2 h-2 rounded-full bg-slate-500" />
+              <span className="flex items-center gap-1 font-bold text-slate-500 dark:text-slate-400 shrink-0">
+                <span className="w-2 h-2 rounded-full bg-slate-400 dark:bg-slate-500" />
                 Disconnected:
               </span>
             )}
-            <span className="font-semibold text-slate-200 truncate">{latestEvent.name}</span>
-            <span className="font-mono text-slate-400">({latestEvent.ip})</span>
+            <span className="font-semibold text-slate-800 dark:text-slate-200 truncate">{latestEvent.name}</span>
+            <span className="font-mono text-slate-500 dark:text-slate-400">({latestEvent.ip})</span>
           </div>
 
-          <span className="text-slate-400 text-[10px] shrink-0">
+          <span className="text-slate-500 dark:text-slate-400 text-[10px] font-mono shrink-0">
             {new Date(latestEvent.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
           </span>
         </div>
@@ -150,27 +150,27 @@ export default function WatchdogStatusBar({
 
       {/* Expandable Historical Log Drawer */}
       {showEventLog && recentEvents.length > 0 && (
-        <div className="p-3 rounded-xl bg-slate-950 border border-slate-800 space-y-2 max-h-48 overflow-y-auto animate-in fade-in duration-150">
-          <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 flex items-center justify-between border-b border-slate-800 pb-1.5">
+        <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-2 max-h-48 overflow-y-auto animate-in fade-in duration-150">
+          <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-1.5">
             <span>Watchdog Event Audit Log</span>
             <span>Last {recentEvents.length} Events</span>
           </div>
 
           <div className="space-y-1.5">
             {recentEvents.map((ev) => (
-              <div key={ev.id} className="flex items-center justify-between text-[11px] py-1 px-2 rounded-lg bg-slate-900/60 border border-slate-800/80">
+              <div key={ev.id} className="flex items-center justify-between text-[11px] py-1 px-2 rounded-lg bg-white dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800/80">
                 <div className="flex items-center gap-2 truncate mr-2">
                   <span
                     className={`px-1.5 py-0.5 rounded text-[9px] font-bold uppercase ${
                       ev.type === 'JOINED'
-                        ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
-                        : 'bg-slate-800 text-slate-400 border border-slate-700'
+                        ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20'
+                        : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700'
                     }`}
                   >
                     {ev.type}
                   </span>
-                  <span className="font-semibold text-slate-200 truncate">{ev.name}</span>
-                  <span className="font-mono text-slate-400">[{ev.ip}]</span>
+                  <span className="font-semibold text-slate-800 dark:text-slate-200 truncate">{ev.name}</span>
+                  <span className="font-mono text-slate-500 dark:text-slate-400">[{ev.ip}]</span>
                 </div>
                 <span className="text-[10px] text-slate-500 font-mono shrink-0">
                   {new Date(ev.timestamp).toLocaleTimeString()}

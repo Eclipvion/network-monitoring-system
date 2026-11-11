@@ -54,4 +54,7 @@ server/data/email_report_config.json
 
 # Generated standalone deployment package
 NetPulse-Server-Package/
+NetPulse-Server-Package.rar
+*.rar
+*.zip
 

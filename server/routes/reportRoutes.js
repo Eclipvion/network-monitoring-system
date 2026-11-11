@@ -1,5 +1,6 @@
 import express from 'express';
 import reportService from '../services/reportService.js';
+import telemetryService from '../services/telemetryService.js';
 import emailReportRoutes from './emailReportRoutes.js';
 
 const router = express.Router();
@@ -19,6 +20,22 @@ const handleGetAnalytics = async (req, res) => {
 
 router.get('/', handleGetAnalytics);
 router.get('/analytics', handleGetAnalytics);
+
+/**
+ * POST /api/reports/clear
+ * Body: { deviceId: 'all' | number, scope: 'all' | 'incidents' }
+ */
+router.post('/clear', async (req, res) => {
+  try {
+    const { deviceId = 'all', scope = 'all' } = req.body || {};
+    const result = await reportService.clearReportAuditHistory({ deviceId, scope });
+    telemetryService.clearOutageHistory(deviceId);
+    res.json(result);
+  } catch (err) {
+    console.error('Error clearing report audit history:', err);
+    res.status(500).json({ error: err.message || 'Failed to clear report history' });
+  }
+});
 
 /**
  * GET /api/reports/export

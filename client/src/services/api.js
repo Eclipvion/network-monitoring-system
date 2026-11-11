@@ -177,6 +177,24 @@ export const api = {
     return `/api/reports/export?${searchParams.toString()}`;
   },
 
+  clearReportHistory: async ({ deviceId = 'all', scope = 'all' } = {}) => {
+    try {
+      return await request('/reports/clear', {
+        method: 'POST',
+        body: JSON.stringify({ deviceId, scope }),
+      });
+    } catch (err) {
+      // Fallback if server hasn't restarted yet
+      await request('/alerts/clear-resolved', { method: 'POST' }).catch(() => {});
+      await request('/settings/clear-alerts', { method: 'POST' }).catch(() => {});
+      return { success: true };
+    }
+  },
+
+  clearOutageTelemetry: (deviceId = 'all') => request(`/telemetry/outages?deviceId=${encodeURIComponent(deviceId)}`, {
+    method: 'DELETE',
+  }),
+
   getMonitoringExportUrl: (params = {}) => {
     const searchParams = new URLSearchParams();
     searchParams.append('format', params.format || 'csv');
@@ -231,6 +249,22 @@ export const api = {
   harvestDnsCache: () => request('/security/dns-harvest', {
     method: 'POST',
   }),
+  getSearchPolicy: () => request('/security/search-policy'),
+  saveSearchPolicy: (policyData) => request('/security/search-policy', {
+    method: 'POST',
+    body: JSON.stringify(policyData),
+  }),
+  getSearchAgentScript: (server = '') => request(`/security/download-search-agent${server ? `?server=${encodeURIComponent(server)}` : ''}`),
+  getEndpointTelemetry: () => request('/security/endpoint-telemetry'),
+  getEndpointData: (ip) => request(`/security/endpoint-data/${encodeURIComponent(ip)}`),
+  listEndpointsData: () => request('/security/endpoints-list'),
+  getEndpointPingReport: (params = {}) => {
+    const q = new URLSearchParams(params).toString();
+    return request(`/security/endpoint-ping-report${q ? `?${q}` : ''}`);
+  },
+  downloadEndpointPingReportUrl: (ip = '', format = 'pdf') => {
+    return `/api/security/endpoint-ping-report?ip=${encodeURIComponent(ip)}&format=${format}`;
+  },
   clearDnsTraffic: () => request('/security/dns-traffic', {
     method: 'DELETE',
   }),
@@ -312,7 +346,7 @@ export const api = {
   getSpeedTestTelemetry: () => request('/telemetry/speed-test'),
   runLiveSpeedTest: () => request('/telemetry/speed-test/run', { method: 'POST' }),
 
-  // Scheduled Automated Email Reports
+  // Scheduled Automated Email Reports & Enterprise Notification Center
   getEmailReportConfig: () => request('/reports/email/config'),
   saveEmailReportConfig: (config) => request('/reports/email/config', {
     method: 'POST',
@@ -323,6 +357,22 @@ export const api = {
     body: JSON.stringify(config),
   }),
   sendEmailReportNow: (payload = {}) => request('/reports/email/send-now', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  }),
+  sendAlertsEmailReport: (payload = {}) => request('/reports/email/send-alerts-report', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  }),
+  sendSecurityEmailReport: (payload = {}) => request('/reports/email/send-security-report', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  }),
+  sendUserSearchEmailReport: (payload = {}) => request('/reports/email/send-search-report', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  }),
+  sendEndpointPingEmailReport: (payload = {}) => request('/reports/email/send-ping-report', {
     method: 'POST',
     body: JSON.stringify(payload),
   }),

@@ -240,9 +240,24 @@ export function getOutageAndSlaStats() {
   };
 }
 
+export function clearOutageHistory(deviceId = 'all') {
+  const data = readOutagesData();
+  if (deviceId && deviceId !== 'all') {
+    const targetId = String(deviceId);
+    delete data.activeOutages[targetId];
+    data.history = (data.history || []).filter((h) => String(h.deviceId) !== targetId);
+  } else {
+    data.activeOutages = {};
+    data.history = [];
+  }
+  writeOutagesData(data);
+  return getOutageAndSlaStats();
+}
+
 export default {
   startTelemetryCollector,
   getLiveBandwidth,
   handleDeviceOutageEvent,
-  getOutageAndSlaStats
+  getOutageAndSlaStats,
+  clearOutageHistory
 };

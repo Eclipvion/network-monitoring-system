@@ -1,1002 +1,1002 @@
 [
   {
-    "id": "ev_1793001087430_37ul",
+    "id": "ev_1794374199414_w5o5",
     "type": "DISCONNECTED",
-    "ip": "172.18.1.226",
-    "name": "LAN Device (172.18.1.226)",
+    "ip": "172.18.1.22",
+    "name": "Device (172.18.1.22)",
     "vendor": "Network Device",
     "typeCategory": "workstation",
     "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T07:51:27.430Z"
+    "timestamp": "2026-11-11T05:16:39.414Z"
   },
   {
-    "id": "ev_1793000727413_edjh",
+    "id": "ev_1794373719341_awvb",
     "type": "DISCONNECTED",
-    "ip": "172.18.1.242",
-    "name": "LAN Device (172.18.1.242)",
+    "ip": "172.18.1.109",
+    "name": "DESKTOP-67",
     "vendor": "Network Device",
     "typeCategory": "workstation",
     "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T07:45:27.413Z"
+    "timestamp": "2026-11-11T05:08:39.341Z"
   },
   {
-    "id": "ev_1792998387095_taxf",
+    "id": "ev_1794373162308_42ic",
     "type": "DISCONNECTED",
-    "ip": "172.18.1.242",
-    "name": "LAN Device (172.18.1.242)",
+    "ip": "172.32.1.93",
+    "name": "LAN Device (172.32.1.93)",
     "vendor": "Network Device",
     "typeCategory": "workstation",
     "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T07:06:27.095Z"
+    "timestamp": "2026-11-11T04:59:22.308Z"
   },
   {
-    "id": "ev_1792997727009_4dxw",
+    "id": "ev_1794373162307_vqsu",
     "type": "DISCONNECTED",
-    "ip": "172.18.1.242",
-    "name": "LAN Device (172.18.1.242)",
+    "ip": "172.32.1.55",
+    "name": "DESKTOP-VICTUS",
     "vendor": "Network Device",
     "typeCategory": "workstation",
     "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T06:55:27.009Z"
+    "timestamp": "2026-11-11T04:59:22.307Z"
   },
   {
-    "id": "ev_1792997126918_v48r",
+    "id": "ev_1794373162307_7rdm",
     "type": "DISCONNECTED",
-    "ip": "172.18.1.242",
-    "name": "LAN Device (172.18.1.242)",
+    "ip": "172.32.1.47",
+    "name": "LAN Device (172.32.1.47)",
     "vendor": "Network Device",
     "typeCategory": "workstation",
     "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T06:45:26.918Z"
+    "timestamp": "2026-11-11T04:59:22.307Z"
   },
   {
-    "id": "ev_1792996646884_mmbg",
+    "id": "ev_1794373162306_dz0p",
     "type": "DISCONNECTED",
-    "ip": "172.18.1.242",
-    "name": "LAN Device (172.18.1.242)",
+    "ip": "172.32.1.12",
+    "name": "FRIDAY",
     "vendor": "Network Device",
     "typeCategory": "workstation",
     "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T06:37:26.884Z"
+    "timestamp": "2026-11-11T04:59:22.306Z"
   },
   {
-    "id": "ev_1792996586874_srp4",
+    "id": "ev_1794373162305_s2yj",
+    "type": "DISCONNECTED",
+    "ip": "172.32.1.1",
+    "name": "LAN Device (172.32.1.1)",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-11T04:59:22.305Z"
+  },
+  {
+    "id": "ev_1794373162305_k65j",
+    "type": "DISCONNECTED",
+    "ip": "172.32.1.9",
+    "name": "DESKTOP-8D1GBAG",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-11T04:59:22.305Z"
+  },
+  {
+    "id": "ev_1794372983912_krzm",
+    "type": "DISCONNECTED",
+    "ip": "172.27.64.1",
+    "name": "DESKTOP-8D1GBAG",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-11T04:56:23.912Z"
+  },
+  {
+    "id": "ev_1794372925627_afbc",
+    "type": "DISCONNECTED",
+    "ip": "172.32.1.115",
+    "name": "LAN Device (172.32.1.115)",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-11T04:55:25.627Z"
+  },
+  {
+    "id": "ev_1794372925626_584a",
+    "type": "DISCONNECTED",
+    "ip": "172.32.1.70",
+    "name": "LAN Device (172.32.1.70)",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-11T04:55:25.626Z"
+  },
+  {
+    "id": "ev_1794372925625_jvav",
+    "type": "DISCONNECTED",
+    "ip": "172.32.1.65",
+    "name": "LAN Device (172.32.1.65)",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-11T04:55:25.625Z"
+  },
+  {
+    "id": "ev_1794372925624_y10k",
+    "type": "DISCONNECTED",
+    "ip": "172.32.1.49",
+    "name": "LAPTOP-MAAZUDDIN",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-11T04:55:25.624Z"
+  },
+  {
+    "id": "ev_1794372925620_cr7i",
+    "type": "DISCONNECTED",
+    "ip": "172.32.1.35",
+    "name": "Rachel",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-11T04:55:25.620Z"
+  },
+  {
+    "id": "ev_1794372925614_v8o6",
+    "type": "DISCONNECTED",
+    "ip": "172.32.1.15",
+    "name": "DESKTOP-COS4GUF",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-11T04:55:25.614Z"
+  },
+  {
+    "id": "ev_1794372925609_7cnm",
+    "type": "DISCONNECTED",
+    "ip": "172.32.1.12",
+    "name": "FRIDAY",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-11T04:55:25.609Z"
+  },
+  {
+    "id": "ev_1794372925603_cxxx",
+    "type": "DISCONNECTED",
+    "ip": "172.32.1.1",
+    "name": "LAN Device (172.32.1.1)",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-11T04:55:25.603Z"
+  },
+  {
+    "id": "ev_1794372925584_92cu",
+    "type": "DISCONNECTED",
+    "ip": "172.32.1.9",
+    "name": "DESKTOP-8D1GBAG",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-11T04:55:25.584Z"
+  },
+  {
+    "id": "ev_1794372923641_h35m",
     "type": "JOINED",
-    "ip": "172.18.1.242",
-    "name": "LAN Device (172.18.1.242)",
+    "ip": "172.27.64.1",
+    "name": "DESKTOP-8D1GBAG",
     "vendor": "Network Device",
     "typeCategory": "workstation",
     "note": "Auto-detected & added to Monitoring and Topology",
-    "timestamp": "2026-10-26T06:36:26.874Z"
+    "timestamp": "2026-11-11T04:55:23.641Z"
   },
   {
-    "id": "ev_1792993018416_pt2s",
+    "id": "ev_1794319446227_dscc",
+    "type": "DISCONNECTED",
+    "ip": "172.32.1.61",
+    "name": "LAN Device (172.32.1.61)",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-10T14:04:06.227Z"
+  },
+  {
+    "id": "ev_1794319326233_9noo",
+    "type": "DISCONNECTED",
+    "ip": "172.32.1.74",
+    "name": "Mobile Device (Private Wi-Fi) (172.32.1.74)",
+    "vendor": "Network Device",
+    "typeCategory": "mobile",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-10T14:02:06.233Z"
+  },
+  {
+    "id": "ev_1794319326232_cthr",
+    "type": "DISCONNECTED",
+    "ip": "172.32.1.55",
+    "name": "DESKTOP-VICTUS",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-10T14:02:06.232Z"
+  },
+  {
+    "id": "ev_1794319206156_j28f",
+    "type": "DISCONNECTED",
+    "ip": "172.32.1.61",
+    "name": "LAN Device (172.32.1.61)",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-10T14:00:06.156Z"
+  },
+  {
+    "id": "ev_1794318666123_ycza",
+    "type": "DISCONNECTED",
+    "ip": "172.32.1.61",
+    "name": "LAN Device (172.32.1.61)",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-10T13:51:06.123Z"
+  },
+  {
+    "id": "ev_1794318366125_szkn",
+    "type": "DISCONNECTED",
+    "ip": "172.32.1.61",
+    "name": "LAN Device (172.32.1.61)",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-10T13:46:06.125Z"
+  },
+  {
+    "id": "ev_1794318246081_qabn",
+    "type": "DISCONNECTED",
+    "ip": "172.32.1.61",
+    "name": "LAN Device (172.32.1.61)",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-10T13:44:06.081Z"
+  },
+  {
+    "id": "ev_1794318006056_2r6h",
+    "type": "DISCONNECTED",
+    "ip": "172.32.1.61",
+    "name": "LAN Device (172.32.1.61)",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-10T13:40:06.056Z"
+  },
+  {
+    "id": "ev_1794317946068_dh1j",
+    "type": "DISCONNECTED",
+    "ip": "172.32.1.64",
+    "name": "ERFANALI",
+    "vendor": "Network Device",
+    "typeCategory": "mobile",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-10T13:39:06.068Z"
+  },
+  {
+    "id": "ev_1794317946067_lahu",
+    "type": "DISCONNECTED",
+    "ip": "172.32.1.63",
+    "name": "Erfan-Laptop-01",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-10T13:39:06.067Z"
+  },
+  {
+    "id": "ev_1794317766047_4mlf",
+    "type": "DISCONNECTED",
+    "ip": "172.32.1.61",
+    "name": "LAN Device (172.32.1.61)",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-10T13:36:06.047Z"
+  },
+  {
+    "id": "ev_1794317766046_phi2",
+    "type": "JOINED",
+    "ip": "172.32.1.63",
+    "name": "Erfan-Laptop-01",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Auto-detected & added to Monitoring and Topology",
+    "timestamp": "2026-11-10T13:36:06.046Z"
+  },
+  {
+    "id": "ev_1794317766026_q128",
+    "type": "JOINED",
+    "ip": "172.32.1.55",
+    "name": "DESKTOP-VICTUS",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Auto-detected & added to Monitoring and Topology",
+    "timestamp": "2026-11-10T13:36:06.026Z"
+  },
+  {
+    "id": "ev_1794317526021_kyq7",
+    "type": "DISCONNECTED",
+    "ip": "172.32.1.18",
+    "name": "LAN Device (172.32.1.18)",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-10T13:32:06.021Z"
+  },
+  {
+    "id": "ev_1794317466009_2erg",
+    "type": "DISCONNECTED",
+    "ip": "172.32.1.101",
+    "name": "LAN Device (172.32.1.101)",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-10T13:31:06.009Z"
+  },
+  {
+    "id": "ev_1794317466009_cdvj",
+    "type": "DISCONNECTED",
+    "ip": "172.32.1.100",
+    "name": "LAN Device (172.32.1.100)",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-10T13:31:06.009Z"
+  },
+  {
+    "id": "ev_1794317466008_fsc3",
+    "type": "DISCONNECTED",
+    "ip": "172.32.1.97",
+    "name": "LAN Device (172.32.1.97)",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-10T13:31:06.008Z"
+  },
+  {
+    "id": "ev_1794317466008_9zdx",
+    "type": "DISCONNECTED",
+    "ip": "172.32.1.95",
+    "name": "LAN Device (172.32.1.95)",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-10T13:31:06.008Z"
+  },
+  {
+    "id": "ev_1794317466007_r1ya",
+    "type": "DISCONNECTED",
+    "ip": "172.32.1.93",
+    "name": "LAN Device (172.32.1.93)",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-10T13:31:06.007Z"
+  },
+  {
+    "id": "ev_1794317466007_76c7",
+    "type": "DISCONNECTED",
+    "ip": "172.32.1.66",
+    "name": "Mobile Device (Private Wi-Fi) (172.32.1.66)",
+    "vendor": "Network Device",
+    "typeCategory": "mobile",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-10T13:31:06.007Z"
+  },
+  {
+    "id": "ev_1794317466006_wzlu",
+    "type": "DISCONNECTED",
+    "ip": "172.32.1.61",
+    "name": "LAN Device (172.32.1.61)",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-10T13:31:06.006Z"
+  },
+  {
+    "id": "ev_1794317466006_85t8",
+    "type": "DISCONNECTED",
+    "ip": "172.32.1.60",
+    "name": "LAN Device (172.32.1.60)",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-10T13:31:06.006Z"
+  },
+  {
+    "id": "ev_1794317466005_2fkb",
+    "type": "DISCONNECTED",
+    "ip": "172.32.1.59",
+    "name": "LAN Device (172.32.1.59)",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-10T13:31:06.005Z"
+  },
+  {
+    "id": "ev_1794317466004_wqkw",
+    "type": "DISCONNECTED",
+    "ip": "172.32.1.47",
+    "name": "LAN Device (172.32.1.47)",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-10T13:31:06.004Z"
+  },
+  {
+    "id": "ev_1794317466004_ert5",
+    "type": "DISCONNECTED",
+    "ip": "172.32.1.14",
+    "name": "Intel Corporation (172.32.1.14)",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-10T13:31:06.004Z"
+  },
+  {
+    "id": "ev_1794317406520_j5q2",
     "type": "DISCONNECTED",
     "ip": "172.18.1.252",
-    "name": "LAN Device (172.18.1.252)",
+    "name": "SKIF-PC",
     "vendor": "Network Device",
-    "typeCategory": "workstation",
+    "typeCategory": "server",
     "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.416Z"
+    "timestamp": "2026-11-10T13:30:06.520Z"
   },
   {
-    "id": "ev_1792993018415_306z",
+    "id": "ev_1794317406519_1ak5",
     "type": "DISCONNECTED",
     "ip": "172.18.1.250",
-    "name": "LAN Device (172.18.1.250)",
+    "name": "DESKTOP-31",
     "vendor": "Network Device",
     "typeCategory": "workstation",
     "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.415Z"
+    "timestamp": "2026-11-10T13:30:06.519Z"
   },
   {
-    "id": "ev_1792993018414_ol0b",
+    "id": "ev_1794317406519_lyfz",
     "type": "DISCONNECTED",
     "ip": "172.18.1.245",
-    "name": "LAN Device (172.18.1.245)",
+    "name": "ZKTECO-PC",
+    "vendor": "Network Device",
+    "typeCategory": "server",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-10T13:30:06.519Z"
+  },
+  {
+    "id": "ev_1794317406518_ayen",
+    "type": "DISCONNECTED",
+    "ip": "172.18.1.242",
+    "name": "DESKTOP-PM49AGD",
     "vendor": "Network Device",
     "typeCategory": "workstation",
     "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.414Z"
+    "timestamp": "2026-11-10T13:30:06.518Z"
   },
   {
-    "id": "ev_1792993018413_5c8q",
+    "id": "ev_1794317406517_bsbt",
     "type": "DISCONNECTED",
     "ip": "172.18.1.241",
-    "name": "LAN Device (172.18.1.241)",
+    "name": "VMware Virtual (172.18.1.241)",
     "vendor": "Network Device",
-    "typeCategory": "workstation",
+    "typeCategory": "server",
     "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.413Z"
+    "timestamp": "2026-11-10T13:30:06.517Z"
   },
   {
-    "id": "ev_1792993018412_xhor",
+    "id": "ev_1794317406517_y2od",
     "type": "DISCONNECTED",
     "ip": "172.18.1.230",
-    "name": "LAN Device (172.18.1.230)",
+    "name": "Device (172.18.1.230)",
     "vendor": "Network Device",
     "typeCategory": "workstation",
     "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.412Z"
+    "timestamp": "2026-11-10T13:30:06.517Z"
   },
   {
-    "id": "ev_1792993018412_9x1l",
+    "id": "ev_1794317406516_ebby",
     "type": "DISCONNECTED",
     "ip": "172.18.1.226",
-    "name": "LAN Device (172.18.1.226)",
+    "name": "Device (172.18.1.226)",
     "vendor": "Network Device",
     "typeCategory": "workstation",
     "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.412Z"
+    "timestamp": "2026-11-10T13:30:06.516Z"
   },
   {
-    "id": "ev_1792993018411_o7jo",
+    "id": "ev_1794317406515_osfl",
     "type": "DISCONNECTED",
     "ip": "172.18.1.201",
-    "name": "LAN Device (172.18.1.201)",
+    "name": "Device (172.18.1.201)",
     "vendor": "Network Device",
     "typeCategory": "workstation",
     "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.411Z"
+    "timestamp": "2026-11-10T13:30:06.515Z"
   },
   {
-    "id": "ev_1792993018410_k3mr",
+    "id": "ev_1794317406515_x79g",
     "type": "DISCONNECTED",
     "ip": "172.18.1.154",
-    "name": "LAN Device (172.18.1.154)",
+    "name": "Device (172.18.1.154)",
     "vendor": "Network Device",
     "typeCategory": "workstation",
     "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.410Z"
+    "timestamp": "2026-11-10T13:30:06.515Z"
   },
   {
-    "id": "ev_1792993018409_azk4",
+    "id": "ev_1794317406514_48lq",
     "type": "DISCONNECTED",
     "ip": "172.18.1.143",
-    "name": "LAN Device (172.18.1.143)",
+    "name": "DESKTOP-29",
     "vendor": "Network Device",
     "typeCategory": "workstation",
     "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.409Z"
+    "timestamp": "2026-11-10T13:30:06.514Z"
   },
   {
-    "id": "ev_1792993018407_e1w5",
+    "id": "ev_1794317406513_f030",
     "type": "DISCONNECTED",
     "ip": "172.18.1.126",
-    "name": "LAN Device (172.18.1.126)",
+    "name": "Device (172.18.1.126)",
     "vendor": "Network Device",
     "typeCategory": "workstation",
     "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.407Z"
+    "timestamp": "2026-11-10T13:30:06.513Z"
   },
   {
-    "id": "ev_1792993018406_hmca",
+    "id": "ev_1794317406512_5wy4",
+    "type": "DISCONNECTED",
+    "ip": "172.18.1.124",
+    "name": "DESKTOP-55",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-10T13:30:06.512Z"
+  },
+  {
+    "id": "ev_1794317406512_le80",
     "type": "DISCONNECTED",
     "ip": "172.18.1.123",
-    "name": "LAN Device (172.18.1.123)",
+    "name": "DESKTOP-TNA36D0",
     "vendor": "Network Device",
     "typeCategory": "workstation",
     "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.406Z"
+    "timestamp": "2026-11-10T13:30:06.512Z"
   },
   {
-    "id": "ev_1792993018404_bwme",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.110",
-    "name": "LAN Device (172.18.1.110)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.404Z"
-  },
-  {
-    "id": "ev_1792993018403_0kr9",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.109",
-    "name": "LAN Device (172.18.1.109)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.403Z"
-  },
-  {
-    "id": "ev_1792993018401_hy0r",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.108",
-    "name": "LAN Device (172.18.1.108)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.401Z"
-  },
-  {
-    "id": "ev_1792993018399_78ad",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.106",
-    "name": "LAN Device (172.18.1.106)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.399Z"
-  },
-  {
-    "id": "ev_1792993018398_meke",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.91",
-    "name": "LAN Device (172.18.1.91)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.398Z"
-  },
-  {
-    "id": "ev_1792993018396_v20x",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.90",
-    "name": "LAN Device (172.18.1.90)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.396Z"
-  },
-  {
-    "id": "ev_1792993018393_3dqr",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.89",
-    "name": "LAN Device (172.18.1.89)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.393Z"
-  },
-  {
-    "id": "ev_1792993018389_qxbv",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.88",
-    "name": "LAN Device (172.18.1.88)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.389Z"
-  },
-  {
-    "id": "ev_1792993018385_kwr6",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.85",
-    "name": "LAN Device (172.18.1.85)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.385Z"
-  },
-  {
-    "id": "ev_1792993018382_43j6",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.78",
-    "name": "LAN Device (172.18.1.78)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.382Z"
-  },
-  {
-    "id": "ev_1792993018381_0wz0",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.77",
-    "name": "LAN Device (172.18.1.77)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.381Z"
-  },
-  {
-    "id": "ev_1792993018380_805v",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.76",
-    "name": "LAN Device (172.18.1.76)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.380Z"
-  },
-  {
-    "id": "ev_1792993018379_9klw",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.75",
-    "name": "LAN Device (172.18.1.75)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.379Z"
-  },
-  {
-    "id": "ev_1792993018378_45vr",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.74",
-    "name": "LAN Device (172.18.1.74)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.378Z"
-  },
-  {
-    "id": "ev_1792993018377_pmef",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.72",
-    "name": "LAN Device (172.18.1.72)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.377Z"
-  },
-  {
-    "id": "ev_1792993018376_yh6j",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.69",
-    "name": "LAN Device (172.18.1.69)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.376Z"
-  },
-  {
-    "id": "ev_1792993018374_fn6p",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.65",
-    "name": "LAN Device (172.18.1.65)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.374Z"
-  },
-  {
-    "id": "ev_1792993018371_p1k3",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.56",
-    "name": "LAN Device (172.18.1.56)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.371Z"
-  },
-  {
-    "id": "ev_1792993018369_hmxk",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.54",
-    "name": "LAN Device (172.18.1.54)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.369Z"
-  },
-  {
-    "id": "ev_1792993018368_sn6z",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.52",
-    "name": "LAN Device (172.18.1.52)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.368Z"
-  },
-  {
-    "id": "ev_1792993018367_cqih",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.51",
-    "name": "LAN Device (172.18.1.51)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.367Z"
-  },
-  {
-    "id": "ev_1792993018365_az91",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.49",
-    "name": "LAN Device (172.18.1.49)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.365Z"
-  },
-  {
-    "id": "ev_1792993018364_w1ia",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.47",
-    "name": "LAN Device (172.18.1.47)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.364Z"
-  },
-  {
-    "id": "ev_1792993018362_ht7g",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.46",
-    "name": "LAN Device (172.18.1.46)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.362Z"
-  },
-  {
-    "id": "ev_1792993018359_si86",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.42",
-    "name": "LAN Device (172.18.1.42)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.359Z"
-  },
-  {
-    "id": "ev_1792993018332_m23w",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.39",
-    "name": "LAN Device (172.18.1.39)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.332Z"
-  },
-  {
-    "id": "ev_1792993018324_bx78",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.36",
-    "name": "LAN Device (172.18.1.36)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.324Z"
-  },
-  {
-    "id": "ev_1792993018306_ivmh",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.34",
-    "name": "LAN Device (172.18.1.34)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.306Z"
-  },
-  {
-    "id": "ev_1792993018285_qpe0",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.33",
-    "name": "LAN Device (172.18.1.33)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.285Z"
-  },
-  {
-    "id": "ev_1792993018265_1zfp",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.31",
-    "name": "LAN Device (172.18.1.31)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.265Z"
-  },
-  {
-    "id": "ev_1792993018243_0kog",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.30",
-    "name": "LAN Device (172.18.1.30)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.243Z"
-  },
-  {
-    "id": "ev_1792993018236_8z2f",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.28",
-    "name": "LAN Device (172.18.1.28)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.236Z"
-  },
-  {
-    "id": "ev_1792993018235_pru0",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.27",
-    "name": "LAN Device (172.18.1.27)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.235Z"
-  },
-  {
-    "id": "ev_1792993018232_g556",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.26",
-    "name": "LAN Device (172.18.1.26)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.232Z"
-  },
-  {
-    "id": "ev_1792993018230_brgp",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.23",
-    "name": "LAN Device (172.18.1.23)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.230Z"
-  },
-  {
-    "id": "ev_1792993018226_80w6",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.22",
-    "name": "LAN Device (172.18.1.22)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.226Z"
-  },
-  {
-    "id": "ev_1792993018223_sziz",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.21",
-    "name": "LAN Device (172.18.1.21)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.223Z"
-  },
-  {
-    "id": "ev_1792993018219_p7gk",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.20",
-    "name": "LAN Device (172.18.1.20)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.219Z"
-  },
-  {
-    "id": "ev_1792993018213_p0g2",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.14",
-    "name": "LAN Device (172.18.1.14)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.213Z"
-  },
-  {
-    "id": "ev_1792993018201_c3wz",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.10",
-    "name": "LAN Device (172.18.1.10)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.201Z"
-  },
-  {
-    "id": "ev_1792993018180_dyf9",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.8",
-    "name": "LAN Device (172.18.1.8)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.180Z"
-  },
-  {
-    "id": "ev_1792993018162_m3gd",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.5",
-    "name": "LAN Device (172.18.1.5)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.162Z"
-  },
-  {
-    "id": "ev_1792993018155_77vj",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.1",
-    "name": "LAN Device (172.18.1.1)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-26T05:36:58.155Z"
-  },
-  {
-    "id": "ev_1792836509783_qnlg",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.91",
-    "name": "LAN Device (172.18.1.91)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-24T10:08:29.783Z"
-  },
-  {
-    "id": "ev_1792836509782_9hqr",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.90",
-    "name": "LAN Device (172.18.1.90)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-24T10:08:29.782Z"
-  },
-  {
-    "id": "ev_1792832789285_9mn2",
+    "id": "ev_1794317406511_us1z",
     "type": "DISCONNECTED",
     "ip": "172.18.1.113",
-    "name": "LAN Device (172.18.1.113)",
+    "name": "DESKTOP-LRFV6P8",
     "vendor": "Network Device",
     "typeCategory": "workstation",
     "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-24T09:06:29.285Z"
+    "timestamp": "2026-11-10T13:30:06.511Z"
   },
   {
-    "id": "ev_1792828270543_3d1e",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.34",
-    "name": "LAN Device (172.18.1.34)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-24T07:51:10.543Z"
-  },
-  {
-    "id": "ev_1792822788535_9o5t",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.252",
-    "name": "LAN Device (172.18.1.252)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-24T06:19:48.535Z"
-  },
-  {
-    "id": "ev_1792822788509_8xzu",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.250",
-    "name": "LAN Device (172.18.1.250)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-24T06:19:48.509Z"
-  },
-  {
-    "id": "ev_1792822788492_tli6",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.245",
-    "name": "LAN Device (172.18.1.245)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-24T06:19:48.492Z"
-  },
-  {
-    "id": "ev_1792822788464_5pm8",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.241",
-    "name": "LAN Device (172.18.1.241)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-24T06:19:48.464Z"
-  },
-  {
-    "id": "ev_1792822788461_m43v",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.230",
-    "name": "LAN Device (172.18.1.230)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-24T06:19:48.461Z"
-  },
-  {
-    "id": "ev_1792822788455_6ljx",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.226",
-    "name": "LAN Device (172.18.1.226)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-24T06:19:48.456Z"
-  },
-  {
-    "id": "ev_1792822788453_5vxp",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.201",
-    "name": "LAN Device (172.18.1.201)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-24T06:19:48.453Z"
-  },
-  {
-    "id": "ev_1792822788448_bjat",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.154",
-    "name": "LAN Device (172.18.1.154)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-24T06:19:48.448Z"
-  },
-  {
-    "id": "ev_1792822788436_nxnm",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.143",
-    "name": "LAN Device (172.18.1.143)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-24T06:19:48.436Z"
-  },
-  {
-    "id": "ev_1792822788390_s45t",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.126",
-    "name": "LAN Device (172.18.1.126)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-24T06:19:48.390Z"
-  },
-  {
-    "id": "ev_1792822788353_sg0e",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.123",
-    "name": "LAN Device (172.18.1.123)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-24T06:19:48.353Z"
-  },
-  {
-    "id": "ev_1792822788331_ponz",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.110",
-    "name": "LAN Device (172.18.1.110)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-24T06:19:48.331Z"
-  },
-  {
-    "id": "ev_1792822788291_bgeu",
+    "id": "ev_1794317406511_yays",
     "type": "DISCONNECTED",
     "ip": "172.18.1.109",
-    "name": "LAN Device (172.18.1.109)",
+    "name": "DESKTOP-67",
     "vendor": "Network Device",
     "typeCategory": "workstation",
     "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-24T06:19:48.291Z"
+    "timestamp": "2026-11-10T13:30:06.511Z"
   },
   {
-    "id": "ev_1792822788274_zpjf",
+    "id": "ev_1794317406510_my6l",
     "type": "DISCONNECTED",
     "ip": "172.18.1.108",
-    "name": "LAN Device (172.18.1.108)",
+    "name": "Device (172.18.1.108)",
     "vendor": "Network Device",
     "typeCategory": "workstation",
     "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-24T06:19:48.274Z"
+    "timestamp": "2026-11-10T13:30:06.510Z"
   },
   {
-    "id": "ev_1792822788271_u6f4",
+    "id": "ev_1794317406510_4nf2",
     "type": "DISCONNECTED",
     "ip": "172.18.1.106",
-    "name": "LAN Device (172.18.1.106)",
+    "name": "Device (172.18.1.106)",
     "vendor": "Network Device",
     "typeCategory": "workstation",
     "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-24T06:19:48.271Z"
+    "timestamp": "2026-11-10T13:30:06.510Z"
   },
   {
-    "id": "ev_1792822788270_m74s",
+    "id": "ev_1794317406509_joa8",
     "type": "DISCONNECTED",
     "ip": "172.18.1.91",
-    "name": "LAN Device (172.18.1.91)",
+    "name": "Device (172.18.1.91)",
     "vendor": "Network Device",
     "typeCategory": "workstation",
     "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-24T06:19:48.270Z"
+    "timestamp": "2026-11-10T13:30:06.509Z"
   },
   {
-    "id": "ev_1792822788269_n5mb",
+    "id": "ev_1794317406509_rxud",
     "type": "DISCONNECTED",
     "ip": "172.18.1.90",
-    "name": "LAN Device (172.18.1.90)",
+    "name": "Device (172.18.1.90)",
     "vendor": "Network Device",
     "typeCategory": "workstation",
     "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-24T06:19:48.269Z"
+    "timestamp": "2026-11-10T13:30:06.509Z"
   },
   {
-    "id": "ev_1792822788265_wdkh",
+    "id": "ev_1794317406508_x81f",
     "type": "DISCONNECTED",
     "ip": "172.18.1.89",
-    "name": "LAN Device (172.18.1.89)",
+    "name": "DESKTOP-70",
     "vendor": "Network Device",
     "typeCategory": "workstation",
     "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-24T06:19:48.266Z"
+    "timestamp": "2026-11-10T13:30:06.508Z"
   },
   {
-    "id": "ev_1792822788247_7q5l",
+    "id": "ev_1794317406507_b6xf",
     "type": "DISCONNECTED",
-    "ip": "172.18.1.85",
-    "name": "LAN Device (172.18.1.85)",
+    "ip": "172.18.1.88",
+    "name": "DESKTOP-69",
     "vendor": "Network Device",
     "typeCategory": "workstation",
     "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-24T06:19:48.247Z"
+    "timestamp": "2026-11-10T13:30:06.507Z"
   },
   {
-    "id": "ev_1792822788192_yun1",
+    "id": "ev_1794317406507_mrvx",
     "type": "DISCONNECTED",
     "ip": "172.18.1.78",
-    "name": "LAN Device (172.18.1.78)",
+    "name": "DESKTOP-59",
     "vendor": "Network Device",
     "typeCategory": "workstation",
     "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-24T06:19:48.192Z"
+    "timestamp": "2026-11-10T13:30:06.507Z"
   },
   {
-    "id": "ev_1792822788125_2wh2",
+    "id": "ev_1794317406506_x4l1",
     "type": "DISCONNECTED",
     "ip": "172.18.1.77",
-    "name": "LAN Device (172.18.1.77)",
+    "name": "DESKTOP-58",
     "vendor": "Network Device",
     "typeCategory": "workstation",
     "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-24T06:19:48.125Z"
+    "timestamp": "2026-11-10T13:30:06.506Z"
   },
   {
-    "id": "ev_1792822787878_zj16",
+    "id": "ev_1794317406506_yw8a",
     "type": "DISCONNECTED",
     "ip": "172.18.1.76",
-    "name": "LAN Device (172.18.1.76)",
+    "name": "DESKTOP-5723323",
     "vendor": "Network Device",
     "typeCategory": "workstation",
     "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-24T06:19:47.878Z"
+    "timestamp": "2026-11-10T13:30:06.506Z"
   },
   {
-    "id": "ev_1792822787515_rfau",
+    "id": "ev_1794317406505_y97v",
     "type": "DISCONNECTED",
     "ip": "172.18.1.75",
-    "name": "LAN Device (172.18.1.75)",
+    "name": "DESKTOP-56",
     "vendor": "Network Device",
     "typeCategory": "workstation",
     "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-24T06:19:47.515Z"
+    "timestamp": "2026-11-10T13:30:06.505Z"
   },
   {
-    "id": "ev_1792822787471_0s4e",
-    "type": "DISCONNECTED",
-    "ip": "172.18.1.74",
-    "name": "LAN Device (172.18.1.74)",
-    "vendor": "Network Device",
-    "typeCategory": "workstation",
-    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-24T06:19:47.471Z"
-  },
-  {
-    "id": "ev_1792822787437_h4iu",
+    "id": "ev_1794317406505_o3js",
     "type": "DISCONNECTED",
     "ip": "172.18.1.72",
-    "name": "LAN Device (172.18.1.72)",
+    "name": "Inbound1",
     "vendor": "Network Device",
     "typeCategory": "workstation",
     "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-24T06:19:47.437Z"
+    "timestamp": "2026-11-10T13:30:06.505Z"
   },
   {
-    "id": "ev_1792822787394_gg95",
+    "id": "ev_1794317406504_s6s4",
     "type": "DISCONNECTED",
     "ip": "172.18.1.69",
-    "name": "LAN Device (172.18.1.69)",
+    "name": "DESKTOP-50",
     "vendor": "Network Device",
     "typeCategory": "workstation",
     "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-24T06:19:47.394Z"
+    "timestamp": "2026-11-10T13:30:06.504Z"
   },
   {
-    "id": "ev_1792822787387_m9j4",
+    "id": "ev_1794317406504_innm",
     "type": "DISCONNECTED",
     "ip": "172.18.1.65",
-    "name": "LAN Device (172.18.1.65)",
+    "name": "Device (172.18.1.65)",
     "vendor": "Network Device",
     "typeCategory": "workstation",
     "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-24T06:19:47.387Z"
+    "timestamp": "2026-11-10T13:30:06.504Z"
   },
   {
-    "id": "ev_1792822787375_hc7j",
+    "id": "ev_1794317406503_s34n",
     "type": "DISCONNECTED",
     "ip": "172.18.1.56",
-    "name": "LAN Device (172.18.1.56)",
+    "name": "DESKTOP-37",
     "vendor": "Network Device",
     "typeCategory": "workstation",
     "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-24T06:19:47.375Z"
+    "timestamp": "2026-11-10T13:30:06.503Z"
   },
   {
-    "id": "ev_1792822787342_vzhn",
+    "id": "ev_1794317406502_jts4",
     "type": "DISCONNECTED",
     "ip": "172.18.1.54",
-    "name": "LAN Device (172.18.1.54)",
+    "name": "Ability-35",
     "vendor": "Network Device",
     "typeCategory": "workstation",
     "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-24T06:19:47.342Z"
+    "timestamp": "2026-11-10T13:30:06.502Z"
   },
   {
-    "id": "ev_1792822787340_8bir",
+    "id": "ev_1794317406502_8sd7",
     "type": "DISCONNECTED",
     "ip": "172.18.1.52",
-    "name": "LAN Device (172.18.1.52)",
+    "name": "DESKTOP-38D",
     "vendor": "Network Device",
     "typeCategory": "workstation",
     "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-24T06:19:47.340Z"
+    "timestamp": "2026-11-10T13:30:06.502Z"
   },
   {
-    "id": "ev_1792822787311_r5ph",
+    "id": "ev_1794317406501_sua2",
     "type": "DISCONNECTED",
     "ip": "172.18.1.51",
-    "name": "LAN Device (172.18.1.51)",
+    "name": "DESKTOP-32",
     "vendor": "Network Device",
     "typeCategory": "workstation",
     "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-24T06:19:47.311Z"
+    "timestamp": "2026-11-10T13:30:06.501Z"
   },
   {
-    "id": "ev_1792822787307_t0wj",
+    "id": "ev_1794317406501_mv0w",
     "type": "DISCONNECTED",
     "ip": "172.18.1.49",
-    "name": "LAN Device (172.18.1.49)",
+    "name": "DESKTOP-30",
     "vendor": "Network Device",
     "typeCategory": "workstation",
     "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-24T06:19:47.307Z"
+    "timestamp": "2026-11-10T13:30:06.501Z"
   },
   {
-    "id": "ev_1792822786820_edyi",
+    "id": "ev_1794317406500_jwyd",
     "type": "DISCONNECTED",
     "ip": "172.18.1.47",
-    "name": "LAN Device (172.18.1.47)",
+    "name": "ABIKLITY-PC021",
     "vendor": "Network Device",
     "typeCategory": "workstation",
     "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-24T06:19:46.820Z"
+    "timestamp": "2026-11-10T13:30:06.500Z"
   },
   {
-    "id": "ev_1792822786776_a1qj",
+    "id": "ev_1794317406499_oodg",
     "type": "DISCONNECTED",
     "ip": "172.18.1.46",
-    "name": "LAN Device (172.18.1.46)",
+    "name": "AbilityPC_01",
     "vendor": "Network Device",
     "typeCategory": "workstation",
     "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-24T06:19:46.776Z"
+    "timestamp": "2026-11-10T13:30:06.499Z"
   },
   {
-    "id": "ev_1792822786651_wjuj",
+    "id": "ev_1794317406499_te9j",
     "type": "DISCONNECTED",
     "ip": "172.18.1.44",
-    "name": "LAN Device (172.18.1.44)",
+    "name": "DESKTOP-120",
     "vendor": "Network Device",
     "typeCategory": "workstation",
     "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
-    "timestamp": "2026-10-24T06:19:46.651Z"
+    "timestamp": "2026-11-10T13:30:06.499Z"
+  },
+  {
+    "id": "ev_1794317406498_kv4g",
+    "type": "DISCONNECTED",
+    "ip": "172.18.1.42",
+    "name": "DESKTOP-23",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-10T13:30:06.498Z"
+  },
+  {
+    "id": "ev_1794317406497_w7em",
+    "type": "DISCONNECTED",
+    "ip": "172.18.1.39",
+    "name": "AbbadLaptop",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-10T13:30:06.497Z"
+  },
+  {
+    "id": "ev_1794317406497_1feu",
+    "type": "DISCONNECTED",
+    "ip": "172.18.1.36",
+    "name": "ABILITY-PC-10",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-10T13:30:06.497Z"
+  },
+  {
+    "id": "ev_1794317406496_7j7c",
+    "type": "DISCONNECTED",
+    "ip": "172.18.1.34",
+    "name": "DESKTOP-15",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-10T13:30:06.496Z"
+  },
+  {
+    "id": "ev_1794317406495_o376",
+    "type": "DISCONNECTED",
+    "ip": "172.18.1.33",
+    "name": "DESKTOP-14",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-10T13:30:06.495Z"
+  },
+  {
+    "id": "ev_1794317406495_vvu6",
+    "type": "DISCONNECTED",
+    "ip": "172.18.1.31",
+    "name": "DESKTOp-12",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-10T13:30:06.495Z"
+  },
+  {
+    "id": "ev_1794317406494_d8zt",
+    "type": "DISCONNECTED",
+    "ip": "172.18.1.30",
+    "name": "DESKTOP-11",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-10T13:30:06.494Z"
+  },
+  {
+    "id": "ev_1794317406493_yl18",
+    "type": "DISCONNECTED",
+    "ip": "172.18.1.28",
+    "name": "DESKTOP-0902",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-10T13:30:06.493Z"
+  },
+  {
+    "id": "ev_1794317406492_w3e3",
+    "type": "DISCONNECTED",
+    "ip": "172.18.1.26",
+    "name": "DSK-027",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-10T13:30:06.492Z"
+  },
+  {
+    "id": "ev_1794317406492_5j2y",
+    "type": "DISCONNECTED",
+    "ip": "172.18.1.23",
+    "name": "DESKTOP-04",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-10T13:30:06.492Z"
+  },
+  {
+    "id": "ev_1794317406491_8opa",
+    "type": "DISCONNECTED",
+    "ip": "172.18.1.22",
+    "name": "Device (172.18.1.22)",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-10T13:30:06.491Z"
+  },
+  {
+    "id": "ev_1794317406490_uaxy",
+    "type": "DISCONNECTED",
+    "ip": "172.18.1.21",
+    "name": "Ability-PC-002",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-10T13:30:06.490Z"
+  },
+  {
+    "id": "ev_1794317406490_51j6",
+    "type": "DISCONNECTED",
+    "ip": "172.18.1.20",
+    "name": "DESKTOP-0001",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-10T13:30:06.490Z"
+  },
+  {
+    "id": "ev_1794317406489_vrk3",
+    "type": "DISCONNECTED",
+    "ip": "172.18.1.14",
+    "name": "Desk-Datacentre",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-10T13:30:06.489Z"
+  },
+  {
+    "id": "ev_1794317406489_7p1r",
+    "type": "DISCONNECTED",
+    "ip": "172.18.1.10",
+    "name": "VMware Virtual (172.18.1.10)",
+    "vendor": "Network Device",
+    "typeCategory": "server",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-10T13:30:06.489Z"
+  },
+  {
+    "id": "ev_1794317406488_rwce",
+    "type": "DISCONNECTED",
+    "ip": "172.18.1.5",
+    "name": "SRV-AD-ABILITY",
+    "vendor": "Network Device",
+    "typeCategory": "server",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-10T13:30:06.488Z"
+  },
+  {
+    "id": "ev_1794317406488_98go",
+    "type": "DISCONNECTED",
+    "ip": "172.18.1.1",
+    "name": "Router / Gateway (172.18.1.1)",
+    "vendor": "Network Device",
+    "typeCategory": "router",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-10T13:30:06.488Z"
+  },
+  {
+    "id": "ev_1794317406487_pgxf",
+    "type": "DISCONNECTED",
+    "ip": "172.18.1.11",
+    "name": "DESKTOP-8D1GBAG",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Device left Wi-Fi network (Removed from Topology, kept in Monitoring)",
+    "timestamp": "2026-11-10T13:30:06.487Z"
+  },
+  {
+    "id": "ev_1794317406486_tio9",
+    "type": "JOINED",
+    "ip": "172.32.1.115",
+    "name": "LAN Device (172.32.1.115)",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Auto-detected & added to Monitoring and Topology",
+    "timestamp": "2026-11-10T13:30:06.486Z"
+  },
+  {
+    "id": "ev_1794317406468_x1tk",
+    "type": "JOINED",
+    "ip": "172.32.1.101",
+    "name": "LAN Device (172.32.1.101)",
+    "vendor": "Network Device",
+    "typeCategory": "workstation",
+    "note": "Auto-detected & added to Monitoring and Topology",
+    "timestamp": "2026-11-10T13:30:06.468Z"
   }
 ]
